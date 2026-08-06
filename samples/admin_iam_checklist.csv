@@ -1,0 +1,7 @@
+Checklist_ID,Category,Security_Item,Required_IAM_Role,Verification_Command,Status
+SEC-01,IAM,Discovery Engine Admin Role assignment,roles/discoveryengine.admin,gcloud projects get-iam-policy [PROJECT_ID],Verified
+SEC-02,IAM,Service Usage Consumer Role assignment,roles/serviceusage.serviceUsageConsumer,gcloud iam service-accounts list,Verified
+SEC-03,Data Protection,VPC Service Controls (VPC-SC) perimeter configuration,roles/accessapproval.approver,gcloud access-approval requests list,Pending
+SEC-04,Model Armor,Sensitive Data Protection (DLP) filter activation,roles/dlp.admin,gcloud dlp inspect-templates list,Verified
+SEC-05,Audit Logging,Cloud Audit Logs Data Access logging enabled,roles/logging.admin,gcloud logging sinks list,Verified
+SEC-06,Cost Governance,BigQuery API cost allocation label verification,roles/billing.viewer,gcloud billing projects describe,Verified

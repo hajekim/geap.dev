@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Part 3: Admin Guide — 종합 슬라이드 강의</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --google-blue: #1a73e8;
+      --google-red: #ea4335;
+      --google-yellow: #fbbc05;
+      --google-green: #34a853;
+      --bg-dark: #0d1117;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.15);
+      --text-main: #ffffff;
+      --text-sub: #9ca3af;
+      --font-display: 'Outfit', 'Noto Sans KR', sans-serif;
+      --font-body: 'Noto Sans KR', -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, html { width: 100%; height: 100%; overflow: hidden; background: var(--bg-dark); color: var(--text-main); font-family: var(--font-body); word-break: keep-all; }
+    
+    .bg-glow { position: fixed; width: 700px; height: 700px; border-radius: 50%; filter: blur(160px); z-index: 0; opacity: 0.25; pointer-events: none; }
+    .glow-1 { top: -120px; left: -120px; background: var(--google-red); }
+    .glow-2 { bottom: -120px; right: -120px; background: var(--google-blue); }
+
+    .slide-container { width: 100%; height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; position: relative; z-index: 1; }
+    .slide-container::-webkit-scrollbar { display: none; }
+    .slide { width: 100vw; height: 100vh; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2.5rem 5rem; position: relative; text-align: center; max-height: 100vh; overflow: hidden; }
+
+    .nav-dots { position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 6px; z-index: 10; max-height: 92vh; overflow-y: auto; padding: 4px; }
+    .nav-dots::-webkit-scrollbar { display: none; }
+    .nav-dot { width: 10px; height: 10px; min-width: 10px; min-height: 10px; padding: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.25); cursor: pointer; transition: all 0.3s ease; border: none; flex-shrink: 0; outline: none; }
+    .nav-dot.active { background: var(--google-red); transform: scale(1.4); box-shadow: 0 0 12px var(--google-red); }
+
+    h1 { font-family: var(--font-display); font-size: 3.5rem; font-weight: 900; line-height: 1.25; margin-bottom: 1rem; background: linear-gradient(135deg, #ffffff 40%, #ff7b72 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    h2 { font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; margin-bottom: 0.8rem; color: #ffffff; }
+    p.subtitle { font-size: 1.45rem; color: var(--text-sub); max-width: 950px; line-height: 1.6; margin-bottom: 1.8rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.8rem; width: 100%; max-width: 1250px; align-items: stretch; }
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 2.2rem; text-align: left; backdrop-filter: blur(16px); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: var(--google-red); }
+    .card.blue::before { background: var(--google-blue); }
+    .card.yellow::before { background: var(--google-yellow); }
+    .card.green::before { background: var(--google-green); }
+
+    .card h3 { font-family: var(--font-display); font-size: 1.7rem; margin-bottom: 0.8rem; color: #fff; }
+    .card p { color: #d1d5db; font-size: 1.25rem; line-height: 1.6; margin-bottom: 0.8rem; }
+    .card ul { list-style: none; padding: 0; margin-top: 0.4rem; }
+    .card ul li { color: #e5e7eb; font-size: 1.2rem; line-height: 1.7; margin-bottom: 0.5rem; padding-left: 1.6rem; position: relative; }
+    .card ul li::before { content: '✔'; position: absolute; left: 0; color: var(--google-red); font-weight: 700; }
+    .card.blue ul li::before { color: var(--google-blue); }
+
+    .code-box { background: rgba(234, 67, 53, 0.15); border: 1px solid rgba(255, 123, 114, 0.3); border-left: 5px solid var(--google-red); border-radius: 12px; padding: 1rem 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 1.15rem; color: #ff7b72; text-align: left; margin: 0.8rem 0; line-height: 1.5; }
+    
+    .img-showcase img, .card img { cursor: zoom-in; transition: transform 0.2s ease, border-color 0.2s ease; }
+    .img-showcase img:hover, .card img:hover { transform: scale(1.03); border-color: var(--google-red); }
+
+    .lightbox-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; cursor: zoom-out; }
+    .lightbox-modal.active { opacity: 1; pointer-events: auto; }
+    .lightbox-img { max-width: 92vw; max-height: 92vh; border-radius: 16px; box-shadow: 0 0 60px rgba(234, 67, 53, 0.5); border: 2px solid rgba(255, 255, 255, 0.25); transform: scale(0.92); transition: transform 0.25s ease; object-fit: contain; }
+    .lightbox-modal.active .lightbox-img { transform: scale(1); }
+
+    .cta-btn { display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, var(--google-red), #c5221f); color: #fff; font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; padding: 1.2rem 3rem; border-radius: 50px; text-decoration: none; box-shadow: 0 10px 30px rgba(234, 67, 53, 0.4); transition: all 0.3s ease; }
+    .cta-btn:hover { transform: translateY(-3px) scale(1.05); }
+    .hint { position: absolute; bottom: 1.2rem; font-size: 1.05rem; color: var(--text-sub); opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+
+  <div class="nav-dots">
+    <button class="nav-dot active" onclick="scrollToSlide(0)" title="1. 타이틀"></button>
+    <button class="nav-dot" onclick="scrollToSlide(1)" title="2. 인프라 거버넌스"></button>
+    <button class="nav-dot" onclick="scrollToSlide(2)" title="3. 다중 프로젝트 2중화"></button>
+    <button class="nav-dot" onclick="scrollToSlide(3)" title="4. VPC SC & CMEK"></button>
+    <button class="nav-dot" onclick="scrollToSlide(4)" title="5. WIF & Cloud Identity"></button>
+    <button class="nav-dot" onclick="scrollToSlide(5)" title="6. M365/ServiceNow 커넥터"></button>
+    <button class="nav-dot" onclick="scrollToSlide(6)" title="7. Actions 쓰기 통제"></button>
+    <button class="nav-dot" onclick="scrollToSlide(7)" title="8. 에이전트 레지스트리"></button>
+    <button class="nav-dot" onclick="scrollToSlide(8)" title="9. ACL & 킬 스위치"></button>
+    <button class="nav-dot" onclick="scrollToSlide(9)" title="10. Model Armor 3대 지표"></button>
+    <button class="nav-dot" onclick="scrollToSlide(10)" title="11. Model Armor 설정"></button>
+    <button class="nav-dot" onclick="scrollToSlide(11)" title="12. BigQuery SIEM 로그"></button>
+    <button class="nav-dot" onclick="scrollToSlide(12)" title="13. 실시간 감사 SQL 실습"></button>
+    <button class="nav-dot" onclick="scrollToSlide(13)" title="14. ROI 재무 시뮬레이션"></button>
+    <button class="nav-dot" onclick="scrollToSlide(14)" title="15. Gemini Notebook 거버넌스"></button>
+    <button class="nav-dot" onclick="scrollToSlide(15)" title="16. 실습 시작 CTA"></button>
+  </div>
+
+  <div class="slide-container" id="container">
+    <!-- 1 -->
+    <section class="slide">
+      <h1>🛡️ Part 3: Admin Guide<br>전사 AI 인프라 & 보안 거버넌스 가이드</h1>
+      <p class="subtitle">이 가이드는 클라우드 인프라 관리자, 정보보호최고책임자(CISO), 기술 의사결정권자를 대상으로 합니다.<br>기업 내 안전한 생성형 AI 도입을 위한 데이터 격리, 권한 제어, 보안 관제 및 투자 효과(ROI) 검토 방안을 다룹니다.</p>
+      <div class="hint">⬇️ 방향키(↓) 또는 마우스 스크롤로 다음 슬라이드로 이동</div>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide">
+      <h2>GCP 프로젝트 설정 및 인프라 거버넌스</h2>
+      <p class="subtitle">Gemini Enterprise의 안전한 전사 배포를 위해 <b>클라우드 인프라의 환경 격리 및 권한 분리 기준</b>을 세웁니다.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>🏛️ 환경별 프로젝트 분리</h3>
+          <p>단일 프로젝트 내 집중을 피하고 <b>운영(Prod) / 개발(Dev) / 감사(Audit)</b> 프로젝트로 격리하여 리소스 간섭 및 단일 실패 지점을 방지합니다.</p>
+        </div>
+        <div class="card blue">
+          <h3>🔐 최소 권한 원칙 (PoLP) 적용</h3>
+          <p>일반 사용자의 서비스 사용 권한과 인프라 관리자의 설정 권한을 분리하며, Cloud Identity 조직 단위(OU) 기반으로 그룹 권한을 매핑합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide">
+      <h2>다중 프로젝트 가용성 아키텍처</h2>
+      <p class="subtitle">서비스 연속성 유지 및 데이터 관리 요건 충족을 위해 <b>멀티 리전 배포 및 데이터 암호화 구조</b>를 적용합니다.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>🌐 멀티 리전 배포 구조</h3>
+          <ul>
+            <li><b>asia-northeast3 (서울)</b>: 주요 운영 트래픽 처리 및 색인 데이터 보관</li>
+            <li><b>us-central1 (아이오와)</b>: 재해 복구(DR) 대비 및 백업 리전 활용</li>
+          </ul>
+        </div>
+        <div class="card yellow">
+          <h3>🛡️ 네트워크 및 암호화 통제</h3>
+          <p>VPC Service Controls</b>: API 호출 및 데이터 색인의 인터넷 통신 제어</li>
+            <li><b>Cloud KMS (CMEK)</b>: 고객 관리 암호화 키를 활용한 데이터 저장 암호화</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide">
+      <h2>심화: VPC SC 및 KMS CMEK 관리</h2>
+      <p class="subtitle">사내 데이터 보호를 위한 <b>보안 경계(Service Perimeter)</b> 설정 및 <b>고객 관리 암호화 키(CMEK)</b> 운영 주기 관리입니다.</p>
+      <div class="card" style="max-width: 1100px; width: 100%;">
+        <h3>💡 보안 경계 통제 기준</h3>
+        <p>VPC SC 경계 내부 리소스 간의 통신만 허용되며, 승인되지 않은 외부 IP 주소 및 미인증 단말에서의 데이터 입출력을 제어합니다.</p>
+        <ul style="margin-top: 1rem;">
+          <li><b>CMEK 주기적 회전</b>: 설정된 주기(예: 90일)에 따라 암호화 키를 자동 회전하여 암호키 노출 에스코프를 최소화합니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide">
+      <h2>사용자 인증 관리: WIF & Cloud Identity</h2>
+      <p class="subtitle">장기 보안 자격증명(`.json` 키 파일) 사용의 위험을 줄이기 위해 <b>Workload Identity Federation (WIF)</b> 기반 인증을 구성합니다.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>🔑 WIF 기반 키리스(Keyless) 연동</h3>
+          <p>사내 IDP(Okta, Entra ID 등)와 구글 클라우드를 OIDC 표준 프로토콜로 연결하여 정적 키 발급 없이 단기 일시 토큰으로 인증합니다.</p>
+        </div>
+        <div class="card blue">
+          <h3>👥 인사 조직 정보 동기화</h3>
+          <p>인사 관리 시스템(HRIS)과의 동기화를 통해 퇴직 및 부서 이동 시 IAM 접근 권한이 자동 갱신 및 해지되는 파이프라인을 운영합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide">
+      <h2>데이터 커넥터 연동: M365 & ServiceNow</h2>
+      <p class="subtitle">Google Workspace 외에 <b>Microsoft 365(Outlook, OneDrive) 및 ServiceNow 사내 시스템</b> 데이터의 색인 및 검색을 연계합니다.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>🔌 M365 엔터프라이즈 커넥터</h3>
+          <p>임직원의 이메일 내역 및 원드라이브 첨부 문서를 색인하여 업무 콘솔 내에서 통합 RAG 검색 환경을 지원합니다.</p>
+        </div>
+        <div class="card green">
+          <h3>🛡️ 접근 제어 목록(ACL) 동기화</h3>
+          <p>원본 데이터 소스의 <b>개별 사용자 접근 권한(ACL) 정보가 색인에 동기화</b>되므로, 원본 시스템에서 열람 권한이 없는 데이터는 검색 결과에 나타나지 않습니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide">
+      <h2>심화: Actions (쓰기 권한) 거버넌스</h2>
+      <p class="subtitle">에이전트가 외부 시스템에 쓰기 작업을 할 때 보안을 어떻게 통제하는지 설명합니다.</p>
+      <div class="card" style="max-width: 1100px; width: 100%;">
+        <h3>⚠️ 승인 단계 필수화 (Human-in-the-Loop)</h3>
+        <p>외부 시스템에 변경을 가하는 Action 트리거 발생 시, 자동 처리를 일시 중지하고 사용자 화면에 <b>[실행 승인 요청] 창</b>을 띄웁니다.</p>
+        <ul style="margin-top: 1rem;">
+          <li><b>권한 토큰 분리</b>: 조회(Read-only) 권한과 변경(Write Action) 권한을 IAM 정책에서 분리 적용합니다.</li>
+          <li><b>감사 내역 기록</b>: Action 실행자, 승인 일시, 파라미터 정보가 Cloud Audit Logs에 보관됩니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide">
+      <h2>전사 에이전트 레지스트리 (Agent Registry)</h2>
+      <p class="subtitle">사내 각 조직에서 배포한 커스텀 에이전트의 현황을 <b>중앙 관리 콘솔에서 모니터링하고 권한을 통제</b>합니다.</p>
+      <div class="grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1250px;">
+        <div class="card">
+          <h3>👁️ 활성 상태 모니터링</h3>
+          <p>등록된 에이전트의 배포 수, 부서별 활성 사용량, 매핑된 데이터 소스 연결 현황을 중앙에서 조회합니다.</p>
+        </div>
+        <div class="card blue">
+          <h3>🔐 ACL 접근 범위 통제</h3>
+          <p>인사, 재무 등 민감 데이터를 다루는 에이전트는 인가된 특정 보안 그룹만 접근할 수 있도록 접근 제어 목록을 설정합니다.</p>
+        </div>
+        <div class="card yellow">
+          <h3>🛑 에이전트 비활성화 (Kill Switch)</h3>
+          <p>보안 정책 위반이나 비정상 호출이 감지된 에이전트를 콘솔에서 즉시 '비활성화(Disable)'하여 호출을 차단합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide">
+      <h2>실습: 에이전트 ACL 감사 및 비활성화</h2>
+      <p class="subtitle">관리자 콘솔에서 정책 위반 에이전트를 확인하고 활성 상태를 제어하는 실습 절차입니다.</p>
+      <div class="card" style="max-width: 1100px; width: 100%;">
+        <h3>📋 통제 실습 단계</h3>
+        <ul>
+          <li><b>1단계 (조회)</b>: Agent Registry 목록에서 대상 에이전트(`[비공식_재무_급여_계산_봇]`) 선택</li>
+          <li><b>2단계 (권한 검토)</b>: 접근 권한 그룹이 `All Employees(전사)`로 과다 설정되어 있는지 감사</li>
+          <li><b>3단계 (비활성화)</b>: 상단의 <b>[Disable Agent]</b> 버튼을 클릭하여 서비스 접근을 차단하고 소유자에게 알림 발송</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide">
+      <h2>Model Armor: 보안 방화벽 3대 지표</h2>
+      <p class="subtitle">실시간 데이터 입출력 방화벽인 <b>Model Armor</b>를 통해 제어하는 주요 데이터 검열 지표입니다.</p>
+      <div class="grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1250px;">
+        <div class="card">
+          <h3>🛡️ 1. 민감 정보(PII) 탐지</h3>
+          <p>주민등록번호, 전화번호, 금융 정보 등 개인식별정보(PII) 패턴 감지 시 마스킹 또는 요청 차단 규칙을 적용합니다.</p>
+        </div>
+        <div class="card blue">
+          <h3>🚫 2. 프롬프트 인젝션 방어</h3>
+          <p>시스템 지시어 우회(Jailbreak) 및 시스템 프롬프트 유출 시도를 탐지하여 모델 인퍼런스 전송 전 필터링합니다.</p>
+        </div>
+        <div class="card green">
+          <h3>☣️ 3. 유해 콘텐츠 검열</h3>
+          <p>욕설, 혐오 표현, 비윤리적 지시문 등 기업 업무에 부적합한 입력 및 출력 데이터를 검출합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="slide">
+      <h2>실습: Model Armor 임계값 정책 설정</h2>
+      <p class="subtitle">조직 단위(OU) 및 부서 특성에 맞춰 Model Armor 필터링 강도를 조정하는 설정 방안입니다.</p>
+      <div class="card" style="max-width: 1100px; width: 100%;">
+        <h3>💡 조직별 차등 제어 정책</h3>
+        <ul>
+          <li><b>고객 상담 부서 (CS)</b>: PII 필터 강도를 `High(엄격)`로 설정하여 대화 내 고객 식별정보 노출 방지</li>
+          <li><b>연구 개발 부서 (R&D)</b>: 소스 코드 및 기술 시나리오 문맥 오탐을 줄이기 위해 구문 필터 임계값을 조정하여 개발 효율성 유지</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="slide">
+      <h2>감사 로그 SIEM 연계: BigQuery 관제</h2>
+      <p class="subtitle">에이전트 호출, 색인에서 문서를 참조한 내역은 <b>Cloud Audit Logs를 거쳐 BigQuery 데이터셋으로 전송</b>됩니다.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>🔍 호출 내역 추적성</h3>
+          <p>호출 일시, 요청 사용자 이메일, 사용된 에이전트 ID, 참조된 문서 URI 등 상세 감사 정보를 보관 및 조회합니다.</p>
+        </div>
+        <div class="card blue">
+          <h3>🚨 SIEM 툴 연동 분석</h3>
+          <p>Splunk, Chronicle 등 사내 SIEM 시스템과 쿼리를 연동하여 단기간 내 다량 문서 참조 발생 시 보안 이벤트 알림을 보냅니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 -->
+    <section class="slide">
+      <h2>실습: BigQuery 감사 로그 조회 SQL</h2>
+      <p class="subtitle">관리자가 BigQuery 콘솔에서 <b>단시간 내 다수 문서를 참조한 호출 내역</b>을 조회하는 쿼리 실습입니다.</p>
+      <div class="card" style="max-width: 1100px; width: 100%;">
+        <h3>📋 SIEM 탐지 SQL 예제</h3>
+        <div class="code-box" style="font-size: 1.05rem;">SELECT
+  prolog.timestamp, prolog.caller_ip, prolog.user_email,
+  prolog.agent_id, prolog.action_type, prolog.query_text, prolog.cited_docs
+FROM `sys-audit-prod-01.gemini_siem.cloudaudit_googleapis_com_data_access` AS prolog
+WHERE prolog.timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 HOUR)
+  AND prolog.action_type = 'RAG_CITATION_QUERY'
+  AND ARRAY_LENGTH(prolog.cited_docs) >= 15
+ORDER BY prolog.timestamp DESC;</div>
+        <p style="margin-top: 0.5rem; color: #85e89d;">💡 <b>결과</b>: 설정된 시간 범위 내 기준치(15개) 이상의 문서를 인용한 사용자 IP 및 요청 이력 리스트가 출력됩니다.</p>
+      </div>
+    </section>
+
+    <!-- 14 -->
+    <section class="slide">
+      <h2>재무 검토: ROI 시뮬레이션 모델</h2>
+      <p class="subtitle">AI 솔루션 도입 검토 시 경영진 보고를 위해 활용하는 <b>정량적 비용 및 효용(ROI) 산출 기준</b>입니다.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>💰 비용 및 절감 파라미터</h3>
+          <ul>
+            <li><b>예상 지출</b>: 구독 라이선스 비용 + 클라우드 인프라 운용 비용</li>
+            <li><b>업무 절감 가정</b>: 인당 월간 반복 업무 절감 시간(Hour)</li>
+            <li><b>환산 가치</b>: 평균 임금 환산액을 적용한 연간 절감 기대 효과</li>
+          </ul>
+        </div>
+        <div class="card yellow">
+          <h3>📈 손익분기점 (BEP) 시뮬레이션</h3>
+          <p>연도별 예상 서비스 활용률(1차년도 온보딩 ~ 3차년도 정착)을 반영하여 누적 순현재가치(NPV) 및 BEP 시점을 계산합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 -->
+    <section class="slide">
+      <h2>Gemini Notebook Enterprise 거버넌스 설정</h2>
+      <p class="subtitle">기업용 Gemini Notebook의 <b>팀 도서관 데이터 외부 공유 통제 및 API 연동 기준</b>을 설명합니다.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>🏛️ 엔터프라이즈 도서관 권한 제어</h3>
+          <ul>
+            <li><b>공유 도메인 제한</b>: 사내 인가 도메인(`.company.com`) 이외의 외부 계정으로 도서관 세션 공유 차단</li>
+            <li><b>내보내기 통제</b>: 업로드된 원본 문서 소스의 외부 다운로드 및 복사 제한 기능</li>
+          </ul>
+        </div>
+        <div class="card green">
+          <h3>🌐 사내 시스템 REST API 연계</h3>
+          <p>그룹웨어 및 사내 업무 포털에서 REST API를 호출하여 Gemini Notebook 도서관에 정형/비정형 문서를 자동 업로드하는 표준을 적용합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 -->
+    <section class="slide">
+      <h2>Part 3 슬라이드 완료</h2>
+      <p class="subtitle">전체 프레젠테이션 안내를 마쳤습니다. 교육 포털 메인으로 진입하여 직무별 실습 문서와 함께 단계별 핸즈온을 진행하세요.</p>
+      <a href="index.html#/" class="cta-btn">🏠 교육 포털 메인으로 진입하기 &rarr;</a>
+    </section>
+  </div>
+
+  <!-- 라이트박스 (이미지 확대 팝업) -->
+  <div class="lightbox-modal" id="lightbox" onclick="closeLightbox()">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="확대 이미지">
+  </div>
+
+  <script>
+    const container = document.getElementById('container');
+    const dots = document.querySelectorAll('.nav-dot');
+    const slides = document.querySelectorAll('.slide');
+    function scrollToSlide(idx) { slides[idx].scrollIntoView({ behavior: 'smooth' }); }
+    container.addEventListener('scroll', () => {
+      const activeIdx = Math.round(container.scrollTop / window.innerHeight);
+      dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    document.querySelectorAll('.img-showcase img, .card img').forEach(img => {
+      img.addEventListener('click', (e) => {
+        e.stopPropagation();
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
+    function closeLightbox() { lightbox.classList.remove('active'); }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+        return;
+      }
+      const idx = Math.round(container.scrollTop / window.innerHeight);
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); if (idx < slides.length - 1) scrollToSlide(idx + 1); }
+      else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); if (idx > 0) scrollToSlide(idx - 1); }
+    });
+  </script>
+</body>
+</html>

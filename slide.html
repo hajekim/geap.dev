@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini Enterprise 오프닝 키노트 슬라이드</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --google-blue: #1a73e8;
+      --google-red: #ea4335;
+      --google-yellow: #fbbc05;
+      --google-green: #34a853;
+      --bg-dark: #0d1117;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text-main: #ffffff;
+      --text-sub: #8b949e;
+      --font-display: 'Outfit', 'Noto Sans KR', sans-serif;
+      --font-body: 'Noto Sans KR', -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      word-break: keep-all;
+    }
+
+    /* 배경 그래디언트 효과 */
+    .bg-glow {
+      position: fixed;
+      width: 650px;
+      height: 650px;
+      border-radius: 50%;
+      filter: blur(150px);
+      z-index: 0;
+      opacity: 0.25;
+      pointer-events: none;
+      transition: all 1s ease;
+    }
+    .glow-1 { top: -120px; left: -120px; background: var(--google-blue); }
+    .glow-2 { bottom: -120px; right: -120px; background: var(--google-red); }
+    .glow-3 { top: 45%; left: 50%; transform: translate(-50%, -50%); background: var(--google-green); opacity: 0.15; }
+
+    /* 슬라이드 컨테이너 */
+    .slide-container {
+      width: 100%;
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      position: relative;
+      z-index: 1;
+    }
+
+    .slide-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem;
+      position: relative;
+      text-align: center;
+    }
+
+    /* 우측 내비게이션 닷 */
+    .nav-dots { position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 6px; z-index: 10; max-height: 92vh; overflow-y: auto; padding: 4px; }
+    .nav-dots::-webkit-scrollbar { display: none; }
+    .nav-dot { width: 10px; height: 10px; min-width: 10px; min-height: 10px; padding: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.25); cursor: pointer; transition: all 0.3s ease; border: none; flex-shrink: 0; outline: none; }
+
+    .nav-dot.active {
+      background: var(--google-blue);
+      transform: scale(1.4);
+      box-shadow: 0 0 12px var(--google-blue);
+    }
+
+    /* 타이포그래피 */
+    h1 {
+      font-family: var(--font-display);
+      font-size: 3.8rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #ffffff 40%, #a5c8ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+      color: #ffffff;
+    }
+
+    p.subtitle {
+      font-size: 1.65rem;
+      color: var(--text-sub);
+      max-width: 880px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    /* 구글 4색 닷 애니메이션 */
+    .google-dots {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 2rem;
+    }
+
+    .dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      animation: bounce 1.8s infinite ease-in-out;
+    }
+    .dot:nth-child(1) { background: var(--google-blue); animation-delay: 0s; }
+    .dot:nth-child(2) { background: var(--google-red); animation-delay: 0.2s; }
+    .dot:nth-child(3) { background: var(--google-yellow); animation-delay: 0.4s; }
+    .dot:nth-child(4) { background: var(--google-green); animation-delay: 0.6s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(1) translateY(0); }
+      40% { transform: scale(1.3) translateY(-10px); }
+    }
+
+    /* 카드 그리드 */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.2rem;
+      width: 100%;
+      max-width: 1250px;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2.8rem 2.2rem;
+      text-align: left;
+      backdrop-filter: blur(16px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+    }
+    .card.blue::before { background: var(--google-blue); }
+    .card.green::before { background: var(--google-green); }
+    .card.red::before { background: var(--google-red); }
+    .card.yellow::before { background: var(--google-yellow); }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.85rem;
+      margin-bottom: 1.2rem;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card p {
+      color: #d1d5db;
+      font-size: 1.35rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .card ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 1.2rem 0 0;
+    }
+
+    .card ul li {
+      color: #e5e7eb;
+      font-size: 1.25rem;
+      line-height: 1.8;
+      margin-bottom: 0.6rem;
+      padding-left: 1.6rem;
+      position: relative;
+    }
+
+    .card ul li::before {
+      content: '✔';
+      position: absolute;
+      left: 0;
+      color: var(--google-blue);
+      font-weight: 700;
+    }
+    .card.green ul li::before { color: var(--google-green); }
+    .card.red ul li::before { color: var(--google-red); }
+    .card.yellow ul li::before { color: var(--google-yellow); }
+
+    /* CTA 버튼 */
+    .img-showcase img, .card img { cursor: zoom-in; transition: transform 0.2s ease, border-color 0.2s ease; }
+    .img-showcase img:hover, .card img:hover { transform: scale(1.03); border-color: var(--google-blue); }
+
+    .lightbox-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; cursor: zoom-out; }
+    .lightbox-modal.active { opacity: 1; pointer-events: auto; }
+    .lightbox-img { max-width: 92vw; max-height: 92vh; border-radius: 16px; box-shadow: 0 0 60px rgba(26, 115, 232, 0.5); border: 2px solid rgba(255, 255, 255, 0.25); transform: scale(0.92); transition: transform 0.25s ease; object-fit: contain; }
+    .lightbox-modal.active .lightbox-img { transform: scale(1); }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--google-blue), #1558b0);
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      padding: 1.3rem 3rem;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(26, 115, 232, 0.4);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(26, 115, 232, 0.6);
+      background: linear-gradient(135deg, #4285f4, var(--google-blue));
+    }
+
+    /* 하단 안내 배지 */
+    .hint {
+      position: absolute;
+      bottom: 2rem;
+      font-size: 1.15rem;
+      color: var(--text-sub);
+      opacity: 0.8;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+
+    /* 반응형 */
+    @media screen and (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 2rem; }
+      .slide { padding: 2rem 1.5rem; }
+      .grid { grid-template-columns: 1fr; gap: 1rem; }
+      .nav-dots { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+  <div class="bg-glow glow-3"></div>
+
+  <!-- 우측 슬라이드 닷 네비게이션 (8개 슬라이드) -->
+  <div class="nav-dots">
+    <button class="nav-dot active" onclick="scrollToSlide(0)" title="Slide 1"></button>
+    <button class="nav-dot" onclick="scrollToSlide(1)" title="Slide 2"></button>
+    <button class="nav-dot" onclick="scrollToSlide(2)" title="Slide 3"></button>
+    <button class="nav-dot" onclick="scrollToSlide(3)" title="Slide 4"></button>
+    <button class="nav-dot" onclick="scrollToSlide(4)" title="Slide 5"></button>
+    <button class="nav-dot" onclick="scrollToSlide(5)" title="Slide 6"></button>
+    <button class="nav-dot" onclick="scrollToSlide(6)" title="Slide 7"></button>
+    <button class="nav-dot" onclick="scrollToSlide(7)" title="Slide 8"></button>
+  </div>
+
+  <div class="slide-container" id="container">
+    <!-- Slide 1: 타이틀 -->
+    <section class="slide">
+      <div class="google-dots">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+      <h1>Google Gemini Enterprise<br>핸즈온 워크숍 오프닝 키노트</h1>
+      <p class="subtitle">본 워크숍은 Google Workspace 및 Cloud 인프라 기반으로 엔터프라이즈 환경에 최적화된 생성형 AI의 기능과 거버넌스를 이해하고, 실무에 적용할 수 있는 단계별 실습을 제공합니다.</p>
+      <div class="hint">⬇️ 방향키(↓) 또는 마우스 스크롤로 다음 슬라이드로 이동</div>
+    </section>
+
+    <!-- Slide 2: 아키텍처 개요 -->
+    <section class="slide">
+      <h2>1. 엔터프라이즈 생성형 AI 아키텍처</h2>
+      <p class="subtitle">Gemini Enterprise는 기업 데이터의 외부에 대한 비공개 요건을 준수하며, 사내 업무 파이프라인과 통합할 수 있는 맞춤형 AI 기능을 제공합니다.</p>
+      <div class="grid">
+        <div class="card blue">
+          <h3>📌 사내 데이터 보호 및 격리</h3>
+          <p>사용자 질의 및 입력 데이터는 모델 학습에 사용되지 않으며, 고객 데이터 보호 경계 내에서만 처리됩니다.</p>
+        </div>
+        <div class="card green">
+          <h3>⚡ 기존 업무 도구와의 연동</h3>
+          <p>Google Workspace(Drive, Gmail 등) 및 Microsoft 365 데이터와 안전하게 연계하여 문서 검색 및 업무 시나리오를 수행합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: 3대 맞춤 트랙 -->
+    <section class="slide">
+      <h2>2. 역할별 3대 실습 트랙 구성</h2>
+      <p class="subtitle">참석자의 직무 역할(End User, Power User, IT/Security Admin)에 맞춰 구성된 세 가지 맞춤 실습 트랙을 안내합니다.</p>
+      <div class="grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1200px;">
+        <div class="card">
+          <h3>🟢 Track 1. Day 1 Value</h3>
+          <p><b>대상: 전 임직원</b><br>별도의 설정 없이 AI Assistant, 미디어 생성, 문서/표 분석 등 즉시 활용 가능한 기본 및 멀티모달 실습을 수행합니다.</p>
+        </div>
+        <div class="card blue">
+          <h3>🔵 Track 2. Advanced</h3>
+          <p><b>대상: 파워 유저, 시민 개발자</b><br>Google Drive RAG 연동, Gemini Notebook 도서관, Deep Research, 그리고 노코드 에이전트 디자이너 실습을 수행합니다.</p>
+        </div>
+        <div class="card red">
+          <h3>🛡️ Part 3. Admin Guide</h3>
+          <p><b>대상: IT 관리자, CISO, 경영진</b><br>GCP 프로젝트 격리, IAM/WIF 권한 설정, Model Armor 보안 방화벽, BigQuery 감사 관제 및 ROI 분석을 수행합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4: Track 1 상세 -->
+    <section class="slide">
+      <h2>3. Track 1: Day 1 Value 주요 내용</h2>
+      <p class="subtitle">생성형 AI를 업무 보조 도구로 활용하여 문서 초안 작성, 멀티모달 데이터 분석, 정보 요약에 드는 시간을 절감합니다.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>✨ 개인화 컨텍스트 (pContext)</h3>
+          <p>사용자의 선호 호칭, 직무, 사내 조직 및 업무 이력을 참조하여 직무 역할에 적합한 맥락 기반의 답변을 생성합니다.</p>
+        </div>
+        <div class="card green">
+          <h3>📊 멀티모달 분석 및 출처 검증</h3>
+          <p>엑셀(.xlsx) 및 파워포인트(.pptx) 구조를 파싱하여 표와 차트로 도출하며, 답변에 인용된 웹 및 사내 문서의 출처 링크를 명시합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5: Track 2 상세 -->
+    <section class="slide">
+      <h2>4. Track 2: Advanced 주요 내용</h2>
+      <p class="subtitle">사내 데이터 저장소 연동(RAG)과 맞춤형 에이전트 설정을 통해 단계별 비즈니스 워크플로우를 구성합니다.</p>
+      <div class="grid">
+        <div class="card blue">
+          <h3>📚 Gemini Notebook & Deep Research</h3>
+          <p>지정된 문서 내에서만 답변을 도출하는 100% 인용 기반 리서치 도서관을 구성하고, 다단계 탐색 보고서를 생성합니다.</p>
+        </div>
+        <div class="card yellow">
+          <h3>🛠️ 에이전트 빌더 (Agent Designer)</h3>
+          <p>자연어 프롬프트와 사내 데이터 소스를 결합하여 부서별 요구사항에 부합하는 업무 특화 에이전트를 조립합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6: 프롬프트 프레임워크 -->
+    <section class="slide">
+      <h2>5. 업무 목적별 프롬프트 프레임워크</h2>
+      <p class="subtitle">일관되고 신뢰할 수 있는 출력 결과를 도출하기 위해 사용되는 표준화된 프롬프트 작성 가이드라인입니다.</p>
+      <div class="grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1200px;">
+        <div class="card">
+          <h3>⚡ APE (단순 질의)</h3>
+          <p><b>Action · Purpose · Expectation</b><br>간단한 정보 요약 및 빠른 즉답 검색에 활용되는 기본 구조</p>
+        </div>
+        <div class="card yellow">
+          <h3>🏆 C.R.A.F.T (표준 보고서)</h3>
+          <p><b>Context · Role · Action · Format · Tone</b><br>보고서, 제안서, 공식 메일 등 형식과 톤 제어가 필요한 업무에 활용</p>
+        </div>
+        <div class="card green">
+          <h3>🎨 CO-STAR (마케팅)</h3>
+          <p><b>Context · Objective · Style · Tone · Audience · Response</b><br>고객 타겟팅 및 어조 조정이 중요한 마케팅 콘텐츠 생성에 활용</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 7: 차세대 워크플로우 비전 -->
+    <section class="slide">
+      <h2>6. 차세대 워크플로우 자동화 아키텍처</h2>
+      <p class="subtitle">단일 문답을 넘어 복합적인 단계별 심사 및 승인 프로세스를 자동화하는 업무 파이프라인 구성 방안입니다.</p>
+      <div class="grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1200px;">
+        <div class="card blue">
+          <h3>⚡ 워크플로우 에이전트</h3>
+          <p><b>Price & Margin 실습</b><br>할인율 심사, 마진율 조건 대조, 결재 승인 메일 발송 단계로 이어지는 조건부 분기 워크플로우를 구현합니다.</p>
+        </div>
+        <div class="card green">
+          <h3>🏛️ 멀티 에이전트 조율</h3>
+          <p><b>ADK / CAA 통합</b><br>RAG 검색, 데이터 분석 등 개별 특화 에이전트들을 오케스트레이터가 순차 또는 병렬로 호출하여 과제를 처리합니다.</p>
+        </div>
+        <div class="card red">
+          <h3>🎨 노코드 에이전트 빌더</h3>
+          <p><b>Agent Designer</b><br>개발 코딩 없이 웹 인터페이스에서 프롬프트 명령어와 사내 소스 매핑을 통해 에이전트를 생성합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8: 맺음말 -->
+    <section class="slide">
+      <h2>7. 워크숍 실습 시작</h2>
+      <p class="subtitle">오프닝 키노트 안내를 마쳤습니다. 다음 단계인 Track 1 (Day 1 Value) 슬라이드로 이동하여 1단계 실습 안내를 시작합니다.</p>
+      <a href="slide_track1.html" class="cta-btn">📺 Track 1 슬라이드로 이동하기 &rarr;</a>
+    </section>
+  </div>
+
+  <!-- 라이트박스 (이미지 확대 팝업) -->
+  <div class="lightbox-modal" id="lightbox" onclick="closeLightbox()">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="확대 이미지">
+  </div>
+
+  <script>
+    const container = document.getElementById('container');
+    const dots = document.querySelectorAll('.nav-dot');
+    const slides = document.querySelectorAll('.slide');
+    function scrollToSlide(idx) { slides[idx].scrollIntoView({ behavior: 'smooth' }); }
+    container.addEventListener('scroll', () => {
+      const activeIdx = Math.round(container.scrollTop / window.innerHeight);
+      dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    document.querySelectorAll('.img-showcase img, .card img').forEach(img => {
+      img.addEventListener('click', (e) => {
+        e.stopPropagation();
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
+    function closeLightbox() { lightbox.classList.remove('active'); }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+        return;
+      }
+      const idx = Math.round(container.scrollTop / window.innerHeight);
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); if (idx < slides.length - 1) scrollToSlide(idx + 1); }
+      else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); if (idx > 0) scrollToSlide(idx - 1); }
+    });
+  </script>
+</body>
+</html>

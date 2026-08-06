@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track 2: Advanced — 종합 슬라이드 강의</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --google-blue: #1a73e8;
+      --google-red: #ea4335;
+      --google-yellow: #fbbc05;
+      --google-green: #34a853;
+      --bg-dark: #0d1117;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.15);
+      --text-main: #ffffff;
+      --text-sub: #9ca3af;
+      --font-display: 'Outfit', 'Noto Sans KR', sans-serif;
+      --font-body: 'Noto Sans KR', -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, html { width: 100%; height: 100%; overflow: hidden; background: var(--bg-dark); color: var(--text-main); font-family: var(--font-body); word-break: keep-all; }
+    
+    .bg-glow { position: fixed; width: 650px; height: 650px; border-radius: 50%; filter: blur(150px); z-index: 0; opacity: 0.25; pointer-events: none; }
+    .glow-1 { top: -120px; left: -120px; background: var(--google-green); }
+    .glow-2 { bottom: -120px; right: -120px; background: var(--google-blue); }
+
+    .slide-container { width: 100%; height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; position: relative; z-index: 1; }
+    .slide-container::-webkit-scrollbar { display: none; }
+    .slide { width: 100vw; height: 100vh; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2.5rem 5rem; position: relative; text-align: center; max-height: 100vh; overflow: hidden; }
+
+    .nav-dots { position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 6px; z-index: 10; max-height: 92vh; overflow-y: auto; padding: 4px; }
+    .nav-dots::-webkit-scrollbar { display: none; }
+    .nav-dot { width: 10px; height: 10px; min-width: 10px; min-height: 10px; padding: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.25); cursor: pointer; transition: all 0.3s ease; border: none; flex-shrink: 0; outline: none; }
+    .nav-dot.active { background: var(--google-green); transform: scale(1.4); box-shadow: 0 0 12px var(--google-green); }
+
+    h1 { font-family: var(--font-display); font-size: 3.5rem; font-weight: 900; line-height: 1.25; margin-bottom: 1rem; background: linear-gradient(135deg, #ffffff 40%, #85e89d 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    h2 { font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; margin-bottom: 0.8rem; color: #ffffff; }
+    p.subtitle { font-size: 1.45rem; color: var(--text-sub); max-width: 950px; line-height: 1.6; margin-bottom: 1.8rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.8rem; width: 100%; max-width: 1250px; align-items: stretch; }
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 2.2rem; text-align: left; backdrop-filter: blur(16px); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: var(--google-green); }
+    .card.blue::before { background: var(--google-blue); }
+    .card.yellow::before { background: var(--google-yellow); }
+    .card.red::before { background: var(--google-red); }
+
+    .card h3 { font-family: var(--font-display); font-size: 1.7rem; margin-bottom: 0.8rem; color: #fff; }
+    .card p { color: #d1d5db; font-size: 1.25rem; line-height: 1.6; margin-bottom: 0.8rem; }
+    .card ul { list-style: none; padding: 0; margin-top: 0.4rem; }
+    .card ul li { color: #e5e7eb; font-size: 1.2rem; line-height: 1.7; margin-bottom: 0.5rem; padding-left: 1.6rem; position: relative; }
+    .card ul li::before { content: '✔'; position: absolute; left: 0; color: var(--google-green); font-weight: 700; }
+    .card.blue ul li::before { color: var(--google-blue); }
+
+    .code-box { background: rgba(52, 168, 83, 0.15); border: 1px solid rgba(133, 232, 157, 0.3); border-left: 5px solid var(--google-green); border-radius: 12px; padding: 1rem 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 1.15rem; color: #85e89d; text-align: left; margin: 0.8rem 0; line-height: 1.5; }
+    
+    .img-showcase img, .card img, figure img, .zoomable { cursor: zoom-in; transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
+    .img-showcase img:hover, .card img:hover, figure img:hover, .zoomable:hover { transform: scale(1.04); border-color: var(--google-green); box-shadow: 0 8px 25px rgba(52, 168, 83, 0.4); }
+
+    .lightbox-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; cursor: zoom-out; }
+    .lightbox-modal.active { opacity: 1; pointer-events: auto; }
+    .lightbox-img { max-width: 92vw; max-height: 92vh; border-radius: 16px; box-shadow: 0 0 60px rgba(52, 168, 83, 0.5); border: 2px solid rgba(255, 255, 255, 0.25); transform: scale(0.92); transition: transform 0.25s ease; object-fit: contain; }
+    .lightbox-modal.active .lightbox-img { transform: scale(1); }
+
+    .cta-btn { display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, var(--google-green), #1e7e34); color: #fff; font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; padding: 1.2rem 3rem; border-radius: 50px; text-decoration: none; box-shadow: 0 10px 30px rgba(52, 168, 83, 0.4); transition: all 0.3s ease; }
+    .cta-btn:hover { transform: translateY(-3px) scale(1.05); }
+    .hint { position: absolute; bottom: 1.2rem; font-size: 1.05rem; color: var(--text-sub); opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+
+  <div class="nav-dots">
+    <button class="nav-dot active" onclick="scrollToSlide(0)" title="1. 타이틀"></button>
+    <button class="nav-dot" onclick="scrollToSlide(1)" title="2. Gemini Notebook 도서관"></button>
+    <button class="nav-dot" onclick="scrollToSlide(2)" title="3. Gemini Notebook 콘텐츠 자동 생성"></button>
+    <button class="nav-dot" onclick="scrollToSlide(3)" title="4. Infographic"></button>
+    <button class="nav-dot" onclick="scrollToSlide(4)" title="5. Slide Deck"></button>
+    <button class="nav-dot" onclick="scrollToSlide(5)" title="6. Slide Deck Customize 실습"></button>
+    <button class="nav-dot" onclick="scrollToSlide(6)" title="7. Video Overview"></button>
+    <button class="nav-dot" onclick="scrollToSlide(7)" title="8. Video Overview 실습"></button>
+    <button class="nav-dot" onclick="scrollToSlide(8)" title="9. Reports"></button>
+    <button class="nav-dot" onclick="scrollToSlide(9)" title="10. Reports 실습"></button>
+    <button class="nav-dot" onclick="scrollToSlide(10)" title="11. Audio Overview"></button>
+    <button class="nav-dot" onclick="scrollToSlide(11)" title="12. Deep Research 원리"></button>
+    <button class="nav-dot" onclick="scrollToSlide(12)" title="13. 에이전트 아키타입"></button>
+    <button class="nav-dot" onclick="scrollToSlide(13)" title="14. Agent Designer"></button>
+    <button class="nav-dot" onclick="scrollToSlide(14)" title="15. CRAFT 에이전트 실습"></button>
+    <button class="nav-dot" onclick="scrollToSlide(15)" title="16. Workflow Agent"></button>
+    <button class="nav-dot" onclick="scrollToSlide(16)" title="17. 시장 분석 에이전트 실습"></button>
+    <button class="nav-dot" onclick="scrollToSlide(17)" title="18. 실습 시작 CTA"></button>
+  </div>
+
+  <div class="slide-container" id="container">
+    <!-- 1 -->
+    <section class="slide">
+      <h1>🔵 Track 2: Advanced<br>Gemini Notebook & 노코드 에이전트 구축 가이드</h1>
+      <p class="subtitle">Gemini Notebook으로 문서 기반 콘텐츠를 자동 생성하고, Deep Research 자율 보고서부터 Agent Designer 노코드 에이전트, Workflow Agent 자동화 파이프라인까지 단계별로 다룹니다.</p>
+      <div class="hint">⬇️ 방향키(↓) 또는 마우스 스크롤로 다음 슬라이드로 이동</div>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide">
+      <h2>Gemini Notebook Enterprise 도서관 구성</h2>
+      <p class="subtitle">프로젝트 및 부서 단위로 참고 문서를 모아 <b>팀 도서관(Team Library)</b>을 구성하는 실습입니다.<br>Google 제품 소개 문서 3종(Gemini · Workspace · Cloud)을 소스로 로드합니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="card">
+          <h3>📚 Gemini Notebook 문서 그라운딩</h3>
+          <ul>
+            <li><b>지정 소스 제한 답변</b>: 업로드된 문서 소스(최대 50개 파일) 범위 내에서만 정보를 조합하여 환각을 최소화합니다.</li>
+            <li><b>온보딩 가이드 자동 생성</b>: 문서 기반의 FAQ, 스터디 가이드, 브리핑 문서를 자동 생성합니다.</li>
+          </ul>
+        </div>
+        <div class="card blue">
+          <h3>🤝 워크스페이스 공유 협업</h3>
+          <p>생성된 노트북 세션 URL을 팀 구성원에게 공유하여 동일한 레퍼런스를 바탕으로 기획안을 공동 작성합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide">
+      <h2>Gemini Notebook 콘텐츠 자동 생성 5종</h2>
+      <p class="subtitle">업로드한 소스 문서(PDF · 텍스트 · 이미지)를 바탕으로 <b>Gemini Notebook에서 5가지 형태의 콘텐츠</b>를 생성합니다.</p>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); max-width: 1300px; gap: 1.2rem;">
+        <div class="card blue">
+          <h3>🎨<br>Infographic</h3>
+          <p>기본 · 스케치노트 · 신문 1면<br>3종 스타일 선택 생성</p>
+        </div>
+        <div class="card">
+          <h3>📊<br>Slide Deck</h3>
+          <p>소스 기반 프레젠테이션 자동 생성 — Customize로 시네마틱 슬라이드까지</p>
+        </div>
+        <div class="card yellow">
+          <h3>🎬<br>Video Overview</h3>
+          <p>소스 내용을 영상 튜토리얼로 자동 변환 — Customize 프롬프트 지원</p>
+        </div>
+        <div class="card green">
+          <h3>📖<br>Reports</h3>
+          <p>Study guide · FAQ · Briefing doc 자동 생성</p>
+        </div>
+        <div class="card red">
+          <h3>🎙️<br>Audio Overview</h3>
+          <p>AI 진행자 2인의 팟캐스트 오디오 5~8분 자동 생성</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide">
+      <h2>🎨 Infographic</h2>
+      <p class="subtitle">Google AI 서비스 기획 텍스트를 소스로 업로드하고 <b>기본 · 스케치노트 · 신문 1면</b> 3가지 스타일의 인포그래픽을 순서대로 생성합니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1200px;">
+        <div class="card">
+          <h3>📥 실습 절차</h3>
+          <ul>
+            <li>Google AI 서비스 텍스트 3종을 노트북 소스로 추가</li>
+            <li>우측 Studio → <b>Infographic</b> (⋮) → <b>Customize</b></li>
+            <li>Workspace → <b>기본 스타일</b> 인포그래픽 생성</li>
+            <li>Gemini → <b>스케치노트</b> 스타일 인포그래픽 생성</li>
+            <li>Cloud → <b>신문 1면</b> 스타일 인포그래픽 생성</li>
+          </ul>
+        </div>
+        <div class="card blue">
+          <h3>📋 스타일별 프롬프트</h3>
+          <div class="code-box">Google Workspace의 주요 앱과 각 앱에 통합된 Gemini AI 기능을 한눈에 정리한 인포그래픽을 만들어줘</div>
+          <div class="code-box" style="margin-top: 0.8rem;">Google Gemini Enterprise의 핵심 기능과 실무 활용 시나리오를 스케치노트 스타일로 그려줘</div>
+          <div class="code-box" style="margin-top: 0.8rem;">Google Cloud Vertex AI와 BigQuery 기반 기업 AI 혁신 현황을 신문 1면 기사 스타일 인포그래픽으로 만들어줘</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1.2rem; justify-content: center; margin-top: 1rem;">
+        <figure style="text-align: center; margin: 0;">
+          <img src="./img/46.webp" alt="기본 스타일 인포그래픽" style="height: 130px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 2px 10px rgba(0,0,0,0.35);">
+          <figcaption style="font-size: 0.76rem; color: #9ca3af; margin-top: 0.35rem;">기본 스타일</figcaption>
+        </figure>
+        <figure style="text-align: center; margin: 0;">
+          <img src="./img/47.webp" alt="스케치노트 스타일 인포그래픽" style="height: 130px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 2px 10px rgba(0,0,0,0.35);">
+          <figcaption style="font-size: 0.76rem; color: #9ca3af; margin-top: 0.35rem;">스케치노트 스타일</figcaption>
+        </figure>
+        <figure style="text-align: center; margin: 0;">
+          <img src="./img/48.webp" alt="신문 1면 스타일 인포그래픽" style="height: 130px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 2px 10px rgba(0,0,0,0.35);">
+          <figcaption style="font-size: 0.76rem; color: #9ca3af; margin-top: 0.35rem;">신문 1면 스타일</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide">
+      <h2>📊 Slide Deck</h2>
+      <p class="subtitle">소스 문서를 업로드하면 <b>목차·내용·디자인이 일괄 완성된 프레젠테이션</b>을 자동으로 생성합니다. Customize로 시네마틱 슬라이드 등 다양한 스타일을 지정할 수 있습니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr; max-width: 640px;">
+        <div class="card">
+          <h3>⚙️ 생성 방법</h3>
+          <ul>
+            <li>우측 <b>Studio</b> 패널 → <b>슬라이드</b> 항목 선택</li>
+            <li><b>Customize</b> 버튼 클릭</li>
+            <li>원하는 방향을 프롬프트로 입력</li>
+            <li>생성된 슬라이드는 <b>PPTX</b>로 다운로드 가능</li>
+          </ul>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 1rem;">
+        <figure style="text-align: center; margin: 0;">
+          <img src="./img/notebooklm_014.webp" alt="Studio 패널에서 Slide Deck 선택" style="height: 160px; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
+          <figcaption style="font-size: 0.78rem; color: #666; margin-top: 0.4rem;">Studio 패널 → Slide Deck (⋮) 클릭</figcaption>
+        </figure>
+        <figure style="text-align: center; margin: 0;">
+          <img src="./img/notebooklm_021.webp" alt="Customize Slides 팝업" style="height: 160px; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 2px 8px rgba(0,0,0,0.12);">
+          <figcaption style="font-size: 0.78rem; color: #666; margin-top: 0.4rem;">Customize 프롬프트 입력 화면</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide">
+      <h2>📊 Slide Deck Customize 실습</h2>
+      <p class="subtitle"><b>제품 이미지만으로</b> Gemini Notebook이 영화 예고편 스타일의 슬라이드를 자동 완성합니다.<br>라이프스타일 브랜드 '홈스타일' 시나리오로 직접 만들어봅니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1200px;">
+        <div class="card">
+          <h3>📥 실습 절차</h3>
+          <ul>
+            <li><b>homestyle.zip</b> 다운로드 후 압축 해제</li>
+            <li>새 노트북 생성 → 이미지 4장 소스 업로드<br><small style="color:#9ca3af;">(sofa · cushion · lighting · diffuser)</small></li>
+            <li>브랜드 스토리 텍스트를 <b>story</b> 소스로 추가</li>
+            <li>슬라이드 자료 → <b>Customize</b> 옵션 선택 후 프롬프트 입력</li>
+          </ul>
+        </div>
+        <div class="card blue">
+          <h3>📋 생성 프롬프트</h3>
+          <div class="code-box" style="font-size: 1.05rem; line-height: 1.6;">스토리에 맞는 시네마틱 슬라이드를 만들어줘, 타이틀, 텍스트, 자막, 설명 등은 포함하지 마</div>
+          <p style="margin-top: 1rem; color: #85e89d;">💡 텍스트 없이 이미지만으로 구성된<br>영화 예고편 스타일 슬라이드 완성</p>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: center; margin-top: 1rem;">
+        <figure style="text-align: center; margin: 0;">
+          <img src="./img/54.webp" alt="시네마틱 슬라이드 생성 결과" style="height: 150px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 4px 16px rgba(0,0,0,0.4);">
+          <figcaption style="font-size: 0.76rem; color: #9ca3af; margin-top: 0.35rem;">시네마틱 슬라이드 생성 결과</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide">
+      <h2>🎬 Video Overview</h2>
+      <p class="subtitle">소스 문서의 내용을 <b>AI가 자동으로 영상 튜토리얼로 변환</b>합니다. Customize 버튼으로 주제와 스타일을 지정할 수 있습니다.</p>
+      <div style="display: flex; gap: 2rem; align-items: flex-start; justify-content: center; margin-top: 0.5rem;">
+        <div class="card" style="flex: 1; max-width: 420px;">
+          <h3>⚙️ 생성 방법</h3>
+          <ul>
+            <li>소스 문서(PDF · 이미지) 업로드</li>
+            <li>우측 <b>Video Overview</b> 패널 선택</li>
+            <li><b>Customize</b> 버튼 클릭</li>
+            <li>프롬프트 입력 후 생성 — MP4로 다운로드 가능</li>
+          </ul>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0.35rem; flex: 1; max-width: 420px;">
+          <a href="https://www.youtube.com/watch?v=4-5qeh4IXVY" target="_blank" style="display: inline-block; position: relative; text-decoration: none; width: 100%;">
+            <img src="https://img.youtube.com/vi/4-5qeh4IXVY/hqdefault.jpg" alt="Video Overview 생성 예시" class="youtube-thumb" style="width: 100%; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 52px; height: 52px; background: rgba(220,38,38,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none;">
+              <span style="color: #fff; font-size: 1.4rem; margin-left: 4px;">▶</span>
+            </div>
+          </a>
+          <p style="font-size: 0.76rem; color: #9ca3af;">클릭하면 YouTube에서 재생됩니다</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="slide">
+      <h2>🎬 Video Overview 실습</h2>
+      <p class="subtitle"><b>canvas.pdf</b>와 이미지를 소스로 업로드하고 Customize 프롬프트로 단계별 튜토리얼 영상을 생성합니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1200px;">
+        <div class="card yellow">
+          <h3>📥 실습 절차</h3>
+          <ul>
+            <li><b>canvas.pdf</b> + <b>canvas.zip</b> 다운로드</li>
+            <li>새 노트북 생성 → PDF와 이미지 소스 업로드</li>
+            <li>우측 <b>Video Overview</b> 패널 선택</li>
+            <li><b>Customize</b> 버튼 클릭 후 프롬프트 입력</li>
+            <li>생성 완료 후 MP4로 다운로드</li>
+          </ul>
+        </div>
+        <div class="card blue">
+          <h3>📋 Customize 프롬프트</h3>
+          <div class="code-box" style="font-size: 1.05rem; line-height: 1.6;">Gemini Enterprise에서 Canvas를 사용하는 방법을 초보자도 따라가기 쉽게 차근차근 설명하는 동영상을 만들어줘</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="slide">
+      <h2>📖 Reports</h2>
+      <p class="subtitle">소스를 기반으로 <b>Study guide · FAQ · Briefing doc</b> 3종 문서를 자동 생성합니다.<br>문서 학습·질의응답·임원 보고 준비를 몇 번의 클릭으로 완성합니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr 1fr 1fr; max-width: 1200px;">
+        <div class="card green">
+          <h3>📚 Study guide</h3>
+          <p>소스 전체를 <b>핵심 개념 → 세부 내용</b> 순서로 자동 정리합니다. 처음 접하는 기술 문서도 빠르게 파악할 수 있습니다.</p>
+        </div>
+        <div class="card green">
+          <h3>❓ FAQ</h3>
+          <p>문서에서 자주 묻는 질문과 답변을 자동 추출합니다. 고객 응대·팀 온보딩 자료로 바로 활용 가능합니다.</p>
+        </div>
+        <div class="card green">
+          <h3>📋 Briefing doc</h3>
+          <p>핵심 내용을 <b>경영진 보고용</b>으로 1페이지 압축 요약합니다. 의사결정용 브리핑 문서 작성 시간을 단축합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 -->
+    <section class="slide">
+      <h2>📖 Reports 실습</h2>
+      <p class="subtitle"><b>data_agent.zip</b> 이미지를 소스로 업로드하고 Reports 3종을 클릭만으로 직접 생성합니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1200px;">
+        <div class="card green">
+          <h3>📥 실습 절차</h3>
+          <ul>
+            <li><b>data_agent.zip</b> 다운로드 후 압축 해제</li>
+            <li>새 노트북 생성 → 이미지 10개 소스 업로드</li>
+            <li><b>Reports → Study guide</b>: 핵심 개념 정리</li>
+            <li><b>Reports → FAQ</b>: 질문·답변 추출</li>
+            <li><b>Reports → Briefing doc</b>: 임원 보고용 요약</li>
+            <li>※ 프롬프트 없이 클릭만으로 생성됩니다.</li>
+          </ul>
+        </div>
+        <figure style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;">
+          <img src="./img/notebooklm_029.webp" style="max-height: 55vh; width: auto; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); cursor: zoom-in;" alt="Reports 메뉴 — Study guide, FAQ, Briefing doc 3종" onclick="openLightbox(this)">
+          <figcaption style="font-size: 0.9rem; color: var(--text-sub);">Reports 하위 메뉴: Study guide · FAQ · Briefing doc</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 14 -->
+    <section class="slide">
+      <h2>🎙️ Audio Overview</h2>
+      <p class="subtitle">소스 문서 전체를 <b>AI 진행자 2인의 팟캐스트 대담 형식</b>으로 자동 요약합니다. 5~8분 분량의 오디오가 자동 생성되며 다운로드 가능합니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1200px;">
+        <div class="card">
+          <h3>⚙️ 생성 방법</h3>
+          <ul>
+            <li>노트북 우측 <b>오디오 개요</b> 패널 열기</li>
+            <li><b>생성하기</b> 버튼 클릭</li>
+            <li>생성 완료 후 재생 또는 다운로드</li>
+            <li>생성 소요 시간: 약 2~5분</li>
+          </ul>
+        </div>
+        <div class="card red">
+          <h3>💡 활용 팁</h3>
+          <ul>
+            <li>이동 중 이어폰으로 문서 내용 파악</li>
+            <li>팀 온보딩 오디오 자료로 배포</li>
+            <li>영어 팟캐스트 형식으로 생성됨</li>
+            <li>다운로드 후 사내 메신저·이메일로 공유</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 -->
+    <section class="slide">
+      <h2>Deep Research 다단계 리서치 메커니즘</h2>
+      <p class="subtitle">입력된 연구 주제에 대해 <b>하위 탐색 질문을 자동 생성하고 웹 및 연결 문서를 다단계로 탐색</b>하여 종합 문서를 완성합니다.</p>
+      <div style="display:flex; gap:0.6rem; align-items:stretch; justify-content:center; max-width:1150px; margin:0.6rem auto 1.2rem;">
+        <div style="flex:1; background:#1e3a5f; border-radius:8px; padding:1.1rem 0.8rem; text-align:center;">
+          <div style="font-size:1.6rem;">🔎</div>
+          <div style="font-size:0.85rem; font-weight:700; color:#93c5fd; margin:0.3rem 0;">① 질의 분해</div>
+          <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.5;">복잡한 질문을<br>하위 질문으로 분해</div>
+        </div>
+        <div style="font-size:1.3rem; color:#60a5fa; align-self:center; flex-shrink:0; padding:0 0.1rem;">→</div>
+        <div style="flex:1; background:#1a3a2a; border-radius:8px; padding:1.1rem 0.8rem; text-align:center;">
+          <div style="font-size:1.6rem;">📋</div>
+          <div style="font-size:0.85rem; font-weight:700; color:#86efac; margin:0.3rem 0;">② 플랜 생성</div>
+          <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.5;">리서치 단계 계획<br>사용자 검토·수정 가능</div>
+        </div>
+        <div style="font-size:1.3rem; color:#4ade80; align-self:center; flex-shrink:0; padding:0 0.1rem;">→</div>
+        <div style="flex:1; background:#2d2a1a; border-radius:8px; padding:1.1rem 0.8rem; text-align:center;">
+          <div style="font-size:1.6rem;">🌐</div>
+          <div style="font-size:0.85rem; font-weight:700; color:#fde68a; margin:0.3rem 0;">③ 자율 탐색</div>
+          <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.5;">웹·내부 문서<br>병렬·순차 검색</div>
+        </div>
+        <div style="font-size:1.3rem; color:#facc15; align-self:center; flex-shrink:0; padding:0 0.1rem;">→</div>
+        <div style="flex:1; background:#2d1a1a; border-radius:8px; padding:1.1rem 0.8rem; text-align:center;">
+          <div style="font-size:1.6rem;">🔄</div>
+          <div style="font-size:0.85rem; font-weight:700; color:#fca5a5; margin:0.3rem 0;">④ 반복 추론</div>
+          <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.5;">지식 공백 파악 후<br>재검색·자기 비판</div>
+        </div>
+        <div style="font-size:1.3rem; color:#f87171; align-self:center; flex-shrink:0; padding:0 0.1rem;">→</div>
+        <div style="flex:1; background:#2a1a3a; border-radius:8px; padding:1.1rem 0.8rem; text-align:center;">
+          <div style="font-size:1.6rem;">📄</div>
+          <div style="font-size:0.85rem; font-weight:700; color:#c4b5fd; margin:0.3rem 0;">⑤ 보고서 생성</div>
+          <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.5;">목차·인용·오디오<br>구조화 문서 완성</div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>🔍 다단계 추론 (Multi-step Reasoning)</h3>
+          <p>초기 탐색 결과에서 얻은 정보를 바탕으로 후속 검색 키워드를 파생시켜 심층 정보를 자동 탐색합니다. 표준 모드 약 <b>80회</b>, Deep Research Max 최대 <b>160회</b> 검색과 추론을 반복하며 소요 시간은 <b>3–8분</b>입니다.</p>
+        </div>
+        <div class="card green">
+          <h3>📑 종합 문서 구조화</h3>
+          <p>목차·핵심 요약·상세 분석·인용 문헌이 체계적으로 구성된 보고서와 <b>1–2분 오디오 요약</b>을 자동 생성합니다. 웹뿐 아니라 기업 내부 앱 데이터·Drive·Gmail 문서도 소스로 활용합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 -->
+    <section class="slide">
+      <h2>에이전트 실무 아키타입</h2>
+      <p class="subtitle">특정한 비즈니스 도메인 및 데이터 처리 목적에 따라 분류되는 <b>차세대 업무 에이전트의 5대 아키타입</b>입니다.</p>
+      <div class="grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1250px;">
+        <div class="card">
+          <h3>1️⃣ 지식 검색 (RAG)</h3>
+          <p><b>주요 기능</b>: 매뉴얼 및 약관 데이터 검색<br><b>적용 예시</b>: 사내 규정 Q&A, 계약서 대조 봇</p>
+        </div>
+        <div class="card blue">
+          <h3>2️⃣ 데이터 분석 (Data)</h3>
+          <p><b>주요 기능</b>: 정형 DB 질의 및 차트 시각화<br><b>적용 예시</b>: KPI 집계, 매출 현황 분석</p>
+        </div>
+        <div class="card green">
+          <h3>3️⃣ 콘텐츠 생성 (Content)</h3>
+          <p><b>주요 기능</b>: 다국어 번역 및 서식 변환<br><b>적용 예시</b>: 대외 PR 초안, 이메일 회신</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 -->
+    <section class="slide">
+      <h2>🤖 Agent Designer</h2>
+      <p class="subtitle">코드 없이 자연어로 에이전트를 만들고 조직에 배포하는 <b>노코드/로우코드 에이전트 빌더</b>입니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1200px;">
+        <div class="card">
+          <h3>📋 에이전트 유형</h3>
+          <ul>
+            <li><b>Custom agent</b>: 자연어 프롬프트 하나로 즉시 생성하는 단일 목적 에이전트</li>
+            <li><b>Workflow agent</b>: Flow Builder로 서브에이전트를 단계별 조율하는 멀티 에이전트</li>
+          </ul>
+        </div>
+        <div class="card blue">
+          <h3>⚙️ 편집 도구</h3>
+          <ul>
+            <li><b>Chat Pane</b>: 자연어로 에이전트를 생성·수정하는 노코드 대화창</li>
+            <li><b>Flow Builder</b>: 노드와 서브에이전트를 시각적으로 구성하는 로우코드 캔버스</li>
+            <li><b>Preview</b>: 배포 전 실시간 동작 테스트</li>
+            <li><b>Create</b>: 조직 전체 또는 특정 사용자에게 배포</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 -->
+    <section class="slide">
+      <h2>🤖 실습: CRAFT 프롬프트 에이전트</h2>
+      <p class="subtitle">CRAFT 프레임워크를 내장한 <b>프롬프트 최적화 에이전트</b>를 Agent Designer로 직접 만들어봅니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1200px;">
+        <div class="card yellow">
+          <h3>📥 실습 절차</h3>
+          <ul>
+            <li>Agents 메뉴 → <b>New Agent</b> 클릭</li>
+            <li>Chat Pane에 CRAFT 설계 요구 명세 입력</li>
+            <li><b>Flow Builder</b>에서 세부 설정 검토</li>
+            <li><b>Preview</b>로 에이전트 동작 테스트</li>
+            <li><b>Create</b>로 배포 → Your Agents 확인</li>
+          </ul>
+        </div>
+        <div class="card blue">
+          <h3>📋 에이전트 생성 프롬프트</h3>
+          <div class="code-box" style="font-size: 1rem; line-height: 1.6;">사용자가 러프하게 작성한 프롬프트를 Gemini에 사용하기 좋도록 아래 CRAFT 프레임워크 기반으로 프롬프트를 재작성합니다. 작성하기 위해 너(Gemini)에게 어떤 정보가 필요한지 나에게 질문하여 얻습니다.</div>
+          <p style="margin-top: 0.8rem; color: #9ca3af; font-size: 0.9rem;">이후 CRAFT 프레임워크 각 항목 정의를 이어서 입력합니다.</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1.2rem; margin-top: 1rem; max-width: 1300px; justify-content: center;">
+        <figure style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
+          <img src="./img/agentdesigner-004.webp" style="max-height: 32vh; width: auto; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); cursor: zoom-in;" alt="Preview 탭에서 에이전트 동작 테스트" onclick="openLightbox(this)">
+          <figcaption style="font-size: 0.85rem; color: var(--text-sub);">Preview 탭 — 에이전트 동작 테스트</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 16 -->
+    <section class="slide">
+      <h2>⚙️ Workflow Agent</h2>
+      <p class="subtitle">복잡한 업무를 <b>순차적 단계(Step)</b>로 분해하고, 각 단계를 전담 서브에이전트가 실행하는 <b>멀티 에이전트 오케스트레이션</b> 방식입니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr 1fr 1fr; max-width: 1200px;">
+        <div class="card green">
+          <h3>🔄 순차 실행 구조</h3>
+          <p>각 노드가 독립적인 Instruction·Knowledge·Tools·Model 설정을 가지며 정해진 순서대로 실행됩니다.</p>
+        </div>
+        <div class="card blue">
+          <h3>⏰ 스케줄러 트리거</h3>
+          <p>정해진 시간이나 이벤트에 Workflow Agent를 자동 실행합니다. 사람 개입 없이 주기적 업무를 자동화합니다.</p>
+        </div>
+        <div class="card yellow">
+          <h3>👤 Human-in-the-loop</h3>
+          <p>중간 단계에 사람의 검토·승인·입력을 삽입하여 중요한 의사결정을 사람이 제어합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 -->
+    <section class="slide">
+      <h2>⚙️ 실습: 시장 조사·경쟁 분석 Workflow Agent</h2>
+      <p class="subtitle">Web Grounding으로 최신 동향을 수집하고, 단계별 분석을 거쳐 <b>경영진 보고서를 자동 작성</b>하는 Workflow Agent를 구축합니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1200px;">
+        <div class="card">
+          <h3>📥 실습 절차</h3>
+          <ul>
+            <li>Agents → <b>New Agent &gt; Workflow Agent</b> 클릭</li>
+            <li>Chat Pane에 시장 분석 에이전트 프롬프트 입력</li>
+            <li>생성된 노드 구조·세부 설정 확인</li>
+            <li><b>Preview → Start manually</b>로 실행</li>
+            <li>Human-in-the-loop 단계에서 분석 대상 입력</li>
+            <li>단계별 실행 흐름 확인 후 결과 검토</li>
+          </ul>
+        </div>
+        <div class="card green">
+          <h3>🔄 4단계 분석 파이프라인</h3>
+          <ul>
+            <li><b>Step 1</b> 정보 수집: Web Grounding으로 최신 동향 검색</li>
+            <li><b>Step 2</b> 전략 분석: 시장 동인·경쟁사·SWOT·전망</li>
+            <li><b>Step 3</b> 보고서 작성: Executive Summary·비교표·액션 플랜</li>
+            <li><b>Step 4</b> 후속 제안: 심층 후속 질문 3개 추천</li>
+          </ul>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1.2rem; margin-top: 1rem; max-width: 1300px; justify-content: center;">
+        <figure style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
+          <img src="./img/workflowagent-012.webp" style="max-height: 32vh; width: auto; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); cursor: zoom-in;" alt="Workflow Agent 자동 생성 완료" onclick="openLightbox(this)">
+          <figcaption style="font-size: 0.85rem; color: var(--text-sub);">Workflow Agent 자동 생성 완료</figcaption>
+        </figure>
+        <figure style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
+          <img src="./img/workflowagent-020.webp" style="max-height: 32vh; width: auto; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); cursor: zoom-in;" alt="시장 분석 결과 - Executive Summary" onclick="openLightbox(this)">
+          <figcaption style="font-size: 0.85rem; color: var(--text-sub);">시장 분석 결과 — Executive Summary</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 18 -->
+    <section class="slide">
+      <h2>Track 2 슬라이드 완료</h2>
+      <p class="subtitle">Track 2 심화 안내를 마쳤습니다. 다음 단계인 Part 3 (Admin Guide) 슬라이드로 이동하여 인프라 거버넌스 및 보안 체계를 확인합니다.</p>
+      <a href="slide_admin.html" class="cta-btn">📺 Part 3 관리자 슬라이드로 이동 &rarr;</a>
+    </section>
+  </div>
+
+  <!-- 라이트박스 (이미지 확대 팝업) -->
+  <div class="lightbox-modal" id="lightbox" onclick="closeLightbox()">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="확대 이미지">
+  </div>
+
+  <script>
+    const container = document.getElementById('container');
+    const dots = document.querySelectorAll('.nav-dot');
+    const slides = document.querySelectorAll('.slide');
+    function scrollToSlide(idx) { slides[idx].scrollIntoView({ behavior: 'smooth' }); }
+    container.addEventListener('scroll', () => {
+      const activeIdx = Math.round(container.scrollTop / window.innerHeight);
+      dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    document.querySelectorAll('.img-showcase img, .card img, figure img:not(.youtube-thumb)').forEach(img => {
+      img.addEventListener('click', (e) => {
+        e.stopPropagation();
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
+    function closeLightbox() { lightbox.classList.remove('active'); }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+        return;
+      }
+      const idx = Math.round(container.scrollTop / window.innerHeight);
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); if (idx < slides.length - 1) scrollToSlide(idx + 1); }
+      else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); if (idx > 0) scrollToSlide(idx - 1); }
+    });
+  </script>
+</body>
+</html>
