@@ -944,9 +944,9 @@
 
             // 축소 시 아이콘 및 툴팁 표시를 위해 사이드바 모든 링크에 속성 부여
             document.querySelectorAll('.sidebar-nav > ul > li > a').forEach(function(a) {
-              var text = a.innerText.trim();
-              // 첫 2글자(이모지 아이콘: 🏠, 1️⃣, 2️⃣, 3️⃣, 📽️) 추출하여 data-icon에 저장
-              var icon = text.substring(0, 2);
+              var text = a.textContent.trim();
+              var match = text.match(/^([\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{1F000}-\u{1F2FF}\u{2B50}\u{2B55}]|[\uD800-\uDBFF][\uDC00-\uDFFF])/u);
+              var icon = match ? match[0] : (Array.from(text)[0] || '📄');
               a.setAttribute('data-icon', icon);
               if (!a.getAttribute('title')) {
                 a.setAttribute('title', text);
