@@ -1,0 +1,36 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+.env
+.venv/
+
+# Logs & temp
+*.log
+*.tmp
+
+# Node / build artifacts (Astro 실험 잔여물 포함)
+node_modules/
+dist/
+.astro/
+
+# Exclude heavy Veo GIFs: exceed GitHub 100MB single-file limit
+img/25.gif
+img/27.gif
+img/29.gif
+img/31.gif
+
+# AI Agent workspace
+.agent/
+.remember/
+
