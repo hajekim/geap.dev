@@ -186,7 +186,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      padding: 2.4rem 4rem;
+      padding: 2.2rem 3.8rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -206,38 +206,39 @@
     /* 슬라이드 상단 헤더 */
     .slide-header {
       text-align: left;
-      margin-bottom: 0.9rem;
+      margin-bottom: 0.8rem;
+      flex-shrink: 0;
     }
     .act-tag {
       display: inline-block;
-      padding: 4px 12px;
+      padding: 3px 10px;
       border-radius: 6px;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 700;
       background: var(--primary-green-light);
       color: var(--primary-green-dark);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
     }
     .slide-title-text {
       font-family: var(--font-heading);
-      font-size: 2.2rem;
+      font-size: 2.15rem;
       font-weight: 800;
       color: var(--text-primary);
       letter-spacing: -0.025em;
       line-height: 1.25;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.25rem;
     }
     .slide-desc-text {
-      font-size: 1.22rem;
+      font-size: 1.18rem;
       color: var(--text-secondary);
-      line-height: 1.55;
+      line-height: 1.5;
     }
 
     /* 슬라이드 바디 영역 */
     .slide-body {
       flex: 1;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
       width: 100%;
       min-height: 0;
@@ -247,18 +248,7 @@
     .layout-split {
       display: grid;
       grid-template-columns: 1fr 1.05fr;
-      gap: 2.2rem;
-      width: 100%;
-      height: 100%;
-      align-items: stretch;
-      text-align: left;
-    }
-
-    /* 3열 다이어그램 레이아웃 */
-    .layout-triad {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      gap: 2rem;
       width: 100%;
       height: 100%;
       align-items: stretch;
@@ -269,7 +259,7 @@
     .layout-matrix-wrap {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.9rem;
       width: 100%;
       height: 100%;
       justify-content: space-between;
@@ -278,14 +268,27 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
-      gap: 1.1rem;
+      gap: 1rem;
       flex: 1;
     }
+
+    /* 3열 다이어그램 레이아웃 */
+    .layout-triad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+      width: 100%;
+      height: 100%;
+      align-items: stretch;
+      text-align: left;
+    }
+
+    /* 하단 통합 결과 배너 공통 스타일 */
     .fusion-banner {
       background: linear-gradient(135deg, #f0fdf4, #e8f0fe);
       border: 1px solid #bbf7d0;
       border-radius: 12px;
-      padding: 0.75rem 1.4rem;
+      padding: 0.65rem 1.3rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -293,54 +296,45 @@
       flex-shrink: 0;
     }
     .fusion-banner-title {
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: #14532d;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      flex-shrink: 0;
     }
     .fusion-pills {
       display: flex;
-      gap: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
     }
     .fusion-pill-item {
       background: #ffffff;
       border: 1px solid #cbd5e1;
-      padding: 5px 14px;
+      padding: 4px 12px;
       border-radius: 20px;
-      font-size: 0.96rem;
+      font-size: 0.92rem;
       font-weight: 600;
       color: var(--text-primary);
-    }
-
-    /* 4열 매트릭스 레이아웃 */
-    .layout-quad {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.2rem;
-      width: 100%;
-      height: 100%;
-      align-items: stretch;
-      text-align: left;
     }
 
     /* 비즈니스 카드 스타일 */
     .biz-card {
       background: var(--stage-subtle);
       border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 1.4rem 1.7rem;
+      border-radius: 14px;
+      padding: 1.2rem 1.5rem;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: space-between;
       position: relative;
     }
 
     .biz-card.highlight {
       background: #ffffff;
       border-color: #bbf7d0;
-      box-shadow: 0 10px 25px -5px rgba(30, 142, 62, 0.08);
+      box-shadow: 0 8px 20px -4px rgba(30, 142, 62, 0.08);
     }
     .biz-card.highlight::before {
       content: '';
@@ -350,25 +344,25 @@
       width: 100%;
       height: 4px;
       background: var(--primary-green);
-      border-radius: 16px 16px 0 0;
+      border-radius: 14px 14px 0 0;
     }
 
     .card-head {
       font-family: var(--font-heading);
-      font-size: 1.38rem;
+      font-size: 1.32rem;
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.4rem;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
     .card-para {
-      font-size: 1.16rem;
+      font-size: 1.12rem;
       color: var(--text-secondary);
-      line-height: 1.62;
-      margin-bottom: 0.8rem;
+      line-height: 1.58;
+      margin-bottom: 0.5rem;
     }
 
     .action-steps-box {
@@ -376,13 +370,13 @@
       background: #f0fdf4;
       border: 1px solid #bbf7d0;
       border-radius: 10px;
-      padding: 0.85rem 1.15rem;
+      padding: 0.75rem 1rem;
     }
     .action-steps-title {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 700;
       color: var(--primary-green-dark);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -393,12 +387,12 @@
       margin: 0;
     }
     .action-steps-list li {
-      font-size: 1.06rem;
+      font-size: 1.02rem;
       color: #166534;
-      line-height: 1.55;
-      padding-left: 1.3rem;
+      line-height: 1.5;
+      padding-left: 1.2rem;
       position: relative;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
     }
     .action-steps-list li::before {
       content: '▸';
@@ -412,27 +406,27 @@
     .prompt-box {
       background: #0f172a;
       border: 1px solid #1e293b;
-      border-radius: 14px;
-      padding: 1.1rem 1.4rem;
+      border-radius: 12px;
+      padding: 0.95rem 1.25rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
-      margin: 0.6rem 0;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      margin: 0.5rem 0;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     }
 
     .prompt-box-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.6rem;
-      padding-bottom: 0.45rem;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.35rem;
       border-bottom: 1px solid #334155;
     }
     .prompt-chip {
       font-family: var(--font-code);
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       font-weight: 700;
       color: #86efac;
       letter-spacing: 0.05em;
@@ -444,9 +438,9 @@
       background: #334155;
       color: #f8fafc;
       border: none;
-      padding: 5px 12px;
+      padding: 4px 10px;
       border-radius: 6px;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -458,9 +452,9 @@
 
     .prompt-code {
       font-family: var(--font-code);
-      font-size: 1.12rem;
+      font-size: 1.08rem;
       color: #f8fafc;
-      line-height: 1.58;
+      line-height: 1.55;
       white-space: pre-wrap;
       user-select: all;
     }
@@ -477,10 +471,10 @@
     }
     .image-stage-frame img {
       max-width: 100%;
-      max-height: 36vh;
+      max-height: 35vh;
       border-radius: 12px;
       border: 1px solid var(--border-color);
-      box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.08);
       object-fit: contain;
       cursor: zoom-in;
       background: #ffffff;
@@ -491,8 +485,8 @@
       border-color: var(--primary-green);
     }
     .image-caption-text {
-      margin-top: 0.6rem;
-      font-size: 0.98rem;
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
       color: var(--text-tertiary);
       font-weight: 500;
     }
@@ -505,10 +499,10 @@
       width: 100%;
       background: #1e293b;
       color: #f1f5f9;
-      padding: 0.9rem 2rem;
+      padding: 0.8rem 2rem;
       border-top: 1px solid #334155;
-      font-size: 1.08rem;
-      line-height: 1.55;
+      font-size: 1.05rem;
+      line-height: 1.5;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -534,9 +528,9 @@
       transform: translateX(-50%) translateY(30px);
       background: #0f172a;
       color: #86efac;
-      padding: 11px 24px;
+      padding: 10px 22px;
       border-radius: 30px;
-      font-size: 0.96rem;
+      font-size: 0.94rem;
       font-weight: 600;
       border: 1px solid #334155;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
@@ -576,7 +570,7 @@
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
     }
 
-    /* 하단 내비게이션 버튼 */
+    /* 좌우 내비게이션 화살표 */
     .stage-nav-arrow {
       position: absolute;
       top: 50%;
@@ -632,38 +626,42 @@
       <button class="stage-nav-arrow nav-arrow-left" onclick="prevSlide()" title="이전 (←)">‹</button>
       <button class="stage-nav-arrow nav-arrow-right" onclick="nextSlide()" title="다음 (→)">›</button>
 
-      <!-- Slide 01: 타이틀 -->
-      <section class="slide-canvas active" data-prompter="오프닝 브리핑: 복잡한 설정 없이 엔터프라이즈 환경에서 바로 체감하는 AI 파트너십의 8가지 실무 기능을 소개합니다.">
-        <div class="slide-header" style="text-align: center; margin-top: auto;">
+      <!-- Slide 01: 타이틀 & 아젠다 로드맵 -->
+      <section class="slide-canvas active" data-prompter="오프닝 브리핑: 복잡한 설정 없이 엔터프라이즈 환경에서 바로 체감하는 AI 파트너십의 8가지 실무 기능을 4개 막(Act)으로 나누어 실습합니다.">
+        <div class="slide-header" style="text-align: center; margin-bottom: 1.2rem;">
           <span class="act-tag">🟢 Track 1. Day 1 Value</span>
-          <h1 class="slide-title-text" style="font-size: 3.2rem; margin: 0.8rem 0;">엔터프라이즈 AI 어시스턴트 & 멀티모달 실무 실습</h1>
-          <p class="slide-desc-text" style="max-width: 880px; margin: 0 auto 1.5rem; font-size: 1.25rem;">
-            개인화 설정부터 실시간 웹 조사, 이미지·비디오 창작, 그리고 사내 데이터 파일 분석까지 웹 브라우저에서 바로 실행하는 실전 워크숍입니다.
+          <h1 class="slide-title-text" style="font-size: 3rem; margin: 0.6rem 0;">엔터프라이즈 AI 어시스턴트 & 멀티모달 실무 실습</h1>
+          <p class="slide-desc-text" style="max-width: 920px; margin: 0 auto; font-size: 1.25rem;">
+            개인화 설정부터 실시간 웹 조사, 이미지·비디오 창작, 그리고 사내 데이터 파일 분석까지 웹 브라우저에서 바로 실행하는 1일차 체감형 워크숍입니다.
           </p>
         </div>
-        <div class="slide-body" style="flex: 0; margin-bottom: auto;">
-          <div style="display: flex; gap: 14px; justify-content: center;">
-            <div class="biz-card" style="padding: 1.1rem 1.8rem; text-align: center;">
-              <div style="font-size: 1.4rem;">🎯 Act 1</div>
-              <div style="font-weight: 700; font-size: 1.15rem; margin-top: 4px;">나만의 AI 파트너 세팅</div>
+        <div class="slide-body">
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; width: 100%;">
+            <div class="biz-card highlight" style="text-align: left; padding: 1.4rem;">
+              <div style="font-size: 1.3rem; font-weight: 800; color: var(--primary-green-dark); margin-bottom: 6px;">🎯 Act 1</div>
+              <div style="font-weight: 700; font-size: 1.18rem; margin-bottom: 8px;">나만의 AI 파트너 세팅</div>
+              <p style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.5;">pContext 4대 소스 원리 및 프로필·세션 메모리 등록</p>
             </div>
-            <div class="biz-card" style="padding: 1.1rem 1.8rem; text-align: center;">
-              <div style="font-size: 1.4rem;">🌐 Act 2</div>
-              <div style="font-weight: 700; font-size: 1.15rem; margin-top: 4px;">실시간 웹 지능 & 멀티모달</div>
+            <div class="biz-card highlight" style="text-align: left; padding: 1.4rem;">
+              <div style="font-size: 1.3rem; font-weight: 800; color: var(--google-blue); margin-bottom: 6px;">🌐 Act 2</div>
+              <div style="font-weight: 700; font-size: 1.18rem; margin-bottom: 8px;">실시간 웹 지능 & 멀티모달</div>
+              <p style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.5;">실시간 출처 검증, URL 파싱, Nano Banana 및 Veo 영상</p>
             </div>
-            <div class="biz-card" style="padding: 1.1rem 1.8rem; text-align: center;">
-              <div style="font-size: 1.4rem;">📊 Act 3</div>
-              <div style="font-weight: 700; font-size: 1.15rem; margin-top: 4px;">업무 파일 분석 & Canvas</div>
+            <div class="biz-card highlight" style="text-align: left; padding: 1.4rem;">
+              <div style="font-size: 1.3rem; font-weight: 800; color: var(--google-yellow); margin-bottom: 6px;">📊 Act 3</div>
+              <div style="font-weight: 700; font-size: 1.18rem; margin-bottom: 8px;">업무 파일 분석 & Canvas</div>
+              <p style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.5;">Excel 차트화, PPTX 요약 표, Canvas 슬라이드 자동 생성</p>
             </div>
-            <div class="biz-card" style="padding: 1.1rem 1.8rem; text-align: center;">
-              <div style="font-size: 1.4rem;">✍️ Act 4</div>
-              <div style="font-weight: 700; font-size: 1.15rem; margin-top: 4px;">3대 프롬프트 프레임워크</div>
+            <div class="biz-card highlight" style="text-align: left; padding: 1.4rem;">
+              <div style="font-size: 1.3rem; font-weight: 800; color: var(--purple); margin-bottom: 6px;">✍️ Act 4</div>
+              <div style="font-weight: 700; font-size: 1.18rem; margin-bottom: 8px;">3대 프롬프트 프레임워크</div>
+              <p style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.5;">APE(속도), CRAFT(보고서), CO-STAR(마케팅 카피) 마스터</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Slide 02: Act 1 pContext 원리 -->
+      <!-- Slide 02: Act 1 pContext 원리 (2x2 매트릭스 + 융합 배너) -->
       <section class="slide-canvas" data-prompter="강사 멘트: Gemini Enterprise의 핵심 차별점은 사용자의 직무와 업무 환경을 파악하여 맞춤형 답변을 도출하는 개인화 컨텍스트(pContext)입니다.">
         <div class="slide-header">
           <span class="act-tag">Act 1. 개인화 컨텍스트</span>
@@ -731,18 +729,21 @@
         <div class="slide-body">
           <div class="layout-split">
             <div class="biz-card highlight">
-              <div class="card-head">✍️ 프로필 입력 가이드</div>
-              <p class="card-para">본인의 실제 역할이나 실습용 페르소나를 아래 예시처럼 입력합니다.</p>
-              <ul style="list-style: none; line-height: 1.9; margin-bottom: 1rem; font-size: 1.15rem;">
-                <li><strong>선호하는 이름</strong>: 홍길동 마케터 (또는 본인 성명)</li>
-                <li><strong>내 직무</strong>: 글로벌 브랜드 마케터</li>
-                <li><strong>회사 산업군</strong>: 모빌리티 및 친환경 에너지</li>
-              </ul>
+              <div>
+                <div class="card-head">✍️ 프로필 입력 가이드</div>
+                <p class="card-para">본인의 실제 역할이나 실습용 페르소나를 아래 예시처럼 입력합니다.</p>
+                <ul style="list-style: none; line-height: 1.8; margin-bottom: 0.8rem; font-size: 1.12rem;">
+                  <li><strong>선호하는 이름</strong>: 홍길동 마케터 (또는 본인 성명)</li>
+                  <li><strong>내 직무</strong>: 글로벌 브랜드 마케터</li>
+                  <li><strong>회사 산업군</strong>: 모빌리티 및 친환경 에너지</li>
+                </ul>
+              </div>
               <div class="action-steps-box">
                 <div class="action-steps-title">👉 지금 수행할 실습 액션</div>
                 <ul class="action-steps-list">
                   <li>좌측 하단 <strong>Settings & help > Personalization</strong> 클릭</li>
                   <li>3개 항목을 입력한 뒤 <strong>Save</strong> 버튼을 눌러 저장</li>
+                  <li>✨ <strong>기대효과</strong>: 프롬프트마다 소속·직무를 반복 입력할 필요 없이 최적화된 관점으로 자동 응답</li>
                 </ul>
               </div>
             </div>
@@ -764,13 +765,20 @@
         <div class="slide-body">
           <div class="layout-split">
             <div class="biz-card highlight">
-              <div class="card-head">🧠 연속성 있는 대화 유지</div>
-              <p class="card-para">새로운 대화창을 열 때마다 매번 프로젝트 배경을 다시 설명할 필요 없이 이전 지시 사항을 이어받아 작업합니다.</p>
+              <div>
+                <div class="card-head">🧠 연속성 있는 대화 유지</div>
+                <p class="card-para">새로운 대화창을 열 때마다 매번 프로젝트 배경을 다시 설명할 필요 없이 이전 지시 사항을 이어받아 작업합니다.</p>
+                <div style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px; padding: 0.7rem 1rem; margin: 0.6rem 0;">
+                  <div style="font-weight: 700; color: #1e293b; font-size: 1.02rem; margin-bottom: 4px;">📌 메모리 연동 시나리오</div>
+                  <div style="font-size: 0.96rem; color: #64748b; line-height: 1.45;">"지난주 설정한 2026 친환경 세단 캠페인 톤앤매너 규칙을 그대로 적용해서 보도자료를 써줘"</div>
+                </div>
+              </div>
               <div class="action-steps-box">
                 <div class="action-steps-title">👉 지금 수행할 실습 액션</div>
                 <ul class="action-steps-list">
                   <li><strong>Conversation history</strong> 토글을 <strong>ON</strong>으로 켭니다.</li>
                   <li><strong>Reference saved memories</strong> 토글을 <strong>ON</strong>으로 켭니다.</li>
+                  <li>✨ <strong>기대효과</strong>: 대화창이 바뀌어도 브랜드 금지어와 핵심 KPI 일관 유지</li>
                 </ul>
               </div>
             </div>
@@ -792,19 +800,22 @@
         <div class="slide-body">
           <div class="layout-split">
             <div class="biz-card highlight">
-              <div class="card-head">📋 실습 프롬프트 복사</div>
-              <div class="prompt-box">
-                <div class="prompt-box-header">
-                  <span class="prompt-chip">Prompt</span>
-                  <button class="btn-copy-prompt" onclick="copyPromptText('p1')">복사하기</button>
+              <div>
+                <div class="card-head">📋 실습 프롬프트 복사</div>
+                <div class="prompt-box">
+                  <div class="prompt-box-header">
+                    <span class="prompt-chip">Prompt</span>
+                    <button class="btn-copy-prompt" onclick="copyPromptText('p1')">복사하기</button>
+                  </div>
+                  <div class="prompt-code" id="p1">너는 10년차 글로벌 마케팅 전문가야. 최근 북미 및 유럽 시장의 '프리미엄 세단' 트렌드를 검색해서 요약해줘. 특히 주요 경쟁사들의 최근 마케팅 소구점(Selling Point)을 도출하고, 한국 자동차에 적용할 만한 인사이트를 제시해줘</div>
                 </div>
-                <div class="prompt-code" id="p1">너는 10년차 글로벌 마케팅 전문가야. 최근 북미 및 유럽 시장의 '프리미엄 세단' 트렌드를 검색해서 요약해줘. 특히 주요 경쟁사들의 최근 마케팅 소구점(Selling Point)을 도출하고, 한국 자동차에 적용할 만한 인사이트를 제시해줘</div>
               </div>
               <div class="action-steps-box">
                 <div class="action-steps-title">👉 검증 포인트</div>
                 <ul class="action-steps-list">
                   <li>응답 하단의 <strong>Source</strong> 링크를 클릭하여 원문 기사 확인</li>
                   <li>본문 특정 단락을 드래그하여 부분 추가 질의 수행</li>
+                  <li>🔍 <strong>신뢰성 확보</strong>: 구글 실시간 검색 인덱싱으로 환각(Hallucination) 방지</li>
                 </ul>
               </div>
             </div>
@@ -816,7 +827,7 @@
         </div>
       </section>
 
-      <!-- Slide 06: Act 2 EU 전기차 SWOT & CES 2026 -->
+      <!-- Slide 06: Act 2 EU 전기차 SWOT & CES 2026 (균형 2열 + 하단 팁 배너) -->
       <section class="slide-canvas" data-prompter="강사 멘트: 단순 검색 요약에 그치지 않고 SWOT 매트릭스나 3줄 핵심 메시지처럼 원하는 구조화 서식을 지정할 수 있습니다.">
         <div class="slide-header">
           <span class="act-tag">Act 2. 실시간 웹 지능</span>
@@ -824,32 +835,51 @@
           <p class="slide-desc-text">복합적인 글로벌 정책 규제와 최신 기술 발표 내용을 구조화된 매트릭스로 정리합니다.</p>
         </div>
         <div class="slide-body">
-          <div class="layout-split">
-            <div class="biz-card">
-              <div class="card-head">🇪🇺 EU 전기차 SWOT 분석</div>
-              <div class="prompt-box">
-                <div class="prompt-box-header">
-                  <span class="prompt-chip">EV Policy SWOT</span>
-                  <button class="btn-copy-prompt" onclick="copyPromptText('p2')">복사하기</button>
+          <div style="display: flex; flex-direction: column; gap: 0.9rem; height: 100%; justify-content: space-between;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; flex: 1;">
+              <div class="biz-card highlight">
+                <div>
+                  <div class="card-head">🇪🇺 EU 전기차 SWOT 분석</div>
+                  <div class="prompt-box">
+                    <div class="prompt-box-header">
+                      <span class="prompt-chip">EV Policy SWOT</span>
+                      <button class="btn-copy-prompt" onclick="copyPromptText('p2')">복사하기</button>
+                    </div>
+                    <div class="prompt-code" id="p2" style="font-size: 1.02rem;">2026년 현재 유럽연합(EU)의 전기차(EV) 보조금 정책 변화와 탄소국경조정제도(CBAM) 관련 최신 글로벌 뉴스를 검색해 줘. 이러한 정책 변화가 한국자동차의 유럽 시장 진출에 미칠 영향을 SWOT(강점, 약점, 기회, 위협) 분석 매트릭스 형태로 시각화해서 정리해 줘.</div>
+                  </div>
                 </div>
-                <div class="prompt-code" id="p2" style="font-size: 1.05rem;">2026년 현재 유럽연합(EU)의 전기차(EV) 보조금 정책 변화와 탄소국경조정제도(CBAM) 관련 최신 글로벌 뉴스를 검색해 줘. 이러한 정책 변화가 한국자동차의 유럽 시장 진출에 미칠 영향을 SWOT(강점, 약점, 기회, 위협) 분석 매트릭스 형태로 시각화해서 정리해 줘.</div>
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.6rem 0.9rem; font-size: 0.95rem; color: #475569;">
+                  📊 <strong>출력 도출 서식</strong>: 강점/약점/기회/위협 4분면 표 + CBAM 관세 대응 전략
+                </div>
+              </div>
+              <div class="biz-card highlight">
+                <div>
+                  <div class="card-head">🤖 CES 2026 피지컬 AI 동향</div>
+                  <div class="prompt-box">
+                    <div class="prompt-box-header">
+                      <span class="prompt-chip">CES Physical AI</span>
+                      <button class="btn-copy-prompt" onclick="copyPromptText('p3')">복사하기</button>
+                    </div>
+                    <div class="prompt-code" id="p3" style="font-size: 1.02rem;">최근 열린 'CES 2026'에서 주요 경쟁사들이 발표한 피지컬 AI 기술 및 마케팅 트렌드를 웹 검색으로 분석해 줘. 특히 글로벌 선도 기업들의 기술 혁신을 요약하고, 차별화 마케팅 핵심 메시지를 3줄로 작성해 줘.</div>
+                  </div>
+                </div>
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.6rem 0.9rem; font-size: 0.95rem; color: #475569;">
+                  🎯 <strong>출력 도출 서식</strong>: 글로벌 선도사 기술 비교 요약 + 차별화 마케팅 3줄 핵심 메시지
+                </div>
               </div>
             </div>
-            <div class="biz-card">
-              <div class="card-head">🤖 CES 2026 피지컬 AI 동향</div>
-              <div class="prompt-box">
-                <div class="prompt-box-header">
-                  <span class="prompt-chip">CES Physical AI</span>
-                  <button class="btn-copy-prompt" onclick="copyPromptText('p3')">복사하기</button>
-                </div>
-                <div class="prompt-code" id="p3" style="font-size: 1.05rem;">최근 열린 'CES 2026'에서 주요 경쟁사들이 발표한 피지컬 AI 기술 및 마케팅 트렌드를 웹 검색으로 분석해 줘. 특히 글로벌 선도 기업들의 기술 혁신을 요약하고, 차별화 마케팅 핵심 메시지를 3줄로 작성해 줘.</div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">⚡ 복합 프롬프트 작성 팁</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">📌 단순 요약 대신 'SWOT 매트릭스' 등 결과물 형태를 직접 지정</div>
+                <div class="fusion-pill-item">📌 임원 보고용 '3줄 핵심 메시지'로 글자 수 제약 부여</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Slide 07: Act 2 URL 바인딩 분석 -->
+      <!-- Slide 07: Act 2 URL 바인딩 분석 (3단계 파이프라인 카드) -->
       <section class="slide-canvas" data-prompter="실습 진행: 공개 기술 블로그나 보도자료 URL을 프롬프트에 직접 포함하여 10초 만에 핵심 내용을 파싱하는 기법을 실습합니다.">
         <div class="slide-header">
           <span class="act-tag">Act 2. 실시간 웹 지능</span>
@@ -859,25 +889,42 @@
         <div class="slide-body">
           <div class="layout-split">
             <div class="biz-card highlight">
-              <div class="card-head">🔗 URL 파싱 프롬프트 복사</div>
-              <div class="prompt-box">
-                <div class="prompt-box-header">
-                  <span class="prompt-chip">URL Parser</span>
-                  <button class="btn-copy-prompt" onclick="copyPromptText('p4')">복사하기</button>
+              <div>
+                <div class="card-head">🔗 URL 파싱 프롬프트 복사</div>
+                <div class="prompt-box">
+                  <div class="prompt-box-header">
+                    <span class="prompt-chip">URL Parser</span>
+                    <button class="btn-copy-prompt" onclick="copyPromptText('p4')">복사하기</button>
+                  </div>
+                  <div class="prompt-code" id="p4">다음 웹페이지의 내용을 읽고, 핵심 내용을 3줄로 요약한 뒤 우리 사업에 시사하는 바를 설명해줘: https://blog.google/technology/ai/</div>
                 </div>
-                <div class="prompt-code" id="p4">다음 웹페이지의 내용을 읽고, 핵심 내용을 3줄로 요약한 뒤 우리 사업에 시사하는 바를 설명해줘: https://blog.google/technology/ai/</div>
               </div>
               <div class="action-steps-box">
                 <div class="action-steps-title">💡 실무 활용 팁</div>
                 <ul class="action-steps-list">
                   <li>긴 영문 기술 백서나 해외 보도자료를 한국어로 즉시 브리핑받을 때 유용합니다.</li>
-                  <li>로그인 인증이 필요 없는 공개 URL을 대상으로 동작합니다.</li>
+                  <li>로그인 인증이 필요 없는 공개 웹페이지를 대상으로 동작합니다.</li>
                 </ul>
               </div>
             </div>
-            <div class="biz-card">
-              <div class="card-head">⚡ 동작 메커니즘</div>
-              <p class="card-para">모델이 대상 URL에 접속하여 텍스트 및 개체 구조를 크롤링한 후, 사용자의 지시어에 맞춰 3줄 요약과 사업적 시사점을 순차적으로 도출합니다.</p>
+            <div class="biz-card highlight">
+              <div class="card-head">⚡ 실시간 3단계 파싱 메커니즘</div>
+              <div style="display: flex; flex-direction: column; gap: 0.7rem; margin: 0.5rem 0;">
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.7rem 1rem;">
+                  <strong style="color: var(--primary-green-dark);">1️⃣ 웹 크롤링</strong>: 대상 URL의 텍스트 및 개체 구조 실시간 파싱
+                </div>
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.7rem 1rem;">
+                  <strong style="color: var(--google-blue);">2️⃣ 컨텍스트 주입</strong>: 추출된 웹 콘텐츠를 LLM 추론 컨텍스트로 전달
+                </div>
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.7rem 1rem;">
+                  <strong style="color: var(--purple);">3️⃣ 맞춤 결과 생성</strong>: 한국어 3줄 요약 및 비즈니스 시사점 순차 도출
+                </div>
+              </div>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                <span style="background: #e0f2fe; color: #0369a1; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; font-weight: 600;">공개 기술 백서</span>
+                <span style="background: #e0f2fe; color: #0369a1; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; font-weight: 600;">해외 보도자료</span>
+                <span style="background: #e0f2fe; color: #0369a1; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; font-weight: 600;">기업 공식 블로그</span>
+              </div>
             </div>
           </div>
         </div>
@@ -892,31 +939,38 @@
         </div>
         <div class="slide-body">
           <div class="layout-split">
-            <div class="biz-card">
-              <div class="card-head">📱 9:16 세로형 모바일 포스터</div>
-              <div class="prompt-box">
-                <div class="prompt-box-header">
-                  <span class="prompt-chip">9:16 Poster</span>
-                  <button class="btn-copy-prompt" onclick="copyPromptText('p5')">복사하기</button>
+            <div class="biz-card highlight">
+              <div>
+                <div class="card-head">📱 9:16 세로형 모바일 포스터</div>
+                <div class="prompt-box">
+                  <div class="prompt-box-header">
+                    <span class="prompt-chip">9:16 Poster</span>
+                    <button class="btn-copy-prompt" onclick="copyPromptText('p5')">복사하기</button>
+                  </div>
+                  <div class="prompt-code" id="p5" style="font-size: 0.98rem;">Gemini Enterprise를 잘 쓰고 싶어하는 직장인을 위한 팁과 핵심 기능을 알려주는 포스터(비율 9:16)를 그려줘. 내용: AI Assistant, Deep Research, Gemini Notebook, Agent Designer, Connectors, Media Generation</div>
                 </div>
-                <div class="prompt-code" id="p5" style="font-size: 1.02rem;">Gemini Enterprise를 잘 쓰고 싶어하는 직장인을 위한 팁과 핵심 기능을 알려주는 포스터(비율 9:16)를 그려줘. 내용: AI Assistant, Deep Research, Gemini Notebook, Agent Designer, Connectors, Media Generation</div>
               </div>
               <div class="image-stage-frame">
-                <img src="./img/21.webp" alt="포스터 생성 결과" style="max-height: 17vh;">
+                <img src="./img/21.webp" alt="포스터 생성 결과" style="max-height: 16vh;">
               </div>
             </div>
-            <div class="biz-card">
-              <div class="card-head">🏗️ 스케치 다이어그램 변환 (Img2Img)</div>
-              <p class="card-para">회의실 화이트보드 스케치를 업로드하고 전문 클라우드 스타일로 다시 그리도록 요청합니다.</p>
+            <div class="biz-card highlight">
+              <div>
+                <div class="card-head">🏗️ 스케치 다이어그램 변환 (Img2Img)</div>
+                <p class="card-para">회의실 화이트보드 스케치를 업로드하고 전문 클라우드 스타일로 다시 그리도록 요청합니다.</p>
+              </div>
               <div class="image-stage-frame">
-                <img src="./img/23.webp" alt="다이어그램 변환 결과" style="max-height: 17vh;">
+                <img src="./img/23.webp" alt="다이어그램 변환 결과" style="max-height: 18vh;">
+              </div>
+              <div style="margin-top: auto; font-size: 0.95rem; color: #166534; background: #f0fdf4; padding: 6px 12px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                ✨ 손그림의 모호한 선과 기호를 엔터프라이즈 아키텍처 아이콘으로 정밀 변환
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Slide 09: Act 2 Veo 비디오 생성 -->
+      <!-- Slide 09: Act 2 Veo 비디오 생성 (2x2 + 비디오 제어 배너) -->
       <section class="slide-canvas" data-prompter="강사 멘트: 구글의 비디오 생성 모델 Veo를 활용하여 제품 광고 영상과 특정 카메라 워크(드론 샷, 레트로 필름)를 제어합니다.">
         <div class="slide-header">
           <span class="act-tag">Act 2. 멀티모달 창작</span>
@@ -924,26 +978,35 @@
           <p class="slide-desc-text">카메라 무빙, 조명 질감, 연대별 필름 스타일을 프롬프트로 세밀하게 제어하여 영상을 생성합니다.</p>
         </div>
         <div class="slide-body">
-          <div class="layout-quad">
-            <div class="biz-card" style="text-align: center; padding: 1.1rem;">
-              <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 6px;">🍾 제품 연출 돌리 샷</div>
-              <img src="./img/24.webp" alt="향수 영상" style="width: 100%; border-radius: 8px; max-height: 15vh; object-fit: cover;">
-              <p style="font-size: 0.95rem; color: var(--text-tertiary); margin-top: 6px;">자연광 조명 클로즈업 무빙</p>
+          <div style="display: flex; flex-direction: column; gap: 0.9rem; height: 100%; justify-content: space-between;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; flex: 1;">
+              <div class="biz-card highlight" style="text-align: center; padding: 0.9rem;">
+                <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">🍾 제품 연출 돌리 샷</div>
+                <img src="./img/24.webp" alt="향수 영상" style="width: 100%; border-radius: 8px; max-height: 14vh; object-fit: cover; cursor: zoom-in;">
+                <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 4px; font-weight: 500;">자연광 조명 클로즈업 무빙</p>
+              </div>
+              <div class="biz-card highlight" style="text-align: center; padding: 0.9rem;">
+                <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">🍔 식품 매크로 슬로우</div>
+                <img src="./img/26.webp" alt="버거 영상" style="width: 100%; border-radius: 8px; max-height: 14vh; object-fit: cover; cursor: zoom-in;">
+                <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 4px; font-weight: 500;">치즈 멜팅 4K 디테일</p>
+              </div>
+              <div class="biz-card highlight" style="text-align: center; padding: 0.9rem;">
+                <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">🚁 드론 FPV 하강 샷</div>
+                <img src="./img/28.webp" alt="드론 영상" style="width: 100%; border-radius: 8px; max-height: 14vh; object-fit: cover; cursor: zoom-in;">
+                <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 4px; font-weight: 500;">폭포 협곡 하강 역동 앵글</p>
+              </div>
+              <div class="biz-card highlight" style="text-align: center; padding: 0.9rem;">
+                <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">📼 90s VHS 캠코더</div>
+                <img src="./img/30.webp" alt="레트로 영상" style="width: 100%; border-radius: 8px; max-height: 14vh; object-fit: cover; cursor: zoom-in;">
+                <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 4px; font-weight: 500;">노이즈 색 번짐 아날로그 감성</p>
+              </div>
             </div>
-            <div class="biz-card" style="text-align: center; padding: 1.1rem;">
-              <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 6px;">🍔 식품 매크로 슬로우</div>
-              <img src="./img/26.webp" alt="버거 영상" style="width: 100%; border-radius: 8px; max-height: 15vh; object-fit: cover;">
-              <p style="font-size: 0.95rem; color: var(--text-tertiary); margin-top: 6px;">치즈 멜팅 4K 디테일</p>
-            </div>
-            <div class="biz-card" style="text-align: center; padding: 1.1rem;">
-              <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 6px;">🚁 드론 FPV 하강 샷</div>
-              <img src="./img/28.webp" alt="드론 영상" style="width: 100%; border-radius: 8px; max-height: 15vh; object-fit: cover;">
-              <p style="font-size: 0.95rem; color: var(--text-tertiary); margin-top: 6px;">폭포 협곡 하강 역동 앵글</p>
-            </div>
-            <div class="biz-card" style="text-align: center; padding: 1.1rem;">
-              <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 6px;">📼 90s VHS 캠코더</div>
-              <img src="./img/30.webp" alt="레트로 영상" style="width: 100%; border-radius: 8px; max-height: 15vh; object-fit: cover;">
-              <p style="font-size: 0.95rem; color: var(--text-tertiary); margin-top: 6px;">노이즈 색 번짐 아날로그 감성</p>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">🎬 Veo 시네마틱 제어 엔진</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">🎥 카메라 워크: Dolly In / Drone FPV / Slow Motion</div>
+                <div class="fusion-pill-item">💡 조명 & 필름: Golden Hour / Cinematic 35mm / VHS Texture</div>
+              </div>
             </div>
           </div>
         </div>
@@ -959,11 +1022,16 @@
         <div class="slide-body">
           <div class="layout-split">
             <div class="biz-card highlight">
-              <div class="card-head">📌 스프레드시트 분석 핵심 팁</div>
-              <ul class="point-list" style="list-style: none; line-height: 1.9; font-size: 1.15rem; margin-bottom: 1rem;">
-                <li><strong>1행 헤더 인식</strong>: 1행에 컬럼명이 명시되어 있어야 자동 매핑됩니다.</li>
-                <li><strong>괄호 컬럼 지정</strong>: <code>(주문 완료일)</code>, <code>(Orders Total Sales)</code>처럼 괄호로 컬럼을 명시하면 정확도가 극대화됩니다.</li>
-              </ul>
+              <div>
+                <div class="card-head">📌 스프레드시트 분석 핵심 팁</div>
+                <ul class="point-list" style="list-style: none; line-height: 1.8; font-size: 1.12rem; margin-bottom: 0.6rem;">
+                  <li><strong>1행 헤더 인식</strong>: 1행에 컬럼명이 명시되어 있어야 자동 매핑됩니다.</li>
+                  <li><strong>괄호 컬럼 지정</strong>: <code>(주문 완료일)</code>, <code>(Orders Total Sales)</code>처럼 괄호로 컬럼을 명시하면 정확도가 극대화됩니다.</li>
+                </ul>
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.6rem 0.9rem; font-size: 0.96rem; color: #475569;">
+                  💡 <strong>변환 파이프라인</strong>: 원본 데이터 테이블(1,000행) ➔ 월별 추이 선 차트 & 제품별 기여도 막대 차트 자동 렌더링
+                </div>
+              </div>
               <div class="action-steps-box">
                 <div class="action-steps-title">👉 실습 액션</div>
                 <ul class="action-steps-list">
@@ -989,13 +1057,20 @@
         <div class="slide-body">
           <div class="layout-split">
             <div class="biz-card highlight">
-              <div class="card-head">📑 슬라이드 요약 질의</div>
-              <div class="prompt-box">
-                <div class="prompt-box-header">
-                  <span class="prompt-chip">PPTX Parser</span>
-                  <button class="btn-copy-prompt" onclick="copyPromptText('p6')">복사하기</button>
+              <div>
+                <div class="card-head">📑 슬라이드 요약 질의</div>
+                <div class="prompt-box">
+                  <div class="prompt-box-header">
+                    <span class="prompt-chip">PPTX Parser</span>
+                    <button class="btn-copy-prompt" onclick="copyPromptText('p6')">복사하기</button>
+                  </div>
+                  <div class="prompt-code" id="p6">BigQuery New Feature 들에 대해서 각 기능별로 요약을 해주고, GA, Preview 여부를 표로 작성해서 보여줘</div>
                 </div>
-                <div class="prompt-code" id="p6">BigQuery New Feature 들에 대해서 각 기능별로 요약을 해주고, GA, Preview 여부를 표로 작성해서 보여줘</div>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 0.4rem;">
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">다면 장표 자동 인식</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">표/다이어그램 텍스트 추출</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">3열 비교표 렌더링</span>
+                </div>
               </div>
               <div class="action-steps-box">
                 <div class="action-steps-title">👉 실습 액션</div>
@@ -1022,16 +1097,25 @@
         <div class="slide-body">
           <div class="layout-split">
             <div class="biz-card highlight">
-              <div class="card-head">📊 Canvas 슬라이드 프롬프트</div>
-              <div class="prompt-box">
-                <div class="prompt-box-header">
-                  <span class="prompt-chip">Canvas Deck</span>
-                  <button class="btn-copy-prompt" onclick="copyPromptText('p7')">복사하기</button>
-                </div>
-                <div class="prompt-code" id="p7" style="font-size: 1.02rem;">새로운 모바일 앱을 위한 백엔드 아키텍처를 GCP에서 설계하려고 해. 트래픽 급증 시 자동 확장과 실시간 로그 분석 파이프라인이 중요해. 완전 관리형 서버리스 서비스를 위주로 설계하고 이유를 설명해줘.
+              <div>
+                <div class="card-head">📊 Canvas 슬라이드 프롬프트</div>
+                <div class="prompt-box">
+                  <div class="prompt-box-header">
+                    <span class="prompt-chip">Canvas Deck</span>
+                    <button class="btn-copy-prompt" onclick="copyPromptText('p7')">복사하기</button>
+                  </div>
+                  <div class="prompt-code" id="p7" style="font-size: 0.96rem;">새로운 모바일 앱을 위한 백엔드 아키텍처를 GCP에서 설계하려고 해. 트래픽 급증 시 자동 확장과 실시간 로그 분석 파이프라인이 중요해. 완전 관리형 서버리스 서비스를 위주로 설계하고 이유를 설명해줘.
 
 그리고 구글 슬라이드로 요약해줘.
 슬라이드는 하얀색 바탕의 깔끔하고 모던한 IT 기술 문서 스타일로 작성해줘.</div>
+                </div>
+              </div>
+              <div class="action-steps-box">
+                <div class="action-steps-title">👉 Canvas 3대 생산성 기능</div>
+                <ul class="action-steps-list">
+                  <li><strong>실시간 슬라이드 렌더링</strong>: 대화창 우측 Canvas 패널에서 장표 구성 실시간 확인</li>
+                  <li><strong>PowerPoint(.pptx) 내보내기</strong>: 우측 상단 메뉴에서 원클릭 로컬 파일 저장</li>
+                </ul>
               </div>
             </div>
             <div class="image-stage-frame">
@@ -1050,25 +1134,36 @@
           <p class="slide-desc-text">행동(Action), 목적(Purpose), 기대형식(Expectation) 3요소로 신속하게 결과물을 도출합니다.</p>
         </div>
         <div class="slide-body">
-          <div class="layout-split">
-            <div class="biz-card highlight">
-              <div class="card-head">⚡ APE 3대 핵심 구성</div>
-              <ul style="list-style: none; line-height: 2.1; font-size: 1.18rem;">
-                <li><strong>Action (행동)</strong>: 모델이 수행할 핵심 미션 (요약, 추출, 번역 등)</li>
-                <li><strong>Purpose (목적)</strong>: 요청 배경 또는 비즈니스 목표</li>
-                <li><strong>Expectation (기대형식)</strong>: 원하는 결과물의 출력 양식 (3개 불릿 등)</li>
-              </ul>
-            </div>
-            <div class="biz-card">
-              <div class="card-head">📋 실전 작성 예제</div>
-              <div class="prompt-box">
-                <div class="prompt-box-header">
-                  <span class="prompt-chip">APE Format</span>
-                  <button class="btn-copy-prompt" onclick="copyPromptText('p8')">복사하기</button>
+          <div style="display: flex; flex-direction: column; gap: 0.9rem; height: 100%; justify-content: space-between;">
+            <div style="display: grid; grid-template-columns: 1fr 1.05fr; gap: 1.4rem; flex: 1;">
+              <div class="biz-card highlight">
+                <div class="card-head">⚡ APE 3대 핵심 구성</div>
+                <ul style="list-style: none; line-height: 2; font-size: 1.12rem;">
+                  <li><strong>Action (행동)</strong>: 모델이 수행할 핵심 미션 (요약, 추출, 번역 등)</li>
+                  <li><strong>Purpose (목적)</strong>: 요청 배경 또는 비즈니스 목표</li>
+                  <li><strong>Expectation (기대형식)</strong>: 원하는 결과물의 출력 양식 (3개 불릿 등)</li>
+                </ul>
+                <div style="margin-top: auto; font-size: 0.95rem; color: #166534; background: #f0fdf4; padding: 6px 12px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                  ⏱️ <strong>작성 소요 시간</strong>: 30초 내외 · 일상적인 업무 질의에 가장 적합
                 </div>
-                <div class="prompt-code" id="p8">[Action] 이 첨부 기사를 요약하세요.
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">📋 실전 작성 예제</div>
+                <div class="prompt-box">
+                  <div class="prompt-box-header">
+                    <span class="prompt-chip">APE Format</span>
+                    <button class="btn-copy-prompt" onclick="copyPromptText('p8')">복사하기</button>
+                  </div>
+                  <div class="prompt-code" id="p8">[Action] 이 첨부 기사를 요약하세요.
 [Purpose] 팀 주간 회의에서 2분 동안 구두로 브리핑해야 합니다.
 [Expectation] 핵심 논점 3가지를 글머리 기호(Bullet points)로 정리하세요.</div>
+                </div>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">⚡ APE 적용 공식</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">Action (지시) ➔ Purpose (배경) ➔ Expectation (출력 양식) = 30초 완성 초고속 프롬프트</div>
               </div>
             </div>
           </div>
@@ -1083,29 +1178,37 @@
           <p class="slide-desc-text">맥락, 페르소나, 행동, 형식, 어조를 통제하여 모호성을 없애고 정형화된 보고서를 완성합니다.</p>
         </div>
         <div class="slide-body">
-          <div class="layout-split">
-            <div class="biz-card highlight">
-              <div class="card-head">🏆 CRAFT 5대 구성 요소</div>
-              <ul style="list-style: none; line-height: 1.9; font-size: 1.10rem;">
-                <li><strong>Context (맥락)</strong>: 업무 상황 및 예산 등 배경 정보</li>
-                <li><strong>Role (역할)</strong>: 10년차 수석 전략가 등 전문 페르소나 부여</li>
-                <li><strong>Action (행동)</strong>: 실행할 과제를 명확한 동사로 지시</li>
-                <li><strong>Format (형식)</strong>: 불릿, 비교 표 등 구조화된 양식 지정</li>
-                <li><strong>Tone (어조)</strong>: 임원 보고용 격식체 등 읽는 사람 맞춤 어조</li>
-              </ul>
-            </div>
-            <div class="biz-card">
-              <div class="card-head">📋 실전 작성 예시</div>
-              <div class="prompt-box">
-                <div class="prompt-box-header">
-                  <span class="prompt-chip">CRAFT Format</span>
-                  <button class="btn-copy-prompt" onclick="copyPromptText('p9')">복사하기</button>
-                </div>
-                <div class="prompt-code" id="p9" style="font-size: 1.02rem;">[Context] 다음 주 신규 서비스 출시를 앞두고 마케팅 예산이 제한적입니다.
+          <div style="display: flex; flex-direction: column; gap: 0.9rem; height: 100%; justify-content: space-between;">
+            <div style="display: grid; grid-template-columns: 1fr 1.05fr; gap: 1.4rem; flex: 1;">
+              <div class="biz-card highlight">
+                <div class="card-head">🏆 CRAFT 5대 구성 요소</div>
+                <ul style="list-style: none; line-height: 1.85; font-size: 1.08rem;">
+                  <li><strong>Context (맥락)</strong>: 업무 상황 및 예산 등 배경 정보</li>
+                  <li><strong>Role (역할)</strong>: 10년차 수석 전략가 등 전문 페르소나 부여</li>
+                  <li><strong>Action (행동)</strong>: 실행할 과제를 명확한 동사로 지시</li>
+                  <li><strong>Format (형식)</strong>: 불릿, 비교 표 등 구조화된 양식 지정</li>
+                  <li><strong>Tone (어조)</strong>: 임원 보고용 격식체 등 읽는 사람 맞춤 어조</li>
+                </ul>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">📋 실전 작성 예시</div>
+                <div class="prompt-box">
+                  <div class="prompt-box-header">
+                    <span class="prompt-chip">CRAFT Format</span>
+                    <button class="btn-copy-prompt" onclick="copyPromptText('p9')">복사하기</button>
+                  </div>
+                  <div class="prompt-code" id="p9" style="font-size: 0.98rem;">[Context] 다음 주 신규 서비스 출시를 앞두고 마케팅 예산이 제한적입니다.
 [Role] IT 스타트업의 10년 차 수석 마케팅 전략가입니다.
 [Action] 저예산으로 실행 가능한 게릴라 마케팅 아이디어 3가지를 제안하세요.
 [Format] 중요도 순 불릿 포인트와 하단 기대효과 요약 표로 작성하세요.
 [Tone] 경영진 보고용이므로 전문적이고 격식 있는 어조를 유지하세요.</div>
+                </div>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">🏆 CRAFT 표준 활용처</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">경영진 보고서 · 신규 사업 기획서 · 전략 분석서 작성 시 100% 모호성 제거</div>
               </div>
             </div>
           </div>
@@ -1120,31 +1223,39 @@
           <p class="slide-desc-text">스타일(Style)과 청중(Audience)을 세밀하게 타깃팅하여 설득력 있는 카피를 작성합니다.</p>
         </div>
         <div class="slide-body">
-          <div class="layout-split">
-            <div class="biz-card highlight">
-              <div class="card-head">🎨 CO-STAR 6대 구성 요소</div>
-              <ul style="list-style: none; line-height: 1.9; font-size: 1.10rem;">
-                <li><strong>Context (맥락)</strong>: 시장 상황 및 배경</li>
-                <li><strong>Objective (목표)</strong>: 달성하려는 비즈니스 전환 목표</li>
-                <li><strong>Style (스타일)</strong>: 설득력 있는 B2B 카피 문체</li>
-                <li><strong>Tone (어조)</strong>: 신뢰감 있고 전문적인 톤</li>
-                <li><strong>Audience (청중)</strong>: 기업 의사결정권자 타깃</li>
-                <li><strong>Response (응답)</strong>: 글자 수 및 이메일 서식 지정</li>
-              </ul>
-            </div>
-            <div class="biz-card">
-              <div class="card-head">📋 B2B 콜드 메일 예제</div>
-              <div class="prompt-box">
-                <div class="prompt-box-header">
-                  <span class="prompt-chip">CO-STAR Format</span>
-                  <button class="btn-copy-prompt" onclick="copyPromptText('p10')">복사하기</button>
-                </div>
-                <div class="prompt-code" id="p10" style="font-size: 1.02rem;">[Context] SaaS 협업 툴 신규 출시 및 무료 체험 도입 유도
+          <div style="display: flex; flex-direction: column; gap: 0.9rem; height: 100%; justify-content: space-between;">
+            <div style="display: grid; grid-template-columns: 1fr 1.05fr; gap: 1.4rem; flex: 1;">
+              <div class="biz-card highlight">
+                <div class="card-head">🎨 CO-STAR 6대 구성 요소</div>
+                <ul style="list-style: none; line-height: 1.85; font-size: 1.06rem;">
+                  <li><strong>Context (맥락)</strong>: 시장 상황 및 배경</li>
+                  <li><strong>Objective (목표)</strong>: 달성하려는 비즈니스 전환 목표</li>
+                  <li><strong>Style (스타일)</strong>: 설득력 있는 B2B 카피 문체</li>
+                  <li><strong>Tone (어조)</strong>: 신뢰감 있고 전문적인 톤</li>
+                  <li><strong>Audience (청중)</strong>: 기업 의사결정권자 타깃</li>
+                  <li><strong>Response (응답)</strong>: 글자 수 및 이메일 서식 지정</li>
+                </ul>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">📋 B2B 콜드 메일 예제</div>
+                <div class="prompt-box">
+                  <div class="prompt-box-header">
+                    <span class="prompt-chip">CO-STAR Format</span>
+                    <button class="btn-copy-prompt" onclick="copyPromptText('p10')">복사하기</button>
+                  </div>
+                  <div class="prompt-code" id="p10" style="font-size: 0.98rem;">[Context] SaaS 협업 툴 신규 출시 및 무료 체험 도입 유도
 [Objective] IT 부서 팀장에게 도입 가치를 전달하고 15분 미팅 제안
 [Style] 설득력 있는 B2B 비즈니스 카피라이팅 문체
 [Tone] 업무 비효율 문제를 정확히 짚는 신뢰감 있는 톤
 [Audience] 엔터프라이즈 기업의 팀장급 의사결정권자
 [Response] 핵심 가치 비교표를 포함한 400자 이내 이메일 초안</div>
+                </div>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">🎨 CO-STAR 타깃 활용처</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">B2B 영업 콜드메일 · 보도자료 배포 · 링크드인 소셜 카피라이팅 전환율 극대화</div>
               </div>
             </div>
           </div>
@@ -1153,30 +1264,42 @@
 
       <!-- Slide 16: 요약 및 다음 트랙 이동 -->
       <section class="slide-canvas" data-prompter="클로징: Track 1 실습을 모두 완료했습니다. 사내 데이터 RAG와 자율 에이전트를 구축하는 Track 2로 이동합니다.">
-        <div class="slide-header" style="text-align: center;">
-          <h2 class="slide-title-text" style="font-size: 2.6rem;">Track 1 실습 완료 & 다음 단계</h2>
+        <div class="slide-header" style="text-align: center; margin-bottom: 0.8rem;">
+          <h2 class="slide-title-text" style="font-size: 2.5rem;">Track 1 실습 완료 & 다음 단계</h2>
           <p class="slide-desc-text">어시스턴트 기본 활용과 멀티모달 실무 실습을 성공적으로 마쳤습니다.</p>
         </div>
         <div class="slide-body">
-          <div class="layout-triad" style="max-width: 1100px;">
-            <div class="biz-card highlight" style="text-align: center; justify-content: center;">
-              <div style="font-size: 2rem;">⚡ APE</div>
-              <div style="font-weight: 700; font-size: 1.25rem; margin: 8px 0;">단문 요약 & 추출</div>
-              <p style="font-size: 1.05rem; color: var(--text-tertiary);">30초 내 빠른 결과가 필요할 때 사용</p>
+          <div class="layout-triad" style="max-width: 1200px; margin: 0 auto; width: 100%;">
+            <div class="biz-card highlight" style="text-align: left; padding: 1.4rem;">
+              <div style="font-size: 2rem; margin-bottom: 6px;">⚡ APE</div>
+              <div style="font-weight: 700; font-size: 1.25rem; margin-bottom: 8px;">단문 요약 & 데이터 추출</div>
+              <p style="font-size: 1.05rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1rem;">30초 내 신속한 결과 도출이 필요할 때 활용</p>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">회의 브리핑</span>
+                <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">이메일 요약</span>
+              </div>
             </div>
-            <div class="biz-card highlight" style="text-align: center; justify-content: center;">
-              <div style="font-size: 2rem;">🏆 C.R.A.F.T</div>
-              <div style="font-weight: 700; font-size: 1.25rem; margin: 8px 0;">비즈니스 기획 보고서</div>
-              <p style="font-size: 1.05rem; color: var(--text-tertiary);">경영진 보고 및 정형 분석 시 표준 활용</p>
+            <div class="biz-card highlight" style="text-align: left; padding: 1.4rem;">
+              <div style="font-size: 2rem; margin-bottom: 6px;">🏆 C.R.A.F.T</div>
+              <div style="font-weight: 700; font-size: 1.25rem; margin-bottom: 8px;">비즈니스 기획 보고서</div>
+              <p style="font-size: 1.05rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1rem;">경영진 보고 및 정형 분석 시 표준 프레임워크</p>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">사업 기획서</span>
+                <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">임원 보고</span>
+              </div>
             </div>
-            <div class="biz-card highlight" style="text-align: center; justify-content: center;">
-              <div style="font-size: 2rem;">🎨 CO-STAR</div>
-              <div style="font-weight: 700; font-size: 1.25rem; margin: 8px 0;">마케팅 & 대외 카피</div>
-              <p style="font-size: 1.05rem; color: var(--text-tertiary);">문체와 독자층 정밀 타깃팅에 최적화</p>
+            <div class="biz-card highlight" style="text-align: left; padding: 1.4rem;">
+              <div style="font-size: 2rem; margin-bottom: 6px;">🎨 CO-STAR</div>
+              <div style="font-weight: 700; font-size: 1.25rem; margin-bottom: 8px;">마케팅 & 대외 카피</div>
+              <p style="font-size: 1.05rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1rem;">문체와 독자층을 정밀 타깃팅하여 전환율 극대화</p>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">B2B 콜드메일</span>
+                <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">보도자료</span>
+              </div>
             </div>
           </div>
         </div>
-        <div style="text-align: center; margin-top: auto; padding-top: 1rem;">
+        <div style="text-align: center; margin-top: auto; padding-top: 0.8rem;">
           <a href="slide_track2.html" class="btn-portal-exit" style="background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark)); color: #ffffff; padding: 12px 30px; font-size: 1.15rem; border-radius: 30px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 10px 25px rgba(30,142,62,0.3);">
             🔵 Track 2 (Agentic Value) 슬라이드로 이동 &rarr;
           </a>
