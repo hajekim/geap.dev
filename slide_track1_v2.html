@@ -666,36 +666,44 @@
       <button class="stage-nav-arrow nav-arrow-left" onclick="prevSlide()" title="이전 (←)">‹</button>
       <button class="stage-nav-arrow nav-arrow-right" onclick="nextSlide()" title="다음 (→)">›</button>
 
-      <!-- Slide 01: 타이틀 & 아젠다 로드맵 -->
-      <section class="slide-canvas active" data-prompter="오프닝 브리핑: 복잡한 설정 없이 엔터프라이즈 환경에서 바로 체감하는 AI 파트너십의 8가지 실무 기능을 4개 막(Act)으로 나누어 실습합니다.">
-        <div class="slide-header" style="text-align: center; margin-bottom: 1.2rem;">
-          <span class="act-tag">🟢 Track 1. Day 1 Value</span>
-          <h1 class="slide-title-text" style="font-size: 3rem; margin: 0.6rem 0;">엔터프라이즈 AI 어시스턴트 & 멀티모달 실무 실습</h1>
-          <p class="slide-desc-text" style="max-width: 920px; margin: 0 auto; font-size: 1.25rem;">
-            개인화 설정부터 실시간 웹 조사, 이미지·비디오 창작, 그리고 사내 데이터 파일 분석까지 웹 브라우저에서 바로 실행하는 1일차 체감형 워크숍입니다.
+      <!-- Slide 01: 타이틀 & 아젠다 로드맵 (중앙 타이틀 + 바닥 4섹션 정렬) -->
+      <section class="slide-canvas active" data-prompter="오프닝 브리핑: 복잡한 설정 없이 엔터프라이즈 환경에서 바로 체감하는 AI 파트너십의 8가지 실무 기능을 4개 막(Act)으로 나누어 실습합니다." style="padding: 2.6rem 4rem 2rem; justify-content: space-between;">
+        <!-- 상단-중앙 타이틀 블록 -->
+        <div style="text-align: center; margin: auto 0 1.8rem;">
+          <div style="display: inline-block; margin-bottom: 0.7rem;">
+            <span class="act-tag" style="font-size: 0.95rem; padding: 5px 16px; border-radius: 20px;">🟢 Track 1. Day 1 Value</span>
+          </div>
+          <h1 class="slide-title-text" style="font-size: 3.2rem; margin: 0.3rem 0 0.8rem; font-weight: 900; letter-spacing: -0.03em; line-height: 1.2;">
+            엔터프라이즈 AI 어시스턴트 & 멀티모달 실무 실습
+          </h1>
+          <p class="slide-desc-text" style="max-width: 960px; margin: 0 auto; font-size: 1.28rem; color: #475569; line-height: 1.6;">
+            개인화 설정부터 실시간 웹 조사, 이미지·비디오 창작, 그리고 사내 데이터 파일 분석까지<br>
+            웹 브라우저에서 바로 실행하는 1일차 체감형 엔터프라이즈 워크숍입니다.
           </p>
         </div>
-        <div class="slide-body">
+
+        <!-- 하단 바닥 정렬 4개 Act 아젠다 섹션 -->
+        <div style="width: 100%; margin-top: auto;">
           <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; width: 100%;">
-            <div class="biz-card highlight" style="text-align: left; padding: 1.4rem;">
-              <div style="font-size: 1.3rem; font-weight: 800; color: var(--primary-green-dark); margin-bottom: 6px;">🎯 Act 1</div>
-              <div style="font-weight: 700; font-size: 1.18rem; margin-bottom: 8px;">나만의 AI 파트너 세팅</div>
-              <p style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.5;">pContext 4대 소스 원리 및 프로필·세션 메모리 등록</p>
+            <div class="biz-card highlight" style="text-align: left; padding: 1.3rem 1.4rem;">
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--primary-green-dark); margin-bottom: 4px;">🎯 Act 1</div>
+              <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">나만의 AI 파트너 세팅</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">pContext 4대 소스 원리 및 프로필·세션 메모리 등록</p>
             </div>
-            <div class="biz-card highlight" style="text-align: left; padding: 1.4rem;">
-              <div style="font-size: 1.3rem; font-weight: 800; color: var(--google-blue); margin-bottom: 6px;">🌐 Act 2</div>
-              <div style="font-weight: 700; font-size: 1.18rem; margin-bottom: 8px;">실시간 웹 지능 & 멀티모달</div>
-              <p style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.5;">실시간 출처 검증, URL 파싱, Nano Banana 및 Veo 영상</p>
+            <div class="biz-card highlight" style="text-align: left; padding: 1.3rem 1.4rem;">
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--google-blue); margin-bottom: 4px;">🌐 Act 2</div>
+              <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">실시간 웹 지능 & 멀티모달</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">실시간 출처 검증, URL 파싱, Nano Banana 및 Veo 영상</p>
             </div>
-            <div class="biz-card highlight" style="text-align: left; padding: 1.4rem;">
-              <div style="font-size: 1.3rem; font-weight: 800; color: var(--google-yellow); margin-bottom: 6px;">📊 Act 3</div>
-              <div style="font-weight: 700; font-size: 1.18rem; margin-bottom: 8px;">업무 파일 분석 & Canvas</div>
-              <p style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.5;">Excel 차트화, PPTX 요약 표, Canvas 슬라이드 자동 생성</p>
+            <div class="biz-card highlight" style="text-align: left; padding: 1.3rem 1.4rem;">
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--google-yellow); margin-bottom: 4px;">📊 Act 3</div>
+              <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">업무 파일 분석 & Canvas</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">Excel 차트화, PPTX 요약 표, Canvas 슬라이드 자동 생성</p>
             </div>
-            <div class="biz-card highlight" style="text-align: left; padding: 1.4rem;">
-              <div style="font-size: 1.3rem; font-weight: 800; color: var(--purple); margin-bottom: 6px;">✍️ Act 4</div>
-              <div style="font-weight: 700; font-size: 1.18rem; margin-bottom: 8px;">3대 프롬프트 프레임워크</div>
-              <p style="font-size: 1.02rem; color: var(--text-secondary); line-height: 1.5;">APE(속도), CRAFT(보고서), CO-STAR(마케팅 카피) 마스터</p>
+            <div class="biz-card highlight" style="text-align: left; padding: 1.3rem 1.4rem;">
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--purple); margin-bottom: 4px;">✍️ Act 4</div>
+              <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">3대 프롬프트 프레임워크</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">APE(속도), CRAFT(보고서), CO-STAR(마케팅 카피) 마스터</p>
             </div>
           </div>
         </div>
