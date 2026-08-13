@@ -17,6 +17,7 @@
       --google-green: #34a853;
       --google-green-dark: #1e7e34;
       --google-yellow: #fbbc04;
+      --purple: #7c3aed;
 
       --bg-main: #f8fafc;
       --bg-card: #ffffff;
@@ -60,7 +61,7 @@
       left: 0;
       width: 100%;
       height: 60px;
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-color);
       display: flex;
@@ -216,7 +217,17 @@
       box-shadow: 0 0 8px rgba(234, 67, 53, 0.6);
     }
 
-    /* 타이포그래피 */
+    .step-pill {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      background: var(--google-red-light);
+      color: var(--google-red-dark);
+    }
+
     h1 {
       font-family: var(--font-display);
       font-size: 3.2rem;
@@ -231,17 +242,17 @@
       font-family: var(--font-display);
       font-size: 2.1rem;
       font-weight: 800;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       color: var(--text-main);
       letter-spacing: -0.02em;
     }
 
     p.subtitle {
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       color: var(--text-muted);
       max-width: 920px;
       line-height: 1.6;
-      margin-bottom: 1.6rem;
+      margin-bottom: 1.5rem;
     }
 
     .grid {
@@ -279,6 +290,7 @@
     .card.blue::before { background: var(--google-blue); }
     .card.green::before { background: var(--google-green); }
     .card.yellow::before { background: var(--google-yellow); }
+    .card.purple::before { background: var(--purple); }
 
     .card h3 {
       font-family: var(--font-display);
@@ -290,9 +302,9 @@
       align-items: center;
       gap: 8px;
     }
-    .card p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; margin-bottom: 0.6rem; }
+    .card p { color: var(--text-muted); font-size: 1.02rem; line-height: 1.6; margin-bottom: 0.6rem; }
     .card ul { list-style: none; padding: 0; margin-top: 0.3rem; }
-    .card ul li { color: var(--text-main); font-size: 1.02rem; line-height: 1.65; margin-bottom: 0.4rem; padding-left: 1.4rem; position: relative; }
+    .card ul li { color: var(--text-main); font-size: 1rem; line-height: 1.65; margin-bottom: 0.4rem; padding-left: 1.4rem; position: relative; }
     .card ul li::before { content: '✔'; position: absolute; left: 0; color: var(--google-red); font-weight: 700; }
     .card.blue ul li::before { color: var(--google-blue); }
     .card.green ul li::before { color: var(--google-green); }
@@ -307,7 +319,7 @@
       font-size: 0.92rem;
       color: #f1f5f9;
       text-align: left;
-      margin: 0.5rem 0;
+      margin: 0.4rem 0;
       line-height: 1.55;
       white-space: pre-wrap;
     }
@@ -435,27 +447,28 @@
   <!-- 우측 슬라이드 닷 네비게이션 (16개) -->
   <div class="nav-dots">
     <button class="nav-dot active" onclick="scrollToSlide(0)" title="1. 타이틀"></button>
-    <button class="nav-dot" onclick="scrollToSlide(1)" title="2. 인프라 거버넌스"></button>
-    <button class="nav-dot" onclick="scrollToSlide(2)" title="3. 다중 프로젝트 2중화"></button>
-    <button class="nav-dot" onclick="scrollToSlide(3)" title="4. VPC SC & CMEK"></button>
-    <button class="nav-dot" onclick="scrollToSlide(4)" title="5. WIF & Cloud Identity"></button>
-    <button class="nav-dot" onclick="scrollToSlide(5)" title="6. M365/ServiceNow 커넥터"></button>
-    <button class="nav-dot" onclick="scrollToSlide(6)" title="7. Actions 쓰기 통제"></button>
-    <button class="nav-dot" onclick="scrollToSlide(7)" title="8. 에이전트 레지스트리"></button>
-    <button class="nav-dot" onclick="scrollToSlide(8)" title="9. ACL & 킬 스위치"></button>
-    <button class="nav-dot" onclick="scrollToSlide(9)" title="10. Model Armor 3대 지표"></button>
-    <button class="nav-dot" onclick="scrollToSlide(10)" title="11. Model Armor 설정"></button>
-    <button class="nav-dot" onclick="scrollToSlide(11)" title="12. BigQuery SIEM 로그"></button>
-    <button class="nav-dot" onclick="scrollToSlide(12)" title="13. 실시간 감사 SQL 실습"></button>
-    <button class="nav-dot" onclick="scrollToSlide(13)" title="14. ROI 재무 시뮬레이션"></button>
-    <button class="nav-dot" onclick="scrollToSlide(14)" title="15. Gemini Notebook 거버넌스"></button>
-    <button class="nav-dot" onclick="scrollToSlide(15)" title="16. 실습 시작"></button>
+    <button class="nav-dot" onclick="scrollToSlide(1)" title="2. [3.1] GCP 프로젝트 & 4대 API"></button>
+    <button class="nav-dot" onclick="scrollToSlide(2)" title="3. [3.1] 멀티 리전 2중화"></button>
+    <button class="nav-dot" onclick="scrollToSlide(3)" title="4. [3.1] VPC SC & CMEK"></button>
+    <button class="nav-dot" onclick="scrollToSlide(4)" title="5. [3.2] WIF & Cloud Identity"></button>
+    <button class="nav-dot" onclick="scrollToSlide(5)" title="6. [3.3] M365/ServiceNow ACL"></button>
+    <button class="nav-dot" onclick="scrollToSlide(6)" title="7. [3.3] Actions 쓰기 통제"></button>
+    <button class="nav-dot" onclick="scrollToSlide(7)" title="8. [3.4] 에이전트 레지스트리"></button>
+    <button class="nav-dot" onclick="scrollToSlide(8)" title="9. [3.4] 킬 스위치 실습"></button>
+    <button class="nav-dot" onclick="scrollToSlide(9)" title="10. [3.5] Model Armor 3대 지표"></button>
+    <button class="nav-dot" onclick="scrollToSlide(10)" title="11. [3.5] 7대 보안 테스트 매트릭스"></button>
+    <button class="nav-dot" onclick="scrollToSlide(11)" title="12. [3.5] 임계값 정책 설정"></button>
+    <button class="nav-dot" onclick="scrollToSlide(12)" title="13. [3.6] BigQuery SIEM 관제"></button>
+    <button class="nav-dot" onclick="scrollToSlide(13)" title="14. [3.6] 실시간 감사 SQL 실습"></button>
+    <button class="nav-dot" onclick="scrollToSlide(14)" title="15. [3.7] 옴니바 & ROI 모델"></button>
+    <button class="nav-dot" onclick="scrollToSlide(15)" title="16. 완료 & 포털 이동"></button>
   </div>
 
   <div class="slide-container" id="container">
     <!-- 1 -->
     <section class="slide">
-      <h1>🔴 Part 3: Admin Guide<br>전사 AI 인프라 & 보안 거버넌스 가이드</h1>
+      <span class="step-pill">🔴 Part 3. Admin & Security</span>
+      <h1>전사 AI 인프라 & 보안 거버넌스 가이드</h1>
       <p class="subtitle">클라우드 인프라 관리자, 정보보호최고책임자(CISO), 기술 의사결정권자를 대상으로 합니다.<br>기업 내 안전한 생성형 AI 도입을 위한 데이터 격리, 권한 제어, 보안 관제 및 투자 효과(ROI) 검토 방안을 다룹니다.</p>
       <div class="hint">
         <span class="kbd-chip">Space</span> 또는 <span class="kbd-chip">↓</span> 키를 눌러 다음 슬라이드로 이동
@@ -464,37 +477,44 @@
 
     <!-- 2 -->
     <section class="slide">
-      <h2>GCP 프로젝트 설정 및 인프라 거버넌스</h2>
-      <p class="subtitle">Gemini Enterprise의 안전한 전사 배포를 위해 <b>클라우드 인프라의 환경 격리 및 권한 분리 기준</b>을 세웁니다.</p>
+      <span class="step-pill">Step 3.1 인프라 설정</span>
+      <h2>GCP 프로젝트 분리 및 4대 필수 API 활성화</h2>
+      <p class="subtitle">Gemini Enterprise의 안전한 전사 배포를 위해 <b>환경별 프로젝트 분리 기준</b>과 <b>4대 필수 API</b>를 설정합니다.</p>
       <div class="grid">
         <div class="card">
-          <h3>🏛️ 환경별 프로젝트 분리</h3>
-          <p>단일 프로젝트 내 집중을 피하고 <strong>운영(Prod) / 개발(Dev) / 감사(Audit)</strong> 프로젝트로 격리하여 리소스 간섭 및 단일 실패 지점을 방지합니다.</p>
+          <h3>🏛️ 환경별 3단 프로젝트 격리</h3>
+          <p><strong>운영(Prod) / 개발(Dev) / 감사(Audit)</strong> 프로젝트로 완전 분리하여 리소스 간섭을 방지하고 최소 권한 원칙(PoLP)을 적용합니다.</p>
         </div>
         <div class="card blue">
-          <h3>🔐 최소 권한 원칙 (PoLP) 적용</h3>
-          <p>일반 사용자의 서비스 사용 권한과 인프라 관리자의 설정 권한을 분리하며, Cloud Identity 조직 단위(OU) 기반으로 그룹 권한을 매핑합니다.</p>
+          <h3>🔌 4대 필수 활성화 API</h3>
+          <ul>
+            <li><strong>gemini.googleapis.com</strong>: Gemini Enterprise 핵심 API</li>
+            <li><strong>discoveryengine.googleapis.com</strong>: Vertex AI Search 커넥터</li>
+            <li><strong>logging.googleapis.com</strong>: Cloud Audit Logs 감사 수집</li>
+            <li><strong>cloudkms.googleapis.com</strong>: 고객 관리 암호화 키 (CMEK)</li>
+          </ul>
         </div>
       </div>
     </section>
 
     <!-- 3 -->
     <section class="slide">
-      <h2>다중 프로젝트 가용성 아키텍처</h2>
-      <p class="subtitle">서비스 연속성 유지 및 데이터 관리 요건 충족을 위해 <b>멀티 리전 배포 및 데이터 암호화 구조</b>를 적용합니다.</p>
+      <span class="step-pill">Step 3.1 인프라 설정</span>
+      <h2>다중 프로젝트 가용성 & 멀티 리전 이중화</h2>
+      <p class="subtitle">서비스 연속성 보장 및 장애 복구(DR) 요건 충족을 위해 <b>멀티 리전 배포 구조</b>를 적용합니다.</p>
       <div class="grid">
-        <div class="card">
+        <div class="card green">
           <h3>🌐 멀티 리전 배포 구조</h3>
           <ul>
-            <li><strong>asia-northeast3 (서울)</strong>: 주요 운영 트래픽 처리 및 색인 데이터 보관</li>
-            <li><strong>us-central1 (아이오와)</strong>: 재해 복구(DR) 대비 및 백업 리전 활용</li>
+            <li><strong>asia-northeast3 (서울)</strong>: 주요 운영 트래픽 처리 및 색인 데이터 로컬 보관 (국내 데이터 주권 준수)</li>
+            <li><strong>us-central1 (아이오와)</strong>: 재해 복구(DR) 대비 글로벌 백업 리전 활용</li>
           </ul>
         </div>
         <div class="card yellow">
           <h3>🛡️ 네트워크 및 암호화 통제</h3>
           <ul>
-            <li><strong>VPC Service Controls</strong>: API 호출 및 데이터 색인의 인터넷 통신 제어</li>
-            <li><strong>Cloud KMS (CMEK)</strong>: 고객 관리 암호화 키를 활용한 데이터 저장 암호화</li>
+            <li><strong>VPC Service Controls</strong>: 비인가 외부 IP 및 단말의 통신 차단</li>
+            <li><strong>Cloud KMS (CMEK)</strong>: 90일 주기 자동 회전 고객 관리 키로 저장 데이터 암호화</li>
           </ul>
         </div>
       </div>
@@ -502,21 +522,24 @@
 
     <!-- 4 -->
     <section class="slide">
-      <h2>심화: VPC SC 및 KMS CMEK 관리</h2>
+      <span class="step-pill">Step 3.1 인프라 설정</span>
+      <h2>심화: VPC SC 및 KMS CMEK 관리 기준</h2>
       <p class="subtitle">사내 데이터 보호를 위한 <b>보안 경계(Service Perimeter)</b> 설정 및 <b>고객 관리 암호화 키(CMEK)</b> 운영 주기 관리입니다.</p>
       <div class="card" style="max-width: 1100px; width: 100%;">
         <h3>💡 보안 경계 통제 기준</h3>
         <p>VPC SC 경계 내부 리소스 간의 통신만 허용되며, 승인되지 않은 외부 IP 주소 및 미인증 단말에서의 데이터 입출력을 철저히 제어합니다.</p>
         <ul style="margin-top: 0.8rem;">
           <li><strong>CMEK 주기적 자동 회전</strong>: 설정된 주기(예: 90일)에 따라 암호화 키를 자동 회전하여 암호키 노출 범위를 최소화합니다.</li>
+          <li><strong>Zero Data Ingestion</strong>: VPC SC 경계 밖으로 사내 비정형 문서가 유출되는 것을 차단합니다.</li>
         </ul>
       </div>
     </section>
 
     <!-- 5 -->
     <section class="slide">
-      <h2>사용자 인증 관리: WIF & Cloud Identity</h2>
-      <p class="subtitle">장기 보안 자격증명(`.json` 키 파일) 사용의 위험을 줄이기 위해 <b>Workload Identity Federation (WIF)</b> 기반 인증을 구성합니다.</p>
+      <span class="step-pill">Step 3.2 인증 관리</span>
+      <h2>WIF 키리스 인증 & Cloud Identity 연동</h2>
+      <p class="subtitle">장기 보안 자격증명(`.json` 키 파일) 사용의 위험을 제거하기 위해 <b>Workload Identity Federation (WIF)</b> 기반 인증을 구성합니다.</p>
       <div class="grid">
         <div class="card">
           <h3>🔑 WIF 기반 키리스(Keyless) 연동</h3>
@@ -531,7 +554,8 @@
 
     <!-- 6 -->
     <section class="slide">
-      <h2>데이터 커넥터 연동: M365 & ServiceNow</h2>
+      <span class="step-pill">Step 3.3 커넥터 거버넌스</span>
+      <h2>M365 / ServiceNow 연동 및 실시간 ACL 동기화</h2>
       <p class="subtitle">Google Workspace 외에 <b>Microsoft 365(Outlook, OneDrive) 및 ServiceNow 사내 시스템</b> 데이터의 색인 및 검색을 연계합니다.</p>
       <div class="grid">
         <div class="card">
@@ -547,7 +571,8 @@
 
     <!-- 7 -->
     <section class="slide">
-      <h2>심화: Actions (쓰기 권한) 거버넌스</h2>
+      <span class="step-pill">Step 3.3 커넥터 거버넌스</span>
+      <h2>심화: Actions (쓰기 권한) Human-in-the-Loop</h2>
       <p class="subtitle">에이전트가 외부 시스템에 쓰기 작업을 수행할 때 보안을 안전하게 통제합니다.</p>
       <div class="card" style="max-width: 1100px; width: 100%;">
         <h3>⚠️ 승인 단계 필수화 (Human-in-the-Loop)</h3>
@@ -561,7 +586,8 @@
 
     <!-- 8 -->
     <section class="slide">
-      <h2>전사 에이전트 레지스트리 (Agent Registry)</h2>
+      <span class="step-pill">Step 3.4 에이전트 관리</span>
+      <h2>전사 에이전트 레지스트리 (Agent Registry) 관제</h2>
       <p class="subtitle">사내 각 조직에서 배포한 커스텀 에이전트의 현황을 <b>중앙 관리 콘솔에서 모니터링하고 권한을 통제</b>합니다.</p>
       <div class="grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1250px;">
         <div class="card">
@@ -581,6 +607,7 @@
 
     <!-- 9 -->
     <section class="slide">
+      <span class="step-pill">Step 3.4 에이전트 관리</span>
       <h2>실습: 에이전트 ACL 감사 및 비활성화</h2>
       <p class="subtitle">관리자 콘솔에서 정책 위반 에이전트를 확인하고 활성 상태를 제어하는 실습 절차입니다.</p>
       <div class="card" style="max-width: 1100px; width: 100%;">
@@ -595,7 +622,8 @@
 
     <!-- 10 -->
     <section class="slide">
-      <h2>Model Armor: 보안 방화벽 3대 지표</h2>
+      <span class="step-pill">Step 3.5 Model Armor</span>
+      <h2>Model Armor: 인라인 보안 방화벽 3대 지표</h2>
       <p class="subtitle">실시간 데이터 입출력 방화벽인 <b>Model Armor</b>를 통해 제어하는 주요 데이터 검열 지표입니다.</p>
       <div class="grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1250px;">
         <div class="card">
@@ -615,25 +643,55 @@
 
     <!-- 11 -->
     <section class="slide">
-      <h2>실습: Model Armor 임계값 정책 설정</h2>
-      <p class="subtitle">조직 단위(OU) 및 부서 특성에 맞춰 Model Armor 필터링 강도를 조정하는 설정 방안입니다.</p>
-      <div class="card" style="max-width: 1100px; width: 100%;">
-        <h3>💡 조직별 차등 제어 정책</h3>
-        <ul>
-          <li><strong>고객 상담 부서 (CS)</strong>: PII 필터 강도를 `High(엄격)`로 설정하여 대화 내 고객 식별정보 노출 방지</li>
-          <li><strong>연구 개발 부서 (R&D)</strong>: 소스 코드 및 기술 시나리오 문맥 오탐을 줄이기 위해 구문 필터 임계값을 조정하여 개발 생산성 유지</li>
-        </ul>
+      <span class="step-pill">Step 3.5 Model Armor</span>
+      <h2>Model Armor 7대 보안 테스트 케이스 매트릭스</h2>
+      <p class="subtitle">엔터프라이즈 환경에서 필수적으로 검증해야 하는 <b>7가지 보안 시나리오 및 방어 메커니즘</b>입니다.</p>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); max-width: 1250px; gap: 1.2rem;">
+        <div class="card">
+          <h3 style="font-size: 1.15rem;">🌐 1. 악성 웹 차단</h3>
+          <p style="font-size: 0.9rem;">피싱 및 악성 URL 파싱 차단</p>
+        </div>
+        <div class="card blue">
+          <h3 style="font-size: 1.15rem;">🔒 2. PII 마스킹</h3>
+          <p style="font-size: 0.9rem;">주민번호·카드번호 인라인 마스킹</p>
+        </div>
+        <div class="card yellow">
+          <h3 style="font-size: 1.15rem;">🚫 3. 인젝션 방어</h3>
+          <p style="font-size: 0.9rem;">시스템 프롬프트 탈취 원천 차단</p>
+        </div>
+        <div class="card green">
+          <h3 style="font-size: 1.15rem;">☣️ 4. 유해 콘텐츠 검열</h3>
+          <p style="font-size: 0.9rem;">비윤리적·공격적 표현 자동 필터</p>
+        </div>
       </div>
     </section>
 
     <!-- 12 -->
     <section class="slide">
-      <h2>감사 로그 SIEM 연계: BigQuery 관제</h2>
+      <span class="step-pill">Step 3.5 Model Armor 실습</span>
+      <h2>부서별 차등 임계값 정책 설정 (CS vs R&D)</h2>
+      <p class="subtitle">조직 단위(OU) 및 부서 특성에 맞춰 Model Armor 필터링 강도를 조정하는 설정 방안입니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1200px;">
+        <div class="card">
+          <h3>🎧 고객 상담 부서 (CS)</h3>
+          <p><strong>엄격 모드 (High)</strong>: 대화 내 고객 개인식별정보(PII) 유출을 100% 방지하기 위해 개인정보 마스킹 강도를 최대로 유지합니다.</p>
+        </div>
+        <div class="card green">
+          <h3>💻 연구 개발 부서 (R&D)</h3>
+          <p><strong>유연 모드 (Moderate)</strong>: 소스 코드, SQL 쿼리, 기술 스크립트 등 특수 구문의 오탐을 방지하여 엔지니어의 개발 생산성을 보장합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 -->
+    <section class="slide">
+      <span class="step-pill">Step 3.6 감사 관제</span>
+      <h2>감사 로그 SIEM 연계: BigQuery 실시간 관제</h2>
       <p class="subtitle">에이전트 호출, 색인에서 문서를 참조한 내역은 <b>Cloud Audit Logs를 거쳐 BigQuery 데이터셋으로 전송</b>됩니다.</p>
       <div class="grid">
         <div class="card">
           <h3>🔍 호출 내역 완벽한 추적성</h3>
-          <p>호출 일시, 요청 사용자 이메일, 사용된 에이전트 ID, 참조된 문서 URI 등 상세 감사 정보를 보관 및 실시간 조회합니다.</p>
+          <p>호출 일시, 요청 사용자 이메일, 사용된 에이전트 ID, 참조된 문서 URI 등 상세 감사 정보를 영구 보관 및 실시간 조회합니다.</p>
         </div>
         <div class="card blue">
           <h3>🚨 SIEM 툴 연동 분석</h3>
@@ -642,10 +700,11 @@
       </div>
     </section>
 
-    <!-- 13 -->
+    <!-- 14 -->
     <section class="slide">
-      <h2>실습: BigQuery 감사 로그 조회 SQL</h2>
-      <p class="subtitle">관리자가 BigQuery 콘솔에서 <b>단시간 내 다수 문서를 참조한 호출 내역</b>을 조회하는 쿼리 실습입니다.</p>
+      <span class="step-pill">Step 3.6 감사 관제 실습</span>
+      <h2>BigQuery 실시간 감사 로그 조회 SQL</h2>
+      <p class="subtitle">관리자가 BigQuery 콘솔에서 <b>단시간 내 다수 문서를 참조한 이상 징후 호출 내역</b>을 조회하는 쿼리 실습입니다.</p>
       <div class="card" style="max-width: 1100px; width: 100%;">
         <h3>📋 SIEM 탐지 SQL 예제</h3>
         <div class="code-box">SELECT
@@ -660,50 +719,29 @@ ORDER BY prolog.timestamp DESC;</div>
       </div>
     </section>
 
-    <!-- 14 -->
-    <section class="slide">
-      <h2>재무 검토: ROI 시뮬레이션 모델</h2>
-      <p class="subtitle">AI 솔루션 도입 검토 시 경영진 보고를 위해 활용하는 <b>정량적 비용 및 효용(ROI) 산출 기준</b>입니다.</p>
-      <div class="grid">
-        <div class="card">
-          <h3>💰 비용 및 절감 파라미터</h3>
-          <ul>
-            <li><strong>예상 지출</strong>: 구독 라이선스 비용 + 클라우드 인프라 운용 비용</li>
-            <li><strong>업무 절감 가정</strong>: 인당 월간 반복 업무 절감 시간(Hour)</li>
-            <li><strong>환산 가치</strong>: 평균 임금 환산액을 적용한 연간 절감 기대 효과</li>
-          </ul>
-        </div>
-        <div class="card yellow">
-          <h3>📈 손익분기점 (BEP) 시뮬레이션</h3>
-          <p>연도별 예상 서비스 활용률(1차년도 온보딩 ~ 3차년도 정착)을 반영하여 누적 순현재가치(NPV) 및 BEP 시점을 계산합니다.</p>
-        </div>
-      </div>
-    </section>
-
     <!-- 15 -->
     <section class="slide">
-      <h2>Gemini Notebook Enterprise 거버넌스 설정</h2>
-      <p class="subtitle">기업용 Gemini Notebook의 <b>팀 도서관 데이터 외부 공유 통제 및 API 연동 기준</b>을 설명합니다.</p>
-      <div class="grid">
-        <div class="card">
-          <h3>🏛️ 엔터프라이즈 도서관 권한 제어</h3>
-          <ul>
-            <li><strong>공유 도메인 제한</strong>: 사내 인가 도메인(`.company.com`) 이외의 외부 계정으로 도서관 세션 공유 차단</li>
-            <li><strong>내보내기 통제</strong>: 업로드된 원본 문서 소스의 외부 다운로드 및 복사 제한 기능</li>
-          </ul>
+      <span class="step-pill">Step 3.7 확장 & ROI</span>
+      <h2>Chrome 옴니바 연동 & ROI 재무 시뮬레이션</h2>
+      <p class="subtitle">Chrome 주소창 연동을 통한 전사 도입 확산 및 경영진 보고용 <b>ROI 산출 공식</b>입니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr 1.1fr; max-width: 1200px;">
+        <div class="card blue">
+          <h3>🌐 Chrome 주소창 옴니바 4단계 호출</h3>
+          <p>주소창에 <b>@gemini [질의]</b> 입력만으로 사내 Gemini Enterprise 콘솔을 즉시 호출하여 전사 사용자 접근성을 극대화합니다.</p>
         </div>
-        <div class="card green">
-          <h3>🌐 사내 시스템 REST API 연계</h3>
-          <p>그룹웨어 및 사내 업무 포털에서 REST API를 호출하여 Gemini Notebook 도서관에 정형/비정형 문서를 자동 업로드하는 표준을 적용합니다.</p>
+        <div class="card yellow">
+          <h3>📈 ROI 정량적 산출 공식</h3>
+          <div class="code-box" style="font-size: 0.88rem; background: #1e293b; color: #fde68a; border-left-color: var(--google-yellow);">ROI(%) = [(인당 절감시간 × 시간당 임금 × 사용자 수) - 총 라이선스 비용] / 총 비용 × 100</div>
+          <p style="margin-top: 0.5rem; font-size: 0.95rem;">월 10시간 절감 가정 시, 도입 6개월 이내 손익분기점(BEP) 달성이 가능합니다.</p>
         </div>
       </div>
     </section>
 
     <!-- 16 -->
     <section class="slide">
-      <h2>Part 3 슬라이드 완료</h2>
-      <p class="subtitle">전체 프레젠테이션 안내를 마쳤습니다. 교육 포털 메인으로 진입하여 직무별 실습 문서와 함께 단계별 핸즈온을 진행하세요.</p>
-      <a href="index.html" class="cta-btn">🏠 교육 포털 메인으로 진입하기 &rarr;</a>
+      <h2>Part 3 관리자 슬라이드 완료</h2>
+      <p class="subtitle">전체 프레젠테이션 안내를 마쳤습니다. 실습 포털 메인으로 이동하여 트랙별 상세 가이드와 함께 실습을 진행하세요.</p>
+      <a href="index.html" class="cta-btn">🏠 실습 포털 메인으로 진입하기 &rarr;</a>
     </section>
   </div>
 
@@ -750,7 +788,7 @@ ORDER BY prolog.timestamp DESC;</div>
 
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
-    document.querySelectorAll('.card img, img').forEach(img => {
+    document.querySelectorAll('.card img, img, figure img').forEach(img => {
       img.addEventListener('click', (e) => {
         e.stopPropagation();
         lightboxImg.src = img.src;

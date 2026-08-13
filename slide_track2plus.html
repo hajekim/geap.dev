@@ -60,7 +60,7 @@
       left: 0;
       width: 100%;
       height: 60px;
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-color);
       display: flex;
@@ -211,7 +211,17 @@
       box-shadow: 0 0 8px rgba(124, 58, 237, 0.6);
     }
 
-    /* 타이포그래피 */
+    .step-pill {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      background: var(--purple-light);
+      color: var(--purple-dark);
+    }
+
     h1 {
       font-family: var(--font-display);
       font-size: 3.2rem;
@@ -226,17 +236,17 @@
       font-family: var(--font-display);
       font-size: 2.1rem;
       font-weight: 800;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       color: var(--text-main);
       letter-spacing: -0.02em;
     }
 
     p.subtitle {
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       color: var(--text-muted);
       max-width: 920px;
       line-height: 1.6;
-      margin-bottom: 1.6rem;
+      margin-bottom: 1.5rem;
     }
 
     .grid {
@@ -285,9 +295,9 @@
       align-items: center;
       gap: 8px;
     }
-    .card p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; margin-bottom: 0.6rem; }
+    .card p { color: var(--text-muted); font-size: 1.02rem; line-height: 1.6; margin-bottom: 0.6rem; }
     .card ul { list-style: none; padding: 0; margin-top: 0.3rem; }
-    .card ul li { color: var(--text-main); font-size: 1.02rem; line-height: 1.65; margin-bottom: 0.4rem; padding-left: 1.4rem; position: relative; }
+    .card ul li { color: var(--text-main); font-size: 1rem; line-height: 1.65; margin-bottom: 0.4rem; padding-left: 1.4rem; position: relative; }
     .card ul li::before { content: '✔'; position: absolute; left: 0; color: var(--purple); font-weight: 700; }
     .card.green ul li::before { color: var(--google-green); }
 
@@ -298,10 +308,10 @@
       border-radius: 10px;
       padding: 0.85rem 1.15rem;
       font-family: var(--font-mono);
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: #f1f5f9;
       text-align: left;
-      margin: 0.5rem 0;
+      margin: 0.4rem 0;
       line-height: 1.55;
       white-space: pre-wrap;
     }
@@ -441,37 +451,38 @@
   <!-- 우측 슬라이드 닷 네비게이션 (10개) -->
   <div class="nav-dots">
     <button class="nav-dot active" onclick="scrollToSlide(0)" title="1. 타이틀"></button>
-    <button class="nav-dot" onclick="scrollToSlide(1)" title="2. Part A 사전 확인"></button>
+    <button class="nav-dot" onclick="scrollToSlide(1)" title="2. Part A 사전 점검"></button>
     <button class="nav-dot" onclick="scrollToSlide(2)" title="3. A.1 Drive 권한 승인"></button>
     <button class="nav-dot" onclick="scrollToSlide(3)" title="4. A.2 Drive RAG 실습"></button>
     <button class="nav-dot" onclick="scrollToSlide(4)" title="5. A.2 GCS RAG 실습"></button>
-    <button class="nav-dot" onclick="scrollToSlide(5)" title="6. RAG-Ready 가이드"></button>
-    <button class="nav-dot" onclick="scrollToSlide(6)" title="7. Part B 파이프라인"></button>
-    <button class="nav-dot" onclick="scrollToSlide(7)" title="8. B.1 코드 & 배포"></button>
-    <button class="nav-dot" onclick="scrollToSlide(8)" title="9. B.1 GE 등록"></button>
-    <button class="nav-dot" onclick="scrollToSlide(9)" title="10. 완료"></button>
+    <button class="nav-dot" onclick="scrollToSlide(5)" title="6. RAG-Ready 문서 수칙"></button>
+    <button class="nav-dot" onclick="scrollToSlide(6)" title="7. Part B ADK 파이프라인"></button>
+    <button class="nav-dot" onclick="scrollToSlide(7)" title="8. B.1 Python 코드 & 배포"></button>
+    <button class="nav-dot" onclick="scrollToSlide(8)" title="9. B.1 어드민 등록 & 호출"></button>
+    <button class="nav-dot" onclick="scrollToSlide(9)" title="10. Track 2+ 완료 & CTA"></button>
   </div>
 
   <div class="slide-container" id="container">
     <!-- 1 -->
     <section class="slide">
-      <h1>🟣 Track 2 Plus<br>Connector & Custom Agent</h1>
-      <p class="subtitle">Google Drive 커넥터 연동(RAG)과 Python 기반 커스텀 에이전트 개발을 다루는 심화 실습입니다.<br>사내 데이터 연동과 ADK 마이크로서비스 확장을 단계별로 학습합니다.</p>
-      <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 900px;">
+      <span class="step-pill">🟣 Track 2 Plus. Pro Code</span>
+      <h1>Connector & Custom Agent 개발 가이드</h1>
+      <p class="subtitle">Google Drive/GCS 커넥터 연동(RAG)과 Python 기반 Google ADK를 활용한 마이크로서비스 에이전트 개발을 다루는 개발자 심화 트랙입니다.</p>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 960px;">
         <div class="card">
-          <h3>📌 Part A. Connector</h3>
+          <h3>📌 Part A. Connector RAG</h3>
           <ul>
-            <li>Google Drive OAuth 권한 승인</li>
-            <li>Drive 사내 문서 RAG 검색</li>
-            <li>GCS 데이터스토어 RAG 검색</li>
+            <li>Google Drive OAuth 권한 승인 및 사내 규정 검색</li>
+            <li>Vertex AI Search 기반 GCS 데이터스토어 연동</li>
+            <li>임베딩 정확도를 높이는 RAG-Ready 문서 작성법</li>
           </ul>
         </div>
         <div class="card green">
-          <h3>📌 Part B. Custom Agent</h3>
+          <h3>📌 Part B. Custom Agent (ADK)</h3>
           <ul>
-            <li>ADK로 에이전트 코드 작성</li>
-            <li>Cloud Run 배포</li>
-            <li>Gemini Enterprise 어드민 등록</li>
+            <li>Python 기반 Google ADK로 비즈니스 로직 작성</li>
+            <li>to_a2a() 변환 및 Cloud Run 서버리스 배포</li>
+            <li>Gemini Enterprise Agent Registry 등록 및 테스트</li>
           </ul>
         </div>
       </div>
@@ -482,20 +493,21 @@
 
     <!-- 2 -->
     <section class="slide">
-      <h2>Part A. Connector 실습 전 확인 사항</h2>
+      <span class="step-pill">Part A. 커넥터 RAG</span>
+      <h2>Part A. 커넥터 연동 전 환경 점검</h2>
       <p class="subtitle">Drive 커넥터를 사용하려면 Gemini Enterprise 어드민이 조직 단위로 커넥터를 미리 활성화해야 합니다.<br>커넥터 목록이 보이지 않거나 Enable actions 버튼이 없으면 강사에게 먼저 문의합니다.</p>
       <div class="grid">
         <div class="card">
-          <h3>🔐 Drive RAG 작동 방식</h3>
-          <p>사용자가 권한 승인을 완료하면 Gemini가 본인의 Drive 파일을 직접 검색합니다. 권한이 없는 파일은 검색 대상에서 제외되므로 IAM 접근 제어가 철저히 유지됩니다.</p>
+          <h3>🔐 Drive RAG 작동 방식 (Zero Data Leak)</h3>
+          <p>사용자가 권한 승인을 완료하면 Gemini가 본인의 Drive 파일을 직접 검색합니다. 접근 권한(ACL)이 없는 파일은 검색 대상에서 원천 배제되므로 보안 경계가 완벽히 유지됩니다.</p>
         </div>
         <div class="card yellow">
           <h3>⚠️ 시작 전 체크리스트</h3>
           <ul>
             <li>어드민 콘솔에서 Drive 커넥터 활성화 완료 확인</li>
             <li>커넥터 목록에 Drive 항목 표시 확인</li>
-            <li>Enable actions 버튼 노출 확인</li>
-            <li>버튼 미노출 시 강사에게 지원 요청</li>
+            <li>Enable actions 버튼 노출 확인 (팝업 허용 필수)</li>
+            <li>버튼 미노출 시 강사에게 즉시 문의</li>
           </ul>
         </div>
       </div>
@@ -503,51 +515,52 @@
 
     <!-- 3 -->
     <section class="slide">
-      <h2>A.1 Google Drive 권한 승인 절차</h2>
-      <p class="subtitle">연동 버튼을 클릭하고 계정을 선택하면 완료됩니다. 최초 1회만 진행합니다.</p>
-      <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: flex-start; flex-wrap: wrap; margin-bottom: 1rem;">
+      <span class="step-pill">Part A.1 권한 승인</span>
+      <h2>Google Drive OAuth 권한 승인 4단계</h2>
+      <p class="subtitle">연동 버튼을 클릭하고 계정을 선택하면 완료됩니다. 사용자별로 최초 1회만 진행합니다.</p>
+      <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: flex-start; flex-wrap: wrap; margin-bottom: 0.8rem;">
         <figure style="text-align: center;">
-          <img src="./img/auth_01.webp" alt="커넥터 목록 — Drive Enable actions" style="height: 160px; border-radius: 8px;" onclick="openLightbox(this)">
-          <figcaption style="font-size: 0.78rem; color: var(--text-sub); margin-top: 0.3rem;">① Drive → Enable actions</figcaption>
+          <img src="./img/auth_01.webp" alt="Drive Enable actions" style="height: 150px; border-radius: 8px;">
+          <figcaption style="font-size: 0.76rem; color: var(--text-sub); margin-top: 0.3rem;">① Drive → Enable actions</figcaption>
         </figure>
         <figure style="text-align: center;">
-          <img src="./img/auth_02.webp" alt="구글 계정 선택 팝업" style="height: 160px; border-radius: 8px;" onclick="openLightbox(this)">
-          <figcaption style="font-size: 0.78rem; color: var(--text-sub); margin-top: 0.3rem;">② 실습 계정 선택</figcaption>
+          <img src="./img/auth_02.webp" alt="계정 선택" style="height: 150px; border-radius: 8px;">
+          <figcaption style="font-size: 0.76rem; color: var(--text-sub); margin-top: 0.3rem;">② 실습 계정 선택</figcaption>
         </figure>
         <figure style="text-align: center;">
-          <img src="./img/auth_03.webp" alt="OAuth 권한 동의 화면" style="height: 160px; border-radius: 8px;" onclick="openLightbox(this)">
-          <figcaption style="font-size: 0.78rem; color: var(--text-sub); margin-top: 0.3rem;">③ 권한 목록 확인 후 Allow</figcaption>
+          <img src="./img/auth_03.webp" alt="권한 동의" style="height: 150px; border-radius: 8px;">
+          <figcaption style="font-size: 0.76rem; color: var(--text-sub); margin-top: 0.3rem;">③ 권한 목록 확인 후 Allow</figcaption>
         </figure>
         <figure style="text-align: center;">
-          <img src="./img/auth_04.webp" alt="Drive 연동 완료" style="height: 160px; border-radius: 8px;" onclick="openLightbox(this)">
-          <figcaption style="font-size: 0.78rem; color: var(--text-sub); margin-top: 0.3rem;">④ Disable actions로 변경 시 완료</figcaption>
+          <img src="./img/auth_04.webp" alt="연동 완료" style="height: 150px; border-radius: 8px;">
+          <figcaption style="font-size: 0.76rem; color: var(--text-sub); margin-top: 0.3rem;">④ Disable actions로 변경 시 완료</figcaption>
         </figure>
       </div>
-      <div class="card" style="max-width: 900px; padding: 0.9rem 1.4rem;">
-        <p style="font-size: 0.98rem; color: var(--purple-dark); margin: 0; font-weight: 500;">💡 계정 선택 팝업이 나타나지 않을 때: 브라우저 주소창 오른쪽의 팝업 차단 아이콘을 클릭해 '항상 허용'으로 바꾼 뒤 페이지를 새로고침합니다.</p>
+      <div class="card" style="max-width: 900px; padding: 0.8rem 1.4rem;">
+        <p style="font-size: 0.95rem; color: var(--purple-dark); margin: 0; font-weight: 500;">💡 계정 선택 팝업이 나타나지 않을 때: 브라우저 주소창 오른쪽의 팝업 차단 아이콘을 클릭해 '항상 허용'으로 바꾼 뒤 페이지를 새로고침합니다.</p>
       </div>
     </section>
 
     <!-- 4 -->
     <section class="slide">
-      <h2>A.2 Drive RAG 실습</h2>
+      <span class="step-pill">Part A.2 Drive RAG</span>
+      <h2>Drive 사내 복리후생 내규 RAG 질의 실습</h2>
       <p class="subtitle">Drive에 업로드한 문서를 Gemini가 직접 검색합니다. 실습 전 Google Search를 끄고 진행합니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1200px;">
         <div class="card">
-          <h3>📥 실습 준비</h3>
+          <h3>📥 실습 준비 및 질의</h3>
           <ul>
-            <li>공통 내규 PDF를 로컬에 다운로드</li>
-            <li>실습용 Google Drive에 업로드</li>
-            <li>Gemini 대화창에서 Google Search OFF</li>
+            <li>공통 내규 PDF를 다운로드하여 실습 Drive에 업로드</li>
+            <li>Gemini 대화창에서 Google Search OFF 설정</li>
           </ul>
-          <div class="code-box" style="margin-top: 0.8rem; font-size: 0.92rem;">내 드라이브에 있는 "복리후생" 문서를 기반으로 자녀 학자금 지원 한도가 재직 기간에 따라 어떻게 다른지 알려줘</div>
+          <div class="code-box" style="margin-top: 0.6rem; font-size: 0.92rem;">내 드라이브에 있는 "복리후생" 문서를 기반으로 자녀 학자금 지원 한도가 재직 기간에 따라 어떻게 다른지 알려줘</div>
         </div>
         <div class="card green">
           <h3>✅ 결과 확인 포인트</h3>
           <p>답변 하단의 인용 마커를 클릭하면 출처 문서로 바로 이동합니다. 마커가 보이면 Drive에서 직접 검색된 것입니다.</p>
-          <div style="display: flex; gap: 0.6rem; margin-top: 0.6rem; justify-content: center; flex-wrap: wrap;">
-            <img src="./img/image20.webp" alt="검색된 복지 정책 문서 결과" style="height: 80px; border-radius: 8px; border: 1px solid var(--border-color);" onclick="openLightbox(this)">
-            <img src="./img/image24.webp" alt="출처 인용 결과" style="height: 80px; border-radius: 8px; border: 1px solid var(--border-color);" onclick="openLightbox(this)">
+          <div style="display: flex; gap: 0.6rem; margin-top: 0.5rem; justify-content: center; flex-wrap: wrap;">
+            <img src="./img/image20.webp" alt="검색 결과" style="height: 75px; border-radius: 8px;">
+            <img src="./img/image24.webp" alt="인용 마커" style="height: 75px; border-radius: 8px;">
           </div>
         </div>
       </div>
@@ -555,31 +568,32 @@
 
     <!-- 5 -->
     <section class="slide">
-      <h2>A.2 GCS RAG 실습</h2>
-      <p class="subtitle">Google Cloud Storage 버킷에 저장된 데이터를 Gemini가 검색합니다. 어드민이 Vertex AI Search 데이터스토어를 사전에 구성한 경우 진행합니다.</p>
+      <span class="step-pill">Part A.2 GCS RAG</span>
+      <h2>GCS 사설 저장소 RAG 검색 (마케팅 캠페인)</h2>
+      <p class="subtitle">Google Cloud Storage 버킷에 저장된 데이터를 Gemini가 검색합니다. Vertex AI Search 데이터스토어 연동 실습입니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1200px;">
         <div class="card yellow">
           <h3>⚠️ 어드민 사전 설정 필요</h3>
           <ul>
             <li>GCS 버킷 생성 및 샘플 파일 적재 완료</li>
             <li>Vertex AI Search 데이터스토어 생성 및 버킷 연결</li>
-            <li>GCS 커넥터 어드민 콘솔 활성화 완료</li>
-            <li>참가자 계정에 IAM 접근 권한 부여 완료</li>
+            <li>GCS 커넥터 어드민 콘솔 활성화 및 IAM 권한 부여</li>
           </ul>
-          <p style="font-size: 0.95rem; color: #b45309; margin-top: 0.5rem; margin-bottom: 0;">GCS 환경이 없으면 마케팅 내규 PDF를 Drive에 올리고 동일한 방식으로 테스트합니다.</p>
+          <p style="font-size: 0.92rem; color: #b45309; margin-top: 0.4rem; margin-bottom: 0;">GCS 환경이 없으면 마케팅 내규 PDF를 Drive에 올리고 동일 방식으로 테스트합니다.</p>
         </div>
         <div class="card">
           <h3>📋 실습 프롬프트</h3>
           <div class="code-box" style="font-size: 0.9rem;">넥스트 테크놀로지스의 사내 브랜드 앰버서더 참여 요건과 전용 VIP 혜택이 무엇인지 요약해줘</div>
-          <div class="code-box" style="font-size: 0.9rem; margin-top: 0.6rem;">넥스트월드 토크콘서트 개최 일정, 시간, 대강당 위치, 그리고 초청 강사를 정확히 가이드해줘</div>
+          <div class="code-box" style="font-size: 0.9rem; margin-top: 0.4rem;">넥스트월드 토크콘서트 개최 일정, 시간, 대강당 위치, 그리고 초청 강사를 정확히 가이드해줘</div>
         </div>
       </div>
     </section>
 
     <!-- 6 -->
     <section class="slide">
-      <h2>RAG-Ready 문서 작성 3가지 수칙</h2>
-      <p class="subtitle">RAG 검색 정확도는 원본 문서 구조에 직접 영향을 받습니다. 문서를 업로드하기 전에 아래 수칙을 적용하면 오답을 줄일 수 있습니다.</p>
+      <span class="step-pill">Part A 가이드</span>
+      <h2>RAG-Ready 문서 작성 3대 골든 룰</h2>
+      <p class="subtitle">RAG 검색 정확도는 원본 문서 구조에 직접 영향을 받습니다. 문서를 업로드하기 전에 아래 수칙을 적용하면 오답을 획기적으로 줄입니다.</p>
       <div class="grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1200px;">
         <div class="card">
           <h3>📊 이미지에 텍스트 병기</h3>
@@ -598,7 +612,8 @@
 
     <!-- 7 -->
     <section class="slide">
-      <h2>Part B. Custom Agent 개발 파이프라인</h2>
+      <span class="step-pill">Part B. Custom Agent</span>
+      <h2>Part B. High-Code ADK 개발 파이프라인</h2>
       <p class="subtitle">ADK로 에이전트를 작성하고 Cloud Run에 배포한 뒤 Gemini Enterprise 어드민 콘솔에 등록하면, 사용자가 Gemini 대화창에서 바로 호출할 수 있습니다.</p>
       <div style="display: flex; align-items: stretch; gap: 0.5rem; margin-bottom: 1.2rem; max-width: 1150px;">
         <div style="flex: 1; background: var(--purple-light); border: 1px solid #e9d5ff; border-radius: 10px; padding: 0.65rem 0.8rem; text-align: center;">
@@ -626,17 +641,18 @@
         </div>
       </div>
       <div class="card" style="max-width: 900px; padding: 0.8rem 1.4rem;">
-        <p style="font-size: 0.98rem; color: var(--purple-dark); margin: 0; font-weight: 500;">💡 마지막 단계인 Gemini Enterprise 어드민 콘솔 등록은 관리자 권한이 필요합니다. 실습 전 강사 또는 관리자에게 등록 지원 가능 여부를 확인하세요.</p>
+        <p style="font-size: 0.95rem; color: var(--purple-dark); margin: 0; font-weight: 500;">💡 마지막 단계인 Gemini Enterprise 어드민 콘솔 등록은 관리자 권한이 필요합니다. 실습 전 강사 또는 관리자에게 등록 지원 가능 여부를 확인하세요.</p>
       </div>
     </section>
 
     <!-- 8 -->
     <section class="slide">
-      <h2>B.1 에이전트 코드 작성 & Cloud Run 배포</h2>
+      <span class="step-pill">Part B.1 개발 & 배포</span>
+      <h2>Python ADK 에이전트 작성 & Cloud Run 배포</h2>
       <p class="subtitle">ADK로 Python 에이전트를 작성하고 to_a2a()로 A2A 서버로 변환한 뒤, 명령어 한 줄로 Cloud Run에 배포합니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1200px; align-items: start;">
         <div class="card" style="padding: 1.2rem 1.4rem;">
-          <h3 style="margin-bottom: 0.4rem; font-size: 1.1rem;">① + ② Python 코드 예시</h3>
+          <h3 style="margin-bottom: 0.4rem; font-size: 1.05rem;">① + ② Python 코드 예시</h3>
           <pre style="background: #1e293b; border-radius: 8px; padding: 0.75rem 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.6; color: #93c5fd; overflow-x: auto; margin: 0; white-space: pre;">from google.adk.agents import Agent
 from google.adk.a2a.utils import to_a2a
 
@@ -655,36 +671,37 @@ root_agent = Agent(
 app = to_a2a(root_agent)</pre>
         </div>
         <div class="card green" style="padding: 1.2rem 1.4rem;">
-          <h3 style="margin-bottom: 0.4rem; font-size: 1.1rem;">③ Cloud Run 배포</h3>
+          <h3 style="margin-bottom: 0.4rem; font-size: 1.05rem;">③ Cloud Run 배포</h3>
           <div class="code-box" style="font-size: 0.85rem; padding: 0.6rem 0.9rem; margin: 0 0 0.8rem; line-height: 1.6; color: #86efac; border-left-color: var(--google-green); background: #1e293b;">adk deploy cloud_run \<br>&nbsp;&nbsp;--service_name=my-agent \<br>&nbsp;&nbsp;--project $PROJECT \<br>&nbsp;&nbsp;--region $REGION \<br>&nbsp;&nbsp;--a2a my_agent/</div>
-          <p style="font-size: 0.98rem; color: var(--text-muted); margin-bottom: 0;">배포 완료 시 Agent Card가 <code style="font-size: 0.85rem; color: var(--google-green-dark); font-weight: 600;">&lt;Cloud Run URL&gt;/a2a/.well-known/agent-card.json</code> 경로에 자동 게시됩니다.</p>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0;">배포 완료 시 Agent Card가 <code style="font-size: 0.85rem; color: var(--google-green-dark); font-weight: 600;">&lt;Cloud Run URL&gt;/a2a/.well-known/agent-card.json</code> 경로에 자동 게시됩니다.</p>
         </div>
       </div>
     </section>
 
     <!-- 9 -->
     <section class="slide">
-      <h2>B.1 Gemini Enterprise 어드민 등록</h2>
+      <span class="step-pill">Part B.1 어드민 등록</span>
+      <h2>Gemini Enterprise 어드민 등록 & 호출</h2>
       <p class="subtitle">Cloud Run에 배포된 에이전트를 Gemini Enterprise 어드민 콘솔에 등록합니다. 등록이 완료되면 사용자 대화창에서 바로 호출할 수 있습니다.</p>
       <div style="display: flex; gap: 1rem; justify-content: center; align-items: flex-start; flex-wrap: wrap;">
         <figure style="text-align: center;">
-          <img src="./img/customagent-001.webp" alt="Add agent 클릭" style="height: 135px; border-radius: 8px;" onclick="openLightbox(this)">
+          <img src="./img/customagent-001.webp" alt="Add agent 클릭" style="height: 130px; border-radius: 8px;">
           <figcaption style="font-size: 0.74rem; color: var(--text-sub); margin-top: 0.3rem;">① Agents → Add agent</figcaption>
         </figure>
         <figure style="text-align: center;">
-          <img src="./img/customagent-002.webp" alt="Custom agent via A2A 선택" style="height: 135px; border-radius: 8px;" onclick="openLightbox(this)">
+          <img src="./img/customagent-002.webp" alt="Custom agent via A2A 선택" style="height: 130px; border-radius: 8px;">
           <figcaption style="font-size: 0.74rem; color: var(--text-sub); margin-top: 0.3rem;">② Custom agent via A2A</figcaption>
         </figure>
         <figure style="text-align: center;">
-          <img src="./img/customagent-003.webp" alt="Agent Card 입력 및 Preview" style="height: 135px; border-radius: 8px;" onclick="openLightbox(this)">
+          <img src="./img/customagent-003.webp" alt="Agent Card 입력" style="height: 130px; border-radius: 8px;">
           <figcaption style="font-size: 0.74rem; color: var(--text-sub); margin-top: 0.3rem;">③ Agent Card JSON 입력 후 Preview</figcaption>
         </figure>
         <figure style="text-align: center;">
-          <img src="./img/customagent-004.webp" alt="등록 완료 채팅 화면" style="height: 135px; border-radius: 8px;" onclick="openLightbox(this)">
+          <img src="./img/customagent-004.webp" alt="등록 완료" style="height: 130px; border-radius: 8px;">
           <figcaption style="font-size: 0.74rem; color: var(--text-sub); margin-top: 0.3rem;">④ 등록 완료 — 채팅 호출 가능</figcaption>
         </figure>
         <figure style="text-align: center;">
-          <img src="./img/customagent-005.webp" alt="에이전트 실행 결과" style="height: 135px; border-radius: 8px;" onclick="openLightbox(this)">
+          <img src="./img/customagent-005.webp" alt="실행 결과" style="height: 130px; border-radius: 8px;">
           <figcaption style="font-size: 0.74rem; color: var(--text-sub); margin-top: 0.3rem;">⑤ 실행 결과 확인</figcaption>
         </figure>
       </div>
@@ -694,7 +711,7 @@ app = to_a2a(root_agent)</pre>
     <section class="slide">
       <h2>Track 2 Plus 슬라이드 완료</h2>
       <p class="subtitle">Connector 실습과 커스텀 에이전트 개발 안내를 마쳤습니다. Track 3 (Admin Guide) 슬라이드로 이동하여 전사 보안 및 관제 체계를 살펴보세요.</p>
-      <div style="display: flex; gap: 1rem; justify-content: center;">
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
         <a href="slide_track2.html" class="cta-btn" style="background: linear-gradient(135deg, var(--google-blue), #1558b0);">← Track 2 슬라이드로 이동</a>
         <a href="slide_admin.html" class="cta-btn" style="background: linear-gradient(135deg, var(--google-red), #b91c1c);">🔴 Track 3 관리자 슬라이드 &rarr;</a>
       </div>
@@ -703,7 +720,7 @@ app = to_a2a(root_agent)</pre>
 
   <!-- 라이트박스 -->
   <div class="lightbox-modal" id="lightbox" onclick="closeLightbox()">
-    <img class="lightbox-img" id="lightbox-img" src="" alt="확대 이미지">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="확대 이미지">
   </div>
 
   <script>
@@ -743,19 +760,15 @@ app = to_a2a(root_agent)</pre>
     });
 
     const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    function openLightbox(img) {
-      lightboxImg.src = img.src;
-      lightbox.classList.add('active');
-    }
-    function closeLightbox() { lightbox.classList.remove('active'); }
-
-    document.querySelectorAll('.card img, img, .zoomable').forEach(img => {
+    const lightboxImg = document.getElementById('lightboxImg');
+    document.querySelectorAll('.card img, img, figure img').forEach(img => {
       img.addEventListener('click', (e) => {
         e.stopPropagation();
-        openLightbox(img);
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
       });
     });
+    function closeLightbox() { lightbox.classList.remove('active'); }
 
     function toggleFullScreen() {
       if (!document.fullscreenElement) {

@@ -11,6 +11,8 @@
   <style>
     :root {
       --google-blue: #1a73e8;
+      --google-blue-dark: #1558b0;
+      --google-blue-light: #e8f0fe;
       --google-green: #34a853;
       --google-green-dark: #1e7e34;
       --google-green-light: #e6f4ea;
@@ -61,7 +63,7 @@
       left: 0;
       width: 100%;
       height: 60px;
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-color);
       display: flex;
@@ -218,6 +220,17 @@
     }
 
     /* 타이포그래피 */
+    .step-pill {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      background: var(--google-green-light);
+      color: var(--google-green-dark);
+    }
+
     h1 {
       font-family: var(--font-display);
       font-size: 3.2rem;
@@ -232,7 +245,7 @@
       font-family: var(--font-display);
       font-size: 2.1rem;
       font-weight: 800;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       color: var(--text-main);
       letter-spacing: -0.02em;
     }
@@ -304,17 +317,17 @@
       border-radius: 10px;
       padding: 0.9rem 1.2rem;
       font-family: var(--font-mono);
-      font-size: 0.96rem;
+      font-size: 0.95rem;
       color: #f1f5f9;
       text-align: left;
-      margin: 0.6rem 0;
+      margin: 0.5rem 0;
       line-height: 1.55;
       white-space: pre-wrap;
     }
     .card.blue .code-box { border-left-color: var(--google-blue); }
 
     .img-showcase { display: flex; align-items: center; justify-content: center; width: 100%; }
-    .img-showcase img {
+    .img-showcase img, .card img, figure img {
       border-radius: 12px;
       border: 1px solid var(--border-color);
       box-shadow: 0 8px 20px rgba(0,0,0,0.06);
@@ -324,7 +337,7 @@
       cursor: zoom-in;
       transition: transform 0.2s ease;
     }
-    .img-showcase img:hover, .card img:hover, .zoomable:hover {
+    .img-showcase img:hover, .card img:hover, figure img:hover, .zoomable:hover {
       transform: scale(1.02);
       border-color: var(--google-green);
     }
@@ -452,35 +465,36 @@
   <!-- 우측 슬라이드 닷 네비게이션 (23개) -->
   <div class="nav-dots">
     <button class="nav-dot active" onclick="scrollToSlide(0)" title="1. 타이틀"></button>
-    <button class="nav-dot" onclick="scrollToSlide(1)" title="2. pContext 원리"></button>
-    <button class="nav-dot" onclick="scrollToSlide(2)" title="3. 프로필 설정"></button>
-    <button class="nav-dot" onclick="scrollToSlide(3)" title="4. Memory 활성화"></button>
-    <button class="nav-dot" onclick="scrollToSlide(4)" title="5. 프리미엄 세단 분석"></button>
-    <button class="nav-dot" onclick="scrollToSlide(5)" title="6. 출처 검증 & @멘션"></button>
-    <button class="nav-dot" onclick="scrollToSlide(6)" title="7. 다국어 & 표 내보내기"></button>
-    <button class="nav-dot" onclick="scrollToSlide(7)" title="8. 세션 공유"></button>
-    <button class="nav-dot" onclick="scrollToSlide(8)" title="9. EU 전기차 SWOT"></button>
-    <button class="nav-dot" onclick="scrollToSlide(9)" title="10. CES 2026 로보틱스"></button>
-    <button class="nav-dot" onclick="scrollToSlide(10)" title="11. URL 바인딩 질의"></button>
-    <button class="nav-dot" onclick="scrollToSlide(11)" title="12. Nano Banana 포스터"></button>
-    <button class="nav-dot" onclick="scrollToSlide(12)" title="13. 손그림 & 다이어그램"></button>
-    <button class="nav-dot" onclick="scrollToSlide(13)" title="14. Veo 향수 & 버거"></button>
-    <button class="nav-dot" onclick="scrollToSlide(14)" title="15. Veo 드론 & VHS"></button>
-    <button class="nav-dot" onclick="scrollToSlide(15)" title="16. Excel 커피 매출 분석"></button>
-    <button class="nav-dot" onclick="scrollToSlide(16)" title="17. PPTX 장표 분류 표"></button>
-    <button class="nav-dot" onclick="scrollToSlide(17)" title="18. Canvas 슬라이드"></button>
-    <button class="nav-dot" onclick="scrollToSlide(18)" title="19. APE 프레임워크"></button>
-    <button class="nav-dot" onclick="scrollToSlide(19)" title="20. CRAFT 프레임워크"></button>
-    <button class="nav-dot" onclick="scrollToSlide(20)" title="21. CRAFT 범용 템플릿"></button>
-    <button class="nav-dot" onclick="scrollToSlide(21)" title="22. CO-STAR 프레임워크"></button>
-    <button class="nav-dot" onclick="scrollToSlide(22)" title="23. 실습 시작"></button>
+    <button class="nav-dot" onclick="scrollToSlide(1)" title="2. [1.1] pContext 원리"></button>
+    <button class="nav-dot" onclick="scrollToSlide(2)" title="3. [1.1] 프로필 설정"></button>
+    <button class="nav-dot" onclick="scrollToSlide(3)" title="4. [1.1] Memory 활성화"></button>
+    <button class="nav-dot" onclick="scrollToSlide(4)" title="5. [1.2] 시장 트렌드 분석"></button>
+    <button class="nav-dot" onclick="scrollToSlide(5)" title="6. [1.2] 출처 검증 & @멘션"></button>
+    <button class="nav-dot" onclick="scrollToSlide(6)" title="7. [1.2] 번역 & 표 내보내기"></button>
+    <button class="nav-dot" onclick="scrollToSlide(7)" title="8. [1.2] 세션 공유"></button>
+    <button class="nav-dot" onclick="scrollToSlide(8)" title="9. [1.3] EU 전기차 SWOT"></button>
+    <button class="nav-dot" onclick="scrollToSlide(9)" title="10. [1.3] 로보틱스 산업 동향"></button>
+    <button class="nav-dot" onclick="scrollToSlide(10)" title="11. [1.3] URL 바인딩 질의"></button>
+    <button class="nav-dot" onclick="scrollToSlide(11)" title="12. [1.4] Nano Banana 포스터"></button>
+    <button class="nav-dot" onclick="scrollToSlide(12)" title="13. [1.4] Img2Img 다이어그램"></button>
+    <button class="nav-dot" onclick="scrollToSlide(13)" title="14. [1.4] Veo 향수 & 버거"></button>
+    <button class="nav-dot" onclick="scrollToSlide(14)" title="15. [1.4] Veo 드론 & VHS"></button>
+    <button class="nav-dot" onclick="scrollToSlide(15)" title="16. [1.5] Excel 커피 매출 분석"></button>
+    <button class="nav-dot" onclick="scrollToSlide(16)" title="17. [1.6] PPTX 요약 표"></button>
+    <button class="nav-dot" onclick="scrollToSlide(17)" title="18. [1.7] Canvas 슬라이드"></button>
+    <button class="nav-dot" onclick="scrollToSlide(18)" title="19. [1.8] APE 프레임워크"></button>
+    <button class="nav-dot" onclick="scrollToSlide(19)" title="20. [1.8] CRAFT 프레임워크"></button>
+    <button class="nav-dot" onclick="scrollToSlide(20)" title="21. [1.8] CRAFT 표준 템플릿"></button>
+    <button class="nav-dot" onclick="scrollToSlide(21)" title="22. [1.8] CO-STAR 프레임워크"></button>
+    <button class="nav-dot" onclick="scrollToSlide(22)" title="23. 실습 완료 & Track 2 이동"></button>
   </div>
 
   <div class="slide-container" id="container">
     <!-- 1 -->
     <section class="slide">
-      <h1>🟢 Track 1: Day 1 Value<br>기본 기능 및 멀티모달 실습 가이드</h1>
-      <p class="subtitle">별도의 복잡한 개발이나 인프라 연동 없이, 엔드유저 계정에서 웹 브라우저로 즉시 활용할 수 있는 핵심 가치를 다룹니다.<br>AI Assistant 개인화부터 웹 그라운딩, 미디어 생성, 로컬 파일 분석 실습을 단계별로 진행합니다.</p>
+      <span class="step-pill">🟢 Track 1. Day 1 Value</span>
+      <h1>기본 어시스턴트 및 멀티모달 실습</h1>
+      <p class="subtitle">별도의 복잡한 사전 설정이나 코딩 없이, 웹 브라우저에서 즉시 체감 가능한 핵심 기능을 다룹니다.<br>AI Assistant 개인화부터 실시간 웹 그라운딩, 미디어 생성, 로컬 파일 분석까지 8개 세부 단계를 실습합니다.</p>
       <div class="hint">
         <span class="kbd-chip">Space</span> 또는 <span class="kbd-chip">↓</span> 키를 눌러 다음 슬라이드로 이동
       </div>
@@ -488,28 +502,30 @@
 
     <!-- 2 -->
     <section class="slide">
-      <h2>시작하기 (1): 개인화 컨텍스트 (pContext) 개요</h2>
-      <p class="subtitle">Gemini Enterprise는 사용자의 업무 환경을 반영하기 위해 <b>개인화 컨텍스트(pContext)</b> 기능을 제공합니다.<br>최근 30일 내외의 사내 4대 정보를 참조하여 직무와 역할에 맞는 답변을 도출합니다.</p>
+      <span class="step-pill">Step 1.1 시작하기</span>
+      <h2>개인화 컨텍스트 (pContext) 원리</h2>
+      <p class="subtitle">Gemini Enterprise는 사용자의 업무 환경을 정밀하게 반영하기 위해 <b>개인화 컨텍스트(pContext)</b>를 제공합니다.<br>사내 4대 참조 소스를 활용하여 직무와 역할에 최적화된 맞춤형 답변을 도출합니다.</p>
       <div class="grid">
         <div class="card">
           <h3>📌 pContext 4대 참조 소스</h3>
           <ul>
             <li><strong>Workspace & M365</strong>: 캘린더 일정, Gmail 이메일, Drive 문서 참조</li>
-            <li><strong>Knowledge Graph</strong>: 사내 조직도 및 협업 보고 체계 연계</li>
+            <li><strong>Knowledge Graph</strong>: 사내 조직도 및 부서별 보고 체계 연계</li>
             <li><strong>사용자 프로필</strong>: 선호 호칭, 직무 역할, 소속 회사 산업군</li>
-            <li><strong>대화 세션 메모리</strong>: 이전 대화 이력 및 저장된 참조 정보</li>
+            <li><strong>대화 세션 메모리</strong>: 이전 대화 이력 및 저장된 레퍼런스 정보</li>
           </ul>
         </div>
         <div class="card green">
           <h3>💡 실무 적용 시나리오</h3>
-          <p>동일한 질의에 대해서도 마케팅 담당자에게는 카피라이팅 및 시장 동향을, 엔지니어에게는 기술 사양 및 아키텍처 요약으로 맞춤 응답합니다.</p>
+          <p>동일한 질의에 대해서도 마케팅 담당자에게는 카피라이팅 및 시장 소구점을, 엔지니어에게는 기술 스펙 및 아키텍처 요약으로 직무에 맞게 응답합니다.</p>
         </div>
       </div>
     </section>
 
     <!-- 3 -->
     <section class="slide">
-      <h2>시작하기 (2): 개인화 프로필 설정 실습</h2>
+      <span class="step-pill">Step 1.1 시작하기</span>
+      <h2>개인화 프로필 설정 실습</h2>
       <p class="subtitle">좌측 하단의 <b>Settings & help > Personalization</b> 메뉴에서 본인의 직무 및 산업군 정보를 설정합니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: center;">
         <div class="card">
@@ -519,6 +535,7 @@
             <li><strong>내 직무</strong>: 예) `글로벌 브랜드 마케터`</li>
             <li><strong>회사 산업군</strong>: 예) `자동차 및 모빌리티`</li>
           </ul>
+          <p style="margin-top: 0.8rem; font-size: 0.95rem;">설정이 저장되면 이후 모든 질의에서 해당 직무 페르소나가 기본 맥락으로 자동 반영됩니다.</p>
         </div>
         <div class="img-showcase">
           <img src="./img/02.webp" alt="프로필 입력 화면">
@@ -528,23 +545,25 @@
 
     <!-- 4 -->
     <section class="slide">
-      <h2>시작하기 (3): 메모리 및 퀵 메뉴 활성화</h2>
-      <p class="subtitle">이전 대화의 주요 맥락을 유지하기 위해 <b>Conversation history</b>와 <b>Reference saved memories</b>를 활성화합니다.</p>
+      <span class="step-pill">Step 1.1 시작하기</span>
+      <h2>메모리 및 퀵 메뉴 활성화</h2>
+      <p class="subtitle">이전 대화의 주요 맥락을 영구 유지하기 위해 <b>Conversation history</b>와 <b>Reference saved memories</b>를 활성화합니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: center;">
         <div class="card yellow">
           <h3>🧠 세션 메모리 기능</h3>
-          <p>과거 세션에서 공유된 프로젝트 지표(KPI)나 작성 규정(금지어 등)을 모델이 참조하므로, 반복적인 배경 설명 없이 대화를 이어갈 수 있습니다.</p>
+          <p>과거 세션에서 공유된 프로젝트 지표(KPI)나 작성 규정(금지어, 타깃 고객 등)을 모델이 기억하므로, 반복적인 배경 설명 없이 자연스럽게 업무를 이어갑니다.</p>
         </div>
-        <div class="img-showcase" style="flex-direction: column; gap: 12px;">
+        <div class="img-showcase" style="flex-direction: column; gap: 10px;">
           <img src="./img/03.webp" alt="Memory 활성화">
-          <img src="./img/04.webp" alt="퀵 메뉴 옵션" style="max-height: 18vh;">
+          <img src="./img/04.webp" alt="퀵 메뉴 옵션" style="max-height: 16vh;">
         </div>
       </div>
     </section>
 
     <!-- 5 -->
     <section class="slide">
-      <h2>AI Assistant 기본 활용 (1): 시장 트렌드 분석</h2>
+      <span class="step-pill">Step 1.2 AI 어시스턴트 활용</span>
+      <h2>시장 트렌드 분석 질의</h2>
       <p class="subtitle">마케팅 전문가 페르소나를 부여하여 북미 및 유럽 <b>'프리미엄 세단' 트렌드 및 마케팅 소구점</b>을 분석합니다.</p>
       <div class="card" style="max-width: 1100px; width: 100%;">
         <h3>📋 실습 프롬프트 실행</h3>
@@ -557,14 +576,15 @@
 
     <!-- 6 -->
     <section class="slide">
-      <h2>AI Assistant 기본 활용 (2): 출처 검증 & @멘션</h2>
-      <p class="subtitle">생성된 응답 하단의 <b>Source(출처)</b> 링크를 클릭하여 데이터 원본을 검증하고, <b>@멘션</b>으로 도구를 호출합니다.</p>
+      <span class="step-pill">Step 1.2 AI 어시스턴트 활용</span>
+      <h2>출처 검증 & @멘션 도구 호출</h2>
+      <p class="subtitle">생성된 응답 하단의 <b>Source(출처)</b> 링크를 클릭하여 팩트를 검증하고, <b>@멘션</b>으로 도구를 호출합니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: center;">
         <div class="card green">
           <h3>🔍 출처 표시 및 본문 질의</h3>
           <p>답변을 구성하는 데 사용된 보고서 및 기사 링크를 확인할 수 있으며, 본문의 특정 단락을 드래그하여 후속 질의를 이어갑니다.</p>
           <ul>
-            <li><strong>@멘션 호출</strong>: `@Deep Research` 또는 사내 연결 도구를 호출하여 전문 검색을 수행합니다.</li>
+            <li><strong>@멘션 호출</strong>: `@Deep Research` 또는 사내 연결 도구를 호출하여 전문 심층 검색을 수행합니다.</li>
           </ul>
         </div>
         <div class="img-showcase">
@@ -575,8 +595,9 @@
 
     <!-- 7 -->
     <section class="slide">
-      <h2>AI Assistant 기본 활용 (3): 다국어 번역 & 표 내보내기</h2>
-      <p class="subtitle">38개 언어 다국어 번역 기능과 함께 <b>Gmail 초안으로 내보내고, 표 데이터를 로컬 파일로 다운로드</b>합니다.</p>
+      <span class="step-pill">Step 1.2 AI 어시스턴트 활용</span>
+      <h2>다국어 번역 & 표 내보내기 (Export)</h2>
+      <p class="subtitle">38개 언어 다국어 번역 기능과 함께 <b>Gmail 초안으로 내보내고, 표 데이터를 스프레드시트</b>로 다운로드합니다.</p>
       <div class="grid">
         <div class="card blue">
           <h3>📧 Gmail 초안 작성 연계</h3>
@@ -584,41 +605,44 @@
         </div>
         <div class="card">
           <h3>📊 표 데이터 내보내기</h3>
-          <p>비교 분석 표를 엑셀(.xlsx) 또는 CSV 파일로 다운로드하거나, 스프레드시트에 직접 붙여넣을 수 있습니다.</p>
+          <p>비교 분석 표를 엑셀(.xlsx) 또는 CSV 파일로 다운로드하거나, Google Sheets에 직접 붙여넣을 수 있습니다.</p>
         </div>
       </div>
     </section>
 
     <!-- 8 -->
     <section class="slide">
-      <h2>AI Assistant 기본 활용 (4): 대화 세션 공유</h2>
-      <p class="subtitle">대화 세션 우측 상단의 <b>Share(공유)</b> 버튼으로 링크를 생성하여 협업하고, <b>Shared chats</b>에서 접근 권한을 관리합니다.</p>
+      <span class="step-pill">Step 1.2 AI 어시스턴트 활용</span>
+      <h2>대화 세션 공유 및 팀 협업</h2>
+      <p class="subtitle">대화 세션 우측 상단의 <b>Share(공유)</b> 버튼으로 링크를 생성하여 협업하고, <b>Shared chats</b>에서 권한을 관리합니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: center;">
         <div class="card yellow">
           <h3>🤝 컨텍스트 유지 협업</h3>
-          <p>공유 링크를 수신한 사용자도 기존 세션의 문답 맥락을 공유받아 추가 질의를 이어나갈 수 있으며, 생성자는 언제든 공유를 중단할 수 있습니다.</p>
+          <p>공유 링크를 수신한 팀원도 기존 세션의 문답 맥락을 공유받아 추가 질의를 이어나갈 수 있으며, 생성자는 언제든 공유를 중단할 수 있습니다.</p>
         </div>
-        <div class="img-showcase" style="flex-direction: column; gap: 12px;">
-          <img src="./img/09.webp" alt="Share 버튼" style="max-height: 18vh;">
-          <img src="./img/10.webp" alt="공유 링크 복사" style="max-height: 18vh;">
+        <div class="img-showcase" style="flex-direction: column; gap: 10px;">
+          <img src="./img/09.webp" alt="Share 버튼" style="max-height: 16vh;">
+          <img src="./img/10.webp" alt="공유 링크 복사" style="max-height: 16vh;">
         </div>
       </div>
     </section>
 
     <!-- 9 -->
     <section class="slide">
-      <h2>웹 검색 그라운딩 (1): EU 전기차 정책 분석</h2>
+      <span class="step-pill">Step 1.3 실시간 웹 검색</span>
+      <h2>EU 전기차 정책 실시간 SWOT 분석</h2>
       <p class="subtitle">구글 검색 인덱스와 연동하여 <b>EU EV 보조금 변화 및 CBAM 탄소 규제</b>를 검색하고 SWOT 분석 표를 만듭니다.</p>
       <div class="card" style="max-width: 1100px; width: 100%;">
         <h3>📋 실습 프롬프트 실행</h3>
         <div class="code-box">2026년 현재 유럽연합(EU)의 전기차(EV) 보조금 정책 변화와 탄소국경조정제도(CBAM) 관련 최신 글로벌 뉴스를 검색해 줘. 이러한 정책 변화가 한국자동차의 유럽 시장 진출에 미칠 영향을 SWOT(강점, 약점, 기회, 위협) 분석 매트릭스 형태로 시각화해서 정리해 줘.</div>
-        <p style="margin-top: 0.8rem; color: var(--google-green-dark); font-weight: 600;">💡 결과: 실시간 검색된 뉴스 출처가 매핑된 4분면 비교 표가 화면에 나타납니다.</p>
+        <p style="margin-top: 0.6rem; color: var(--google-green-dark); font-weight: 600;">💡 결과: 실시간 검색된 뉴스 출처 링크가 매핑된 4분면 비교 표가 렌더링됩니다.</p>
       </div>
     </section>
 
     <!-- 10 -->
     <section class="slide">
-      <h2>웹 검색 그라운딩 (2): 로보틱스 산업 동향</h2>
+      <span class="step-pill">Step 1.3 실시간 웹 검색</span>
+      <h2>CES 2026 로보틱스 산업 동향 분석</h2>
       <p class="subtitle"><b>CES 2026 피지컬 AI 신기술</b> 발표 내용을 검색하여 글로벌 업체의 기술 트렌드와 마케팅 메시지를 분석합니다.</p>
       <div class="card" style="max-width: 1100px; width: 100%;">
         <h3>📋 실습 프롬프트 실행</h3>
@@ -628,22 +652,24 @@
 
     <!-- 11 -->
     <section class="slide">
-      <h2>웹 검색 그라운딩 (3): URL 바인딩 질의</h2>
+      <span class="step-pill">Step 1.3 실시간 웹 검색</span>
+      <h2>URL 바인딩 기반 직접 파싱 질의</h2>
       <p class="subtitle"><b>특정 웹페이지 URL을 프롬프트 내에 포함하여 해당 페이지의 텍스트 본문을 파싱</b>하고 요약합니다.</p>
       <div class="card" style="max-width: 1100px; width: 100%;">
         <h3>📋 실습 프롬프트 실행</h3>
         <div class="code-box">다음 웹페이지의 내용을 읽고, 핵심 내용을 3줄로 요약한 뒤 우리 사업에 시사하는 바를 설명해줘: https://blog.google/technology/ai/</div>
-        <ul style="margin-top: 1.2rem;">
-          <li><strong>작동 메커니즘</strong>: 대상 URL의 본문 데이터를 읽어와 대화 컨텍스트에 포함하여 질의에 답합니다.</li>
-          <li><strong>적용 범위</strong>: 공개 웹페이지, 보도자료, 기술 블로그 등에 다양하게 활용할 수 있습니다.</li>
+        <ul style="margin-top: 1rem;">
+          <li><strong>작동 메커니즘</strong>: 대상 URL의 본문 데이터를 크롤링하여 대화 컨텍스트에 포함한 뒤 질의에 응답합니다.</li>
+          <li><strong>적용 범위</strong>: 로그인 인증이 필요 없는 공개 웹페이지, 보도자료, 기술 블로그 등에 활용됩니다.</li>
         </ul>
       </div>
     </section>
 
     <!-- 12 -->
     <section class="slide">
-      <h2>미디어 생성 (1): 9:16 비율 이미지 생성</h2>
-      <p class="subtitle"><b>Tools > Create images</b> 도구를 사용하여 <b>Gemini Enterprise 주요 기능을 안내하는 이미지(9:16 비율)</b>를 생성합니다.</p>
+      <span class="step-pill">Step 1.4 미디어 생성</span>
+      <h2>Nano Banana: 9:16 모바일 포스터 생성</h2>
+      <p class="subtitle"><b>Tools > Create images</b> 도구를 사용하여 <b>Gemini Enterprise 주요 기능을 안내하는 모바일 포스터(9:16 비율)</b>를 생성합니다.</p>
       <div class="grid" style="grid-template-columns: 1.1fr 1fr; align-items: center;">
         <div class="card">
           <h3>✍️ 이미지 생성 프롬프트 예시</h3>
@@ -657,7 +683,8 @@
 
     <!-- 13 -->
     <section class="slide">
-      <h2>미디어 생성 (2): 이미지 기반 변환 (Img2Img)</h2>
+      <span class="step-pill">Step 1.4 미디어 생성</span>
+      <h2>스케치 기반 아키텍처 변환 (Img2Img)</h2>
       <p class="subtitle">손으로 그린 스케치 파일(`handwrite_arch.png`)을 <b>클라우드 아키텍처 다이어그램 스타일</b>로 변환합니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: center;">
         <div class="card green">
@@ -672,43 +699,46 @@
 
     <!-- 14 -->
     <section class="slide">
-      <h2>미디어 생성 (3): 비디오 생성 모델 (Veo) - Part A</h2>
-      <p class="subtitle"><b>Veo 비디오 생성 모델</b>을 활용하여 제품 광고 및 클로즈업 1080p 영상을 생성하는 실습입니다.</p>
+      <span class="step-pill">Step 1.4 미디어 생성</span>
+      <h2>Veo 비디오 생성 모델 — Part A (제품 & 식품)</h2>
+      <p class="subtitle"><b>Veo 비디오 생성 모델</b>을 활용하여 제품 광고 및 클로즈업 1080p 고화질 영상을 생성하는 실습입니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1100px;">
-        <div class="card" style="padding: 1.5rem; text-align: center;">
+        <div class="card" style="padding: 1.4rem; text-align: center;">
           <h3 style="justify-content: center;">🍾 제품 연출 비디오</h3>
-          <p style="font-size: 1rem;">대리석 위 물방울과 자연광 조명 클로즈업 돌리 샷</p>
-          <img src="./img/24.webp" alt="향수" style="width: 100%; border-radius: 12px; margin-top: 10px; max-height: 32vh; object-fit: cover;">
+          <p style="font-size: 0.95rem;">대리석 위 물방울과 자연광 조명 클로즈업 돌리 샷</p>
+          <img src="./img/24.webp" alt="향수" style="width: 100%; border-radius: 12px; margin-top: 8px; max-height: 30vh; object-fit: cover;">
         </div>
-        <div class="card" style="padding: 1.5rem; text-align: center;">
+        <div class="card" style="padding: 1.4rem; text-align: center;">
           <h3 style="justify-content: center;">🍔 식품 매크로 비디오</h3>
-          <p style="font-size: 1rem;">녹아내리는 치즈와 김 4K 슬로우 모션 효과</p>
-          <img src="./img/26.webp" alt="버거" style="width: 100%; border-radius: 12px; margin-top: 10px; max-height: 32vh; object-fit: cover;">
+          <p style="font-size: 0.95rem;">녹아내리는 치즈와 김 4K 슬로우 모션 효과</p>
+          <img src="./img/26.webp" alt="버거" style="width: 100%; border-radius: 12px; margin-top: 8px; max-height: 30vh; object-fit: cover;">
         </div>
       </div>
     </section>
 
     <!-- 15 -->
     <section class="slide">
-      <h2>미디어 생성 (4): 비디오 생성 모델 (Veo) - Part B</h2>
+      <span class="step-pill">Step 1.4 미디어 생성</span>
+      <h2>Veo 비디오 생성 모델 — Part B (드론 & 레트로)</h2>
       <p class="subtitle">드론 주행 시점 영상 및 특정 연대(90년대 VHS) 스타일의 필터가 적용된 영상을 생성합니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1100px;">
-        <div class="card" style="padding: 1.5rem; text-align: center;">
+        <div class="card" style="padding: 1.4rem; text-align: center;">
           <h3 style="justify-content: center;">🚁 드론 FPV 시점 영상</h3>
-          <p style="font-size: 1rem;">폭포 아래로 하강하는 빠른 속도감의 드론 촬영 기법</p>
-          <img src="./img/28.webp" alt="드론" style="width: 100%; border-radius: 12px; margin-top: 10px; max-height: 32vh; object-fit: cover;">
+          <p style="font-size: 0.95rem;">폭포 아래로 하강하는 빠른 속도감의 드론 촬영 기법</p>
+          <img src="./img/28.webp" alt="드론" style="width: 100%; border-radius: 12px; margin-top: 8px; max-height: 30vh; object-fit: cover;">
         </div>
-        <div class="card" style="padding: 1.5rem; text-align: center;">
+        <div class="card" style="padding: 1.4rem; text-align: center;">
           <h3 style="justify-content: center;">📼 레트로 스타일 영상</h3>
-          <p style="font-size: 1rem;">색 번짐과 흔들림 효과가 적용된 90년대 캠코더 스타일</p>
-          <img src="./img/30.webp" alt="보드" style="width: 100%; border-radius: 12px; margin-top: 10px; max-height: 32vh; object-fit: cover;">
+          <p style="font-size: 0.95rem;">색 번짐과 흔들림 효과가 적용된 90년대 캠코더 스타일</p>
+          <img src="./img/30.webp" alt="보드" style="width: 100%; border-radius: 12px; margin-top: 8px; max-height: 30vh; object-fit: cover;">
         </div>
       </div>
     </section>
 
     <!-- 16 -->
     <section class="slide">
-      <h2>Excel 로컬 파일 업로드 및 데이터 시각화</h2>
+      <span class="step-pill">Step 1.5 엑셀 파일 분석</span>
+      <h2>Excel 데이터 시각화 & 매출 차트 도출</h2>
       <p class="subtitle">`coffee orders.xlsx` 파일을 첨부하고 <b>월별·일별 매출 추이 선 차트 및 상품 기여도 차트</b>를 그립니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: center;">
         <div class="card">
@@ -723,7 +753,8 @@
 
     <!-- 17 -->
     <section class="slide">
-      <h2>PowerPoint(PPTX) 문서 파싱 및 요약</h2>
+      <span class="step-pill">Step 1.6 PPTX 문서 분석</span>
+      <h2>PowerPoint(PPTX) 슬라이드 구조 요약 표</h2>
       <p class="subtitle">다수의 슬라이드로 구성된 `BigQuery New Feature Update.pptx`를 첨부하여 <b>기능별 GA / Preview 상태를 3열 표로 요약</b>합니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1.2fr; align-items: center;">
         <div class="card blue">
@@ -739,7 +770,8 @@
 
     <!-- 18 -->
     <section class="slide">
-      <h2>Canvas: Google Slides 자동 생성</h2>
+      <span class="step-pill">Step 1.7 Canvas</span>
+      <h2>Google Slides 자동 생성 및 PPTX 내보내기</h2>
       <p class="subtitle">대화 내용으로 <b>GCP 아키텍처 구글 슬라이드를 자동 생성</b>하고, 원하는 스타일을 적용하여 <b>Google Slides 및 PPTX</b>로 내보냅니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1.1fr; max-width: 1200px; align-items: center;">
         <div class="card green">
@@ -755,16 +787,17 @@
           </ul>
         </div>
       </div>
-      <div style="display: flex; justify-content: center; margin-top: 0.8rem;">
+      <div style="display: flex; justify-content: center; margin-top: 0.6rem;">
         <figure style="text-align: center; margin: 0;">
-          <img src="./img/image128.webp" alt="Canvas 슬라이드 생성 결과" class="zoomable" style="height: 130px; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.06); cursor: pointer;">
+          <img src="./img/image128.webp" alt="Canvas 슬라이드 생성 결과" class="zoomable" style="height: 120px; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.06); cursor: pointer;">
         </figure>
       </div>
     </section>
 
     <!-- 19 -->
     <section class="slide">
-      <h2>프롬프트 프레임워크 (1): APE</h2>
+      <span class="step-pill">Step 1.8 프롬프트 프레임워크</span>
+      <h2>APE (단순 질의 및 빠른 요약)</h2>
       <p class="subtitle">복잡성이 요구되지 않는 <b>단순하고 빠른 정보 요약 및 단문 검색</b>에 최적화된 직관적인 3단계 구조입니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1.1fr; max-width: 1200px; align-items: center;">
         <div class="card">
@@ -786,7 +819,8 @@
 
     <!-- 20 -->
     <section class="slide">
-      <h2>프롬프트 프레임워크 (2): CRAFT</h2>
+      <span class="step-pill">Step 1.8 프롬프트 프레임워크</span>
+      <h2>C.R.A.F.T (표준 비즈니스 보고서)</h2>
       <p class="subtitle">프롬프트를 5가지 영역으로 나누어 <b>특정 페르소나를 부여하고 정형화된 비즈니스 보고서</b>를 만드는 표준 프레임워크입니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1.1fr; max-width: 1200px; align-items: center;">
         <div class="card yellow">
@@ -812,8 +846,9 @@
 
     <!-- 21 -->
     <section class="slide">
-      <h2>프롬프트 프레임워크 (3): CRAFT 범용 템플릿</h2>
-      <p class="subtitle">어떤 비즈니스 시나리오에서도 즉시 복사하여 붙여넣고 조립할 수 있는 <b>CRAFT 표준 마크다운 템플릿</b>입니다.</p>
+      <span class="step-pill">Step 1.8 프롬프트 프레임워크</span>
+      <h2>CRAFT 표준 마크다운 템플릿</h2>
+      <p class="subtitle">어떤 비즈니스 시나리오에서도 즉시 복사하여 붙여넣고 조립할 수 있는 <b>CRAFT 표준 구조 템플릿</b>입니다.</p>
       <div class="card" style="max-width: 1100px; width: 100%;">
         <h3>💡 CRAFT 표준 구조 템플릿</h3>
         <div class="code-box" style="font-size: 0.95rem;">[Context]
@@ -836,7 +871,8 @@
 
     <!-- 22 -->
     <section class="slide">
-      <h2>프롬프트 프레임워크 (4): CO-STAR</h2>
+      <span class="step-pill">Step 1.8 프롬프트 프레임워크</span>
+      <h2>CO-STAR (마케팅 & 카피라이팅)</h2>
       <p class="subtitle">마케팅 카피라이팅, 홍보 문구, 콜드 메일 등 <b>스타일과 청중 맞춤 어조를 정밀 제어</b>할 때 사용하는 고도화 기법입니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1.1fr; max-width: 1200px; align-items: center;">
         <div class="card green">
@@ -865,7 +901,7 @@
     <!-- 23 -->
     <section class="slide">
       <h2>Track 1 슬라이드 완료</h2>
-      <p class="subtitle">Track 1 안내를 마쳤습니다. 다음 단계인 Track 2 (Advanced) 슬라이드로 이동하여 사내 데이터 RAG 및 에이전트 실습을 살펴보세요.</p>
+      <p class="subtitle">Track 1 안내를 마쳤습니다. 다음 단계인 Track 2 (Agentic Value) 슬라이드로 이동하여 사내 데이터 RAG 및 에이전트 실습을 살펴보세요.</p>
       <a href="slide_track2.html" class="cta-btn">📺 Track 2 심화 슬라이드로 이동 &rarr;</a>
     </section>
   </div>

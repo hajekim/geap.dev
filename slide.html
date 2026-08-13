@@ -7,7 +7,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --google-blue: #1a73e8;
@@ -33,6 +33,7 @@
 
       --font-display: 'Outfit', 'Noto Sans KR', sans-serif;
       --font-body: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -47,7 +48,6 @@
       word-break: keep-all;
     }
 
-    /* 앰비언트 글로우 배경 */
     .bg-glow {
       position: fixed;
       border-radius: 50%;
@@ -55,20 +55,19 @@
       z-index: 0;
       opacity: 0.16;
       pointer-events: none;
-      transition: all 1s ease;
     }
     .glow-1 { width: 550px; height: 550px; top: -10%; left: -5%; background: radial-gradient(circle, var(--google-blue) 0%, transparent 70%); }
     .glow-2 { width: 500px; height: 500px; bottom: -10%; right: -5%; background: radial-gradient(circle, var(--google-red) 0%, transparent 70%); }
     .glow-3 { width: 450px; height: 450px; top: 40%; left: 50%; transform: translate(-50%, -50%); background: radial-gradient(circle, var(--google-yellow) 0%, transparent 70%); opacity: 0.1; }
 
-    /* 상단 고정 헤더 HUD */
+    /* 상단 HUD 헤더 */
     .pres-header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 60px;
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-color);
       display: flex;
@@ -78,12 +77,7 @@
       z-index: 100;
     }
 
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
+    .header-left { display: flex; align-items: center; gap: 12px; }
     .btn-back-portal {
       display: inline-flex;
       align-items: center;
@@ -132,18 +126,13 @@
     }
     .progress-bar {
       height: 100%;
-      width: 12.5%;
+      width: 11.1%;
       background: linear-gradient(90deg, var(--google-blue), var(--google-green));
       border-radius: 999px;
       transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
+    .header-right { display: flex; align-items: center; gap: 12px; }
     .slide-counter {
       font-family: var(--font-display);
       font-size: 0.92rem;
@@ -153,7 +142,6 @@
       padding: 4px 12px;
       border-radius: 20px;
     }
-
     .btn-ctrl {
       background: transparent;
       border: 1px solid var(--border-color);
@@ -168,10 +156,7 @@
       font-size: 1rem;
       transition: all 0.2s ease;
     }
-    .btn-ctrl:hover {
-      background: #f1f5f9;
-      color: var(--text-main);
-    }
+    .btn-ctrl:hover { background: #f1f5f9; color: var(--text-main); }
 
     /* 슬라이드 컨테이너 */
     .slide-container {
@@ -194,7 +179,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 3rem 4rem;
+      padding: 2.5rem 4.5rem;
       position: relative;
       text-align: center;
       max-height: calc(100vh - 60px);
@@ -212,7 +197,7 @@
       gap: 10px;
       z-index: 10;
       padding: 8px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.75);
       backdrop-filter: blur(8px);
       border-radius: 30px;
       border: 1px solid var(--border-color);
@@ -226,7 +211,6 @@
       transition: all 0.3s ease;
       border: none;
       outline: none;
-      position: relative;
     }
     .nav-dot.active {
       background: var(--google-blue);
@@ -247,22 +231,21 @@
 
     h2 {
       font-family: var(--font-display);
-      font-size: 2.3rem;
+      font-size: 2.2rem;
       font-weight: 800;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem;
       color: var(--text-main);
       letter-spacing: -0.02em;
     }
 
     p.subtitle {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--text-muted);
-      max-width: 860px;
-      line-height: 1.65;
-      margin-bottom: 2rem;
+      max-width: 900px;
+      line-height: 1.6;
+      margin-bottom: 1.8rem;
     }
 
-    /* 구글 4색 닷 애니메이션 */
     .google-dots {
       display: flex;
       gap: 12px;
@@ -284,26 +267,27 @@
       40% { transform: scale(1.25) translateY(-8px); }
     }
 
-    /* 카드 그리드 */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.8rem;
+      gap: 1.6rem;
       width: 100%;
-      max-width: 1200px;
-      margin-top: 0.5rem;
+      max-width: 1240px;
     }
 
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 20px;
-      padding: 2.2rem 2rem;
+      padding: 2rem 1.8rem;
       text-align: left;
       box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.06), 0 4px 6px -2px rgba(15, 23, 42, 0.03);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.25s ease;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .card::before {
@@ -321,48 +305,42 @@
     .card.purple::before { background: var(--purple); }
 
     .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 35px -4px rgba(15, 23, 42, 0.1);
+      transform: translateY(-3px);
+      box-shadow: 0 18px 30px -4px rgba(15, 23, 42, 0.09);
       border-color: #cbd5e1;
     }
 
     .card h3 {
       font-family: var(--font-display);
-      font-size: 1.45rem;
+      font-size: 1.35rem;
       font-weight: 700;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.7rem;
       color: var(--text-main);
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .card p {
       color: var(--text-muted);
-      font-size: 1.05rem;
-      line-height: 1.65;
+      font-size: 1.02rem;
+      line-height: 1.6;
     }
 
-    /* CTA 버튼 */
     .cta-btn {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, var(--google-blue), var(--google-blue-dark));
+      gap: 8px;
       color: #ffffff;
       font-family: var(--font-display);
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 700;
-      padding: 1.1rem 2.6rem;
+      padding: 0.9rem 1.8rem;
       border-radius: 50px;
       text-decoration: none;
-      box-shadow: 0 10px 25px rgba(26, 115, 232, 0.35);
       transition: all 0.25s ease;
     }
-    .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(26, 115, 232, 0.45);
-    }
+    .cta-btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
 
     .hint {
       position: absolute;
@@ -382,7 +360,6 @@
       font-size: 0.85rem;
     }
 
-    /* 플로팅 내비게이션 화살표 */
     .float-nav-btn {
       position: fixed;
       bottom: 24px;
@@ -401,11 +378,7 @@
       z-index: 50;
       transition: all 0.2s ease;
     }
-    .float-nav-btn:hover {
-      background: var(--google-blue-light);
-      color: var(--google-blue);
-      transform: scale(1.08);
-    }
+    .float-nav-btn:hover { background: var(--google-blue-light); color: var(--google-blue); transform: scale(1.08); }
     .float-nav-prev { left: 24px; }
     .float-nav-next { right: 70px; }
 
@@ -464,7 +437,7 @@
       </div>
     </div>
     <div class="header-right">
-      <span class="slide-counter" id="slideCounter">01 / 08</span>
+      <span class="slide-counter" id="slideCounter">01 / 09</span>
       <button class="btn-ctrl" onclick="toggleFullScreen()" title="전체화면 (F)">⛶</button>
     </div>
   </header>
@@ -473,16 +446,17 @@
   <button class="float-nav-btn float-nav-prev" onclick="prevSlide()" title="이전 슬라이드 (←)">←</button>
   <button class="float-nav-btn float-nav-next" onclick="nextSlide()" title="다음 슬라이드 (→)">→</button>
 
-  <!-- 우측 슬라이드 닷 네비게이션 (8개) -->
+  <!-- 우측 슬라이드 닷 네비게이션 (9개) -->
   <div class="nav-dots">
     <button class="nav-dot active" onclick="scrollToSlide(0)" title="1. 키노트 타이틀"></button>
     <button class="nav-dot" onclick="scrollToSlide(1)" title="2. 생성형 AI 아키텍처"></button>
-    <button class="nav-dot" onclick="scrollToSlide(2)" title="3. 3대 실습 트랙"></button>
+    <button class="nav-dot" onclick="scrollToSlide(2)" title="3. 4대 맞춤 실습 트랙"></button>
     <button class="nav-dot" onclick="scrollToSlide(3)" title="4. Track 1 Day 1 Value"></button>
-    <button class="nav-dot" onclick="scrollToSlide(4)" title="5. Track 2 Advanced"></button>
-    <button class="nav-dot" onclick="scrollToSlide(5)" title="6. 프롬프트 프레임워크"></button>
-    <button class="nav-dot" onclick="scrollToSlide(6)" title="7. 워크플로우 자동화"></button>
-    <button class="nav-dot" onclick="scrollToSlide(7)" title="8. 실습 시작"></button>
+    <button class="nav-dot" onclick="scrollToSlide(4)" title="5. Track 2 Agentic Value"></button>
+    <button class="nav-dot" onclick="scrollToSlide(5)" title="6. Track 2+ & Track 3"></button>
+    <button class="nav-dot" onclick="scrollToSlide(6)" title="7. 프롬프트 프레임워크"></button>
+    <button class="nav-dot" onclick="scrollToSlide(7)" title="8. 엔터프라이즈 AI 로드맵"></button>
+    <button class="nav-dot" onclick="scrollToSlide(8)" title="9. 실습 시작 및 트랙 선택"></button>
   </div>
 
   <div class="slide-container" id="container">
@@ -492,7 +466,7 @@
         <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
       </div>
       <h1>Google Gemini Enterprise<br>핸즈온 워크숍 오프닝 키노트</h1>
-      <p class="subtitle">Google Workspace 및 Cloud 인프라 기반으로 엔터프라이즈 환경에 최적화된 생성형 AI의 기능과 거버넌스를 이해하고, 실무에 적용할 수 있는 단계별 실습을 제공합니다.</p>
+      <p class="subtitle">Google Workspace 및 Google Cloud 인프라를 기반으로 엔터프라이즈 환경에 최적화된 생성형 AI의 핵심 기능과 거버넌스를 이해하고, 실무에 즉시 적용하는 4대 트랙 핸즈온을 진행합니다.</p>
       <div class="hint">
         <span class="kbd-chip">Space</span> 또는 <span class="kbd-chip">↓</span> 키를 눌러 다음 슬라이드로 이동
       </div>
@@ -501,35 +475,39 @@
     <!-- Slide 2: 아키텍처 개요 -->
     <section class="slide">
       <h2>1. 엔터프라이즈 생성형 AI 아키텍처</h2>
-      <p class="subtitle">Gemini Enterprise는 기업 데이터 주권과 보안 요건을 완벽히 준수하며, 사내 업무 파이프라인과 안전하게 통합됩니다.</p>
+      <p class="subtitle">Gemini Enterprise는 기업 데이터 주권과 보안 요건을 완벽히 준수하며, 사내 업무 도구와 안전하게 통합됩니다.</p>
       <div class="grid">
         <div class="card blue">
           <h3>📌 사내 데이터 보호 및 격리</h3>
-          <p>사용자 질의 및 입력 데이터는 모델 학습에 절대 사용되지 않으며, 고객 데이터 보호 경계(VPC) 내에서만 안전하게 격리 처리됩니다.</p>
+          <p>사용자 질의 및 입력 데이터는 모델 재학습에 절대 사용되지 않으며, 고객 데이터 보호 경계(VPC Service Controls) 내에서 안전하게 격리 처리됩니다.</p>
         </div>
         <div class="card green">
           <h3>⚡ 기존 업무 도구와의 유기적 연동</h3>
-          <p>Google Workspace(Drive, Gmail 등) 및 Microsoft 365 데이터와 실시간 연계하여 권한(ACL) 기반 문서 검색 및 업무 시나리오를 수행합니다.</p>
+          <p>Google Workspace(Drive, Gmail 등) 및 Microsoft 365 데이터와 실시간 연계하여 권한(ACL) 기반의 안전한 문서 검색 및 업무 자동화를 수행합니다.</p>
         </div>
       </div>
     </section>
 
-    <!-- Slide 3: 3대 맞춤 트랙 -->
+    <!-- Slide 3: 4대 맞춤 트랙 -->
     <section class="slide">
-      <h2>2. 역할별 수준 맞춤형 실습 트랙</h2>
-      <p class="subtitle">참석자의 직무 역할(End User, Power User, IT/Security Admin)에 맞춘 체계적인 실습 과정을 안내합니다.</p>
-      <div class="grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1200px;">
+      <h2>2. 역할별 4대 실습 트랙 매트릭스</h2>
+      <p class="subtitle">참석자의 직무 역할(일반 임직원, 기획자, 개발자, IT/보안 관리자)에 맞춰 설계된 체계적인 실습 여정을 안내합니다.</p>
+      <div class="grid" style="grid-template-columns: repeat(4, 1fr); max-width: 1280px; gap: 1.2rem;">
         <div class="card green">
-          <h3>🟢 Track 1. Day 1 Value</h3>
-          <p><strong>대상: 전사 임직원 및 입문자</strong><br>설치 없이 AI 어시스턴트, 미디어 생성, 문서/표 분석 등 즉시 체감 가능한 핵심 실무 가치를 체험합니다.</p>
+          <h3 style="font-size: 1.2rem;">🟢 Track 1</h3>
+          <p><strong>Day 1 Value</strong><br>전사 임직원 대상<br>설치 없이 브라우저에서 즉시 체감하는 기본 AI 어시스턴트, 미디어 생성, 데이터 시각화 실습</p>
         </div>
         <div class="card blue">
-          <h3>🔵 Track 2. Agentic Value</h3>
-          <p><strong>대상: 파워 유저, 기획 혁신 리더</strong><br>Gemini Notebook 도서관, Deep Research, 그리고 노코드 에이전트 디자이너 워크플로우를 구축합니다.</p>
+          <h3 style="font-size: 1.2rem;">🔵 Track 2</h3>
+          <p><strong>Agentic Value</strong><br>기획자 및 파워유저<br>팀 도서관 소스 기반 콘텐츠 자동 생성, Deep Research 심층 탐색, 노코드 에이전트 구축</p>
+        </div>
+        <div class="card purple">
+          <h3 style="font-size: 1.2rem;">🟣 Track 2 Plus</h3>
+          <p><strong>Pro Code</strong><br>개발자 및 엔지니어<br>Drive/GCS 사내 RAG 연동, Google ADK 프레임워크 기반 Python 커스텀 에이전트 개발 및 Cloud Run 배포</p>
         </div>
         <div class="card red">
-          <h3>🔴 Track 3. Admin & Security</h3>
-          <p><strong>대상: IT 관리자, CISO, 경영진</strong><br>GCP 프로젝트 격리, IAM/WIF 권한 설정, Model Armor 인라인 보안, BigQuery 감사 관제 및 ROI 분석을 수행합니다.</p>
+          <h3 style="font-size: 1.2rem;">🔴 Track 3</h3>
+          <p><strong>Admin & Security</strong><br>IT 관리자 및 CISO<br>GCP 프로젝트 격리, Model Armor 인라인 보안 방화벽, BigQuery SIEM 감사 로그 관제 및 ROI 분석</p>
         </div>
       </div>
     </section>
@@ -537,80 +515,109 @@
     <!-- Slide 4: Track 1 상세 -->
     <section class="slide">
       <h2>3. Track 1: Day 1 Value 주요 내용</h2>
-      <p class="subtitle">생성형 AI를 업무 파트너로 활용하여 문서 초안 작성, 멀티모달 데이터 분석, 정보 요약에 드는 시간을 획기적으로 절감합니다.</p>
+      <p class="subtitle">별도의 설정 없이 웹 브라우저에서 즉시 활용하여 문서 작성과 데이터 분석 시간을 획기적으로 절감합니다.</p>
       <div class="grid">
-        <div class="card blue">
-          <h3>✨ 개인화 컨텍스트 (pContext)</h3>
-          <p>사용자의 선호 호칭, 직무, 사내 조직 및 업무 이력을 참조하여 직무 역할에 최적화된 맥락 기반 맞춤형 답변을 생성합니다.</p>
-        </div>
         <div class="card green">
-          <h3>📊 멀티모달 분석 및 출처 검증</h3>
-          <p>엑셀(.xlsx) 및 파워포인트(.pptx) 구조를 파싱하여 표와 차트로 도출하며, 답변에 인용된 웹 및 사내 문서의 출처 링크를 투명하게 검증합니다.</p>
+          <h3>✨ 개인화 컨텍스트 (pContext)</h3>
+          <p>사용자의 직무, 산업군, 협업 조직 및 이전 대화 메모리를 참조하여 개인에게 최적화된 맥락 기반 맞춤형 답변을 생성합니다.</p>
+        </div>
+        <div class="card blue">
+          <h3>📊 멀티모달 파일 분석 & Canvas</h3>
+          <p>엑셀(.xlsx) 매출 추이 차트 생성, 파워포인트(.pptx) 요약 표 작성, 그리고 대화 내용으로 구글 슬라이드를 자동 디자인하여 내보냅니다.</p>
         </div>
       </div>
     </section>
 
     <!-- Slide 5: Track 2 상세 -->
     <section class="slide">
-      <h2>4. Track 2: Advanced 주요 내용</h2>
-      <p class="subtitle">사내 데이터 저장소 연동(RAG)과 맞춤형 에이전트 설정을 통해 단계별 비즈니스 워크플로우를 구성합니다.</p>
+      <h2>4. Track 2: Agentic Value 주요 내용</h2>
+      <p class="subtitle">사내 지식 도서관 연동과 맞춤형 에이전트 설정을 통해 단계별 비즈니스 워크플로우를 구성합니다.</p>
       <div class="grid">
         <div class="card blue">
-          <h3>📚 Gemini Notebook & Deep Research</h3>
-          <p>지정된 문서 내에서만 답변을 도출하는 100% 인용 기반 리서치 도서관을 구성하고, 다단계 탐색 마스터 보고서를 생성합니다.</p>
+          <h3>📚 Gemini Notebook 도서관 (5종 생성)</h3>
+          <p>지정된 문서(Gemini, Workspace, Cloud 소스 3종) 기반으로 인포그래픽, 팟캐스트 오디오, 시네마틱 슬라이드, 리포트 3종, 튜토리얼 비디오를 자동 완성합니다.</p>
         </div>
         <div class="card yellow">
-          <h3>🛠️ 에이전트 빌더 (Agent Designer)</h3>
-          <p>자연어 대화와 사내 데이터 소스를 결합하여 부서별 요구사항에 부합하는 업무 특화 맞춤형 AI 에이전트를 조립합니다.</p>
+          <h3>🛠️ Deep Research & Agent Designer</h3>
+          <p>최대 160회 다단계 자율 리서치 보고서를 생성하고, 노코드 Flow Builder로 시장 분석 및 업무 자동화 에이전트를 조립합니다.</p>
         </div>
       </div>
     </section>
 
-    <!-- Slide 6: 프롬프트 프레임워크 -->
+    <!-- Slide 6: Track 2+ & Track 3 상세 -->
     <section class="slide">
-      <h2>5. 업무 목적별 프롬프트 프레임워크</h2>
-      <p class="subtitle">일관되고 신뢰할 수 있는 고품질 출력 결과를 도출하기 위해 표준화된 프롬프트 작성 가이드라인을 활용합니다.</p>
+      <h2>5. Track 2 Plus & Track 3 심화 내용</h2>
+      <p class="subtitle">개발자를 위한 커스텀 마이크로서비스 확장과 IT 관리자를 위한 전사 거버넌스 체계를 다룹니다.</p>
+      <div class="grid">
+        <div class="card purple">
+          <h3>🟣 Track 2 Plus: ADK & Cloud Run</h3>
+          <p>Python 기반 Google ADK로 비즈니스 로직을 구현하고, to_a2a() 표준 변환을 거쳐 Cloud Run에 원클릭 배포 후 Gemini Enterprise 에이전트로 등록합니다.</p>
+        </div>
+        <div class="card red">
+          <h3>🔴 Track 3: Model Armor & SIEM 관제</h3>
+          <p>개인식별정보(PII) 유출 차단 및 프롬프트 인젝션을 방어하는 Model Armor 7대 테스트를 검증하고, BigQuery로 실시간 RAG 감사 로그를 분석합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 7: 프롬프트 프레임워크 -->
+    <section class="slide">
+      <h2>6. 업무 목적별 프롬프트 프레임워크 3종</h2>
+      <p class="subtitle">상황과 목적에 따라 가장 적합한 구조화 프레임워크를 선택하여 일관되고 정확한 출력 결과를 도출합니다.</p>
       <div class="grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1200px;">
         <div class="card blue">
           <h3>⚡ APE (단순 질의)</h3>
-          <p><strong>Action · Purpose · Expectation</strong><br>간단한 정보 요약 및 빠른 팩트 검색에 활용되는 신속한 3단계 기본 구조</p>
+          <p><strong>Action · Purpose · Expectation</strong><br>빠른 정보 요약과 사실 검색에 최적화된 직관적인 3단계 기본 구조</p>
         </div>
         <div class="card yellow">
           <h3>🏆 C.R.A.F.T (표준 보고서)</h3>
-          <p><strong>Context · Role · Action · Format · Tone</strong><br>기획서, 제안서, 공식 메일 등 형식과 톤 제어가 필요한 엔터프라이즈 표준</p>
+          <p><strong>Context · Role · Action · Format · Tone</strong><br>기획서, 제안서, 공식 메일 등 형식과 톤 제어가 필요한 비즈니스 표준</p>
         </div>
         <div class="card green">
           <h3>🎨 CO-STAR (마케팅)</h3>
-          <p><strong>Context · Objective · Style · Tone · Audience · Response</strong><br>고객 타겟팅 및 브랜드 어조 제어가 중요한 마케팅 카피라이팅에 최적화</p>
+          <p><strong>Context · Objective · Style · Tone · Audience · Response</strong><br>고객 타겟팅 및 브랜드 어조 제어가 중요한 카피라이팅에 최적화</p>
         </div>
       </div>
     </section>
 
-    <!-- Slide 7: 차세대 워크플로우 비전 -->
+    <!-- Slide 8: 엔터프라이즈 AI 성숙도 로드맵 -->
     <section class="slide">
-      <h2>6. 차세대 워크플로우 자동화 아키텍처</h2>
-      <p class="subtitle">단일 문답을 넘어 복합적인 단계별 심사 및 승인 프로세스를 자동화하는 업무 파이프라인 구성 방안입니다.</p>
-      <div class="grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1200px;">
-        <div class="card blue">
-          <h3>⚡ 워크플로우 에이전트</h3>
-          <p><strong>Price & Margin 실습</strong><br>할인율 심사, 마진율 조건 대조, 결재 승인 메일 발송 단계로 이어지는 조건부 분기 워크플로우를 구현합니다.</p>
+      <h2>7. 엔터프라이즈 생성형 AI 성숙도 로드맵</h2>
+      <p class="subtitle">단순한 질의응답 보조에서 시작하여 전사 자율 워크플로우와 거버넌스로 발전하는 4단계 도입 여정입니다.</p>
+      <div style="display: flex; gap: 1rem; align-items: stretch; justify-content: center; max-width: 1200px; width: 100%;">
+        <div class="card green" style="flex: 1; padding: 1.5rem; text-align: center;">
+          <div style="font-size: 1.6rem; margin-bottom: 0.3rem;">1️⃣</div>
+          <h3 style="justify-content: center; font-size: 1.15rem;">개인 어시스턴트</h3>
+          <p style="font-size: 0.9rem;">초안 작성, 번역, 표 분석, 미디어 생성 등 일상 업무 30% 시간 절감</p>
         </div>
-        <div class="card green">
-          <h3>🏛️ 멀티 에이전트 조율</h3>
-          <p><strong>ADK / CAA 통합</strong><br>RAG 검색, 데이터 분석 등 개별 특화 에이전트들을 오케스트레이터가 순차 또는 병렬로 호출하여 과제를 처리합니다.</p>
+        <div class="card blue" style="flex: 1; padding: 1.5rem; text-align: center;">
+          <div style="font-size: 1.6rem; margin-bottom: 0.3rem;">2️⃣</div>
+          <h3 style="justify-content: center; font-size: 1.15rem;">팀 지식 도서관</h3>
+          <p style="font-size: 0.9rem;">Gemini Notebook 소스 그라운딩 기반 다형태 콘텐츠 자동 생성</p>
         </div>
-        <div class="card purple">
-          <h3>🎨 노코드 에이전트 빌더</h3>
-          <p><strong>Agent Designer</strong><br>개발 코딩 없이 웹 인터페이스에서 프롬프트 명령어와 사내 소스 매핑을 통해 에이전트를 생성합니다.</p>
+        <div class="card purple" style="flex: 1; padding: 1.5rem; text-align: center;">
+          <div style="font-size: 1.6rem; margin-bottom: 0.3rem;">3️⃣</div>
+          <h3 style="justify-content: center; font-size: 1.15rem;">자율 워크플로우</h3>
+          <p style="font-size: 0.9rem;">Agent Designer 및 ADK를 활용한 부서별 특화 다단계 에이전트 조율</p>
+        </div>
+        <div class="card red" style="flex: 1; padding: 1.5rem; text-align: center;">
+          <div style="font-size: 1.6rem; margin-bottom: 0.3rem;">4️⃣</div>
+          <h3 style="justify-content: center; font-size: 1.15rem;">전사 거버넌스</h3>
+          <p style="font-size: 0.9rem;">Model Armor 보안 방화벽, BigQuery 감사 관제, 체계적 ROI 입증</p>
         </div>
       </div>
     </section>
 
-    <!-- Slide 8: 맺음말 -->
+    <!-- Slide 9: 맺음말 & 트랙 선택 -->
     <section class="slide">
-      <h2>7. 워크숍 실습 시작</h2>
-      <p class="subtitle">오프닝 키노트 안내를 마쳤습니다. 다음 단계인 Track 1 (Day 1 Value) 슬라이드로 이동하여 1단계 실습 안내를 시작합니다.</p>
-      <a href="slide_track1.html" class="cta-btn">📺 Track 1 슬라이드로 이동하기 &rarr;</a>
+      <h2>8. 워크숍 실습 시작</h2>
+      <p class="subtitle">오프닝 키노트를 마쳤습니다. 참석하신 직무에 맞춰 아래 트랙 슬라이드로 이동하여 본격적인 실습을 시작하세요.</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 0.5rem;">
+        <a href="slide_track1.html" class="cta-btn" style="background: linear-gradient(135deg, var(--google-green), var(--google-green-dark));">🟢 Track 1: Day 1 Value &rarr;</a>
+        <a href="slide_track2.html" class="cta-btn" style="background: linear-gradient(135deg, var(--google-blue), var(--google-blue-dark));">🔵 Track 2: Agentic Value &rarr;</a>
+        <a href="slide_track2plus.html" class="cta-btn" style="background: linear-gradient(135deg, var(--purple), #6b21a8);">🟣 Track 2 Plus: Pro Code &rarr;</a>
+        <a href="slide_admin.html" class="cta-btn" style="background: linear-gradient(135deg, var(--google-red), var(--google-red-dark));">🔴 Track 3: Admin Guide &rarr;</a>
+      </div>
     </section>
   </div>
 
@@ -699,7 +706,6 @@
       }
     });
 
-    // 터치 스와이프 지원
     let touchStartY = 0;
     container.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
     container.addEventListener('touchend', e => {
