@@ -470,21 +470,42 @@
       font-weight: 700;
       text-decoration: none;
       transition: all 0.15s ease;
+      background: #f1f5f9;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+    .btn-download:hover {
+      background: #e2e8f0;
+      transform: translateY(-1px);
     }
     .btn-download.excel {
       background: #107c41;
       color: #ffffff;
+      border-color: #107c41;
     }
     .btn-download.excel:hover {
       background: #0d6334;
+      border-color: #0d6334;
       transform: translateY(-1px);
     }
     .btn-download.pptx {
       background: #c43e1c;
       color: #ffffff;
+      border-color: #c43e1c;
     }
     .btn-download.pptx:hover {
       background: #a33215;
+      border-color: #a33215;
+      transform: translateY(-1px);
+    }
+    .btn-download.image, .btn-download.png {
+      background: #1a73e8;
+      color: #ffffff;
+      border-color: #1a73e8;
+    }
+    .btn-download.image:hover, .btn-download.png:hover {
+      background: #1557b0;
+      border-color: #1557b0;
       transform: translateY(-1px);
     }
 
@@ -1117,7 +1138,7 @@
             <span>📑</span>
             <span>BigQuery 업데이트.pptx</span>
           </a>
-          <a href="samples/handwrite_arch.png" download="handwrite_arch.png" class="btn-download">
+          <a href="samples/handwrite_arch.png" download="handwrite_arch.png" class="btn-download image">
             <span>📐</span>
             <span>handwrite_arch.png</span>
           </a>
