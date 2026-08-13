@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Gemini Enterprise — 오프닝 키노트 & 로드맵</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-green: #1e8e3e;
+      --primary-green-dark: #137333;
+      --primary-green-light: #e6f4ea;
+      --google-blue: #1a73e8;
+      --google-blue-dark: #1557b0;
+      --google-blue-light: #e8f0fe;
+      --google-yellow: #ea8600;
+      --google-yellow-light: #fef7e0;
+      --google-red: #d93025;
+      --google-red-light: #fce8e6;
+      --purple: #7c3aed;
+      --purple-light: #f3e8ff;
+
+      --bg-canvas: #0f172a;
+      --stage-bg: #ffffff;
+      --stage-subtle: #f8fafc;
+      --border-color: #e2e8f0;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-tertiary: #64748b;
+
+      --font-heading: 'Outfit', 'Noto Sans KR', sans-serif;
+      --font-body: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      word-break: keep-all;
+      user-select: none;
+    }
+
+    /* 16:9 프레젠테이션 스테이지 컨테이너 */
+    .presentation-app {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* 상단 컨트롤 바 */
+    .top-control-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 52px;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+    }
+
+    .brand-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-portal-exit {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      transition: all 0.2s ease;
+    }
+    .btn-portal-exit:hover {
+      background: var(--google-blue);
+      color: #ffffff;
+    }
+
+    .track-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      background: rgba(26, 115, 232, 0.2);
+      color: #93c5fd;
+      border: 1px solid rgba(26, 115, 232, 0.4);
+    }
+
+    .stage-progress {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .progress-bar-bg {
+      width: 280px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 11.11%;
+      background: linear-gradient(90deg, #1a73e8, #34a853);
+      border-radius: 999px;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide-page-badge {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-top-next-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #1e8e3e, #137333);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 20px;
+      box-shadow: 0 4px 14px rgba(30, 142, 62, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      opacity: 0;
+      transform: scale(0.85);
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-top-next-track.visible {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+    .btn-top-next-track:hover {
+      background: var(--primary-green-dark);
+      box-shadow: 0 6px 18px rgba(30, 142, 62, 0.6);
+      transform: scale(1.05);
+    }
+
+    .btn-icon-ctrl {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+    .btn-icon-ctrl:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    /* 16:9 와이드스크린 캔버스 스테이지 */
+    .stage-wrapper {
+      width: 95vw;
+      max-width: 1540px;
+      aspect-ratio: 16 / 9;
+      max-height: calc(100vh - 80px);
+      background: var(--stage-bg);
+      border-radius: 20px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+    }
+
+    /* 개별 슬라이드 (가로 전환 / 페이드) */
+    .slide-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 1.8rem 3.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      transform: translateX(30px);
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide-canvas.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    /* 슬라이드 상단 헤더 */
+    .slide-header {
+      text-align: left;
+      margin-bottom: 0.7rem;
+      flex-shrink: 0;
+    }
+    .act-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: var(--google-blue-light);
+      color: var(--google-blue);
+      margin-bottom: 0.25rem;
+    }
+    .slide-title-text {
+      font-family: var(--font-heading);
+      font-size: 2.15rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      margin-bottom: 0.2rem;
+    }
+    .slide-desc-text {
+      font-size: 1.16rem;
+      color: var(--text-secondary);
+      line-height: 1.48;
+    }
+
+    /* 슬라이드 바디 영역 */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      min-height: 0;
+    }
+
+    /* 2열 스플릿 레이아웃 */
+    .layout-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      width: 100%;
+      height: 100%;
+      align-items: stretch;
+      text-align: left;
+    }
+
+    /* 2x2 매트릭스 레이아웃 */
+    .layout-matrix-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      width: 100%;
+      height: 100%;
+      justify-content: space-between;
+    }
+    .layout-matrix-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 0.9rem;
+      flex: 1;
+    }
+
+    /* 3열 다이어그램 레이아웃 */
+    .layout-triad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+      width: 100%;
+      height: 100%;
+      align-items: stretch;
+      text-align: left;
+    }
+
+    /* 4열 매트릭스 레이아웃 */
+    .layout-quad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.1rem;
+      width: 100%;
+      height: 100%;
+      align-items: stretch;
+      text-align: left;
+    }
+
+    /* 하단 통합 결과 배너 공통 스타일 */
+    .fusion-banner {
+      background: linear-gradient(135deg, #f0fdf4, #e8f0fe);
+      border: 1px solid #bbf7d0;
+      border-radius: 12px;
+      padding: 0.6rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+    .fusion-banner-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #14532d;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .fusion-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .fusion-pill-item {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* 비즈니스 카드 스타일 */
+    .biz-card {
+      background: var(--stage-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      position: relative;
+    }
+
+    .biz-card.highlight {
+      background: #ffffff;
+      border-color: #bbf7d0;
+      box-shadow: 0 8px 20px -4px rgba(30, 142, 62, 0.08);
+    }
+    .biz-card.highlight.blue {
+      border-color: #bfdbfe;
+      box-shadow: 0 8px 20px -4px rgba(26, 115, 232, 0.08);
+    }
+    .biz-card.highlight.purple {
+      border-color: #e9d5ff;
+      box-shadow: 0 8px 20px -4px rgba(124, 58, 237, 0.08);
+    }
+    .biz-card.highlight.red {
+      border-color: #fecaca;
+      box-shadow: 0 8px 20px -4px rgba(217, 48, 37, 0.08);
+    }
+
+    .biz-card.highlight::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--primary-green);
+      border-radius: 14px 14px 0 0;
+    }
+    .biz-card.highlight.blue::before { background: var(--google-blue); }
+    .biz-card.highlight.purple::before { background: var(--purple); }
+    .biz-card.highlight.red::before { background: var(--google-red); }
+
+    .card-head {
+      font-family: var(--font-heading);
+      font-size: 1.28rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-para {
+      font-size: 1.10rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 0.4rem;
+    }
+
+    /* 하단 발표자 프롬프터 서랍 */
+    .prompter-drawer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #1e293b;
+      color: #f1f5f9;
+      padding: 0.8rem 2rem;
+      border-top: 1px solid #334155;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      z-index: 50;
+    }
+    .prompter-drawer.open {
+      transform: translateY(0);
+    }
+    .prompter-label {
+      font-weight: 700;
+      color: #86efac;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    /* 좌우 내비게이션 화살표 */
+    .stage-nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      cursor: pointer;
+      z-index: 20;
+      transition: all 0.2s ease;
+    }
+    .stage-nav-arrow:hover {
+      background: var(--google-blue-light);
+      color: var(--google-blue);
+      border-color: #bfdbfe;
+      transform: translateY(-50%) scale(1.08);
+    }
+    .nav-arrow-left { left: 16px; }
+    .nav-arrow-right { right: 16px; }
+  </style>
+</head>
+<body>
+  <div class="presentation-app">
+    <!-- 상단 컨트롤 바 -->
+    <header class="top-control-bar">
+      <div class="brand-meta">
+        <a href="index.html" class="btn-portal-exit">← 포털 홈</a>
+        <span class="track-indicator">🎯 오프닝 키노트 & 로드맵</span>
+      </div>
+      <div class="stage-progress">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+        <span class="slide-page-badge" id="slidePageBadge">01 / 09</span>
+      </div>
+      <div class="top-actions">
+        <a href="slide_track1_v2.html" class="btn-top-next-track" id="topNextTrackBtn" title="Track 1 슬라이드로 이동">🟢 Track 1 이동 &rarr;</a>
+        <button class="btn-icon-ctrl" onclick="togglePrompter()" title="강사 해설 노트 (N)">💬</button>
+        <button class="btn-icon-ctrl" onclick="toggleFullScreen()" title="전체화면 (F)">⛶</button>
+      </div>
+    </header>
+
+    <!-- 16:9 와이드스크린 스테이지 -->
+    <main class="stage-wrapper" id="stageWrapper">
+      <!-- 좌우 내비게이션 화살표 -->
+      <button class="stage-nav-arrow nav-arrow-left" onclick="prevSlide()" title="이전 (←)">‹</button>
+      <button class="stage-nav-arrow nav-arrow-right" onclick="nextSlide()" title="다음 (→)">›</button>
+
+      <!-- Slide 01: 키노트 타이틀 & 아젠다 로드맵 -->
+      <section class="slide-canvas active" data-prompter="오프닝 브리핑: 구글 제미나이 엔터프라이즈의 보안 격리 원리와 전사 4대 실습 트랙의 구조를 소개합니다." style="padding: 2.6rem 4rem 2rem; justify-content: space-between;">
+        <div style="text-align: center; margin: auto 0 1.8rem;">
+          <div style="display: inline-block; margin-bottom: 0.7rem;">
+            <span class="act-tag" style="font-size: 0.95rem; padding: 5px 16px; border-radius: 20px;">🎯 Google Gemini Enterprise Keynote</span>
+          </div>
+          <h1 class="slide-title-text" style="font-size: 3.2rem; margin: 0.3rem 0 0.8rem; font-weight: 900; letter-spacing: -0.03em; line-height: 1.2;">
+            엔터프라이즈 생성형 AI 아키텍처 & 4대 실습 트랙
+          </h1>
+          <p class="slide-desc-text" style="max-width: 960px; margin: 0 auto; font-size: 1.28rem; color: #475569; line-height: 1.6;">
+            Google Workspace 및 Google Cloud 인프라를 기반으로 보안 요건을 완벽히 준수하며,<br>
+            일반 임직원부터 전문 개발자, IT 관리자까지 아우르는 맞춤형 실무 핸즈온을 진행합니다.
+          </p>
+        </div>
+
+        <div style="width: 100%; margin-top: auto;">
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; width: 100%;">
+            <div class="biz-card highlight" style="text-align: left; padding: 1.3rem 1.4rem;">
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--primary-green-dark); margin-bottom: 4px;">🟢 Track 1</div>
+              <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">Day 1 Value</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">전사 임직원 대상 · 브라우저 기반 AI 어시스턴트 & 멀티모달 실무</p>
+            </div>
+            <div class="biz-card highlight blue" style="text-align: left; padding: 1.3rem 1.4rem;">
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--google-blue); margin-bottom: 4px;">🔵 Track 2</div>
+              <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">Agentic Value</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">기획자 & 파워유저 · Notebook 소스 RAG & 노코드 에이전트 구축</p>
+            </div>
+            <div class="biz-card highlight purple" style="text-align: left; padding: 1.3rem 1.4rem;">
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--purple); margin-bottom: 4px;">🟣 Track 2 Plus</div>
+              <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">Pro Code ADK</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">개발자 & 엔지니어 · 사내 RAG 연동 & Python Google ADK 2.0</p>
+            </div>
+            <div class="biz-card highlight red" style="text-align: left; padding: 1.3rem 1.4rem;">
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--google-red); margin-bottom: 4px;">🔴 Track 3</div>
+              <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">Admin & Security</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">IT 관리자 & 보안팀 · Model Armor 보안 방화벽 & FinOps ROI</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 02: 엔터프라이즈 AI 보안 아키텍처 -->
+      <section class="slide-canvas" data-prompter="강사 멘트: 고객의 모든 데이터는 VPC Service Controls 경계 내에 격리되며, 모델 재학습에 절대 사용되지 않는 기업 데이터 주권 원칙을 강조합니다.">
+        <div class="slide-header">
+          <span class="act-tag">Architecture</span>
+          <h2 class="slide-title-text">엔터프라이즈 생성형 AI 아키텍처 & 데이터 주권</h2>
+          <p class="slide-desc-text">기업 데이터의 완벽한 격리 보호와 사내 업무 도구와의 안전한 접근 제어(ACL)를 보장합니다.</p>
+        </div>
+        <div class="slide-body">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div class="layout-split" style="flex: 1;">
+              <div class="biz-card highlight blue">
+                <div class="card-head">🛡️ 사내 데이터 보호 및 절대 격리</div>
+                <p class="card-para">사용자 질의 및 입력 데이터는 기반 모델의 재학습(Training)에 절대 활용되지 않으며, 고객 전용 테넌트 경계 내에서 암호화 처리됩니다.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">VPC Service Controls</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">고객 관리 암호화 키(CMEK)</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">HIPAA / ISO 27001 준수</span>
+                </div>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">⚡ 권한(ACL) 기반 업무 도구 연동</div>
+                <p class="card-para">Google Workspace(Gmail, Drive) 및 Microsoft 365 데이터와 실시간 연동되어, 사용자가 실제 접근 권한을 가진 문서에 대해서만 정확하게 답변을 생성합니다.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">실시간 권한(ACL) 상속</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">WIF 기반 SSO 연동</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Cloud Audit Logs 전수 기록</span>
+                </div>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">⚡ 엔터프라이즈 보안 원칙</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">🔒 재학습 배제 보장</div>
+                <div class="fusion-pill-item">🔑 세분화된 접근 권한 준수</div>
+                <div class="fusion-pill-item">📊 투명한 감사 로그 추적</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 03: 4대 맞춤 트랙 매트릭스 -->
+      <section class="slide-canvas" data-prompter="강사 멘트: 참석자의 직무와 기술 수준에 맞추어 4개의 독립된 트랙으로 실습이 진행됨을 안내합니다.">
+        <div class="slide-header">
+          <span class="act-tag">Tracks Matrix</span>
+          <h2 class="slide-title-text">역할별 4대 실습 트랙 매트릭스</h2>
+          <p class="slide-desc-text">비즈니스 실무자부터 시스템 아키텍트까지 최적화된 맞춤형 학습 경로를 제공합니다.</p>
+        </div>
+        <div class="slide-body">
+          <div class="layout-quad">
+            <div class="biz-card highlight">
+              <div class="card-head">🟢 Track 1</div>
+              <div style="font-weight: 700; font-size: 1.12rem; color: var(--primary-green-dark);">Day 1 Value</div>
+              <p class="card-para">설치 없이 브라우저에서 즉시 체감하는 기본 AI 어시스턴트, Veo/Nano Banana 미디어 생성 및 Excel/PPTX 파일 분석</p>
+              <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 5px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                👥 전사 모든 임직원
+              </div>
+            </div>
+            <div class="biz-card highlight blue">
+              <div class="card-head">🔵 Track 2</div>
+              <div style="font-weight: 700; font-size: 1.12rem; color: var(--google-blue);">Agentic Value</div>
+              <p class="card-para">Gemini Notebook 도서관 5종 콘텐츠 자동 생성, Deep Research 심층 조사, Agent Designer 노코드 에이전트 구축</p>
+              <div style="margin-top: auto; font-size: 0.92rem; color: #1e40af; background: #eff6ff; padding: 5px 10px; border-radius: 8px; border: 1px solid #bfdbfe;">
+                👥 기획자 & 파워유저
+              </div>
+            </div>
+            <div class="biz-card highlight purple">
+              <div class="card-head">🟣 Track 2 Plus</div>
+              <div style="font-weight: 700; font-size: 1.12rem; color: var(--purple);">Pro Code ADK</div>
+              <p class="card-para">Google Drive 및 GCS 사내 RAG 연동, Google ADK 2.0 파이썬 에이전트 개발, Cloud Run 배포 및 A2A 등록</p>
+              <div style="margin-top: auto; font-size: 0.92rem; color: #6b21a8; background: #faf5ff; padding: 5px 10px; border-radius: 8px; border: 1px solid #e9d5ff;">
+                👥 개발자 & 엔지니어
+              </div>
+            </div>
+            <div class="biz-card highlight red">
+              <div class="card-head">🔴 Track 3</div>
+              <div style="font-weight: 700; font-size: 1.12rem; color: var(--google-red);">Admin & Security</div>
+              <p class="card-para">GCP 테넌트 구성, Model Armor 7대 인라인 보안 검증, BigQuery SIEM 감사 로그 관제 및 ROI 분석</p>
+              <div style="margin-top: auto; font-size: 0.92rem; color: #991b1b; background: #fef2f2; padding: 5px 10px; border-radius: 8px; border: 1px solid #fecaca;">
+                👥 IT 관리자 & CISO
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 04: Track 1 주요 가치 브리핑 -->
+      <section class="slide-canvas" data-prompter="강사 멘트: Track 1은 로그인 즉시 체감하는 개인화 컨텍스트와 멀티모달 창작 역량을 배양합니다.">
+        <div class="slide-header">
+          <span class="act-tag">Track 1 Deep Dive</span>
+          <h2 class="slide-title-text">Track 1: Day 1 Value — 개인화 & 멀티모달 실무</h2>
+          <p class="slide-desc-text">별도의 환경 설정 없이 웹 브라우저에서 문서 작성과 데이터 분석 시간을 즉시 단축합니다.</p>
+        </div>
+        <div class="slide-body">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div class="layout-split" style="flex: 1;">
+              <div class="biz-card highlight">
+                <div class="card-head">✨ 개인화 컨텍스트 (pContext) & 실시간 웹</div>
+                <p class="card-para">사용자의 직무, 산업군, 세션 메모리를 결합하여 질문 배경을 일일이 설명할 필요 없이 맞춤형 답변을 도출하며, 실시간 구글 검색 인덱싱으로 출처를 검증합니다.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">직무 페르소나 설정</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">실시간 Source 검증</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">URL 바인딩 요약</span>
+                </div>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">📊 멀티모달 창작 & 업무 파일 시각화</div>
+                <p class="card-para">Nano Banana 이미지 및 Veo 1080p 시네마틱 영상 제작을 실습하고, Excel 매출 차트 및 PPTX 요약 표, Canvas 슬라이드 자동 생성을 실행합니다.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">9:16 모바일 포스터</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Veo 1080p 시네마틱</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Canvas Google Slides</span>
+                </div>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">🟢 실무 효과</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">⏱️ 일상적인 문서 작성 시간 50% 단축</div>
+                <div class="fusion-pill-item">📈 데이터 시각화 차트 즉시 도출</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 05: Track 2 주요 가치 브리핑 -->
+      <section class="slide-canvas" data-prompter="강사 멘트: Track 2는 팀 도서관 그라운딩을 통해 환각을 없애고 노코드로 자율 에이전트를 조립하는 실습입니다.">
+        <div class="slide-header">
+          <span class="act-tag">Track 2 Deep Dive</span>
+          <h2 class="slide-title-text">Track 2: Agentic Value — 지식 도서관 & 노코드 에이전트</h2>
+          <p class="slide-desc-text">사내 지식 문서를 바인딩하여 5종 멀티모달 콘텐츠를 자동 생성하고 노코드 에이전트를 구축합니다.</p>
+        </div>
+        <div class="slide-body">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div class="layout-split" style="flex: 1;">
+              <div class="biz-card highlight blue">
+                <div class="card-head">📚 Gemini Notebook Enterprise 도서관</div>
+                <p class="card-para">업로드 파일, Google Drive, 유튜브 소스 3종을 그라운딩하여 인포그래픽, 팟캐스트 오디오, 시네마틱 슬라이드, 리포트, 튜토리얼 비디오 5종을 자동 완성합니다.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">오디오 팟캐스트 개요</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">인포그래픽 3종 스타일</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">시네마틱 발표 슬라이드</span>
+                </div>
+              </div>
+              <div class="biz-card highlight blue">
+                <div class="card-head">🛠️ Deep Research & Agent Designer</div>
+                <p class="card-para">웹 전반을 최대 수십 회 심층 추론하는 리서치 보고서를 생성하고, 코딩 없이 CRAFT 코치 에이전트 및 소셜 미디어 멀티 에이전트를 조립합니다.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">다단계 자율 리서치</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">CRAFT 코치 에이전트</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">소셜 미디어 멀티 에이전트</span>
+                </div>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">🔵 실무 효과</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">🎧 100페이지 사내 문서를 5분 팟캐스트로 요약</div>
+                <div class="fusion-pill-item">🤖 노코드 자율 에이전트 즉시 현업 배포</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 06: Track 2+ & Track 3 심화 내용 -->
+      <section class="slide-canvas" data-prompter="강사 멘트: 엔지니어와 IT 관리자를 위한 커스텀 ADK 마이크로서비스 확장과 Model Armor 거버넌스 체계를 소개합니다.">
+        <div class="slide-header">
+          <span class="act-tag">Advanced & Governance</span>
+          <h2 class="slide-title-text">Track 2 Plus & Track 3: 개발자 ADK & 전사 거버넌스</h2>
+          <p class="slide-desc-text">하이브리드 커넥터 RAG, Google ADK 2.0 멀티 에이전트 개발 및 Model Armor 보안 방화벽을 다룹니다.</p>
+        </div>
+        <div class="slide-body">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div class="layout-split" style="flex: 1;">
+              <div class="biz-card highlight purple">
+                <div class="card-head">🟣 Track 2 Plus: Google ADK 2.0</div>
+                <p class="card-para">Google Drive 및 GCS 저장소 RAG 연동을 바탕으로, Python 기반 Google ADK 프레임워크로 비즈니스 로직을 구현하고 Cloud Run에 마이크로서비스로 배포합니다.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Drive & GCS RAG 탐색</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Google ADK 2.0 그래프</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Cloud Run & A2A 등록</span>
+                </div>
+              </div>
+              <div class="biz-card highlight red">
+                <div class="card-head">🔴 Track 3: Model Armor & FinOps</div>
+                <p class="card-para">악성 URL, PII 유출, 프롬프트 인젝션을 인라인으로 차단하는 7대 보안 테스트를 수행하고, BigQuery 감사 로그 분석과 Chrome 옴니바 ROI를 산출합니다.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Model Armor 7대 보안 검증</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">BigQuery SIEM 감사 로그</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Chrome 주소창 옴니바 연동</span>
+                </div>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">⚡ 확장 & 보안 시너지</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">💻 고도화된 커스텀 에이전트 확장</div>
+                <div class="fusion-pill-item">🛡️ 인라인 보안 필터로 기업 리스크 0%화</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 07: 3대 프롬프트 프레임워크 매트릭스 -->
+      <section class="slide-canvas" data-prompter="강사 멘트: 실무 질의 목적에 따라 APE(속도), CRAFT(보고서), CO-STAR(마케팅)를 선택하는 기준을 설명합니다.">
+        <div class="slide-header">
+          <span class="act-tag">Frameworks</span>
+          <h2 class="slide-title-text">업무 목적별 3대 프롬프트 프레임워크</h2>
+          <p class="slide-desc-text">상황과 목적에 따라 가장 적합한 구조화 프레임워크를 선택하여 일관되고 정확한 출력 결과를 도출합니다.</p>
+        </div>
+        <div class="slide-body">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div class="layout-triad" style="flex: 1;">
+              <div class="biz-card highlight">
+                <div class="card-head">⚡ APE (단순 질의 & 요약)</div>
+                <p class="card-para">Action · Purpose · Expectation<br>빠른 정보 요약과 사실 추출에 최적화된 직관적인 3단계 기본 구조</p>
+                <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                  ⏱️ 30초 내 신속 작성 · 회의 브리핑
+                </div>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">🏆 C.R.A.F.T (비즈니스 보고서)</div>
+                <p class="card-para">Context · Role · Action · Format · Tone<br>기획서, 제안서, 공식 메일 등 형식과 톤 제어가 필요한 비즈니스 표준</p>
+                <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                  📑 2분 내 정형화 작성 · 임원 보고
+                </div>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">🎨 CO-STAR (마케팅 & 대외)</div>
+                <p class="card-para">Context · Objective · Style · Tone · Audience · Response<br>고객 타깃팅 및 브랜드 어조 제어가 중요한 카피라이팅에 최적화</p>
+                <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                  🎯 3분 내 정밀 타깃팅 · B2B 영업 메일
+                </div>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">💡 선택 가이드</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">빠른 사실 확인은 APE</div>
+                <div class="fusion-pill-item">임원 보고서는 CRAFT</div>
+                <div class="fusion-pill-item">고객 제안은 CO-STAR</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 08: 엔터프라이즈 AI 성숙도 4단계 로드맵 -->
+      <section class="slide-canvas" data-prompter="강사 멘트: 단순 어시스턴트에서 시작하여 자율 멀티 에이전트와 전사 거버넌스로 진화하는 기업 AI 성숙도 4단계를 설명합니다.">
+        <div class="slide-header">
+          <span class="act-tag">Maturity Journey</span>
+          <h2 class="slide-title-text">엔터프라이즈 생성형 AI 성숙도 로드맵 (4단계)</h2>
+          <p class="slide-desc-text">개인 생산성 향상에서 출발하여 전사 자율 워크플로우와 거버넌스로 확장하는 로드맵입니다.</p>
+        </div>
+        <div class="slide-body">
+          <div class="layout-quad">
+            <div class="biz-card highlight">
+              <div style="font-size: 1.8rem; margin-bottom: 2px;">1️⃣</div>
+              <div class="card-head" style="color: var(--primary-green-dark);">개인 어시스턴트</div>
+              <p class="card-para">초안 작성, 번역, 표 분석, 미디어 생성 등 일상 업무 30% 시간 절감</p>
+              <div style="margin-top: auto; font-size: 0.9rem; color: #475569; background: #f8fafc; padding: 4px 8px; border-radius: 6px;">
+                🟢 Track 1 영역
+              </div>
+            </div>
+            <div class="biz-card highlight blue">
+              <div style="font-size: 1.8rem; margin-bottom: 2px;">2️⃣</div>
+              <div class="card-head" style="color: var(--google-blue);">팀 지식 도서관</div>
+              <p class="card-para">Gemini Notebook 소스 그라운딩 기반 5종 멀티모달 콘텐츠 자동 완성</p>
+              <div style="margin-top: auto; font-size: 0.9rem; color: #475569; background: #f8fafc; padding: 4px 8px; border-radius: 6px;">
+                🔵 Track 2 영역
+              </div>
+            </div>
+            <div class="biz-card highlight purple">
+              <div style="font-size: 1.8rem; margin-bottom: 2px;">3️⃣</div>
+              <div class="card-head" style="color: var(--purple);">자율 워크플로우</div>
+              <p class="card-para">Google ADK 2.0 기반 멀티 에이전트 협업 및 Cloud Run 마이크로서비스 연동</p>
+              <div style="margin-top: auto; font-size: 0.9rem; color: #475569; background: #f8fafc; padding: 4px 8px; border-radius: 6px;">
+                🟣 Track 2 Plus 영역
+              </div>
+            </div>
+            <div class="biz-card highlight red">
+              <div style="font-size: 1.8rem; margin-bottom: 2px;">4️⃣</div>
+              <div class="card-head" style="color: var(--google-red);">전사 거버넌스</div>
+              <p class="card-para">Model Armor 보안 방화벽, BigQuery SIEM 관제 및 전사 ROI 가치 실현</p>
+              <div style="margin-top: auto; font-size: 0.9rem; color: #475569; background: #f8fafc; padding: 4px 8px; border-radius: 6px;">
+                🔴 Track 3 영역
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 09: 실습 시작 & 트랙 런치패드 -->
+      <section class="slide-canvas" data-prompter="클로징: 키노트를 마치고 본인의 역할에 맞는 실습 트랙 슬라이드로 이동하여 본격적인 워크숍을 시작합니다.">
+        <div class="slide-header" style="text-align: center; margin-bottom: 0.7rem;">
+          <h2 class="slide-title-text" style="font-size: 2.5rem;">워크숍 시작: 맞춤 트랙 선택</h2>
+          <p class="slide-desc-text">본인의 직무와 실습 목표에 맞춰 원하는 트랙의 프레젠테이션으로 이동하세요.</p>
+        </div>
+        <div class="slide-body">
+          <div class="layout-quad" style="max-width: 1320px; margin: 0 auto; width: 100%;">
+            <div class="biz-card highlight" style="text-align: left; padding: 1.2rem;">
+              <div style="font-size: 1.8rem;">🟢</div>
+              <div style="font-weight: 800; font-size: 1.15rem; color: var(--primary-green-dark); margin: 4px 0;">Track 1. Day 1 Value</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">AI 어시스턴트, 미디어 생성, Excel/PPTX 파일 분석</p>
+              <a href="slide_track1_v2.html" class="btn-portal-exit" style="background: var(--primary-green); color: #ffffff; padding: 6px 14px; font-size: 0.9rem; border-radius: 20px; text-align: center; justify-content: center; margin-top: auto;">
+                Track 1 시작 &rarr;
+              </a>
+            </div>
+            <div class="biz-card highlight blue" style="text-align: left; padding: 1.2rem;">
+              <div style="font-size: 1.8rem;">🔵</div>
+              <div style="font-weight: 800; font-size: 1.15rem; color: var(--google-blue); margin: 4px 0;">Track 2. Agentic Value</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">Gemini Notebook 5종 생성, Deep Research, 노코드 에이전트</p>
+              <a href="slide_track2_v2.html" class="btn-portal-exit" style="background: var(--google-blue); color: #ffffff; padding: 6px 14px; font-size: 0.9rem; border-radius: 20px; text-align: center; justify-content: center; margin-top: auto;">
+                Track 2 시작 &rarr;
+              </a>
+            </div>
+            <div class="biz-card highlight purple" style="text-align: left; padding: 1.2rem;">
+              <div style="font-size: 1.8rem;">🟣</div>
+              <div style="font-weight: 800; font-size: 1.15rem; color: var(--purple); margin: 4px 0;">Track 2 Plus. Pro Code</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">사내 RAG 연동, Google ADK 2.0 개발, Cloud Run 배포</p>
+              <a href="slide_track2plus_v2.html" class="btn-portal-exit" style="background: var(--purple); color: #ffffff; padding: 6px 14px; font-size: 0.9rem; border-radius: 20px; text-align: center; justify-content: center; margin-top: auto;">
+                Track 2+ 시작 &rarr;
+              </a>
+            </div>
+            <div class="biz-card highlight red" style="text-align: left; padding: 1.2rem;">
+              <div style="font-size: 1.8rem;">🔴</div>
+              <div style="font-weight: 800; font-size: 1.15rem; color: var(--google-red); margin: 4px 0;">Track 3. Admin & Security</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">Model Armor 보안 방화벽, BigQuery 감사 로그, FinOps ROI</p>
+              <a href="slide_admin_v2.html" class="btn-portal-exit" style="background: var(--google-red); color: #ffffff; padding: 6px 14px; font-size: 0.9rem; border-radius: 20px; text-align: center; justify-content: center; margin-top: auto;">
+                Track 3 시작 &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="fusion-banner" style="margin-top: auto;">
+          <div class="fusion-banner-title">🎯 오프닝 키노트 세션 완료</div>
+          <div class="fusion-pills">
+            <div class="fusion-pill-item">📌 상단 버튼 또는 각 카드의 시작 버튼을 클릭하여 트랙별 실습으로 진입하세요.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 하단 강사 해설 프로프터 서랍 -->
+      <div class="prompter-drawer" id="prompterDrawer">
+        <div style="display: flex; align-items: center;">
+          <span class="prompter-label">💬 강사 해설 가이드:</span>
+          <span id="prompterText">오프닝 브리핑: 구글 제미나이 엔터프라이즈의 보안 격리 원리와 전사 4대 실습 트랙의 구조를 소개합니다.</span>
+        </div>
+        <button class="btn-icon-ctrl" onclick="togglePrompter()" style="height: 28px; width: 28px; font-size: 0.75rem;">✕</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide-canvas');
+    const totalSlides = slides.length;
+    const progressFill = document.getElementById('progressFill');
+    const slidePageBadge = document.getElementById('slidePageBadge');
+    const prompterDrawer = document.getElementById('prompterDrawer');
+    const prompterText = document.getElementById('prompterText');
+    const topNextTrackBtn = document.getElementById('topNextTrackBtn');
+
+    function updateSlideStage(idx) {
+      if (idx < 0 || idx >= totalSlides) return;
+      slides.forEach((s, i) => {
+        s.classList.toggle('active', i === idx);
+      });
+      currentSlide = idx;
+
+      // 상단 진행률 갱신
+      const pct = ((currentSlide + 1) / totalSlides) * 100;
+      progressFill.style.width = pct + '%';
+      slidePageBadge.innerText = String(currentSlide + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
+
+      // 마지막 슬라이드 도달 시 상단 Track 1 이동 버튼 동적 활성화
+      if (topNextTrackBtn) {
+        if (currentSlide === totalSlides - 1) {
+          topNextTrackBtn.classList.add('visible');
+        } else {
+          topNextTrackBtn.classList.remove('visible');
+        }
+      }
+
+      // 프롬프터 텍스트 갱신
+      const pText = slides[currentSlide].getAttribute('data-prompter') || '강사 해설 포인트가 지정되지 않았습니다.';
+      prompterText.innerText = pText;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        updateSlideStage(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        updateSlideStage(currentSlide - 1);
+      }
+    }
+
+    function togglePrompter() {
+      prompterDrawer.classList.toggle('open');
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    // 키보드 내비게이션
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        updateSlideStage(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        updateSlideStage(totalSlides - 1);
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+      } else if (e.key === 'n' || e.key === 'N') {
+        togglePrompter();
+      }
+    });
+
+    // 스와이프 제스처
+    let touchStartX = 0;
+    const stageWrapper = document.getElementById('stageWrapper');
+    stageWrapper.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    stageWrapper.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    }, { passive: true });
+
+    updateSlideStage(0);
+  </script>
+</body>
+</html>

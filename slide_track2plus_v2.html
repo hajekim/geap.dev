@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track 2 Plus: Pro Code — Connector RAG & Google ADK 2.0</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟣</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-purple: #7c3aed;
+      --primary-purple-dark: #6b21a8;
+      --primary-purple-light: #f3e8ff;
+      --primary-purple-border: #e9d5ff;
+      --primary-blue: #1a73e8;
+      --primary-green: #1e8e3e;
+      --google-yellow: #ea8600;
+      --google-red: #d93025;
+
+      --bg-canvas: #0f172a;
+      --stage-bg: #ffffff;
+      --stage-subtle: #f8fafc;
+      --border-color: #e2e8f0;
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-tertiary: #64748b;
+
+      --font-heading: 'Outfit', 'Noto Sans KR', sans-serif;
+      --font-body: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      word-break: keep-all;
+      user-select: none;
+    }
+
+    .presentation-app {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* 상단 컨트롤 바 */
+    .top-control-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 52px;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+    }
+
+    .brand-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-portal-exit {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      transition: all 0.2s ease;
+    }
+    .btn-portal-exit:hover {
+      background: var(--primary-purple);
+      color: #ffffff;
+    }
+
+    .track-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      background: rgba(124, 58, 237, 0.2);
+      color: #d8b4fe;
+      border: 1px solid rgba(124, 58, 237, 0.4);
+    }
+
+    .stage-progress {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .progress-bar-bg {
+      width: 280px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 10%;
+      background: linear-gradient(90deg, #7c3aed, #a855f7);
+      border-radius: 999px;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide-page-badge {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-top-next-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #d93025, #b91c1c);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 20px;
+      box-shadow: 0 4px 14px rgba(217, 48, 37, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      opacity: 0;
+      transform: scale(0.85);
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-top-next-track.visible {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+    .btn-top-next-track:hover {
+      background: #b91c1c;
+      box-shadow: 0 6px 18px rgba(217, 48, 37, 0.6);
+      transform: scale(1.05);
+    }
+
+    .btn-icon-ctrl {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+    .btn-icon-ctrl:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    /* 16:9 와이드스크린 캔버스 스테이지 */
+    .stage-wrapper {
+      width: 95vw;
+      max-width: 1540px;
+      aspect-ratio: 16 / 9;
+      max-height: calc(100vh - 80px);
+      background: var(--stage-bg);
+      border-radius: 20px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .slide-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 1.8rem 3.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      transform: translateX(30px);
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide-canvas.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    .slide-header {
+      text-align: left;
+      margin-bottom: 0.7rem;
+      flex-shrink: 0;
+    }
+    .act-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: var(--primary-purple-light);
+      color: var(--primary-purple);
+      margin-bottom: 0.25rem;
+    }
+    .slide-title-text {
+      font-family: var(--font-heading);
+      font-size: 2.15rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      margin-bottom: 0.2rem;
+    }
+    .slide-desc-text {
+      font-size: 1.16rem;
+      color: var(--text-secondary);
+      line-height: 1.48;
+    }
+
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      min-height: 0;
+    }
+
+    .layout-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      width: 100%;
+      height: 100%;
+      align-items: stretch;
+      text-align: left;
+    }
+
+    .layout-triad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+      width: 100%;
+      height: 100%;
+      align-items: stretch;
+      text-align: left;
+    }
+
+    .layout-quad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.1rem;
+      width: 100%;
+      height: 100%;
+      align-items: stretch;
+      text-align: left;
+    }
+
+    /* 하단 통합 결과 배너 */
+    .fusion-banner {
+      background: linear-gradient(135deg, #faf5ff, #f8fafc);
+      border: 1px solid #e9d5ff;
+      border-radius: 12px;
+      padding: 0.6rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+    .fusion-banner-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #581c87;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .fusion-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .fusion-pill-item {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* 카드 스타일 */
+    .biz-card {
+      background: var(--stage-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      position: relative;
+    }
+
+    .biz-card.highlight {
+      background: #ffffff;
+      border-color: #e9d5ff;
+      box-shadow: 0 8px 20px -4px rgba(124, 58, 237, 0.08);
+    }
+    .biz-card.highlight::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--primary-purple);
+      border-radius: 14px 14px 0 0;
+    }
+
+    .card-head {
+      font-family: var(--font-heading);
+      font-size: 1.28rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-para {
+      font-size: 1.10rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 0.4rem;
+    }
+
+    .prompt-box {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 0.9rem 1.1rem;
+      margin-top: 0.3rem;
+      position: relative;
+    }
+    .prompt-box-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    .prompt-chip {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary-purple-dark);
+      background: var(--primary-purple-light);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: var(--font-code);
+    }
+    .btn-copy-prompt {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+    .btn-copy-prompt:hover {
+      background: var(--primary-purple-light);
+      color: var(--primary-purple-dark);
+      border-color: var(--primary-purple-border);
+    }
+    .prompt-code {
+      font-family: var(--font-code);
+      font-size: 1.05rem;
+      color: #0f172a;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* 이미지 쇼케이스 프레임 */
+    .image-stage-frame {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      cursor: zoom-in;
+    }
+    .image-stage-frame img {
+      max-height: 36vh;
+      max-width: 100%;
+      border-radius: 8px;
+      object-fit: contain;
+      transition: transform 0.25s ease;
+    }
+    .image-stage-frame:hover img {
+      transform: scale(1.02);
+    }
+
+    .prompter-drawer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #1e293b;
+      color: #f1f5f9;
+      padding: 0.8rem 2rem;
+      border-top: 1px solid #334155;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      z-index: 50;
+    }
+    .prompter-drawer.open {
+      transform: translateY(0);
+    }
+    .prompter-label {
+      font-weight: 700;
+      color: #d8b4fe;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .stage-nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      cursor: pointer;
+      z-index: 20;
+      transition: all 0.2s ease;
+    }
+    .stage-nav-arrow:hover {
+      background: var(--primary-purple-light);
+      color: var(--primary-purple);
+      border-color: var(--primary-purple-border);
+      transform: translateY(-50%) scale(1.08);
+    }
+    .nav-arrow-left { left: 16px; }
+    .nav-arrow-right { right: 16px; }
+
+    .toast-popup {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1e293b;
+      color: #ffffff;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast-popup.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(10px);
+      z-index: 3000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      cursor: zoom-out;
+    }
+    .lightbox-modal.active { opacity: 1; pointer-events: auto; }
+    .lightbox-modal img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="presentation-app">
+    <!-- 상단 컨트롤 바 -->
+    <header class="top-control-bar">
+      <div class="brand-meta">
+        <a href="index.html" class="btn-portal-exit">← 포털 홈</a>
+        <span class="track-indicator">🟣 Track 2 Plus. Pro Code</span>
+      </div>
+      <div class="stage-progress">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+        <span class="slide-page-badge" id="slidePageBadge">01 / 10</span>
+      </div>
+      <div class="top-actions">
+        <a href="slide_admin_v2.html" class="btn-top-next-track" id="topNextTrackBtn" title="Track 3 관리자 슬라이드로 이동">🔴 Track 3 이동 &rarr;</a>
+        <button class="btn-icon-ctrl" onclick="togglePrompter()" title="강사 해설 노트 (N)">💬</button>
+        <button class="btn-icon-ctrl" onclick="toggleFullScreen()" title="전체화면 (F)">⛶</button>
+      </div>
+    </header>
+
+    <!-- 16:9 와이드스크린 스테이지 -->
+    <main class="stage-wrapper" id="stageWrapper">
+      <!-- 좌우 내비게이션 화살표 -->
+      <button class="stage-nav-arrow nav-arrow-left" onclick="prevSlide()" title="이전 (←)">‹</button>
+      <button class="stage-nav-arrow nav-arrow-right" onclick="nextSlide()" title="다음 (→)">›</button>
+
+      <!-- Slide 01: 타이틀 & 아젠다 로드맵 (중앙 타이틀 + 바닥 4섹션 정렬) -->
+      <section class="slide-canvas active" data-prompter="오프닝 브리핑: 개발자와 엔지니어를 위한 Google Drive/GCS 커넥터 RAG와 Python Google ADK 2.0 기반 마이크로서비스 에이전트 개발 트랙을 시작합니다." style="padding: 2.6rem 4rem 2rem; justify-content: space-between;">
+        <div style="text-align: center; margin: auto 0 1.8rem;">
+          <div style="display: inline-block; margin-bottom: 0.7rem;">
+            <span class="act-tag" style="font-size: 0.95rem; padding: 5px 16px; border-radius: 20px;">🟣 Track 2 Plus. Pro Code</span>
+          </div>
+          <h1 class="slide-title-text" style="font-size: 3.2rem; margin: 0.3rem 0 0.8rem; font-weight: 900; letter-spacing: -0.03em; line-height: 1.2;">
+            Connector RAG & Google ADK 2.0 개발 가이드
+          </h1>
+          <p class="slide-desc-text" style="max-width: 960px; margin: 0 auto; font-size: 1.28rem; color: #475569; line-height: 1.6;">
+            Google Drive/GCS 사내 저장소 RAG 연동부터 Python 기반 Google ADK 프레임워크를 활용한<br>
+            자율 마이크로서비스 에이전트 개발, Cloud Run 서버리스 배포 및 A2A 등록을 다룹니다.
+          </p>
+        </div>
+
+        <div style="width: 100%; margin-top: auto;">
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; width: 100%;">
+            <div class="biz-card highlight" style="text-align: left; padding: 1.3rem 1.4rem;">
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--primary-purple); margin-bottom: 4px;">🔐 Act 1</div>
+              <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">OAuth 인증 & 환경 점검</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">Drive 커넥터 Enable actions 승인 및 Zero Data Leak 보안 검증</p>
+            </div>
+            <div class="biz-card highlight" style="text-align: left; padding: 1.3rem 1.4rem;">
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--primary-purple); margin-bottom: 4px;">📚 Act 2</div>
+              <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">사내 RAG 실습 & 수칙</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">복리후생 내규 PDF 질의, GCS 버킷 연동 및 RAG-Ready 3대 수칙</p>
+            </div>
+            <div class="biz-card highlight" style="text-align: left; padding: 1.3rem 1.4rem;">
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--primary-purple); margin-bottom: 4px;">💻 Act 3</div>
+              <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">Google ADK 2.0 개발</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">Python ADK 에이전트 코드 작성, to_a2a() 래핑 및 Cloud Run 배포</p>
+            </div>
+            <div class="biz-card highlight" style="text-align: left; padding: 1.3rem 1.4rem;">
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--primary-purple); margin-bottom: 4px;">🏢 Act 4</div>
+              <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">A2A 카탈로그 & 호출</div>
+              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">Agent Registry 등록, 대화창 연동 호출 및 CI/CD 수명 주기</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 02: 커넥터 연동 전 환경 점검 및 Zero Data Leak -->
+      <section class="slide-canvas" data-prompter="강사 멘트: Drive 커넥터는 사용자의 실제 접근 권한(ACL)을 완벽히 상속하여 데이터 유출을 0%로 차단하는 Zero Data Leak 아키텍처입니다.">
+        <div class="slide-header">
+          <span class="act-tag">Act 1. 엔터프라이즈 인증 & 보안</span>
+          <h2 class="slide-title-text">커넥터 연동 전 환경 점검 & Zero Data Leak</h2>
+          <p class="slide-desc-text">Drive 커넥터를 사용하려면 어드민이 조직 단위로 커넥터를 활성화해야 합니다.</p>
+        </div>
+        <div class="slide-body">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div class="layout-split" style="flex: 1;">
+              <div class="biz-card highlight">
+                <div class="card-head">🔐 Zero Data Leak 작동 방식</div>
+                <p class="card-para">사용자가 OAuth 권한 승인을 완료하면 Gemini가 본인의 Drive 파일만 직접 검색합니다. 접근 권한(ACL)이 없는 사내 문서는 검색 인덱스에서 원천 배제됩니다.</p>
+                <div style="margin-top: auto; font-size: 0.92rem; color: #581c87; background: #faf5ff; padding: 6px 10px; border-radius: 8px; border: 1px solid #e9d5ff;">
+                  🛡️ <strong>보안 원칙</strong>: 권한 없는 문서 데이터 유출 원천 차단
+                </div>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">⚠️ 시작 전 체크리스트</div>
+                <ul style="line-height: 1.8; font-size: 1.05rem; padding-left: 1.2rem; color: var(--text-secondary);">
+                  <li>어드민 콘솔에서 Google Drive 커넥터 활성화 완료 확인</li>
+                  <li>Gemini Enterprise 커넥터 목록에 Drive 항목 표시 확인</li>
+                  <li>Enable actions 버튼 노출 확인 (팝업 허용 필수)</li>
+                  <li>버튼 미노출 시 강사 또는 IT 관리자에게 즉시 문의</li>
+                </ul>
+                <div style="margin-top: auto; font-size: 0.94rem; color: #b45309; background: #fefce8; padding: 6px 12px; border-radius: 8px; border: 1px solid #fef08a;">
+                  💡 브라우저 주소창 팝업 차단 해제 필수
+                </div>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">🔑 커넥터 보안 표준</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">OAuth 2.0 User-Delegated Token</div>
+                <div class="fusion-pill-item">실시간 ACL 상속</div>
+                <div class="fusion-pill-item">VPC Service Controls 경계 내 실행</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 03: Google Drive OAuth 권한 승인 4단계 -->
+      <section class="slide-canvas" data-prompter="강사 멘트: Drive 커넥터의 Enable actions 버튼을 누르고 계정을 승인하는 4단계 프로세스를 안내합니다. 사용자별 최초 1회만 수행합니다.">
+        <div class="slide-header">
+          <span class="act-tag">Act 1. 엔터프라이즈 인증 & 보안</span>
+          <h2 class="slide-title-text">Google Drive OAuth 권한 승인 4단계</h2>
+          <p class="slide-desc-text">연동 버튼을 클릭하고 계정을 선택하면 완료됩니다. 사용자별 최초 1회만 진행합니다.</p>
+        </div>
+        <div class="slide-body">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div class="layout-quad" style="flex: 1;">
+              <div class="biz-card highlight" style="text-align: center; padding: 0.8rem;" onclick="openLightbox('./img/auth_01.webp')">
+                <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">① Enable actions</div>
+                <img src="./img/auth_01.webp" alt="Enable actions" style="max-height: 22vh; width: 100%; object-fit: contain; border-radius: 6px;">
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px;">Drive 항목의 활성화 버튼 클릭</p>
+              </div>
+              <div class="biz-card highlight" style="text-align: center; padding: 0.8rem;" onclick="openLightbox('./img/auth_02.webp')">
+                <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">② 실습 계정 선택</div>
+                <img src="./img/auth_02.webp" alt="계정 선택" style="max-height: 22vh; width: 100%; object-fit: contain; border-radius: 6px;">
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px;">워크스페이스 실습 계정 지정</p>
+              </div>
+              <div class="biz-card highlight" style="text-align: center; padding: 0.8rem;" onclick="openLightbox('./img/auth_03.webp')">
+                <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">③ 권한 목록 허용</div>
+                <img src="./img/auth_03.webp" alt="권한 허용" style="max-height: 22vh; width: 100%; object-fit: contain; border-radius: 6px;">
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px;">읽기 전용 권한 목록 확인 후 Allow</p>
+              </div>
+              <div class="biz-card highlight" style="text-align: center; padding: 0.8rem;" onclick="openLightbox('./img/auth_04.webp')">
+                <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">④ 연동 완료 상태</div>
+                <img src="./img/auth_04.webp" alt="연동 완료" style="max-height: 22vh; width: 100%; object-fit: contain; border-radius: 6px;">
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 4px;">Disable actions로 토글 시 완료</p>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">💡 팝업 팁</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">팝업 차단 시: 주소창 우측 아이콘 ➔ '팝업 항상 허용' 설정 후 새로고침</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 04: 사내 복리후생 내규 RAG 질의 실습 -->
+      <section class="slide-canvas" data-prompter="강사 멘트: Google Search를 끄고 Drive에 올린 사내 복리후생 내규 PDF만을 참조하여 정확한 학자금 기준을 추출하는 RAG 실습입니다.">
+        <div class="slide-header">
+          <span class="act-tag">Act 2. 사내 지식 RAG 탐색</span>
+          <h2 class="slide-title-text">실습 1. Drive 사내 복리후생 내규 RAG 질의</h2>
+          <p class="slide-desc-text">Drive에 업로드한 문서를 Gemini가 직접 검색하여 인용 마커와 함께 답변을 생성합니다.</p>
+        </div>
+        <div class="slide-body">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div class="layout-split" style="flex: 1;">
+              <div class="biz-card highlight">
+                <div class="card-head">📥 실습 절차</div>
+                <ul style="line-height: 1.8; font-size: 1.05rem; padding-left: 1.2rem; color: var(--text-secondary);">
+                  <li>공통 내규 PDF(복리후생)를 다운로드하여 실습 Drive에 업로드</li>
+                  <li>Gemini 대화창 하단에서 <strong>Google Search OFF</strong> 설정</li>
+                  <li>아래 프롬프트를 입력하여 Drive 전용 질의 실행</li>
+                </ul>
+                <div class="prompt-box">
+                  <div class="prompt-box-header">
+                    <span class="prompt-chip">Drive RAG Prompt</span>
+                    <button class="btn-copy-prompt" onclick="copyPromptText('t2pp1')">복사하기</button>
+                  </div>
+                  <div class="prompt-code" id="t2pp1" style="font-size: 0.94rem;">내 드라이브에 있는 "복리후생" 문서를 기반으로 자녀 학자금 지원 한도가 재직 기간에 따라 어떻게 다른지 표로 정리해줘.</div>
+                </div>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">✅ 검증 포인트: 인용 마커 (Citations)</div>
+                <p class="card-para">답변 하단에 생성되는 출처 링크 마커를 클릭하면 원본 Drive PDF 문서의 해당 페이지로 바로 이동합니다.</p>
+                <div class="image-stage-frame" style="margin-top: auto;" onclick="openLightbox('./img/image20.webp')">
+                  <img src="./img/image20.webp" alt="Drive RAG 결과" style="max-height: 20vh;">
+                </div>
+                <div style="margin-top: auto; font-size: 0.94rem; color: #166534; background: #f0fdf4; padding: 6px 12px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                  ✨ 100% 원문 페이지 번호 및 하이라이트 인용 검증
+                </div>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">📚 Drive RAG 핵심 가치</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">문서 다운로드 없이 브라우저 대화창에서 사내 규정 즉시 조회</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 05: GCS 사설 저장소 RAG 검색 (마케팅 캠페인) -->
+      <section class="slide-canvas" data-prompter="강사 멘트: Google Cloud Storage 버킷에 저장된 수만 건의 비정형 문서를 Vertex AI Search로 실시간 검색하는 실습입니다.">
+        <div class="slide-header">
+          <span class="act-tag">Act 2. 사내 지식 RAG 탐색</span>
+          <h2 class="slide-title-text">실습 2. GCS 사설 저장소 RAG 검색 (마케팅 캠페인)</h2>
+          <p class="slide-desc-text">Cloud Storage 버킷과 Vertex AI Search 데이터스토어를 연동하여 사내 마케팅 자산을 검색합니다.</p>
+        </div>
+        <div class="slide-body">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div class="layout-split" style="flex: 1;">
+              <div class="biz-card highlight">
+                <div class="card-head">⚙️ GCS 데이터스토어 연동 구조</div>
+                <ul style="line-height: 1.8; font-size: 1.05rem; padding-left: 1.2rem; color: var(--text-secondary);">
+                  <li>GCS 버킷(예: <code style="font-size: 0.95rem; color: var(--primary-purple);">gs://corp-marketing-docs</code>) 생성</li>
+                  <li>Vertex AI Search 데이터스토어 생성 및 버킷 바인딩</li>
+                  <li>Gemini Enterprise 어드민 콘솔에서 GCS 커넥터 활성화</li>
+                  <li>비정형 PDF, PPTX, Docx 원문 청킹 및 임베딩 자동 인덱싱</li>
+                </ul>
+                <div style="margin-top: auto; font-size: 0.92rem; color: #581c87; background: #faf5ff; padding: 6px 10px; border-radius: 8px; border: 1px solid #e9d5ff;">
+                  🏢 대규모 엔터프라이즈 파일 레이크 검색 지원
+                </div>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">📋 실습 질의 프롬프트</div>
+                <div class="prompt-box">
+                  <div class="prompt-box-header">
+                    <span class="prompt-chip">GCS RAG Prompt 1</span>
+                    <button class="btn-copy-prompt" onclick="copyPromptText('t2pp2')">복사하기</button>
+                  </div>
+                  <div class="prompt-code" id="t2pp2" style="font-size: 0.92rem;">넥스트 테크놀로지스의 사내 브랜드 앰버서더 참여 요건과 전용 VIP 혜택이 무엇인지 요약해줘.</div>
+                </div>
+                <div class="prompt-box" style="margin-top: 0.5rem;">
+                  <div class="prompt-box-header">
+                    <span class="prompt-chip">GCS RAG Prompt 2</span>
+                    <button class="btn-copy-prompt" onclick="copyPromptText('t2pp3')">복사하기</button>
+                  </div>
+                  <div class="prompt-code" id="t2pp3" style="font-size: 0.92rem;">넥스트월드 토크콘서트 개최 일정, 시간, 대강당 위치, 그리고 초청 강사를 정확히 가이드해줘.</div>
+                </div>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">☁️ GCS RAG 강점</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">수백 기가바이트 규모 사내 문서 저장소 실시간 시맨틱 검색</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 06: RAG-Ready 문서 작성 3대 골든 룰 -->
+      <section class="slide-canvas" data-prompter="강사 멘트: RAG의 답변 정확도는 원본 문서의 구조화 수준에 의해 결정됩니다. 이미지 데이터 표 병기, 헤딩 계층화, 구버전 아카이빙 3대 수칙을 설명합니다.">
+        <div class="slide-header">
+          <span class="act-tag">Act 2. 사내 지식 RAG 탐색</span>
+          <h2 class="slide-title-text">RAG-Ready 문서 작성 3대 골든 룰</h2>
+          <p class="slide-desc-text">RAG 검색 정확도는 원본 문서의 구조화 수준에 직접적인 영향을 받습니다.</p>
+        </div>
+        <div class="slide-body">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div class="layout-triad" style="flex: 1;">
+              <div class="biz-card highlight">
+                <div class="card-head">📊 1. 이미지에 텍스트 병기</div>
+                <p class="card-para">차트나 다이어그램 아래에 핵심 수치를 표 형식으로 한 번 더 정리합니다. 정형 텍스트가 함께 있을 때 임베딩 검색 정확도가 2배 향상됩니다.</p>
+                <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                  📈 멀티모달 임베딩 보강
+                </div>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">📋 2. 헤딩 계층 구조화</div>
+                <p class="card-para">H1, H2, H3 스타일을 명확히 구분하여 문서를 작성합니다. 계층 구조가 있는 문서가 청킹(Chunking) 시 관련성 점수를 높게 받습니다.</p>
+                <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                  📑 시맨틱 청킹 정밀도 극대화
+                </div>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">🗂️ 3. 구버전 문서 주기적 격리</div>
+                <p class="card-para">같은 내용의 구버전과 신버전이 공존하면 최신본 판단 오류가 발생합니다. 구버전 문서는 아카이브 전용 버킷으로 정기 이관합니다.</p>
+                <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                  🧹 단일 진실 공급원(SSOT) 유지
+                </div>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">✨ 엔터프라이즈 문서 관리 원칙</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">좋은 문서가 좋은 RAG 답변을 만듭니다.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 07: High-Code ADK 개발 파이프라인 개요 -->
+      <section class="slide-canvas" data-prompter="강사 멘트: Google ADK로 비즈니스 로직을 구현하고 to_a2a()로 표준 A2A 서버로 변환하여 Cloud Run에 배포하는 4단계 파이프라인입니다.">
+        <div class="slide-header">
+          <span class="act-tag">Act 3. Google ADK 2.0</span>
+          <h2 class="slide-title-text">High-Code Google ADK 2.0 개발 파이프라인</h2>
+          <p class="slide-desc-text">Python으로 에이전트를 작성하고 Cloud Run 배포 후 Gemini Enterprise에 등록합니다.</p>
+        </div>
+        <div class="slide-body">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div class="layout-quad" style="flex: 1;">
+              <div class="biz-card highlight" style="padding: 1.1rem 1rem;">
+                <div style="font-size: 1.5rem; margin-bottom: 2px;">🛠️</div>
+                <div style="font-weight: 700; font-size: 1.1rem; color: var(--primary-purple);">① ADK 코드 작성</div>
+                <p class="card-para" style="font-size: 0.95rem;">Python 기반 Agent 클래스 정의 및 도구(Tools), 프롬프트 연결</p>
+              </div>
+              <div class="biz-card highlight" style="padding: 1.1rem 1rem;">
+                <div style="font-size: 1.5rem; margin-bottom: 2px;">🔗</div>
+                <div style="font-weight: 700; font-size: 1.1rem; color: var(--primary-purple);">② to_a2a() 래핑</div>
+                <p class="card-para" style="font-size: 0.95rem;">A2A 통신 규격 변환 및 Agent Card 메타데이터 JSON 자동 생성</p>
+              </div>
+              <div class="biz-card highlight" style="padding: 1.1rem 1rem;">
+                <div style="font-size: 1.5rem; margin-bottom: 2px;">☁️</div>
+                <div style="font-weight: 700; font-size: 1.1rem; color: var(--primary-purple);">③ Cloud Run 배포</div>
+                <p class="card-para" style="font-size: 0.95rem;">adk deploy 명령어로 서버리스 컨테이너 원클릭 자동 프로비저닝</p>
+              </div>
+              <div class="biz-card highlight" style="padding: 1.1rem 1rem;">
+                <div style="font-size: 1.5rem; margin-bottom: 2px;">🏢</div>
+                <div style="font-weight: 700; font-size: 1.1rem; color: var(--primary-purple);">④ 어드민 등록</div>
+                <p class="card-para" style="font-size: 0.95rem;">Gemini Enterprise Agent Registry에 등록하여 전사 채팅창에 노출</p>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">🚀 Google ADK 2.0 표준</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">Agent-to-Agent (A2A) 상호운용성 보장</div>
+                <div class="fusion-pill-item">서버리스 오토스케일링 인프라</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 08: Python ADK 코드 & Cloud Run 배포 -->
+      <section class="slide-canvas" data-prompter="강사 멘트: 간결한 10줄의 Python 코드로 도구를 바인딩하고 Cloud Run 배포 명령어 한 줄로 완성하는 실무 코드입니다.">
+        <div class="slide-header">
+          <span class="act-tag">Act 3. Google ADK 2.0</span>
+          <h2 class="slide-title-text">Python ADK 코드 예시 & Cloud Run 배포</h2>
+          <p class="slide-desc-text">비즈니스 로직을 함수로 정의하고 to_a2a()로 변환하여 서버리스로 배포합니다.</p>
+        </div>
+        <div class="slide-body">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div class="layout-split" style="flex: 1;">
+              <div class="biz-card highlight">
+                <div class="card-head">💻 Python ADK 에이전트 소스코드</div>
+                <pre style="background: #1e293b; border-radius: 8px; padding: 0.8rem 1rem; font-family: var(--font-code); font-size: 0.88rem; line-height: 1.55; color: #93c5fd; overflow-x: auto; margin: 0; white-space: pre;">from google.adk.agents import Agent
+from google.adk.a2a.utils import to_a2a
+
+def check_inventory(sku: str) -> str:
+    """ERP 재고 수량을 조회하는 커스텀 도구"""
+    return f"SKU {sku}: 현재 재고 142개 (정상)"
+
+root_agent = Agent(
+    model='gemini-2.5-flash',
+    name='inventory_bot',
+    description='사내 재고 실시간 조회 에이전트',
+    tools=[check_inventory],
+)
+
+app = to_a2a(root_agent) # A2A 표준 엔드포인트 자동 래핑</pre>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">☁️ Cloud Run 원클릭 배포 명령어</div>
+                <div class="prompt-box">
+                  <div class="prompt-box-header">
+                    <span class="prompt-chip">Deploy CLI</span>
+                    <button class="btn-copy-prompt" onclick="copyPromptText('t2pp4')">복사하기</button>
+                  </div>
+                  <div class="prompt-code" id="t2pp4" style="font-size: 0.90rem;">adk deploy cloud_run \
+  --service_name=inventory-agent \
+  --project=$PROJECT_ID \
+  --region=asia-northeast3 \
+  --a2a inventory_agent/</div>
+                </div>
+                <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 8px 12px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                  📌 배포 완료 시 Agent Card URL 자동 생성:<br>
+                  <code style="font-size: 0.84rem; color: #15803d;">https://&lt;SERVICE_URL&gt;/a2a/.well-known/agent-card.json</code>
+                </div>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">⚡ ADK 프레임워크 생산성</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">복잡한 FastAPI 보일러플레이트 코드 제로화</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 09: Gemini Enterprise 어드민 등록 & 호출 -->
+      <section class="slide-canvas" data-prompter="강사 멘트: Cloud Run에 배포된 에이전트의 Agent Card URL을 어드민 콘솔에 등록하여 전사 임직원이 채팅창에서 @멘션으로 호출하도록 연결합니다.">
+        <div class="slide-header">
+          <span class="act-tag">Act 4. A2A 에이전트 등록</span>
+          <h2 class="slide-title-text">Gemini Enterprise 어드민 등록 & 채팅 호출</h2>
+          <p class="slide-desc-text">Agent Card JSON을 등록하여 전사 사용자가 Gemini 대화창에서 바로 호출합니다.</p>
+        </div>
+        <div class="slide-body">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.8rem; flex: 1;">
+              <div class="biz-card highlight" style="text-align: center; padding: 0.7rem;" onclick="openLightbox('./img/customagent-001.webp')">
+                <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">① Add agent</div>
+                <img src="./img/customagent-001.webp" alt="Add agent" style="max-height: 18vh; width: 100%; object-fit: contain; border-radius: 6px;">
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 4px;">어드민 Agents 메뉴</p>
+              </div>
+              <div class="biz-card highlight" style="text-align: center; padding: 0.7rem;" onclick="openLightbox('./img/customagent-002.webp')">
+                <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">② via A2A 선택</div>
+                <img src="./img/customagent-002.webp" alt="Custom agent via A2A" style="max-height: 18vh; width: 100%; object-fit: contain; border-radius: 6px;">
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 4px;">Custom agent via A2A</p>
+              </div>
+              <div class="biz-card highlight" style="text-align: center; padding: 0.7rem;" onclick="openLightbox('./img/customagent-003.webp')">
+                <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">③ Agent Card 입력</div>
+                <img src="./img/customagent-003.webp" alt="Agent Card 입력" style="max-height: 18vh; width: 100%; object-fit: contain; border-radius: 6px;">
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 4px;">Cloud Run URL 검증</p>
+              </div>
+              <div class="biz-card highlight" style="text-align: center; padding: 0.7rem;" onclick="openLightbox('./img/customagent-004.webp')">
+                <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">④ 등록 완료</div>
+                <img src="./img/customagent-004.webp" alt="등록 완료" style="max-height: 18vh; width: 100%; object-fit: contain; border-radius: 6px;">
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 4px;">전사 카탈로그 활성화</p>
+              </div>
+              <div class="biz-card highlight" style="text-align: center; padding: 0.7rem;" onclick="openLightbox('./img/customagent-005.webp')">
+                <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px;">⑤ 채팅 호출 실행</div>
+                <img src="./img/customagent-005.webp" alt="실행 결과" style="max-height: 18vh; width: 100%; object-fit: contain; border-radius: 6px;">
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 4px;">Gemini 대화창에서 호출</p>
+              </div>
+            </div>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">🏢 A2A 에이전트 생태계</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">개발된 모든 백엔드 마이크로서비스를 Gemini 대화 인터페이스와 즉시 결합</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 10: Track 2 Plus 완료 & 다음 트랙 이동 -->
+      <section class="slide-canvas" data-prompter="클로징: Track 2 Plus 실습을 완료했습니다. 전사 인프라 격리, Model Armor 보안 방화벽 및 FinOps 거버넌스를 다루는 Track 3로 이동합니다.">
+        <div class="slide-header" style="text-align: center; margin-bottom: 0.7rem;">
+          <h2 class="slide-title-text" style="font-size: 2.5rem;">Track 2 Plus 실습 완료 & 다음 단계</h2>
+          <p class="slide-desc-text">Google Drive/GCS 커넥터 RAG와 Python Google ADK 2.0 개발 실습을 마쳤습니다.</p>
+        </div>
+        <div class="slide-body">
+          <div class="layout-triad" style="max-width: 1200px; margin: 0 auto; width: 100%;">
+            <div class="biz-card highlight" style="text-align: left; padding: 1.3rem;">
+              <div style="font-size: 2rem; margin-bottom: 6px;">🔐 Connector RAG</div>
+              <div style="font-weight: 700; font-size: 1.25rem; margin-bottom: 6px;">사내 지식 검색 RAG</div>
+              <p style="font-size: 1.04rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">Drive OAuth 권한 승인 및 GCS 버킷 시맨틱 RAG</p>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Zero Data Leak</span>
+                <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">인용 마커</span>
+              </div>
+            </div>
+            <div class="biz-card highlight" style="text-align: left; padding: 1.3rem;">
+              <div style="font-size: 2rem; margin-bottom: 6px;">💻 Google ADK 2.0</div>
+              <div style="font-weight: 700; font-size: 1.25rem; margin-bottom: 6px;">Pro Code 에이전트 개발</div>
+              <p style="font-size: 1.04rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">Python 기반 Agent 구축 및 to_a2a() 표준 래핑</p>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Agent Card</span>
+                <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">서버리스 배포</span>
+              </div>
+            </div>
+            <div class="biz-card highlight" style="text-align: left; padding: 1.3rem;">
+              <div style="font-size: 2rem; margin-bottom: 6px;">🏢 A2A Ecosystem</div>
+              <div style="font-weight: 700; font-size: 1.25rem; margin-bottom: 6px;">전사 카탈로그 배포</div>
+              <p style="font-size: 1.04rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">Gemini 대화창에서 커스텀 백엔드 에이전트 직접 호출</p>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Agent Registry</span>
+                <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">채팅 연동</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fusion-banner" style="margin-top: auto;">
+          <div class="fusion-banner-title">🎉 Track 2 Plus (Pro Code) 실무 과정 수료</div>
+          <div class="fusion-pills">
+            <div class="fusion-pill-item">✅ 사내 Drive/GCS 커넥터 RAG 구축 완료</div>
+            <div class="fusion-pill-item">✅ Python Google ADK 2.0 에이전트 개발 완료</div>
+            <div class="fusion-pill-item">✅ Cloud Run 배포 및 A2A 전사 등록 완료</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 하단 강사 해설 프로프터 서랍 -->
+      <div class="prompter-drawer" id="prompterDrawer">
+        <div style="display: flex; align-items: center;">
+          <span class="prompter-label">💬 강사 해설 가이드:</span>
+          <span id="prompterText">오프닝 브리핑: 개발자와 엔지니어를 위한 Google Drive/GCS 커넥터 RAG와 Python Google ADK 2.0 기반 마이크로서비스 에이전트 개발 트랙을 시작합니다.</span>
+        </div>
+        <button class="btn-icon-ctrl" onclick="togglePrompter()" style="height: 28px; width: 28px; font-size: 0.75rem;">✕</button>
+      </div>
+    </main>
+  </div>
+
+  <!-- 토스트 알림 -->
+  <div class="toast-popup" id="toastPopup">✓ 프롬프트가 클립보드에 복사되었습니다.</div>
+
+  <!-- 라이트박스 -->
+  <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox()">
+    <img id="lightboxImage" src="" alt="확대 이미지">
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide-canvas');
+    const totalSlides = slides.length;
+    const progressFill = document.getElementById('progressFill');
+    const slidePageBadge = document.getElementById('slidePageBadge');
+    const prompterDrawer = document.getElementById('prompterDrawer');
+    const prompterText = document.getElementById('prompterText');
+    const toastPopup = document.getElementById('toastPopup');
+    const lightboxModal = document.getElementById('lightboxModal');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const topNextTrackBtn = document.getElementById('topNextTrackBtn');
+
+    function updateSlideStage(idx) {
+      if (idx < 0 || idx >= totalSlides) return;
+      slides.forEach((s, i) => {
+        s.classList.toggle('active', i === idx);
+      });
+      currentSlide = idx;
+
+      // 상단 진행률 갱신
+      const pct = ((currentSlide + 1) / totalSlides) * 100;
+      progressFill.style.width = pct + '%';
+      slidePageBadge.innerText = String(currentSlide + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
+
+      // 마지막 슬라이드 도달 시 상단 Track 3 이동 버튼 동적 활성화
+      if (topNextTrackBtn) {
+        if (currentSlide === totalSlides - 1) {
+          topNextTrackBtn.classList.add('visible');
+        } else {
+          topNextTrackBtn.classList.remove('visible');
+        }
+      }
+
+      // 프롬프터 텍스트 갱신
+      const pText = slides[currentSlide].getAttribute('data-prompter') || '강사 해설 포인트가 지정되지 않았습니다.';
+      prompterText.innerText = pText;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        updateSlideStage(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        updateSlideStage(currentSlide - 1);
+      }
+    }
+
+    function togglePrompter() {
+      prompterDrawer.classList.toggle('open');
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    function copyPromptText(elementId) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const text = el.innerText || el.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast();
+      }).catch(() => {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast();
+      });
+    }
+
+    function showToast() {
+      toastPopup.classList.add('show');
+      setTimeout(() => {
+        toastPopup.classList.remove('show');
+      }, 2500);
+    }
+
+    function openLightbox(src) {
+      lightboxImage.src = src;
+      lightboxModal.classList.add('active');
+    }
+
+    function closeLightbox() {
+      lightboxModal.classList.remove('active');
+    }
+
+    // 키보드 내비게이션
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        updateSlideStage(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        updateSlideStage(totalSlides - 1);
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+      } else if (e.key === 'n' || e.key === 'N') {
+        togglePrompter();
+      } else if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+
+    // 스와이프 제스처
+    let touchStartX = 0;
+    const stageWrapper = document.getElementById('stageWrapper');
+    stageWrapper.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    stageWrapper.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    }, { passive: true });
+
+    updateSlideStage(0);
+  </script>
+</body>
+</html>
