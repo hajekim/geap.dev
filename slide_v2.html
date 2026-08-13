@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Gemini Enterprise — 오프닝 키노트 & 전사 AI 로드맵</title>
+  <title>Google Gemini Enterprise : 오프닝 키노트 & 전사 AI 로드맵</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,7 +85,7 @@
       gap: 6px;
       color: #cbd5e1;
       text-decoration: none;
-      font-size: 0.88rem;
+      font-size: 1.14rem;
       font-weight: 600;
       padding: 5px 12px;
       border-radius: 8px;
@@ -103,7 +103,7 @@
       gap: 6px;
       padding: 4px 12px;
       border-radius: 20px;
-      font-size: 0.84rem;
+      font-size: 1.14rem;
       font-weight: 700;
       background: rgba(26, 115, 232, 0.2);
       color: #93c5fd;
@@ -133,7 +133,7 @@
 
     .slide-page-badge {
       font-family: var(--font-heading);
-      font-size: 0.95rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: #94a3b8;
     }
@@ -151,7 +151,7 @@
       background: linear-gradient(135deg, #1e8e3e, #137333);
       color: #ffffff;
       text-decoration: none;
-      font-size: 0.88rem;
+      font-size: 1.14rem;
       font-weight: 700;
       padding: 5px 14px;
       border-radius: 20px;
@@ -184,7 +184,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.95rem;
+      font-size: 1.15rem;
       transition: all 0.2s ease;
     }
     .btn-icon-ctrl:hover {
@@ -238,7 +238,7 @@
       display: inline-block;
       padding: 3px 10px;
       border-radius: 6px;
-      font-size: 0.85rem;
+      font-size: 1.14rem;
       font-weight: 700;
       background: #e8f0fe;
       color: var(--google-blue);
@@ -266,14 +266,15 @@
       justify-content: center;
       width: 100%;
       min-height: 0;
+      gap: 0.8rem;
     }
 
     .layout-split {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.8rem;
+      gap: 1.6rem;
       width: 100%;
-      height: 100%;
+      height: auto;
       align-items: stretch;
       text-align: left;
     }
@@ -283,7 +284,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 1.4rem;
       width: 100%;
-      height: 100%;
+      height: auto;
       align-items: stretch;
       text-align: left;
     }
@@ -293,7 +294,7 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 1.1rem;
       width: 100%;
-      height: 100%;
+      height: auto;
       align-items: stretch;
       text-align: left;
     }
@@ -303,17 +304,18 @@
       background: linear-gradient(135deg, #f0fdf4, #f8fafc);
       border: 1px solid #bbf7d0;
       border-radius: 12px;
-      padding: 0.6rem 1.2rem;
+      padding: 0.75rem 1.4rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
       flex-shrink: 0;
+      margin-top: 0.4rem;
     }
     .fusion-banner-title {
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #166534;
+      color: #1e40af;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -327,24 +329,25 @@
     .fusion-pill-item {
       background: #ffffff;
       border: 1px solid #cbd5e1;
-      padding: 4px 12px;
+      padding: 5px 14px;
       border-radius: 20px;
-      font-size: 0.92rem;
+      font-size: 1.12rem;
       font-weight: 600;
       color: var(--text-primary);
     }
 
-    /* 비즈니스 카드 */
+    /* 비즈니스 카드 - 자연스러운 높이 유지 및 가독성 폰트 */
     .biz-card {
       background: var(--stage-subtle);
       border: 1px solid var(--border-color);
       border-radius: 14px;
-      padding: 1.1rem 1.3rem;
+      padding: 1.25rem 1.45rem;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      gap: 0.45rem;
+      gap: 0.55rem;
       position: relative;
+      height: auto;
     }
 
     .biz-card.highlight {
@@ -380,8 +383,8 @@
 
     .card-head {
       font-family: var(--font-heading);
-      font-size: 1.26rem;
-      font-weight: 700;
+      font-size: 1.42rem;
+      font-weight: 800;
       color: var(--text-primary);
       margin-bottom: 0.25rem;
       display: flex;
@@ -390,32 +393,32 @@
     }
 
     .card-para {
-      font-size: 1.08rem;
+      font-size: 1.15rem;
       color: var(--text-secondary);
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
     /* 고밀도 서브 블록 */
     .sub-block {
       background: #f8fafc;
       border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 8px 12px;
-      margin: 2px 0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin: 4px 0;
     }
     .sub-block-title {
-      font-size: 0.88rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: #1e40af;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
     }
     .sub-block-desc {
-      font-size: 0.95rem;
+      font-size: 1.15rem;
       color: var(--text-secondary);
-      line-height: 1.45;
+      line-height: 1.52;
     }
 
     .prompter-drawer {
@@ -427,7 +430,7 @@
       color: #f1f5f9;
       padding: 0.8rem 2rem;
       border-top: 1px solid #334155;
-      font-size: 1.05rem;
+      font-size: 1.14rem;
       line-height: 1.5;
       display: flex;
       align-items: center;
@@ -483,7 +486,7 @@
       color: #ffffff;
       padding: 10px 24px;
       border-radius: 30px;
-      font-size: 0.95rem;
+      font-size: 1.15rem;
       font-weight: 600;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       z-index: 2000;
@@ -555,7 +558,7 @@
       <section class="slide-canvas active" data-prompter="오프닝 브리핑: 구글 제미나이 엔터프라이즈의 보안 격리 원리와 전사 4대 실습 트랙의 구조를 소개합니다." style="padding: 2.6rem 4rem 2rem; justify-content: space-between;">
         <div style="text-align: center; margin: auto 0 1.8rem;">
           <div style="display: inline-block; margin-bottom: 0.7rem;">
-            <span class="act-tag" style="font-size: 0.95rem; padding: 5px 16px; border-radius: 20px;">🎯 Google Gemini Enterprise Keynote</span>
+            <span class="act-tag" style="font-size: 1.15rem; padding: 5px 16px; border-radius: 20px;">🎯 Google Gemini Enterprise Keynote</span>
           </div>
           <h1 class="slide-title-text" style="font-size: 3.2rem; margin: 0.3rem 0 0.8rem; font-weight: 900; letter-spacing: -0.03em; line-height: 1.2;">
             엔터프라이즈 생성형 AI 아키텍처 & 4대 실습 트랙
@@ -571,22 +574,22 @@
             <div class="biz-card highlight" style="text-align: left; padding: 1.3rem 1.4rem;">
               <div style="font-size: 1.25rem; font-weight: 800; color: var(--primary-green-dark); margin-bottom: 4px;">🟢 Track 1</div>
               <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">Day 1 Value</div>
-              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">전사 임직원 대상 · 브라우저 기반 AI 어시스턴트 & 멀티모달 실무</p>
+              <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.48;">전사 임직원 대상 · 브라우저 기반 AI 어시스턴트 & 멀티모달 실무</p>
             </div>
             <div class="biz-card highlight blue" style="text-align: left; padding: 1.3rem 1.4rem;">
               <div style="font-size: 1.25rem; font-weight: 800; color: var(--google-blue); margin-bottom: 4px;">🔵 Track 2</div>
               <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">Agentic Value</div>
-              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">기획자 & 파워유저 · Notebook 소스 RAG & 노코드 에이전트 구축</p>
+              <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.48;">기획자 & 파워유저 · Notebook 소스 RAG & 노코드 에이전트 구축</p>
             </div>
             <div class="biz-card highlight purple" style="text-align: left; padding: 1.3rem 1.4rem;">
               <div style="font-size: 1.25rem; font-weight: 800; color: var(--purple); margin-bottom: 4px;">🟣 Track 2 Plus</div>
               <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">Pro Code ADK</div>
-              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">개발자 & 엔지니어 · 사내 RAG 연동 & Python Google ADK 2.0</p>
+              <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.48;">개발자 & 엔지니어 · 사내 RAG 연동 & Python Google ADK 2.0</p>
             </div>
             <div class="biz-card highlight red" style="text-align: left; padding: 1.3rem 1.4rem;">
               <div style="font-size: 1.25rem; font-weight: 800; color: var(--google-red); margin-bottom: 4px;">🔴 Track 3</div>
               <div style="font-weight: 700; font-size: 1.15rem; margin-bottom: 6px;">Admin & Security</div>
-              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48;">IT 관리자 & 보안팀 · Model Armor 보안 방화벽 & FinOps ROI</p>
+              <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.48;">IT 관리자 & 보안팀 · Model Armor 보안 방화벽 & FinOps ROI</p>
             </div>
           </div>
         </div>
@@ -600,8 +603,8 @@
           <p class="slide-desc-text">기업 데이터의 완벽한 격리 보호와 사내 업무 도구와의 안전한 접근 제어(ACL)를 보장합니다.</p>
         </div>
         <div class="slide-body">
-          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
-            <div class="layout-split" style="flex: 1;">
+          <div style="display: flex; flex-direction: column; gap: 0.85rem; width: 100%;">
+            <div class="layout-split">
               <div class="biz-card highlight blue">
                 <div class="card-head">🛡️ 사내 데이터 보호 및 절대 격리</div>
                 <div class="sub-block">
@@ -653,16 +656,16 @@
           <p class="slide-desc-text">비즈니스 실무자부터 시스템 아키텍트까지 최적화된 맞춤형 학습 경로를 제공합니다.</p>
         </div>
         <div class="slide-body">
-          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
-            <div class="layout-quad" style="flex: 1;">
+          <div style="display: flex; flex-direction: column; gap: 0.85rem; width: 100%;">
+            <div class="layout-quad">
               <div class="biz-card highlight">
                 <div class="card-head">🟢 Track 1</div>
                 <div style="font-weight: 800; font-size: 1.12rem; color: var(--primary-green-dark);">Day 1 Value</div>
                 <div class="sub-block" style="padding: 6px 8px;">
-                  <div class="sub-block-title" style="font-size: 0.82rem; color: var(--primary-green-dark);">🎯 대상: 전사 모든 임직원</div>
-                  <div class="sub-block-desc" style="font-size: 0.85rem;">• 개인화 pContext 설정<br>• 실시간 웹 검색 SWOT 분석<br>• Imagen/Veo 미디어 생성<br>• Excel/PPT 파일 시각화</div>
+                  <div class="sub-block-title" style="font-size: 1.14rem; color: var(--primary-green-dark);">🎯 대상: 전사 모든 임직원</div>
+                  <div class="sub-block-desc" style="font-size: 1.14rem;">• 개인화 pContext 설정<br>• 실시간 웹 검색 SWOT 분석<br>• Imagen/Veo 미디어 생성<br>• Excel/PPT 파일 시각화</div>
                 </div>
-                <div style="margin-top: auto; font-size: 0.85rem; color: #166534; background: #f0fdf4; padding: 4px 8px; border-radius: 6px; border: 1px solid #bbf7d0; text-align: center;">
+                <div style="margin-top: auto; font-size: 1.14rem; color: #166534; background: #f0fdf4; padding: 4px 8px; border-radius: 6px; border: 1px solid #bbf7d0; text-align: center;">
                   기초 실무 완성
                 </div>
               </div>
@@ -670,10 +673,10 @@
                 <div class="card-head">🔵 Track 2</div>
                 <div style="font-weight: 800; font-size: 1.12rem; color: var(--google-blue);">Agentic Value</div>
                 <div class="sub-block" style="padding: 6px 8px;">
-                  <div class="sub-block-title" style="font-size: 0.82rem; color: #1e40af;">🎯 대상: 기획자 & 파워유저</div>
-                  <div class="sub-block-desc" style="font-size: 0.85rem;">• Notebook 팀 도서관 5종<br>• Deep Research 심층 탐색<br>• Agent Designer 노코드 빌더<br>• 4단계 워크플로우 자동화</div>
+                  <div class="sub-block-title" style="font-size: 1.14rem; color: #1e40af;">🎯 대상: 기획자 & 파워유저</div>
+                  <div class="sub-block-desc" style="font-size: 1.14rem;">• Notebook 팀 도서관 5종<br>• Deep Research 심층 탐색<br>• Agent Designer 노코드 빌더<br>• 4단계 워크플로우 자동화</div>
                 </div>
-                <div style="margin-top: auto; font-size: 0.85rem; color: #1e40af; background: #eff6ff; padding: 4px 8px; border-radius: 6px; border: 1px solid #bfdbfe; text-align: center;">
+                <div style="margin-top: auto; font-size: 1.14rem; color: #1e40af; background: #eff6ff; padding: 4px 8px; border-radius: 6px; border: 1px solid #bfdbfe; text-align: center;">
                   노코드 에이전트 구축
                 </div>
               </div>
@@ -681,10 +684,10 @@
                 <div class="card-head">🟣 Track 2 Plus</div>
                 <div style="font-weight: 800; font-size: 1.12rem; color: var(--purple);">Pro Code ADK</div>
                 <div class="sub-block" style="padding: 6px 8px;">
-                  <div class="sub-block-title" style="font-size: 0.82rem; color: #6b21a8;">🎯 대상: 개발자 & 엔지니어</div>
-                  <div class="sub-block-desc" style="font-size: 0.85rem;">• Drive/GCS 커넥터 RAG<br>• Python Google ADK 2.0<br>• to_a2a() 마이크로서비스<br>• Cloud Run 서버리스 배포</div>
+                  <div class="sub-block-title" style="font-size: 1.14rem; color: #6b21a8;">🎯 대상: 개발자 & 엔지니어</div>
+                  <div class="sub-block-desc" style="font-size: 1.14rem;">• Drive/GCS 커넥터 RAG<br>• Python Google ADK 2.0<br>• to_a2a() 마이크로서비스<br>• Cloud Run 서버리스 배포</div>
                 </div>
-                <div style="margin-top: auto; font-size: 0.85rem; color: #6b21a8; background: #faf5ff; padding: 4px 8px; border-radius: 6px; border: 1px solid #e9d5ff; text-align: center;">
+                <div style="margin-top: auto; font-size: 1.14rem; color: #6b21a8; background: #faf5ff; padding: 4px 8px; border-radius: 6px; border: 1px solid #e9d5ff; text-align: center;">
                   프로코드 확장 개발
                 </div>
               </div>
@@ -692,10 +695,10 @@
                 <div class="card-head">🔴 Track 3</div>
                 <div style="font-weight: 800; font-size: 1.12rem; color: var(--google-red);">Admin & Security</div>
                 <div class="sub-block" style="padding: 6px 8px;">
-                  <div class="sub-block-title" style="font-size: 0.82rem; color: #991b1b;">🎯 대상: IT 관리자 & CISO</div>
-                  <div class="sub-block-desc" style="font-size: 0.85rem;">• 서울-아이오와 멀티 리전 DR<br>• Model Armor 7대 보안 방화벽<br>• BigQuery SIEM 실시간 감사<br>• Chrome 옴니바 & FinOps ROI</div>
+                  <div class="sub-block-title" style="font-size: 1.14rem; color: #991b1b;">🎯 대상: IT 관리자 & CISO</div>
+                  <div class="sub-block-desc" style="font-size: 1.14rem;">• 서울-아이오와 멀티 리전 DR<br>• Model Armor 7대 보안 방화벽<br>• BigQuery SIEM 실시간 감사<br>• Chrome 옴니바 & FinOps ROI</div>
                 </div>
-                <div style="margin-top: auto; font-size: 0.85rem; color: #991b1b; background: #fef2f2; padding: 4px 8px; border-radius: 6px; border: 1px solid #fecaca; text-align: center;">
+                <div style="margin-top: auto; font-size: 1.14rem; color: #991b1b; background: #fef2f2; padding: 4px 8px; border-radius: 6px; border: 1px solid #fecaca; text-align: center;">
                   전사 인프라 & 거버넌스
                 </div>
               </div>
@@ -714,12 +717,12 @@
       <section class="slide-canvas" data-prompter="강사 멘트: Track 1은 로그인 즉시 체감하는 개인화 컨텍스트와 멀티모달 창작 역량을 배양합니다.">
         <div class="slide-header">
           <span class="act-tag">Track 1 Deep Dive</span>
-          <h2 class="slide-title-text">Track 1: Day 1 Value — 개인화 & 멀티모달 실무</h2>
+          <h2 class="slide-title-text">Track 1: Day 1 Value : 개인화 및 멀티모달 실무</h2>
           <p class="slide-desc-text">별도의 환경 설정 없이 웹 브라우저에서 문서 작성과 데이터 분석 시간을 즉시 단축합니다.</p>
         </div>
         <div class="slide-body">
-          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
-            <div class="layout-split" style="flex: 1;">
+          <div style="display: flex; flex-direction: column; gap: 0.85rem; width: 100%;">
+            <div class="layout-split">
               <div class="biz-card highlight">
                 <div class="card-head">✨ 개인화 컨텍스트 (pContext) & 실시간 웹</div>
                 <div class="sub-block">
@@ -747,7 +750,7 @@
                 </div>
                 <div class="sub-block">
                   <div class="sub-block-title">Canvas Google Slides 변환</div>
-                  <div class="sub-block-desc">텍스트 아이디어를 단 3초 만에 완성형 프레젠테이션 슬라이드로 자동 렌더링</div>
+                  <div class="sub-block-desc">대화창의 기획 아이디어를 Google Slides 프레젠테이션으로 실시간 생성하고 편집</div>
                 </div>
               </div>
             </div>
@@ -766,12 +769,12 @@
       <section class="slide-canvas" data-prompter="강사 멘트: Track 2는 팀 도서관 그라운딩을 통해 환각을 없애고 노코드로 자율 에이전트를 조립하는 실습입니다.">
         <div class="slide-header">
           <span class="act-tag">Track 2 Deep Dive</span>
-          <h2 class="slide-title-text">Track 2: Agentic Value — 지식 도서관 & 노코드 에이전트</h2>
+          <h2 class="slide-title-text">Track 2: Agentic Value : 지식 도서관 및 노코드 에이전트</h2>
           <p class="slide-desc-text">사내 지식 문서를 바인딩하여 5종 멀티모달 콘텐츠를 자동 생성하고 노코드 에이전트를 구축합니다.</p>
         </div>
         <div class="slide-body">
-          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
-            <div class="layout-split" style="flex: 1;">
+          <div style="display: flex; flex-direction: column; gap: 0.85rem; width: 100%;">
+            <div class="layout-split">
               <div class="biz-card highlight blue">
                 <div class="card-head">📚 Gemini Notebook Enterprise 도서관</div>
                 <div class="sub-block">
@@ -814,8 +817,8 @@
           <p class="slide-desc-text">하이브리드 커넥터 RAG, Google ADK 2.0 멀티 에이전트 개발 및 Model Armor 보안 방화벽을 다룹니다.</p>
         </div>
         <div class="slide-body">
-          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
-            <div class="layout-split" style="flex: 1;">
+          <div style="display: flex; flex-direction: column; gap: 0.85rem; width: 100%;">
+            <div class="layout-split">
               <div class="biz-card highlight purple">
                 <div class="card-head">🟣 Track 2 Plus: Google ADK 2.0</div>
                 <div class="sub-block">
@@ -858,38 +861,38 @@
           <p class="slide-desc-text">상황과 목적에 따라 가장 적합한 구조화 프레임워크를 선택하여 일관되고 정확한 출력 결과를 도출합니다.</p>
         </div>
         <div class="slide-body">
-          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
-            <div class="layout-triad" style="flex: 1;">
+          <div style="display: flex; flex-direction: column; gap: 0.85rem; width: 100%;">
+            <div class="layout-triad">
               <div class="biz-card highlight">
                 <div class="card-head">⚡ APE (단순 질의 & 요약)</div>
-                <p class="card-para" style="font-size: 0.95rem;">Action · Purpose · Expectation<br>빠른 정보 요약과 사실 추출에 최적화된 직관적인 3단계 기본 구조</p>
+                <p class="card-para" style="font-size: 1.15rem;">Action · Purpose · Expectation<br>빠른 정보 요약과 사실 추출에 최적화된 직관적인 3단계 기본 구조</p>
                 <div class="sub-block">
                   <div class="sub-block-title">📌 권장 업무 시나리오</div>
                   <div class="sub-block-desc">• 회의록 핵심 안건 3줄 요약<br>• 영문 기술 문서 한국어 번역<br>• 긴 이메일 스레드 팩트 추출</div>
                 </div>
-                <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                <div style="margin-top: auto; font-size: 1.15rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
                   ⏱️ 30초 내 신속 작성 · 사실 확인
                 </div>
               </div>
               <div class="biz-card highlight">
                 <div class="card-head">🏆 C.R.A.F.T (비즈니스 보고서)</div>
-                <p class="card-para" style="font-size: 0.95rem;">Context · Role · Action · Format · Tone<br>기획서, 제안서, 공식 메일 등 형식과 톤 제어가 필요한 비즈니스 표준</p>
+                <p class="card-para" style="font-size: 1.15rem;">Context · Role · Action · Format · Tone<br>기획서, 제안서, 공식 메일 등 형식과 톤 제어가 필요한 비즈니스 표준</p>
                 <div class="sub-block">
                   <div class="sub-block-title">📌 권장 업무 시나리오</div>
                   <div class="sub-block-desc">• 임원 보고용 전략 원페이저 기획<br>• 신규 사업 제안서 초안 작성<br>• 대외 공문 및 고객 공식 회신문</div>
                 </div>
-                <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                <div style="margin-top: auto; font-size: 1.15rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
                   📑 2분 내 정형화 작성 · 임원 보고
                 </div>
               </div>
               <div class="biz-card highlight">
                 <div class="card-head">🎨 CO-STAR (마케팅 & 대외)</div>
-                <p class="card-para" style="font-size: 0.95rem;">Context · Objective · Style · Tone · Audience · Response<br>고객 타깃팅 및 브랜드 어조 제어가 중요한 카피라이팅에 최적화</p>
+                <p class="card-para" style="font-size: 1.15rem;">Context · Objective · Style · Tone · Audience · Response<br>고객 타깃팅 및 브랜드 어조 제어가 중요한 카피라이팅에 최적화</p>
                 <div class="sub-block">
                   <div class="sub-block-title">📌 권장 업무 시나리오</div>
                   <div class="sub-block-desc">• SNS 다채널 홍보 카피 다변화<br>• B2B 잠재 고객 영업 콜드메일<br>• 보도자료 및 이벤트 안내문</div>
                 </div>
-                <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                <div style="margin-top: auto; font-size: 1.15rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
                   🎯 3분 내 정밀 타깃팅 · 마케팅 카피
                 </div>
               </div>
@@ -914,16 +917,16 @@
           <p class="slide-desc-text">개인 생산성 향상에서 출발하여 전사 자율 워크플로우와 거버넌스로 확장하는 로드맵입니다.</p>
         </div>
         <div class="slide-body">
-          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
-            <div class="layout-quad" style="flex: 1;">
+          <div style="display: flex; flex-direction: column; gap: 0.85rem; width: 100%;">
+            <div class="layout-quad">
               <div class="biz-card highlight">
                 <div style="font-size: 1.6rem; margin-bottom: 2px;">1️⃣</div>
                 <div class="card-head" style="color: var(--primary-green-dark); font-size: 1.1rem;">개인 어시스턴트</div>
                 <div class="sub-block" style="padding: 6px 8px;">
-                  <div class="sub-block-title" style="font-size: 0.82rem; color: var(--primary-green-dark);">1단계: 개인 업무 혁신</div>
-                  <div class="sub-block-desc" style="font-size: 0.84rem;">초안 작성, 실시간 웹 검색, 번역, 엑셀/PPT 분석으로 일상 업무 시간 30% 절감</div>
+                  <div class="sub-block-title" style="font-size: 1.14rem; color: var(--primary-green-dark);">1단계: 개인 업무 혁신</div>
+                  <div class="sub-block-desc" style="font-size: 1.14rem;">초안 작성, 실시간 웹 검색, 번역, 엑셀/PPT 분석으로 일상 업무 시간 30% 절감</div>
                 </div>
-                <div style="margin-top: auto; font-size: 0.85rem; color: #166534; background: #f0fdf4; padding: 4px 8px; border-radius: 6px; border: 1px solid #bbf7d0; text-align: center;">
+                <div style="margin-top: auto; font-size: 1.14rem; color: #166534; background: #f0fdf4; padding: 4px 8px; border-radius: 6px; border: 1px solid #bbf7d0; text-align: center;">
                   🟢 Track 1 영역
                 </div>
               </div>
@@ -931,10 +934,10 @@
                 <div style="font-size: 1.6rem; margin-bottom: 2px;">2️⃣</div>
                 <div class="card-head" style="color: var(--google-blue); font-size: 1.1rem;">팀 지식 도서관</div>
                 <div class="sub-block" style="padding: 6px 8px;">
-                  <div class="sub-block-title" style="font-size: 0.82rem; color: #1e40af;">2단계: 팀 지식 자산화</div>
-                  <div class="sub-block-desc" style="font-size: 0.84rem;">Notebook 그라운딩으로 팟캐스트, 인포그래픽 5종 생성 및 노코드 에이전트 조립</div>
+                  <div class="sub-block-title" style="font-size: 1.14rem; color: #1e40af;">2단계: 팀 지식 자산화</div>
+                  <div class="sub-block-desc" style="font-size: 1.14rem;">Notebook 그라운딩으로 팟캐스트, 인포그래픽 5종 생성 및 노코드 에이전트 조립</div>
                 </div>
-                <div style="margin-top: auto; font-size: 0.85rem; color: #1e40af; background: #eff6ff; padding: 4px 8px; border-radius: 6px; border: 1px solid #bfdbfe; text-align: center;">
+                <div style="margin-top: auto; font-size: 1.14rem; color: #1e40af; background: #eff6ff; padding: 4px 8px; border-radius: 6px; border: 1px solid #bfdbfe; text-align: center;">
                   🔵 Track 2 영역
                 </div>
               </div>
@@ -942,10 +945,10 @@
                 <div style="font-size: 1.6rem; margin-bottom: 2px;">3️⃣</div>
                 <div class="card-head" style="color: var(--purple); font-size: 1.1rem;">자율 워크플로우</div>
                 <div class="sub-block" style="padding: 6px 8px;">
-                  <div class="sub-block-title" style="font-size: 0.82rem; color: #6b21a8;">3단계: 시스템 연동 자동화</div>
-                  <div class="sub-block-desc" style="font-size: 0.84rem;">Google ADK 2.0 기반 멀티 에이전트 협업 및 Cloud Run 서버리스 마이크로서비스 배포</div>
+                  <div class="sub-block-title" style="font-size: 1.14rem; color: #6b21a8;">3단계: 시스템 연동 자동화</div>
+                  <div class="sub-block-desc" style="font-size: 1.14rem;">Google ADK 2.0 기반 멀티 에이전트 협업 및 Cloud Run 서버리스 마이크로서비스 배포</div>
                 </div>
-                <div style="margin-top: auto; font-size: 0.85rem; color: #6b21a8; background: #faf5ff; padding: 4px 8px; border-radius: 6px; border: 1px solid #e9d5ff; text-align: center;">
+                <div style="margin-top: auto; font-size: 1.14rem; color: #6b21a8; background: #faf5ff; padding: 4px 8px; border-radius: 6px; border: 1px solid #e9d5ff; text-align: center;">
                   🟣 Track 2 Plus 영역
                 </div>
               </div>
@@ -953,10 +956,10 @@
                 <div style="font-size: 1.6rem; margin-bottom: 2px;">4️⃣</div>
                 <div class="card-head" style="color: var(--google-red); font-size: 1.1rem;">전사 거버넌스</div>
                 <div class="sub-block" style="padding: 6px 8px;">
-                  <div class="sub-block-title" style="font-size: 0.82rem; color: #991b1b;">4단계: 엔터프라이즈 운영</div>
-                  <div class="sub-block-desc" style="font-size: 0.84rem;">Model Armor 보안 방화벽, BigQuery SIEM 관제 및 연간 300% FinOps ROI 달성</div>
+                  <div class="sub-block-title" style="font-size: 1.14rem; color: #991b1b;">4단계: 엔터프라이즈 운영</div>
+                  <div class="sub-block-desc" style="font-size: 1.14rem;">Model Armor 보안 방화벽, BigQuery SIEM 관제 및 연간 300% FinOps ROI 달성</div>
                 </div>
-                <div style="margin-top: auto; font-size: 0.85rem; color: #991b1b; background: #fef2f2; padding: 4px 8px; border-radius: 6px; border: 1px solid #fecaca; text-align: center;">
+                <div style="margin-top: auto; font-size: 1.14rem; color: #991b1b; background: #fef2f2; padding: 4px 8px; border-radius: 6px; border: 1px solid #fecaca; text-align: center;">
                   🔴 Track 3 영역
                 </div>
               </div>
@@ -982,7 +985,7 @@
             <div class="biz-card highlight" style="text-align: left; padding: 1.2rem;">
               <div style="font-size: 1.8rem;">🟢</div>
               <div style="font-weight: 800; font-size: 1.15rem; color: var(--primary-green-dark); margin: 4px 0;">Track 1. Day 1 Value</div>
-              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">AI 어시스턴트, 미디어 생성, Excel/PPTX 파일 분석</p>
+              <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">AI 어시스턴트, 미디어 생성, Excel/PPTX 파일 분석</p>
               <a href="slide_track1_v2.html" class="btn-portal-exit" style="background: var(--primary-green); color: #ffffff; padding: 6px 14px; font-size: 0.9rem; border-radius: 20px; text-align: center; justify-content: center; margin-top: auto;">
                 Track 1 시작 &rarr;
               </a>
@@ -990,7 +993,7 @@
             <div class="biz-card highlight blue" style="text-align: left; padding: 1.2rem;">
               <div style="font-size: 1.8rem;">🔵</div>
               <div style="font-weight: 800; font-size: 1.15rem; color: var(--google-blue); margin: 4px 0;">Track 2. Agentic Value</div>
-              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">Gemini Notebook 5종 생성, Deep Research, 노코드 에이전트</p>
+              <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">Gemini Notebook 5종 생성, Deep Research, 노코드 에이전트</p>
               <a href="slide_track2_v2.html" class="btn-portal-exit" style="background: var(--google-blue); color: #ffffff; padding: 6px 14px; font-size: 0.9rem; border-radius: 20px; text-align: center; justify-content: center; margin-top: auto;">
                 Track 2 시작 &rarr;
               </a>
@@ -998,7 +1001,7 @@
             <div class="biz-card highlight purple" style="text-align: left; padding: 1.2rem;">
               <div style="font-size: 1.8rem;">🟣</div>
               <div style="font-weight: 800; font-size: 1.15rem; color: var(--purple); margin: 4px 0;">Track 2 Plus. Pro Code</div>
-              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">사내 RAG 연동, Google ADK 2.0 개발, Cloud Run 배포</p>
+              <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">사내 RAG 연동, Google ADK 2.0 개발, Cloud Run 배포</p>
               <a href="slide_track2plus_v2.html" class="btn-portal-exit" style="background: var(--purple); color: #ffffff; padding: 6px 14px; font-size: 0.9rem; border-radius: 20px; text-align: center; justify-content: center; margin-top: auto;">
                 Track 2+ 시작 &rarr;
               </a>
@@ -1006,7 +1009,7 @@
             <div class="biz-card highlight red" style="text-align: left; padding: 1.2rem;">
               <div style="font-size: 1.8rem;">🔴</div>
               <div style="font-weight: 800; font-size: 1.15rem; color: var(--google-red); margin: 4px 0;">Track 3. Admin & Security</div>
-              <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">Model Armor 보안 방화벽, BigQuery 감사 로그, FinOps ROI</p>
+              <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.48; margin-bottom: 0.8rem;">Model Armor 보안 방화벽, BigQuery 감사 로그, FinOps ROI</p>
               <a href="slide_admin_v2.html" class="btn-portal-exit" style="background: var(--google-red); color: #ffffff; padding: 6px 14px; font-size: 0.9rem; border-radius: 20px; text-align: center; justify-content: center; margin-top: auto;">
                 Track 3 시작 &rarr;
               </a>
