@@ -24,7 +24,7 @@
       --purple: #7c3aed;
       --purple-light: #f3e8ff;
       
-      --bg-main: #f8fafc;
+      --bg-main: #f0f4f9;
       --bg-card: #ffffff;
       --border-color: #e2e8f0;
       --border-focus: #cbd5e1;
@@ -75,7 +75,7 @@
     .glow-2 { width: 600px; height: 600px; bottom: -10%; left: 20%; background: radial-gradient(circle, var(--google-green) 0%, transparent 70%); }
     .glow-3 { width: 450px; height: 450px; top: 40%; right: 10%; background: radial-gradient(circle, var(--purple) 0%, transparent 70%); }
 
-    /* 사이드바 */
+        /* 사이드바 & Google Cloud Brand */
     aside.sidebar {
       width: var(--sidebar-width);
       background: #ffffff;
@@ -91,7 +91,7 @@
     }
 
     .sidebar-header {
-      padding: 16px 20px;
+      padding: 14px 18px;
       border-bottom: 1px solid var(--border-color);
       display: flex;
       align-items: center;
@@ -99,11 +99,19 @@
       height: var(--header-height);
     }
     .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); }
-    .brand-logo { font-size: 24px; line-height: 1; }
-    .brand-title { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; letter-spacing: -0.02em; }
+    .brand-logo { font-size: 22px; line-height: 1; }
+    .brand-text-group { display: flex; flex-direction: column; gap: 1px; }
+    .brand-title-row { display: flex; align-items: center; gap: 8px; }
+    .brand-title { font-family: var(--font-display); font-weight: 800; font-size: 1.02rem; letter-spacing: -0.02em; }
     .brand-title span { color: var(--google-blue); }
+    .brand-sub-badge { font-size: 0.72rem; font-weight: 700; color: var(--google-blue); letter-spacing: 0.02em; text-transform: uppercase; }
 
-    .sidebar-toggle-btn {
+    .sidebar-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sidebar-icon-btn, .sidebar-toggle-btn {
       width: 32px;
       height: 32px;
       border-radius: var(--radius-sm);
@@ -115,83 +123,90 @@
       align-items: center;
       justify-content: center;
       transition: all 0.15s ease;
+      text-decoration: none;
+      font-size: 13px;
     }
-    .sidebar-toggle-btn:hover { background: var(--bg-main); color: var(--google-blue); }
+    .sidebar-icon-btn:hover, .sidebar-toggle-btn:hover { background: #f1f5f9; color: var(--google-blue); }
 
     .sidebar-content {
       flex: 1;
       overflow-y: auto;
-      padding: 16px 14px 24px 14px;
+      padding: 20px 14px 24px 14px;
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
 
-    .sidebar-cta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: linear-gradient(135deg, #1a73e8, #34a853);
-      color: #ffffff !important;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 10px 16px;
-      border-radius: var(--radius-md);
-      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);
-      transition: all 0.2s ease;
-    }
-    .sidebar-cta:hover { transform: translateY(-1px); opacity: 0.95; }
-
     .nav-group-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-sub); padding: 0 8px 6px 8px; }
-    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
     .nav-item a {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 8px 12px;
-      border-radius: var(--radius-sm);
+      padding: 9px 12px;
+      border-radius: 10px;
       text-decoration: none;
       font-size: 0.88rem;
       font-weight: 500;
       color: var(--text-muted);
       transition: all 0.15s ease;
+      border-left: 3px solid transparent;
     }
     .nav-item a:hover { background: #f1f5f9; color: var(--text-main); }
-    .nav-item.active a { background: var(--google-blue-light); color: var(--google-blue-dark); font-weight: 700; }
+    .nav-item.active > a {
+      background: #e8f0fe;
+      color: var(--google-blue);
+      font-weight: 700;
+      border-left: 3px solid var(--google-blue);
+    }
 
     .sub-nav-list {
       list-style: none;
-      margin: 4px 0 6px 16px;
-      padding-left: 12px;
+      margin: 4px 0 6px 28px;
+      padding-left: 10px;
       border-left: 2px solid var(--border-color);
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
     .sub-nav-item a {
+      padding: 4px 8px;
       font-size: 0.8rem;
       color: var(--text-sub);
-      padding: 5px 8px;
       border-radius: 6px;
+      border-left: none;
       display: block;
-      text-decoration: none;
-      transition: all 0.15s;
     }
-    .sub-nav-item a:hover { color: var(--google-blue); background: #f8fafc; }
-    .sub-nav-item.active a { color: var(--google-blue); font-weight: 700; background: var(--google-blue-light); }
+    .sub-nav-item a:hover {
+      color: var(--google-blue);
+      background: #f1f5f9;
+    }
 
-    /* 축소 모드 */
-    body.sidebar-mini { --sidebar-width: var(--sidebar-collapsed-width); }
-    body.sidebar-mini .brand-title,
-    body.sidebar-mini .sidebar-cta,
-    body.sidebar-mini .nav-group-title,
-    body.sidebar-mini .sub-nav-list,
-    body.sidebar-mini .nav-item a span.label { display: none !important; }
-    body.sidebar-mini .sidebar-header { justify-content: center; padding: 16px 0; }
-    body.sidebar-mini .brand { display: none; }
-    body.sidebar-mini .nav-item a { justify-content: center; padding: 10px 0; font-size: 1.2rem; }
+    /* Google 4-Color Top Line & Dots */
+    .g-top-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #4285f4 0%, #ea4335 33%, #fbbc04 66%, #34a853 100%);
+      z-index: 1000;
+    }
+    .g-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .g-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .g-dot.blue { background-color: #4285f4; }
+    .g-dot.red { background-color: #ea4335; }
+    .g-dot.yellow { background-color: #fbbc04; }
+    .g-dot.green { background-color: #34a853; }
 
     /* 메인 뷰 */
     .main-wrapper { flex: 1; display: flex; flex-direction: column; min-width: 0; }
@@ -233,22 +248,22 @@
 
     main.content-area {
       flex: 1;
-      max-width: 1040px;
+      max-width: 1140px;
       width: 100%;
-      margin: 0 auto;
-      padding: 40px 32px 100px 32px;
+      margin: 28px auto 80px auto;
+      padding: 0 28px;
       display: flex;
       flex-direction: column;
-      gap: 36px;
+      gap: 32px;
     }
 
     /* 히어로 카드 */
     .hero-card {
-      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-      border: 1px solid var(--border-color);
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.9);
       border-radius: var(--radius-xl);
       padding: 36px 40px;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
       position: relative;
       overflow: hidden;
     }
@@ -289,14 +304,14 @@
     /* 다운로드 스트립 */
     .download-strip {
       background: #ffffff;
-      border: 1px solid var(--border-color);
+      border: 1px solid rgba(226, 232, 240, 0.9);
       border-radius: var(--radius-lg);
       padding: 20px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
       flex-wrap: wrap;
     }
     .download-strip-left { display: flex; align-items: center; gap: 16px; }
@@ -333,12 +348,16 @@
 
     /* 스텝 카드 */
     .step-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.9);
       border-radius: var(--radius-xl);
-      padding: 32px 36px;
-      box-shadow: var(--shadow-sm);
+      padding: 36px 40px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
       position: relative;
+      transition: box-shadow 0.2s ease;
+    }
+    .step-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
     }
     .step-card-header {
       display: flex;
@@ -565,39 +584,84 @@
     .img-modal img { max-width: 90vw; max-height: 90vh; border-radius: var(--radius-md); }
     .img-modal-close { position: absolute; top: 24px; right: 24px; color: #ffffff; font-size: 32px; cursor: pointer; }
 
-    @media (max-width: 960px) {
+        @media (max-width: 960px) {
       aside.sidebar { position: fixed; left: -100%; }
       aside.sidebar.open { left: 0; }
       header.app-bar { padding: 0 16px; }
-      main.content-area { padding: 24px 16px 80px 16px; }
-      .hero-card { padding: 24px; }
+      main.content-area { padding: 0 16px; margin: 20px auto 60px auto; }
+      .hero-card { padding: 24px 20px; }
       .step-card { padding: 24px 20px; }
     }
+      /* Google 4-Color Top Line */
+    .g-top-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #4285f4 0%, #ea4335 33%, #fbbc04 66%, #34a853 100%);
+      z-index: 1000;
+    }
+    .g-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .g-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .g-dot.blue { background-color: #4285f4; }
+    .g-dot.red { background-color: #ea4335; }
+    .g-dot.yellow { background-color: #fbbc04; }
+    .g-dot.green { background-color: #34a853; }
+    .brand-text-group { display: flex; flex-direction: column; gap: 1px; }
+    .brand-title-row { display: flex; align-items: center; gap: 8px; }
+    .brand-sub-badge { font-size: 0.72rem; font-weight: 700; color: var(--google-blue); letter-spacing: 0.02em; text-transform: uppercase; }
+
   </style>
 </head>
 <body>
+  <!-- Google 4-Color Top Line -->
+  <div class="g-top-line"></div>
+
+  <!-- Google 4-Color Top Line -->
   <div class="ambient-glow glow-1"></div>
   <div class="ambient-glow glow-2"></div>
   <div class="ambient-glow glow-3"></div>
 
-  <!-- 사이드바 -->
+    <!-- 사이드바 -->
   <aside class="sidebar" id="app-sidebar">
     <div class="sidebar-header">
       <a href="index.html" class="brand">
         <span class="brand-logo">🌐</span>
-        <span class="brand-title">GE <span>Class</span></span>
+        <div class="brand-text-group">
+          <div class="brand-title-row">
+            <span class="brand-title">Gemini <span>Enterprise</span></span>
+            <div class="g-dots">
+              <span class="g-dot blue"></span>
+              <span class="g-dot red"></span>
+              <span class="g-dot yellow"></span>
+              <span class="g-dot green"></span>
+            </div>
+          </div>
+          <span class="brand-sub-badge">Google Cloud</span>
+        </div>
       </a>
-      <button type="button" class="sidebar-toggle-btn" id="toggle-sidebar" title="사이드바 축소/확대">
-        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
+      <div class="sidebar-header-actions">
+        <button type="button" class="sidebar-icon-btn" id="toggle-sidebar" title="사이드바 축소/확대">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <div class="sidebar-content">
-
       <div>
         <div class="nav-group-title">커리큘럼 트랙</div>
         <ul class="nav-list">
@@ -612,6 +676,7 @@
               <span>🟢</span>
               <span class="label">Track 1. Day 1 Value</span>
             </a>
+
           </li>
           <li class="nav-item active">
             <a href="track2.html">
@@ -619,28 +684,25 @@
               <span class="label">Track 2. Agentic Value</span>
             </a>
             <ul class="sub-nav-list">
-              <li class="sub-nav-item"><a href="#step-21">2.1 Gemini Notebook</a></li>
-              <li class="sub-nav-item" style="padding-left: 8px;"><a href="#step-211">2.1.1 인포그래픽</a></li>
-              <li class="sub-nav-item" style="padding-left: 8px;"><a href="#step-212">2.1.2 오디오 팟캐스트</a></li>
-              <li class="sub-nav-item" style="padding-left: 8px;"><a href="#step-213">2.1.3 시네마틱 슬라이드</a></li>
-              <li class="sub-nav-item" style="padding-left: 8px;"><a href="#step-214">2.1.4 설명서 및 리포트</a></li>
-              <li class="sub-nav-item" style="padding-left: 8px;"><a href="#step-215">2.1.5 비디오 제작</a></li>
-              <li class="sub-nav-item"><a href="#step-22">2.2 Deep Research Agent</a></li>
-              <li class="sub-nav-item"><a href="#step-23">2.3 Agent Designer</a></li>
-              <li class="sub-nav-item"><a href="#step-24">2.4 Workflow Agent</a></li>
+              <li class="sub-nav-item"><a href="#step-01">2.1 Gemini Notebook 5대 과제</a></li>
+              <li class="sub-nav-item"><a href="#step-02">2.2 Deep Research</a></li>
+              <li class="sub-nav-item"><a href="#step-03">2.3 Agent Designer 노코드</a></li>
+              <li class="sub-nav-item"><a href="#step-04">2.4 Workflow Agent 파이프라인</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a href="track2plus.html">
+            <a href="track3.html">
               <span>🟣</span>
-              <span class="label">Track 2 Plus. Pro Code</span>
+              <span class="label">Track 3. Pro Code</span>
             </a>
+
           </li>
           <li class="nav-item">
-            <a href="track3.html">
+            <a href="track4.html">
               <span>🔴</span>
-              <span class="label">Track 3. Admin & Security</span>
+              <span class="label">Track 4. Admin &amp; Security</span>
             </a>
+
           </li>
         </ul>
       </div>
@@ -654,6 +716,12 @@
         <a href="index.html">교육 포털</a>
         <span>/</span>
         <span class="current">Track 2. Agentic Value</span>
+      </div>
+      <div class="g-dots" style="opacity: 0.85;">
+        <span class="g-dot blue"></span>
+        <span class="g-dot red"></span>
+        <span class="g-dot yellow"></span>
+        <span class="g-dot green"></span>
       </div>
       <div class="app-bar-actions">
         <a href="slide_track2_v2.html" target="_blank" class="btn-slide-launch">

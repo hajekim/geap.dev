@@ -1,4 +1,4 @@
-# 🟣 Track 2 Plus. Connector & Custom Agent — Pro Code
+# 🟣 Track 3. Connector & Custom Agent — Pro Code
 
 > [!NOTE]
 > **트랙 개요**: Google Drive / Workspace 커넥터 연동과 Python 기반 커스텀 에이전트 개발을 다루는 심화 실습 과정입니다. 관리자가 사전에 커넥터 또는 커스텀 에이전트 환경을 구성한 상태에서 진행합니다.
@@ -10,7 +10,8 @@
 > - [📕 임직원 복리후생 가이드라인 (PDF)](samples/%5B공통_내규%5D_넥스트_테크놀로지스_임직원_복리후생_가이드라인.pdf) | [📄 Markdown 버전](samples/%5B공통_내규%5D_넥스트_테크놀로지스_임직원_복리후생_가이드라인.md)
 > - [📕 브랜드 앰버서더 프로그램 가이드라인 (PDF)](samples/%5B마케팅_캠페인%5D_넥스트_테크놀로지스_사내_브랜드_앰버서더_프로그램_가이드라인.pdf) | [📄 Markdown 버전](samples/%5B마케팅_캠페인%5D_넥스트_테크놀로지스_사내_브랜드_앰버서더_프로그램_가이드라인.md)
 > - [📄 사내 AI 윤리 및 보안 규정 (Markdown)](samples/track2_rag_policy.md)
-> - [📽️ Track 2 Plus 강의 슬라이드 열기](slide_track2plus.html)
+> - [🌐 Track 3 인터랙티브 웹 포털 열기](https://geap.dev/track3.html)
+> - [📽️ Track 3 16:9 발표 슬라이드 열기](https://geap.dev/slide_track3_v2.html)
 
 ---
 

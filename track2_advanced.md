@@ -1,7 +1,7 @@
 # 🔵 Track 2. Advanced — Agentic Value
 
 > [!NOTE]
-> **트랙 개요**: Gemini Notebook 팀 도서관 구축, Deep Research 자율 보고서, 에이전트 빌더를 활용한 맞춤형 AI로 업무 파이프라인을 직접 구성하는 중급 실습 과정입니다. Google Drive 커넥터 및 프로코드 커스텀 에이전트 개발 실습은 [Track 2 Plus](track2plus.md)를 참고하세요.
+> **트랙 개요**: Gemini Notebook 팀 도서관 구축, Deep Research 자율 보고서, 에이전트 빌더를 활용한 맞춤형 AI로 업무 파이프라인을 직접 구성하는 중급 실습 과정입니다. Google Drive 커넥터 및 프로코드 커스텀 에이전트 개발 실습은 [Track 3](track3_pro_code.md)를 참고하세요.
 
 > [!TIP]
 > **실습 첨부파일 다운로드**
@@ -9,7 +9,8 @@
 > - [📦 시네마틱 슬라이드 실습용 이미지 (homestyle.zip)](samples/homestyle.zip)
 > - [📄 Canvas 가이드 문서 (canvas.pdf)](samples/canvas.pdf)
 > - [📦 Canvas 튜토리얼 비디오 패키지 (canvas.zip)](samples/canvas.zip)
-> - [📽️ Track 2 강의 슬라이드 열기](slide_track2.html)
+> - [🌐 Track 2 인터랙티브 웹 포털 열기](https://geap.dev/track2.html)
+> - [📽️ Track 2 16:9 발표 슬라이드 열기](https://geap.dev/slide_track2_v2.html)
 
 ---
 

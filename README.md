@@ -4,18 +4,19 @@ Google Gemini Enterprise를 활용한 실무 중심의 생성형 AI 핸즈온 �
 
 > [!TIP]
 > **웹 포털로 실습하기**  
-> 본 저장소는 순수 HTML 기반의 독립 웹 애플리케이션을 제공합니다. 브라우저에서 [index.html](index.html)을 열거나 로컬 웹서버(`python3 -m http.server 8080`)를 실행하면 인터랙티브한 실습 환경(프롬프트 원클릭 복사, 이미지 줌 뷰어, 슬라이드 발표 모드)을 이용할 수 있습니다.
+> 본 저장소는 순수 HTML/JS 기반의 독립 웹 애플리케이션을 제공합니다. [https://geap.dev](https://geap.dev)에 접속하거나 로컬 웹서버(`python3 -m http.server 8080`)를 실행하면 인터랙티브한 실습 환경(프롬프트 원클릭 복사, 이미지 줌 뷰어, 슬라이드 발표 모드)을 즉시 이용할 수 있습니다.
 
 ---
 
 ## 🧭 수준별 실습 교육 트랙
 
-| 트랙 | 대상 및 난이도 | 주요 실습 주제 | 문서 바로가기 | 발표 자료 |
-| :--- | :--- | :--- | :--- | :--- |
-| **🟢 Track 1. Day 1 Value** | 전사 임직원 · 기획/마케팅 실무진<br>`입문 (No-Code)` | 웹 검색 그라운딩, 이미지/영상 생성, 엑셀/PPT 파일 분석, Canvas 슬라이드, CRAFT 프롬프트 | [📖 Track 1 가이드](track1_day1_value.md) | [📽️ 슬라이드](slide_track1.html) |
-| **🔵 Track 2. Agentic Value** | 비즈니스 파워 유저 · 기획 리더<br>`중급 (No-Code Agent)` | Gemini Notebook(3종 인포그래픽, 팟캐스트, 시네마틱 슬라이드), Deep Research, Agent Designer, Workflow Agent | [📖 Track 2 가이드](track2_advanced.md) | [📽️ 슬라이드](slide_track2.html) |
-| **🟣 Track 2 Plus. Pro Code** | 클라우드 엔지니어 · 백엔드 개발자<br>`고급 (Pro-Code)` | Google Drive/Workspace 커넥터 연동, 사내 내규 RAG 검색, Python ADK 에이전트 개발, Cloud Run 배포 및 A2A 등록 | [📖 Track 2 Plus 가이드](track2plus.md) | [📽️ 슬라이드](slide_track2plus.html) |
-| **🔴 Track 3. Admin & Security** | IT 관리자 · CISO · 보안 조직<br>`고급 (Admin & Security)` | GCP 이중화 배포, Cloud Identity (WIF), 전사 제어판 튜닝, Model Armor 7대 보안 테스트, Cloud Audit Logs SQL 감사, Chrome 옴니바 연동 및 ROI | [📖 Track 3 가이드](admin_guide.md) | [📽️ 슬라이드](slide_admin.html) |
+| 트랙 | 대상 및 난이도 | 주요 실습 주제 | MD 문서 | 웹 포털 실습 | 발표 슬라이드 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **🎯 오프닝 키노트** | 전사 임직원 · 리더십 | 전사 AI 도입 비전 및 4단계 성숙도 로드맵 | - | [🌐 geap.dev](https://geap.dev) | [📽️ Keynote 슬라이드](https://geap.dev/slide_v2.html) |
+| **🟢 Track 1. Day 1 Value** | 전사 임직원 · 기획/마케팅 실무진<br>`입문 (No-Code)` | 웹 검색 그라운딩, 이미지/영상 생성, 엑셀/PPT 파일 분석, Canvas 슬라이드, CRAFT 프롬프트 | [📖 Track 1 가이드](track1_day1_value.md) | [🌐 Track 1 포털](https://geap.dev/track1.html) | [📽️ 슬라이드](https://geap.dev/slide_track1_v2.html) |
+| **🔵 Track 2. Agentic Value** | 비즈니스 파워 유저 · 기획 리더<br>`중급 (No-Code Agent)` | Gemini Notebook(3종 인포그래픽, 팟캐스트, 시네마틱 슬라이드), Deep Research, Agent Designer, Workflow Agent | [📖 Track 2 가이드](track2_advanced.md) | [🌐 Track 2 포털](https://geap.dev/track2.html) | [📽️ 슬라이드](https://geap.dev/slide_track2_v2.html) |
+| **🟣 Track 3. Pro Code** | 클라우드 엔지니어 · 백엔드 개발자<br>`고급 (Pro-Code)` | Google Drive/Workspace 커넥터 연동, 사내 내규 RAG 검색, Python ADK 에이전트 개발, Cloud Run 배포 및 A2A 등록 | [📖 Track 3 가이드](track3_pro_code.md) | [🌐 Track 3 포털](https://geap.dev/track3.html) | [📽️ 슬라이드](https://geap.dev/slide_track3_v2.html) |
+| **🔴 Track 4. Admin & Security** | IT 관리자 · CISO · 보안 조직<br>`고급 (Admin & Security)` | GCP 이중화 배포, Cloud Identity (WIF), 전사 제어판 튜닝, Model Armor 7대 보안 테스트, Cloud Audit Logs SQL 감사, Chrome 옴니바 연동 및 ROI | [📖 Track 4 가이드](track4_admin.md) | [🌐 Track 4 포털](https://geap.dev/track4.html) | [📽️ 슬라이드](https://geap.dev/slide_track4_v2.html) |
 
 ---
 
@@ -52,15 +53,15 @@ Google Gemini Enterprise를 활용한 실무 중심의 생성형 AI 핸즈온 �
 ## 📂 저장소 구조
 
 ```text
-├── index.html               # 메인 교육 포털 홈 웹 애플리케이션
-├── track1.html              # Track 1 웹 인터랙티브 가이드
-├── track2.html              # Track 2 웹 인터랙티브 가이드
-├── track2plus.html          # Track 2 Plus 웹 인터랙티브 가이드
-├── track3.html              # Track 3 웹 인터랙티브 가이드
+├── index.html               # 메인 교육 포털 홈 웹 애플리케이션 (https://geap.dev)
+├── track1.html              # Track 1 웹 인터랙티브 가이드 (https://geap.dev/track1.html)
+├── track2.html              # Track 2 웹 인터랙티브 가이드 (https://geap.dev/track2.html)
+├── track3.html              # Track 3 웹 인터랙티브 가이드 (https://geap.dev/track3.html)
+├── track4.html              # Track 4 웹 인터랙티브 가이드 (https://geap.dev/track4.html)
 ├── track1_day1_value.md     # Track 1 마크다운 원본 문서
 ├── track2_advanced.md       # Track 2 마크다운 원본 문서
-├── track2plus.md            # Track 2 Plus 마크다운 원본 문서
-├── admin_guide.md           # Track 3 마크다운 원본 문서
+├── track3_pro_code.md       # Track 3 마크다운 원본 문서
+├── track4_admin.md          # Track 4 마크다운 원본 문서
 ├── img/                     # 전체 실습 스크린샷 및 UI 에셋
 └── samples/                 # 실습용 샘플 파일 (엑셀, PPTX, PDF, Zip, CSV)
 ```

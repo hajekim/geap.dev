@@ -24,8 +24,9 @@
       --google-yellow-light: #fef7e0;
       --purple: #7c3aed;
       --purple-light: #f3e8ff;
+      --amber: #d97706;
       
-      --bg-main: #f8fafc;
+      --bg-page: #f0f4f9;
       --bg-card: #ffffff;
       --border-color: #e2e8f0;
       --border-focus: #cbd5e1;
@@ -41,21 +42,22 @@
       --sidebar-collapsed-width: 72px;
       --header-height: 64px;
       --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --radius-xl: 20px;
+      --radius-md: 14px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --radius-2xl: 28px;
       
       --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
       --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+      --shadow-canvas: 0 12px 36px rgba(0, 0, 0, 0.035), 0 1px 3px rgba(0, 0, 0, 0.02);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: var(--font-body);
-      background-color: var(--bg-main);
+      background-color: var(--bg-page);
       color: var(--text-main);
       line-height: 1.75;
       letter-spacing: -0.015em;
@@ -64,12 +66,40 @@
       min-height: 100vh;
     }
 
+    /* Google 4-Color Top Line */
+    .g-top-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #4285f4 0%, #ea4335 33%, #fbbc04 66%, #34a853 100%);
+      z-index: 1000;
+    }
+
+    /* Google 4-Color Dots Component */
+    .g-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .g-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .g-dot.blue { background-color: #4285f4; }
+    .g-dot.red { background-color: #ea4335; }
+    .g-dot.yellow { background-color: #fbbc04; }
+    .g-dot.green { background-color: #34a853; }
+
     .ambient-glow {
       position: fixed;
       border-radius: 50%;
       filter: blur(140px);
       z-index: -1;
-      opacity: 0.12;
+      opacity: 0.15;
       pointer-events: none;
     }
     .glow-1 { width: 550px; height: 550px; top: -10%; right: -5%; background: radial-gradient(circle, var(--google-blue) 0%, transparent 70%); }
@@ -92,7 +122,7 @@
     }
 
     .sidebar-header {
-      padding: 16px 20px;
+      padding: 14px 18px;
       border-bottom: 1px solid var(--border-color);
       display: flex;
       align-items: center;
@@ -100,11 +130,19 @@
       height: var(--header-height);
     }
     .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); }
-    .brand-logo { font-size: 24px; line-height: 1; }
-    .brand-title { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; letter-spacing: -0.02em; }
+    .brand-logo { font-size: 22px; line-height: 1; }
+    .brand-text-group { display: flex; flex-direction: column; gap: 1px; }
+    .brand-title-row { display: flex; align-items: center; gap: 8px; }
+    .brand-title { font-family: var(--font-display); font-weight: 800; font-size: 1.02rem; letter-spacing: -0.02em; }
     .brand-title span { color: var(--google-blue); }
+    .brand-sub-badge { font-size: 0.72rem; font-weight: 700; color: var(--google-blue); letter-spacing: 0.02em; text-transform: uppercase; }
 
-    .sidebar-toggle-btn {
+    .sidebar-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sidebar-icon-btn {
       width: 32px;
       height: 32px;
       border-radius: var(--radius-sm);
@@ -116,60 +154,50 @@
       align-items: center;
       justify-content: center;
       transition: all 0.15s ease;
+      text-decoration: none;
+      font-size: 13px;
     }
-    .sidebar-toggle-btn:hover { background: var(--bg-main); color: var(--google-blue); }
+    .sidebar-icon-btn:hover { background: #f1f5f9; color: var(--google-blue); }
 
     .sidebar-content {
       flex: 1;
       overflow-y: auto;
-      padding: 16px 14px 24px 14px;
+      padding: 20px 14px 24px 14px;
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
 
-    .sidebar-cta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: linear-gradient(135deg, #1a73e8, #34a853);
-      color: #ffffff !important;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 10px 16px;
-      border-radius: var(--radius-md);
-      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);
-      transition: all 0.2s ease;
-    }
-    .sidebar-cta:hover { transform: translateY(-1px); opacity: 0.95; }
-
     .nav-group-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-sub); padding: 0 8px 6px 8px; }
-    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
     .nav-item a {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 8px 12px;
-      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      border-radius: 10px;
       text-decoration: none;
       font-size: 0.88rem;
       font-weight: 500;
       color: var(--text-muted);
       transition: all 0.15s ease;
+      border-left: 3px solid transparent;
     }
     .nav-item a:hover { background: #f1f5f9; color: var(--text-main); }
-    .nav-item.active a { background: var(--google-blue-light); color: var(--google-blue-dark); font-weight: 700; }
+    .nav-item.active a {
+      background: #e8f0fe;
+      color: var(--google-blue);
+      font-weight: 700;
+      border-left: 3px solid var(--google-blue);
+    }
 
     body.sidebar-mini { --sidebar-width: var(--sidebar-collapsed-width); }
-    body.sidebar-mini .brand-title,
-    body.sidebar-mini .sidebar-cta,
+    body.sidebar-mini .brand-text-group,
     body.sidebar-mini .nav-group-title,
     body.sidebar-mini .nav-item a span.label { display: none !important; }
     body.sidebar-mini .sidebar-header { justify-content: center; padding: 16px 0; }
     body.sidebar-mini .brand { display: none; }
-    body.sidebar-mini .nav-item a { justify-content: center; padding: 10px 0; font-size: 1.2rem; }
+    body.sidebar-mini .nav-item a { justify-content: center; padding: 10px 0; font-size: 1.2rem; border-left: none; }
 
     /* 메인 뷰 */
     .main-wrapper { flex: 1; display: flex; flex-direction: column; min-width: 0; }
@@ -193,73 +221,167 @@
 
     main.content-area {
       flex: 1;
-      max-width: 1100px;
+      max-width: 1140px;
       width: 100%;
-      margin: 0 auto;
-      padding: 40px 32px 100px 32px;
+      margin: 28px auto 80px auto;
+      padding: 0 28px;
+    }
+
+    /* 플로팅 마스터 캔버스 카드 */
+    .portal-canvas {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: var(--radius-2xl);
+      box-shadow: var(--shadow-canvas);
+      padding: 48px 52px;
       display: flex;
       flex-direction: column;
       gap: 36px;
     }
 
-    /* 히어로 카드 */
-    .hero-card {
-      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-xl);
-      padding: 40px 44px;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
+    /* 히어로 섹션 */
+    .hero-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
-    .hero-title { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 12px; letter-spacing: -0.02em; }
-    .hero-desc { font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; max-width: 860px; margin-bottom: 24px; }
-    
-    .google-dots { display: flex; gap: 8px; margin-bottom: 20px; }
-    .dot { width: 12px; height: 12px; border-radius: 50%; }
-    .dot:nth-child(1) { background: var(--google-blue); }
-    .dot:nth-child(2) { background: var(--google-red); }
-    .dot:nth-child(3) { background: var(--google-yellow); }
-    .dot:nth-child(4) { background: var(--google-green); }
+    .gcp-pill-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .gcp-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--google-blue-light);
+      color: var(--google-blue);
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid #d2e3fc;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+    .hero-subhead {
+      font-family: var(--font-display);
+      font-size: 2.0rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+    .hero-subhead .blue-text { color: var(--google-blue); }
+    .hero-subhead .gold-text { color: var(--amber); }
 
-    /* 트랙 카드 그리드 */
+    .hero-desc {
+      font-size: 1.02rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 860px;
+      margin-bottom: 18px;
+    }
+
+    /* GCP Environment Meta Chips */
+    .gcp-chips-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .gcp-meta-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .chip-dot.blue { background: var(--google-blue); }
+    .chip-dot.green { background: var(--google-green); }
+    .chip-dot.purple { background: var(--purple); }
+    .chip-dot.red { background: var(--google-red); }
+
+    .hero-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #1a73e8, #1557b0);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 11px 24px;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);
+      transition: all 0.2s ease;
+    }
+    .hero-cta-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(26, 115, 232, 0.35);
+      opacity: 0.95;
+    }
+
+    /* 4대 트랙 그리드 */
     .tracks-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
     }
+    @media (max-width: 960px) {
+      .tracks-grid { grid-template-columns: 1fr; }
+      .portal-canvas { padding: 28px 20px; }
+    }
+
     .track-card {
       background: #ffffff;
-      border: 1px solid var(--border-color);
+      border: 1px solid #eef2f6;
       border-radius: var(--radius-xl);
-      padding: 28px 30px;
-      box-shadow: var(--shadow-sm);
+      padding: 30px 32px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.2s ease;
       position: relative;
-      overflow: hidden;
     }
     .track-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--border-focus);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+      border-color: #cbd5e1;
     }
-    .track-card.t1 { border-top: 5px solid var(--google-green); }
-    .track-card.t2 { border-top: 5px solid var(--google-blue); }
-    .track-card.t2p { border-top: 5px solid var(--purple); }
-    .track-card.t3 { border-top: 5px solid var(--google-red); }
+    .track-card.t1 { border-top: 4px solid var(--google-green); }
+    .track-card.t2 { border-top: 4px solid var(--google-blue); }
+    .track-card.t3 { border-top: 4px solid var(--purple); }
+    .track-card.t4 { border-top: 4px solid var(--google-red); }
 
     .track-card-header {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 12px;
     }
-    .track-icon-box {
-      width: 44px;
-      height: 44px;
+    .card-icon-box {
+      width: 46px;
+      height: 46px;
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -267,25 +389,27 @@
       font-size: 22px;
       flex-shrink: 0;
     }
-    .track-card.t1 .track-icon-box { background: var(--google-green-light); color: var(--google-green-dark); }
-    .track-card.t2 .track-icon-box { background: var(--google-blue-light); color: var(--google-blue-dark); }
-    .track-card.t2p .track-icon-box { background: var(--purple-light); color: var(--purple); }
-    .track-card.t3 .track-icon-box { background: var(--google-red-light); color: var(--google-red-dark); }
+    .card-icon-box.green { background: #f0fdf4; color: #16a34a; border: 1px solid #dcfce7; }
+    .card-icon-box.blue { background: #eff6ff; color: #2563eb; border: 1px solid #dbeafe; }
+    .card-icon-box.purple { background: #faf5ff; color: #9333ea; border: 1px solid #f3e8ff; }
+    .card-icon-box.red { background: #fef2f2; color: #dc2626; border: 1px solid #fee2e2; }
 
     .track-badge {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 700;
       color: var(--text-sub);
       text-transform: uppercase;
+      letter-spacing: 0.03em;
     }
     .track-card-title {
       font-size: 1.25rem;
       font-weight: 800;
       color: var(--text-main);
       margin-bottom: 8px;
+      letter-spacing: -0.01em;
     }
     .track-card-desc {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       line-height: 1.6;
       margin-bottom: 20px;
@@ -295,13 +419,13 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 7px;
       margin-bottom: 24px;
       padding-top: 16px;
-      border-top: 1px solid var(--border-color);
+      border-top: 1px solid #f1f5f9;
     }
     .track-features-list li {
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       display: flex;
       align-items: center;
@@ -309,7 +433,7 @@
     }
     .track-features-list li::before {
       content: '✓';
-      font-weight: 700;
+      font-weight: 800;
       color: var(--google-blue);
     }
 
@@ -317,12 +441,15 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      padding-top: 16px;
+      border-top: 1px solid #f1f5f9;
+      margin-top: auto;
     }
     .btn-track-start {
       flex: 1;
       padding: 10px 16px;
-      border-radius: var(--radius-sm);
-      font-size: 0.88rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
       font-weight: 700;
       text-decoration: none;
       text-align: center;
@@ -333,18 +460,18 @@
     .track-card.t1 .btn-track-start:hover { background: var(--google-green-dark); }
     .track-card.t2 .btn-track-start { background: var(--google-blue); }
     .track-card.t2 .btn-track-start:hover { background: var(--google-blue-dark); }
-    .track-card.t2p .btn-track-start { background: var(--purple); }
-    .track-card.t2p .btn-track-start:hover { background: #6b21a8; }
-    .track-card.t3 .btn-track-start { background: var(--google-red); }
-    .track-card.t3 .btn-track-start:hover { background: var(--google-red-dark); }
+    .track-card.t3 .btn-track-start { background: var(--purple); }
+    .track-card.t3 .btn-track-start:hover { background: #6b21a8; }
+    .track-card.t4 .btn-track-start { background: var(--google-red); }
+    .track-card.t4 .btn-track-start:hover { background: var(--google-red-dark); }
 
     .btn-track-slide {
       padding: 9px 14px;
-      border-radius: var(--radius-sm);
-      font-size: 0.82rem;
+      border-radius: 10px;
+      font-size: 0.84rem;
       font-weight: 600;
       text-decoration: none;
-      background: #f1f5f9;
+      background: #f8fafc;
       color: var(--text-main);
       border: 1px solid var(--border-color);
       transition: all 0.15s ease;
@@ -353,20 +480,21 @@
       gap: 4px;
     }
     .btn-track-slide:hover {
-      background: var(--bg-main);
-      border-color: var(--border-focus);
+      background: #e2e8f0;
     }
 
     @media (max-width: 960px) {
       aside.sidebar { position: fixed; left: -100%; }
       aside.sidebar.open { left: 0; }
       header.app-bar { padding: 0 16px; }
-      main.content-area { padding: 24px 16px 80px 16px; }
-      .hero-card { padding: 24px; }
+      main.content-area { padding: 0 16px; margin: 16px auto 40px auto; }
     }
   </style>
 </head>
 <body>
+  <!-- Google 4-Color Top Line -->
+  <div class="g-top-line"></div>
+
   <div class="ambient-glow glow-1"></div>
   <div class="ambient-glow glow-2"></div>
   <div class="ambient-glow glow-3"></div>
@@ -376,19 +504,31 @@
     <div class="sidebar-header">
       <a href="index.html" class="brand">
         <span class="brand-logo">🌐</span>
-        <span class="brand-title">GE <span>Class</span></span>
+        <div class="brand-text-group">
+          <div class="brand-title-row">
+            <span class="brand-title">Gemini <span>Enterprise</span></span>
+            <div class="g-dots">
+              <span class="g-dot blue"></span>
+              <span class="g-dot red"></span>
+              <span class="g-dot yellow"></span>
+              <span class="g-dot green"></span>
+            </div>
+          </div>
+          <span class="brand-sub-badge">Google Cloud</span>
+        </div>
       </a>
-      <button type="button" class="sidebar-toggle-btn" id="toggle-sidebar" title="사이드바 축소/확대">
-        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
+      <div class="sidebar-header-actions">
+        <button type="button" class="sidebar-icon-btn" id="toggle-sidebar" title="사이드바 축소/확대">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <div class="sidebar-content">
-
       <div>
         <div class="nav-group-title">커리큘럼 트랙</div>
         <ul class="nav-list">
@@ -411,15 +551,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="track2plus.html">
+            <a href="track3.html">
               <span>🟣</span>
-              <span class="label">Track 2 Plus. Pro Code</span>
+              <span class="label">Track 3. Pro Code</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="track3.html">
+            <a href="track4.html">
               <span>🔴</span>
-              <span class="label">Track 3. Admin & Security</span>
+              <span class="label">Track 4. Admin &amp; Security</span>
             </a>
           </li>
         </ul>
@@ -431,119 +571,157 @@
   <div class="main-wrapper">
     <header class="app-bar">
       <div class="breadcrumbs">
-        <span class="current">Google Gemini Enterprise 교육 포털</span>
+        <span>Google Cloud</span>
+        <span>/</span>
+        <span class="current">Gemini Enterprise 교육 포털</span>
+      </div>
+      <div class="g-dots" style="opacity: 0.85;">
+        <span class="g-dot blue"></span>
+        <span class="g-dot red"></span>
+        <span class="g-dot yellow"></span>
+        <span class="g-dot green"></span>
       </div>
     </header>
 
     <main class="content-area">
-      <!-- 히어로 카드 -->
-      <section class="hero-card">
-        <div class="google-dots">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-        </div>
-        <h1 class="hero-title">Google Gemini Enterprise 교육 포털</h1>
-        <p class="hero-desc">수준별 맞춤형 실무 교육 핸즈온 포털에 오신 것을 환영합니다. 별도 개발 연동 없이 브라우저에서 즉시 활용 가능한 기초 실습부터, 팀 도서관 및 에이전트 구축, 커넥터 및 커스텀 개발, 보안과 전사 거버넌스까지 단계별로 학습할 수 있습니다.</p>
-        <div style="margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap;">
-          <a href="slide_v2.html" target="_blank" class="sidebar-cta" style="display: inline-flex; font-size: 0.92rem; padding: 10px 22px; border-radius: 30px; background: linear-gradient(135deg, #1a73e8, #1557b0);">
-            <span>🎯 오프닝 키노트 프레젠테이션 열기</span>
-            <span>📽️</span>
-          </a>
-        </div>
-      </section>
-
-      <!-- 4대 트랙 그리드 -->
-      <section class="tracks-grid">
-        <!-- Track 1 -->
-        <div class="track-card t1">
-          <div>
-            <div class="track-card-header">
-              <div class="track-icon-box">🟢</div>
-              <span class="track-badge">기초 및 실무 활용</span>
+      <!-- 플로팅 마스터 캔버스 카드 -->
+      <section class="portal-canvas">
+        <!-- 히어로 섹션 -->
+        <div class="hero-box">
+          <div class="gcp-pill-row">
+            <div class="gcp-pill">
+              <div class="g-dots">
+                <span class="g-dot blue"></span>
+                <span class="g-dot red"></span>
+                <span class="g-dot yellow"></span>
+                <span class="g-dot green"></span>
+              </div>
+              <span>Google Cloud Enterprise</span>
             </div>
-            <h2 class="track-card-title">Track 1. Day 1 Value</h2>
-            <p class="track-card-desc">별도의 개발 연동 없이 브라우저에서 즉시 체감하는 Gemini Enterprise 핵심 실무 가치입니다.</p>
-            <ul class="track-features-list">
-              <li>나만의 개인화 설정 및 pContext</li>
-              <li>실시간 구글 검색 및 SWOT 분석</li>
-              <li>Imagen 3 &amp; Veo 미디어 제작</li>
-              <li>엑셀 및 PPT 파일 분석 실습</li>
-              <li>Canvas 슬라이드 자동 생성</li>
-              <li>실무 표준 프롬프트 작성법</li>
-            </ul>
           </div>
-          <div class="track-actions">
-            <a href="track1.html" class="btn-track-start">실습 시작하기 →</a>
-            <a href="slide_track1_v2.html" target="_blank" class="btn-track-slide">📽️ 슬라이드</a>
+          <h1 class="hero-title">Google Gemini Enterprise 교육 포털</h1>
+          <div class="hero-subhead">
+            <span class="blue-text">수준별 맞춤</span> <span class="gold-text">실무 실습 포털</span>
+          </div>
+          <p class="hero-desc">
+            수준별 맞춤형 실무 교육 핸즈온 포털에 오신 것을 환영합니다. 별도 개발 연동 없이 브라우저에서 즉시 활용 가능한 기초 실습부터, 팀 도서관 및 에이전트 구축, 커넥터 및 커스텀 개발, 보안과 전사 거버넌스까지 단계별로 학습할 수 있습니다.
+          </p>
+
+          <!-- GCP Environment Meta Chips -->
+          <div class="gcp-chips-bar">
+            <span class="gcp-meta-chip"><span class="chip-dot blue"></span>Google Cloud Vertex AI</span>
+            <span class="gcp-meta-chip"><span class="chip-dot green"></span>Gemini Enterprise</span>
+            <span class="gcp-meta-chip"><span class="chip-dot purple"></span>Google ADK 2.0</span>
+            <span class="gcp-meta-chip"><span class="chip-dot red"></span>Model Armor 보안 방화벽</span>
+          </div>
+
+          <div>
+            <a href="slide_v2.html" target="_blank" class="hero-cta-btn">
+              <span>🎯 오프닝 키노트 프레젠테이션 열기</span>
+              <span>📽️</span>
+            </a>
           </div>
         </div>
 
-        <!-- Track 2 -->
-        <div class="track-card t2">
-          <div>
-            <div class="track-card-header">
-              <div class="track-icon-box">🔵</div>
-              <span class="track-badge">심화 에이전트 구축</span>
+        <!-- 4대 트랙 그리드 -->
+        <div class="tracks-grid">
+          <!-- Track 1 -->
+          <div class="track-card t1">
+            <div>
+              <div class="track-card-header">
+                <div class="card-icon-box green">🟢</div>
+                <div>
+                  <span class="track-badge">기초 및 실무 활용</span>
+                  <h2 class="track-card-title">Track 1. Day 1 Value</h2>
+                </div>
+              </div>
+              <p class="track-card-desc">별도의 개발 연동 없이 브라우저에서 즉시 체감하는 Gemini Enterprise 핵심 실무 가치입니다.</p>
+              <ul class="track-features-list">
+                <li>나만의 개인화 설정 및 pContext</li>
+                <li>실시간 구글 검색 및 SWOT 분석</li>
+                <li>Imagen 3 &amp; Veo 미디어 제작</li>
+                <li>엑셀 및 PPT 파일 분석 실습</li>
+                <li>Canvas 슬라이드 자동 생성</li>
+                <li>실무 표준 프롬프트 작성법</li>
+              </ul>
             </div>
-            <h2 class="track-card-title">Track 2. Agentic Value</h2>
-            <p class="track-card-desc">Gemini Notebook 팀 도서관, Deep Research 자율 리포트, 노코드 에이전트 파이프라인을 직접 제작합니다.</p>
-            <ul class="track-features-list">
-              <li>Gemini Notebook 5대 과제</li>
-              <li>Deep Research 다수 소스 자율 탐색</li>
-              <li>Agent Designer 노코드 에이전트</li>
-              <li>Workflow Agent 다단계 파이프라인</li>
-            </ul>
+            <div class="track-actions">
+              <a href="track1.html" class="btn-track-start">실습 시작하기 &rarr;</a>
+              <a href="slide_track1_v2.html" target="_blank" class="btn-track-slide">📽️ 슬라이드</a>
+            </div>
           </div>
-          <div class="track-actions">
-            <a href="track2.html" class="btn-track-start">실습 시작하기 →</a>
-            <a href="slide_track2_v2.html" target="_blank" class="btn-track-slide">📽️ 슬라이드</a>
-          </div>
-        </div>
 
-        <!-- Track 2 Plus -->
-        <div class="track-card t2p">
-          <div>
-            <div class="track-card-header">
-              <div class="track-icon-box">🟣</div>
-              <span class="track-badge">개발자 및 커넥터</span>
+          <!-- Track 2 -->
+          <div class="track-card t2">
+            <div>
+              <div class="track-card-header">
+                <div class="card-icon-box blue">🔵</div>
+                <div>
+                  <span class="track-badge">심화 에이전트 구축</span>
+                  <h2 class="track-card-title">Track 2. Agentic Value</h2>
+                </div>
+              </div>
+              <p class="track-card-desc">Gemini Notebook 팀 도서관, Deep Research 자율 리포트, 노코드 에이전트 파이프라인을 직접 제작합니다.</p>
+              <ul class="track-features-list">
+                <li>Gemini Notebook 5대 과제</li>
+                <li>Deep Research 다수 소스 자율 탐색</li>
+                <li>Agent Designer 노코드 에이전트</li>
+                <li>Workflow Agent 다단계 파이프라인</li>
+              </ul>
             </div>
-            <h2 class="track-card-title">Track 2 Plus. Pro Code</h2>
-            <p class="track-card-desc">Google Drive 커넥터 연동과 Python ADK 기반 커스텀 에이전트 개발 및 Cloud Run 배포를 실습합니다.</p>
-            <ul class="track-features-list">
-              <li>Google Drive 및 Workspace OAuth 연동</li>
-              <li>사내 규정 문서 기반 RAG 탐색</li>
-              <li>Python ADK 에이전트 개발</li>
-              <li>Cloud Run 배포 및 A2A 등록</li>
-            </ul>
+            <div class="track-actions">
+              <a href="track2.html" class="btn-track-start">실습 시작하기 &rarr;</a>
+              <a href="slide_track2_v2.html" target="_blank" class="btn-track-slide">📽️ 슬라이드</a>
+            </div>
           </div>
-          <div class="track-actions">
-            <a href="track2plus.html" class="btn-track-start">실습 시작하기 →</a>
-            <a href="slide_track2plus_v2.html" target="_blank" class="btn-track-slide">📽️ 슬라이드</a>
-          </div>
-        </div>
 
-        <!-- Track 3 -->
-        <div class="track-card t3">
-          <div>
-            <div class="track-card-header">
-              <div class="track-icon-box">🔴</div>
-              <span class="track-badge">관리자 및 보안</span>
+          <!-- Track 3 -->
+          <div class="track-card t3">
+            <div>
+              <div class="track-card-header">
+                <div class="card-icon-box purple">🟣</div>
+                <div>
+                  <span class="track-badge">개발자 및 커넥터</span>
+                  <h2 class="track-card-title">Track 3. Pro Code</h2>
+                </div>
+              </div>
+              <p class="track-card-desc">Google Drive 커넥터 연동과 Python ADK 기반 커스텀 에이전트 개발 및 Cloud Run 배포를 실습합니다.</p>
+              <ul class="track-features-list">
+                <li>Google Drive 및 Workspace OAuth 연동</li>
+                <li>사내 규정 문서 기반 RAG 탐색</li>
+                <li>Python ADK 에이전트 개발</li>
+                <li>Cloud Run 배포 및 A2A 등록</li>
+              </ul>
             </div>
-            <h2 class="track-card-title">Track 3. Admin &amp; Security</h2>
-            <p class="track-card-desc">IT 관리자와 CISO를 위한 GCP 인프라 이중화, Model Armor 인라인 보안, Cloud Audit Logs 감사를 다룹니다.</p>
-            <ul class="track-features-list">
-              <li>GCP Live / Test 인스턴스 이중화</li>
-              <li>Cloud Identity 및 WIF SSO 연동</li>
-              <li>Model Armor 인라인 보안 필터링</li>
-              <li>Cloud Audit Logs &amp; BigQuery SIEM</li>
-              <li>경영진 보고용 ROI 시뮬레이션</li>
-            </ul>
+            <div class="track-actions">
+              <a href="track3.html" class="btn-track-start">실습 시작하기 &rarr;</a>
+              <a href="slide_track3_v2.html" target="_blank" class="btn-track-slide">📽️ 슬라이드</a>
+            </div>
           </div>
-          <div class="track-actions">
-            <a href="track3.html" class="btn-track-start">실습 시작하기 →</a>
-            <a href="slide_admin_v2.html" target="_blank" class="btn-track-slide">📽️ 슬라이드</a>
+
+          <!-- Track 4 -->
+          <div class="track-card t4">
+            <div>
+              <div class="track-card-header">
+                <div class="card-icon-box red">🔴</div>
+                <div>
+                  <span class="track-badge">관리자 및 보안</span>
+                  <h2 class="track-card-title">Track 4. Admin &amp; Security</h2>
+                </div>
+              </div>
+              <p class="track-card-desc">IT 관리자와 CISO를 위한 GCP 인프라 이중화, Model Armor 인라인 보안, Cloud Audit Logs 감사를 다룹니다.</p>
+              <ul class="track-features-list">
+                <li>GCP Live / Test 인스턴스 이중화</li>
+                <li>Cloud Identity 및 WIF SSO 연동</li>
+                <li>Model Armor 인라인 보안 필터링</li>
+                <li>Cloud Audit Logs &amp; BigQuery SIEM</li>
+                <li>경영진 보고용 ROI 시뮬레이션</li>
+              </ul>
+            </div>
+            <div class="track-actions">
+              <a href="track4.html" class="btn-track-start">실습 시작하기 &rarr;</a>
+              <a href="slide_track4_v2.html" target="_blank" class="btn-track-slide">📽️ 슬라이드</a>
+            </div>
           </div>
         </div>
       </section>
@@ -552,13 +730,15 @@
 
   <script>
     const toggleBtn = document.getElementById('toggle-sidebar');
-    toggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('sidebar-mini');
-      const isMini = document.body.classList.contains('sidebar-mini');
-      localStorage.setItem('sidebar-mini-state', isMini ? '1' : '0');
-    });
-    if (localStorage.getItem('sidebar-mini-state') === '1') {
-      document.body.classList.add('sidebar-mini');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('sidebar-mini');
+        const isMini = document.body.classList.contains('sidebar-mini');
+        localStorage.setItem('sidebar-mini-state', isMini ? '1' : '0');
+      });
+      if (localStorage.getItem('sidebar-mini-state') === '1') {
+        document.body.classList.add('sidebar-mini');
+      }
     }
   </script>
 </body>

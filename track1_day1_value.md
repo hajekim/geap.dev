@@ -8,7 +8,8 @@
 > - [📊 엑셀 매출 데이터 (coffee orders.xlsx)](samples/coffee%20orders.xlsx)
 > - [📑 BigQuery 신규 기능 보고서 (202603-BigQuery New Feature Update.pptx)](samples/202603-BigQuery%20New%20Feature%20Update.pptx)
 > - [🖼️ 손그림 아키텍처 스케치 (handwrite_arch.png)](samples/handwrite_arch.png)
-> - [📽️ Track 1 강의 슬라이드 열기](slide_track1.html)
+> - [🌐 Track 1 인터랙티브 웹 포털 열기](https://geap.dev/track1.html)
+> - [📽️ Track 1 16:9 발표 슬라이드 열기](https://geap.dev/slide_track1_v2.html)
 
 ---
 
