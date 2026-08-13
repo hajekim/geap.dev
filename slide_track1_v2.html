@@ -265,6 +265,55 @@
       text-align: left;
     }
 
+    /* 2x2 매트릭스 + 하단 배너 레이아웃 */
+    .layout-matrix-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      height: 100%;
+      justify-content: space-between;
+    }
+    .layout-matrix-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1.1rem;
+      flex: 1;
+    }
+    .fusion-banner {
+      background: linear-gradient(135deg, #f0fdf4, #e8f0fe);
+      border: 1px solid #bbf7d0;
+      border-radius: 12px;
+      padding: 0.75rem 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+    .fusion-banner-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #14532d;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .fusion-pills {
+      display: flex;
+      gap: 10px;
+    }
+    .fusion-pill-item {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
     /* 4열 매트릭스 레이아웃 */
     .layout-quad {
       display: grid;
@@ -622,22 +671,51 @@
           <p class="slide-desc-text">AI가 사용자의 업무 배경을 이해하고 최적의 결과를 생성할 수 있도록 맥락을 제공합니다.</p>
         </div>
         <div class="slide-body">
-          <div class="layout-quad">
-            <div class="biz-card highlight">
-              <div class="card-head">📅 Workspace & M365</div>
-              <p class="card-para">캘린더 일정, 수신 이메일, 드라이브 문서를 직접 대조하여 업무 맥락을 파악합니다.</p>
+          <div class="layout-matrix-wrap">
+            <div class="layout-matrix-grid">
+              <div class="biz-card highlight">
+                <div class="card-head">📅 Workspace & M365</div>
+                <p class="card-para" style="margin-bottom: 0.4rem;">캘린더 일정, 수신 이메일, 드라이브 문서를 직접 대조하여 실시간 업무 맥락을 파악합니다.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.92rem; color: #475569; font-weight: 500;">Gmail 수신함</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.92rem; color: #475569; font-weight: 500;">Google Calendar</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.92rem; color: #475569; font-weight: 500;">Drive / OneDrive</span>
+                </div>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">👤 사용자 프로필</div>
+                <p class="card-para" style="margin-bottom: 0.4rem;">설정된 직무와 소속 산업군을 답변의 기본 페르소나로 설정하여 전문 용어와 관점을 자동 반영합니다.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.92rem; color: #475569; font-weight: 500;">직무 페르소나</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.92rem; color: #475569; font-weight: 500;">소속 산업군</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.92rem; color: #475569; font-weight: 500;">담당 전문 도메인</span>
+                </div>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">🏢 Knowledge Graph</div>
+                <p class="card-para" style="margin-bottom: 0.4rem;">사내 조직도 및 부서별 업무 보고 체계를 연계하여 직무 범위와 결재 라인을 인식합니다.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.92rem; color: #475569; font-weight: 500;">전사 조직도</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.92rem; color: #475569; font-weight: 500;">팀별 업무 분장</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.92rem; color: #475569; font-weight: 500;">의사결정권자 매핑</span>
+                </div>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">🧠 세션 메모리</div>
+                <p class="card-para" style="margin-bottom: 0.4rem;">과거 대화에서 공유한 프로젝트 KPI와 브랜드 작성 규정을 기억하여 세션이 바뀌어도 일관성을 유지합니다.</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.92rem; color: #475569; font-weight: 500;">프로젝트 KPI</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.92rem; color: #475569; font-weight: 500;">브랜드 가이드라인</span>
+                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.92rem; color: #475569; font-weight: 500;">금지어 및 어조 규칙</span>
+                </div>
+              </div>
             </div>
-            <div class="biz-card highlight">
-              <div class="card-head">🏢 Knowledge Graph</div>
-              <p class="card-para">사내 조직도 및 부서별 업무 보고 체계를 연계하여 직무 범위를 인식합니다.</p>
-            </div>
-            <div class="biz-card highlight">
-              <div class="card-head">👤 사용자 프로필</div>
-              <p class="card-para">설정된 직무(마케터, 엔지니어)와 소속 산업군을 답변의 기본 페르소나로 설정합니다.</p>
-            </div>
-            <div class="biz-card highlight">
-              <div class="card-head">🧠 세션 메모리</div>
-              <p class="card-para">과거 대화에서 공유한 프로젝트 목표와 작성 규칙을 기억하여 일관된 답변을 유지합니다.</p>
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">⚡ 4대 소스 융합 추론 결과</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">🎯 마케터 질의 시: 고객 소구점 및 카피라이팅 도출</div>
+                <div class="fusion-pill-item">🛠️ 엔지니어 질의 시: 기술 사양 및 아키텍처 다이어그램 도출</div>
+              </div>
             </div>
           </div>
         </div>
