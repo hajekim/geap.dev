@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track 1: Day 1 Value — 인터랙티브 강의 및 실습 슬라이드 (v2)</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟢</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-green: #1e8e3e;
+      --primary-green-dark: #137333;
+      --primary-green-light: #e6f4ea;
+      --primary-green-border: #a8dab5;
+      --google-blue: #1a73e8;
+      --google-blue-light: #e8f0fe;
+      --google-yellow: #f9ab00;
+      --google-yellow-light: #fef7e0;
+      --google-red: #d93025;
+      --purple: #7c3aed;
+
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --border-subtle: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #334155;
+      --text-sub: #64748b;
+
+      --font-display: 'Outfit', 'Noto Sans KR', sans-serif;
+      --font-body: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      word-break: keep-all;
+    }
+
+    .bg-ambient {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(140px);
+      z-index: 0;
+      opacity: 0.16;
+      pointer-events: none;
+    }
+    .amb-1 { width: 600px; height: 600px; top: -15%; left: -10%; background: radial-gradient(circle, #34a853 0%, transparent 70%); }
+    .amb-2 { width: 550px; height: 550px; bottom: -15%; right: -10%; background: radial-gradient(circle, #1a73e8 0%, transparent 70%); }
+
+    /* 상단 프레젠테이션 HUD 헤더 */
+    .pres-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      z-index: 100;
+    }
+
+    .header-nav-left { display: flex; align-items: center; gap: 14px; }
+    .btn-portal-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 15px;
+      border-radius: 10px;
+      background: #f1f5f9;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.2s ease;
+    }
+    .btn-portal-back:hover {
+      background: var(--primary-green-light);
+      color: var(--primary-green-dark);
+      border-color: var(--primary-green-border);
+    }
+
+    .track-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: var(--primary-green-light);
+      color: var(--primary-green-dark);
+      border: 1px solid var(--primary-green-border);
+    }
+
+    .header-nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 360px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 7px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 4.1%;
+      background: linear-gradient(90deg, #34a853, #1e8e3e);
+      border-radius: 999px;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .header-nav-right { display: flex; align-items: center; gap: 12px; }
+    .slide-num-pill {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border-subtle);
+    }
+    .btn-fullscreen {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      transition: all 0.2s ease;
+    }
+    .btn-fullscreen:hover { background: #f1f5f9; color: var(--text-main); }
+
+    /* 슬라이드 뷰포트 */
+    .slide-viewport {
+      width: 100%;
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      position: relative;
+      z-index: 1;
+      padding-top: 64px;
+    }
+    .slide-viewport::-webkit-scrollbar { display: none; }
+
+    .slide-section {
+      width: 100vw;
+      height: calc(100vh - 64px);
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2.2rem 4.5rem;
+      position: relative;
+      text-align: center;
+      max-height: calc(100vh - 64px);
+      overflow: hidden;
+    }
+
+    /* 우측 닷 내비게이션 */
+    .side-nav-rail {
+      position: fixed;
+      right: 1.4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 20;
+      padding: 10px 8px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      max-height: 86vh;
+      overflow-y: auto;
+    }
+    .side-nav-rail::-webkit-scrollbar { display: none; }
+    .nav-pip {
+      width: 9px;
+      height: 9px;
+      min-width: 9px;
+      min-height: 9px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+      outline: none;
+    }
+    .nav-pip.active {
+      background: var(--primary-green);
+      transform: scale(1.45);
+      box-shadow: 0 0 10px rgba(30, 142, 62, 0.65);
+    }
+
+    /* 타이포그래피 */
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      border-radius: 18px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      background: var(--primary-green-light);
+      color: var(--primary-green-dark);
+      border: 1px solid var(--primary-green-border);
+    }
+
+    h1.hero-title {
+      font-family: var(--font-display);
+      font-size: 3.3rem;
+      font-weight: 900;
+      line-height: 1.22;
+      margin-bottom: 1.1rem;
+      color: var(--text-main);
+      letter-spacing: -0.035em;
+    }
+
+    h2.slide-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 0.45rem;
+      color: var(--text-main);
+      letter-spacing: -0.025em;
+    }
+
+    p.lead-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 980px;
+      line-height: 1.62;
+      margin-bottom: 1.6rem;
+    }
+
+    /* 2열 스플릿 레이아웃 */
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 2rem;
+      width: 100%;
+      max-width: 1280px;
+      align-items: center;
+      text-align: left;
+    }
+
+    .full-width-card {
+      width: 100%;
+      max-width: 1200px;
+      text-align: left;
+    }
+
+    .lecture-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 1.8rem 2.2rem;
+      box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.04), 0 4px 6px -2px rgba(15, 23, 42, 0.02);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .lecture-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--primary-green);
+    }
+    .lecture-card.blue::before { background: var(--google-blue); }
+    .lecture-card.yellow::before { background: var(--google-yellow); }
+    .lecture-card.red::before { background: var(--google-red); }
+    .lecture-card.purple::before { background: var(--purple); }
+
+    .card-label {
+      font-family: var(--font-display);
+      font-size: 1.28rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-text {
+      color: var(--text-muted);
+      font-size: 1.04rem;
+      line-height: 1.65;
+      margin-bottom: 0.8rem;
+    }
+
+    .point-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.3rem;
+    }
+    .point-list li {
+      color: var(--text-main);
+      font-size: 1.02rem;
+      line-height: 1.68;
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .point-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--primary-green);
+      font-weight: 800;
+    }
+    .lecture-card.blue .point-list li::before { color: var(--google-blue); }
+
+    /* 청중 실습 액션 박스 */
+    .action-callout {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 12px;
+      padding: 0.85rem 1.2rem;
+      margin-top: 0.8rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .action-callout-icon {
+      font-size: 1.2rem;
+      line-height: 1;
+      color: var(--primary-green-dark);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .action-callout-content {
+      font-size: 0.96rem;
+      color: #14532d;
+      line-height: 1.55;
+    }
+    .action-callout-content strong {
+      font-weight: 700;
+      color: #052e16;
+    }
+
+    /* 프롬프트 스튜디오 박스 */
+    .prompt-studio {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-left: 4px solid var(--primary-green);
+      border-radius: 14px;
+      padding: 1.1rem 1.4rem;
+      position: relative;
+      margin: 0.6rem 0;
+    }
+    .prompt-studio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #334155;
+    }
+    .prompt-studio-tag {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #86efac;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .prompt-text {
+      font-family: var(--font-mono);
+      font-size: 0.94rem;
+      color: #f8fafc;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      user-select: all;
+    }
+
+    /* 이미지 쇼케이스 */
+    .screenshot-frame {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .screenshot-frame img {
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.03);
+      max-height: 48vh;
+      max-width: 100%;
+      object-fit: contain;
+      cursor: zoom-in;
+      transition: all 0.25s ease;
+      background: #ffffff;
+    }
+    .screenshot-frame img:hover {
+      transform: scale(1.02);
+      border-color: var(--primary-green);
+      box-shadow: 0 16px 36px -4px rgba(30, 142, 62, 0.18);
+    }
+    .screenshot-caption {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      font-weight: 500;
+    }
+
+    /* 3단 그리드 */
+    .triple-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+      width: 100%;
+      max-width: 1240px;
+    }
+
+    /* 하단 CTA 버튼 */
+    .btn-hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      font-weight: 700;
+      padding: 1.15rem 2.8rem;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 12px 28px rgba(30, 142, 62, 0.35);
+      transition: all 0.25s ease;
+    }
+    .btn-hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px rgba(30, 142, 62, 0.45);
+    }
+
+    .key-hint {
+      position: absolute;
+      bottom: 1.4rem;
+      font-size: 0.92rem;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .kbd-btn {
+      background: #e2e8f0;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--text-main);
+    }
+
+    .nav-arrow-btn {
+      position: fixed;
+      bottom: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--text-main);
+      cursor: pointer;
+      z-index: 50;
+      transition: all 0.2s ease;
+    }
+    .nav-arrow-btn:hover {
+      background: var(--primary-green-light);
+      color: var(--primary-green-dark);
+      border-color: var(--primary-green-border);
+      transform: scale(1.08);
+    }
+    .btn-arrow-prev { left: 24px; }
+    .btn-arrow-next { right: 68px; }
+
+    /* 확대 라이트박스 */
+    .lightbox-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      cursor: zoom-out;
+    }
+    .lightbox-backdrop.active { opacity: 1; pointer-events: auto; }
+    .lightbox-view-img {
+      max-width: 92vw;
+      max-height: 90vh;
+      border-radius: 14px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+      transform: scale(0.96);
+      transition: transform 0.25s ease;
+    }
+    .lightbox-backdrop.active .lightbox-view-img { transform: scale(1); }
+
+    @media screen and (max-width: 960px) {
+      .split-layout { grid-template-columns: 1fr; gap: 1.2rem; }
+      h1.hero-title { font-size: 2.2rem; }
+      h2.slide-title { font-size: 1.65rem; }
+      .slide-section { padding: 1.5rem; }
+      .side-nav-rail, .header-nav-center, .nav-arrow-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-ambient amb-1"></div>
+  <div class="bg-ambient amb-2"></div>
+
+  <!-- 상단 HUD 헤더 -->
+  <header class="pres-header">
+    <div class="header-nav-left">
+      <a href="index.html" class="btn-portal-back">← 포털 홈</a>
+      <span class="track-badge">🟢 Track 1. Day 1 Value (강의 & 실습)</span>
+    </div>
+    <div class="header-nav-center">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+    <div class="header-nav-right">
+      <span class="slide-num-pill" id="slideNumPill">01 / 24</span>
+      <button class="btn-fullscreen" onclick="toggleFullScreen()" title="전체화면 (F)">⛶</button>
+    </div>
+  </header>
+
+  <!-- 플로팅 이전/다음 버튼 -->
+  <button class="nav-arrow-btn btn-arrow-prev" onclick="prevSlide()" title="이전 (←)">←</button>
+  <button class="nav-arrow-btn btn-arrow-next" onclick="nextSlide()" title="다음 (→)">→</button>
+
+  <!-- 우측 슬라이드 닷 네비게이션 (24개) -->
+  <div class="side-nav-rail">
+    <button class="nav-pip active" onclick="jumpToSlide(0)" title="1. 오프닝 및 트랙 개요"></button>
+    <button class="nav-pip" onclick="jumpToSlide(1)" title="2. [1.1] 개인화 컨텍스트 원리"></button>
+    <button class="nav-pip" onclick="jumpToSlide(2)" title="3. [1.1] 프로필 설정 실습"></button>
+    <button class="nav-pip" onclick="jumpToSlide(3)" title="4. [1.1] 메모리 및 퀵메뉴"></button>
+    <button class="nav-pip" onclick="jumpToSlide(4)" title="5. [1.2] 시장 트렌드 분석"></button>
+    <button class="nav-pip" onclick="jumpToSlide(5)" title="6. [1.2] 출처 검증 & @멘션"></button>
+    <button class="nav-pip" onclick="jumpToSlide(6)" title="7. [1.2] 번역 및 표 내보내기"></button>
+    <button class="nav-pip" onclick="jumpToSlide(7)" title="8. [1.2] 세션 공유 협업"></button>
+    <button class="nav-pip" onclick="jumpToSlide(8)" title="9. [1.3] EU 전기차 SWOT"></button>
+    <button class="nav-pip" onclick="jumpToSlide(9)" title="10. [1.3] CES 피지컬 AI 동향"></button>
+    <button class="nav-pip" onclick="jumpToSlide(10)" title="11. [1.3] URL 바인딩 분석"></button>
+    <button class="nav-pip" onclick="jumpToSlide(11)" title="12. [1.4] 9:16 모바일 포스터"></button>
+    <button class="nav-pip" onclick="jumpToSlide(12)" title="13. [1.4] 스케치 다이어그램 변환"></button>
+    <button class="nav-pip" onclick="jumpToSlide(13)" title="14. [1.4] Veo 향수 & 버거 영상"></button>
+    <button class="nav-pip" onclick="jumpToSlide(14)" title="15. [1.4] Veo 드론 & 레트로 영상"></button>
+    <button class="nav-pip" onclick="jumpToSlide(15)" title="16. [1.5] Excel 커피 매출 시각화"></button>
+    <button class="nav-pip" onclick="jumpToSlide(16)" title="17. [1.6] PPTX 구조 요약 표"></button>
+    <button class="nav-pip" onclick="jumpToSlide(17)" title="18. [1.7] Canvas 구글 슬라이드"></button>
+    <button class="nav-pip" onclick="jumpToSlide(18)" title="19. [1.8] APE 프레임워크"></button>
+    <button class="nav-pip" onclick="jumpToSlide(19)" title="20. [1.8] CRAFT 프레임워크"></button>
+    <button class="nav-pip" onclick="jumpToSlide(20)" title="21. [1.8] CRAFT 표준 템플릿"></button>
+    <button class="nav-pip" onclick="jumpToSlide(21)" title="22. [1.8] CO-STAR 프레임워크"></button>
+    <button class="nav-pip" onclick="jumpToSlide(22)" title="23. [1.8] 3대 프레임워크 선택 기준"></button>
+    <button class="nav-pip" onclick="jumpToSlide(23)" title="24. 실습 완료 & 다음 트랙 이동"></button>
+  </div>
+
+  <div class="slide-viewport" id="slideContainer">
+    <!-- 1. 타이틀 -->
+    <section class="slide-section">
+      <span class="section-tag">🟢 Track 1. Day 1 Value</span>
+      <h1 class="hero-title">기본 어시스턴트 & 멀티모달 실무 실습</h1>
+      <p class="lead-desc">복잡한 사전 준비나 코딩 없이 웹 브라우저에서 바로 체감하는 8가지 핵심 기능입니다.<br>개인화 설정부터 실시간 웹 검색, 이미지 및 비디오 생성, 엑셀과 파워포인트 분석까지 순서대로 진행합니다.</p>
+      <div class="key-hint">
+        <span class="kbd-btn">Space</span> 또는 <span class="kbd-btn">↓</span> 키를 눌러 다음 슬라이드로 이동
+      </div>
+    </section>
+
+    <!-- 2. Step 1.1 pContext 원리 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.1 시작하기</span>
+      <h2 class="slide-title">개인화 컨텍스트 (pContext) 작동 원리</h2>
+      <p class="lead-desc">Gemini Enterprise는 사용자의 업무 환경을 파악하여 질문 의도에 맞는 답변을 생성합니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card">
+          <div class="card-label">📌 사내 4대 참조 소스</div>
+          <ul class="point-list">
+            <li><strong>Workspace & M365</strong>: 캘린더 일정, 수신 이메일, 드라이브 문서를 교차 확인합니다.</li>
+            <li><strong>Knowledge Graph</strong>: 사내 조직도와 팀별 업무 분장 정보를 연계합니다.</li>
+            <li><strong>사용자 프로필</strong>: 설정한 직무, 직책, 소속 산업군 정보를 기본 맥락으로 삼습니다.</li>
+            <li><strong>대화 세션 메모리</strong>: 이전 대화에서 언급한 프로젝트 목표와 작성 규칙을 기억합니다.</li>
+          </ul>
+        </div>
+        <div class="lecture-card blue">
+          <div class="card-label">💡 실무 적용 효과</div>
+          <p class="card-text">같은 질문이라도 마케터에게는 시장 소구점 중심의 카피를, 엔지니어에게는 기술 규격과 아키텍처 중심으로 답변을 구성합니다.</p>
+          <div class="action-callout">
+            <span class="action-callout-icon">👉</span>
+            <div class="action-callout-content">
+              <strong>강사 안내</strong>: 다음 장표에서 각자의 프로필을 직접 입력하고 저장합니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Step 1.1 프로필 설정 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.1 시작하기</span>
+      <h2 class="slide-title">개인화 프로필 설정 실습</h2>
+      <p class="lead-desc">화면 좌측 하단의 <strong>Settings & help > Personalization</strong> 메뉴로 이동하여 본인의 프로필을 등록합니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card">
+          <div class="card-label">✍️ 입력 매개변수 예시</div>
+          <ul class="point-list">
+            <li><strong>선호하는 이름</strong>: 홍길동 마케터 (또는 본인 이름)</li>
+            <li><strong>내 직무</strong>: 글로벌 브랜드 마케터</li>
+            <li><strong>회사 산업군</strong>: 모빌리티 및 친환경 에너지</li>
+          </ul>
+          <div class="action-callout">
+            <span class="action-callout-icon">⚡</span>
+            <div class="action-callout-content">
+              <strong>실습 행동</strong>: 우측 화면처럼 3개 항목을 채운 뒤 <strong>Save</strong>를 클릭합니다.
+            </div>
+          </div>
+        </div>
+        <div class="screenshot-frame">
+          <img src="./img/02.webp" alt="프로필 설정 화면">
+          <span class="screenshot-caption">Settings > Personalization 프로필 입력 콘솔</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Step 1.1 메모리 및 퀵 메뉴 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.1 시작하기</span>
+      <h2 class="slide-title">세션 메모리 및 퀵 메뉴 활성화</h2>
+      <p class="lead-desc">이전 대화 맥락을 유지하기 위해 <strong>Conversation history</strong>와 <strong>Reference saved memories</strong>를 켭니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card yellow">
+          <div class="card-label">🧠 메모리 기능 활용 팁</div>
+          <p class="card-text">과거 세션에서 나눈 프로젝트 핵심 지표(KPI)나 브랜드 금지어를 모델이 기억합니다. 매번 새로운 대화를 열 때마다 배경을 다시 설명할 필요가 없습니다.</p>
+          <div class="action-callout" style="background: #fefce8; border-color: #fef08a;">
+            <span class="action-callout-icon">💡</span>
+            <div class="action-callout-content" style="color: #713f12;">
+              <strong>실습 행동</strong>: 토글 스위치를 모두 ON으로 설정하고 우측 하단 퀵 메뉴를 확인합니다.
+            </div>
+          </div>
+        </div>
+        <div class="screenshot-frame" style="flex-direction: row; gap: 14px;">
+          <img src="./img/03.webp" alt="메모리 활성화" style="max-height: 38vh; width: 55%;">
+          <img src="./img/04.webp" alt="퀵 메뉴" style="max-height: 38vh; width: 40%;">
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Step 1.2 시장 트렌드 분석 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.2 AI 어시스턴트 활용</span>
+      <h2 class="slide-title">시장 트렌드 분석 질의 실습</h2>
+      <p class="lead-desc">글로벌 마케팅 전문가 역할을 부여하고 프리미엄 세단 시장 트렌드 분석을 요청합니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card">
+          <div class="card-label">📋 실행 프롬프트 복사</div>
+          <div class="prompt-studio">
+            <div class="prompt-studio-header">
+              <span class="prompt-studio-tag">Prompt</span>
+            </div>
+            <div class="prompt-text">너는 10년차 글로벌 마케팅 전문가야. 최근 북미 및 유럽 시장의 '프리미엄 세단' 트렌드를 검색해서 요약해줘. 특히 주요 경쟁사들의 최근 마케팅 소구점(Selling Point)을 도출하고, 한국 자동차에 적용할 만한 인사이트를 제시해줘</div>
+          </div>
+          <div class="action-callout">
+            <span class="action-callout-icon">🚀</span>
+            <div class="action-callout-content">
+              <strong>실습 행동</strong>: 위 프롬프트를 대화창에 붙여넣고 실행 결과를 확인합니다.
+            </div>
+          </div>
+        </div>
+        <div class="screenshot-frame">
+          <img src="./img/06.webp" alt="시장 분석 결과">
+          <span class="screenshot-caption">트렌드 분석 및 마케팅 소구점 도출 결과 화면</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Step 1.2 출처 검증 & @멘션 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.2 AI 어시스턴트 활용</span>
+      <h2 class="slide-title">출처 검증(Source) 및 @멘션 도구 호출</h2>
+      <p class="lead-desc">생성된 답변 하단의 <strong>Source</strong> 링크로 팩트를 대조하고, <strong>@멘션</strong>으로 전문 도구를 불러옵니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card blue">
+          <div class="card-label">🔍 출처 검증 및 부분 질의</div>
+          <ul class="point-list">
+            <li><strong>Source 확인</strong>: 인용된 보고서와 기사 웹 링크를 클릭하여 사실 관계를 검증합니다.</li>
+            <li><strong>본문 드래그 질의</strong>: 응답 문장의 일부를 드래그하여 바로 추가 설명을 요구합니다.</li>
+            <li><strong>@멘션 도구 호출</strong>: 대화창에 <code>@Deep Research</code>를 입력하여 심층 검색 모드로 전환합니다.</li>
+          </ul>
+        </div>
+        <div class="screenshot-frame">
+          <img src="./img/07.webp" alt="Source 출처 확인">
+          <span class="screenshot-caption">본문 인용 출처(Source) 링크 검증 화면</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Step 1.2 번역 & 표 내보내기 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.2 AI 어시스턴트 활용</span>
+      <h2 class="slide-title">다국어 번역 및 데이터 내보내기 (Export)</h2>
+      <p class="lead-desc">보고서 결과를 38개 언어로 즉시 번역하고, 표 데이터를 업무 도구로 내보냅니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card">
+          <div class="card-label">📧 Gmail 초안 작성 연계</div>
+          <p class="card-text">응답 상단의 <strong>내보내기 > Gmail에서 초안 작성</strong>을 클릭하면 작성된 본문이 서식 그대로 메일 발송 창에 채워집니다.</p>
+        </div>
+        <div class="lecture-card blue">
+          <div class="card-label">📊 Google Sheets 내보내기</div>
+          <p class="card-text">비교 표 하단의 <strong>Sheets로 내보내기</strong>를 누르면 웹 스프레드시트 파일이 자동 생성되어 데이터 가공을 바로 이어갈 수 있습니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Step 1.2 세션 공유 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.2 AI 어시스턴트 활용</span>
+      <h2 class="slide-title">대화 세션 공유 및 팀 협업</h2>
+      <p class="lead-desc">우측 상단의 <strong>Share</strong> 버튼으로 읽기 및 추가 질의 권한이 포함된 링크를 만듭니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card yellow">
+          <div class="card-label">🤝 맥락 유지 협업</div>
+          <p class="card-text">공유 링크를 전달받은 동료는 이전 질문과 답변 흐름을 그대로 이어받아 작업을 계속할 수 있습니다. 작성자는 <strong>Shared chats</strong> 메뉴에서 언제든 공유를 해제할 수 있습니다.</p>
+          <div class="action-callout" style="background: #fefce8; border-color: #fef08a;">
+            <span class="action-callout-icon">🔗</span>
+            <div class="action-callout-content" style="color: #713f12;">
+              <strong>실습 행동</strong>: Share 버튼을 누르고 공유 링크를 생성해 봅니다.
+            </div>
+          </div>
+        </div>
+        <div class="screenshot-frame" style="flex-direction: row; gap: 14px;">
+          <img src="./img/09.webp" alt="Share 버튼" style="max-height: 38vh; width: 48%;">
+          <img src="./img/10.webp" alt="공유 링크" style="max-height: 38vh; width: 48%;">
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Step 1.3 EU 전기차 SWOT -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.3 실시간 웹 검색</span>
+      <h2 class="slide-title">EU 전기차 정책 실시간 SWOT 분석</h2>
+      <p class="lead-desc">구글 실시간 검색 색인과 연동하여 최신 보조금 정책과 탄소국경조정제도(CBAM)를 분석합니다.</p>
+      <div class="full-width-card">
+        <div class="lecture-card">
+          <div class="card-label">📋 실행 프롬프트</div>
+          <div class="prompt-studio">
+            <div class="prompt-studio-header">
+              <span class="prompt-studio-tag">Prompt</span>
+            </div>
+            <div class="prompt-text">2026년 현재 유럽연합(EU)의 전기차(EV) 보조금 정책 변화와 탄소국경조정제도(CBAM) 관련 최신 글로벌 뉴스를 검색해 줘. 이러한 정책 변화가 한국자동차의 유럽 시장 진출에 미칠 영향을 SWOT(강점, 약점, 기회, 위협) 분석 매트릭스 형태로 시각화해서 정리해 줘.</div>
+          </div>
+          <div class="action-callout">
+            <span class="action-callout-icon">💡</span>
+            <div class="action-callout-content">
+              <strong>결과 확인</strong>: 실시간 검색된 최신 뉴스 출처가 연결된 4분면 비교 표가 출력됩니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Step 1.3 CES 2026 로보틱스 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.3 실시간 웹 검색</span>
+      <h2 class="slide-title">CES 2026 로보틱스 산업 동향 분석</h2>
+      <p class="lead-desc">최신 피지컬 AI 기술 발표 내용을 검색하여 기업별 기술 트렌드와 차별화 포인트를 정리합니다.</p>
+      <div class="full-width-card">
+        <div class="lecture-card blue">
+          <div class="card-label">📋 실행 프롬프트</div>
+          <div class="prompt-studio">
+            <div class="prompt-studio-header">
+              <span class="prompt-studio-tag">Prompt</span>
+            </div>
+            <div class="prompt-text">최근 열린 'CES 2026'에서 주요 경쟁사들이 발표한 피지컬 AI 기술 및 마케팅 트렌드를 웹 검색으로 분석해 줘. 특히 글로벌 선도 기업들의 기술 혁신을 요약하고, 차별화 마케팅 핵심 메시지를 3줄로 작성해 줘.</div>
+          </div>
+          <div class="action-callout" style="background: #eff6ff; border-color: #bfdbfe;">
+            <span class="action-callout-icon">🎯</span>
+            <div class="action-callout-content" style="color: #1e40af;">
+              <strong>포인트</strong>: 학습 컷오프 이후의 최신 행사 발표 내용도 웹 그라운딩으로 정확히 수집합니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Step 1.3 URL 바인딩 분석 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.3 실시간 웹 검색</span>
+      <h2 class="slide-title">URL 바인딩 기반 웹페이지 직접 파싱</h2>
+      <p class="lead-desc">프롬프트 안에 특정 웹페이지 링크를 포함하여 해당 페이지의 본문 데이터를 직접 파싱합니다.</p>
+      <div class="full-width-card">
+        <div class="lecture-card">
+          <div class="card-label">📋 실행 프롬프트</div>
+          <div class="prompt-studio">
+            <div class="prompt-studio-header">
+              <span class="prompt-studio-tag">Prompt</span>
+            </div>
+            <div class="prompt-text">다음 웹페이지의 내용을 읽고, 핵심 내용을 3줄로 요약한 뒤 우리 사업에 시사하는 바를 설명해줘: https://blog.google/technology/ai/</div>
+          </div>
+          <ul class="point-list" style="margin-top: 0.8rem;">
+            <li><strong>작동 방식</strong>: 로그인 인증이 필요 없는 공개 블로그, 보도자료, 뉴스 기사 URL을 본문으로 직접 읽어옵니다.</li>
+            <li><strong>실무 활용</strong>: 긴 영문 기술 블로그나 경쟁사 신제품 보도자료를 10초 만에 한국어로 요약할 때 유용합니다.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. Step 1.4 Nano Banana 모바일 포스터 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.4 미디어 생성</span>
+      <h2 class="slide-title">Nano Banana: 9:16 모바일 포스터 생성</h2>
+      <p class="lead-desc"><strong>Tools > Create images</strong> 도구로 스마트폰 화면에 맞는 세로형 안내 포스터를 제작합니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card">
+          <div class="card-label">✍️ 이미지 생성 프롬프트</div>
+          <div class="prompt-studio">
+            <div class="prompt-studio-header">
+              <span class="prompt-studio-tag">Image Prompt</span>
+            </div>
+            <div class="prompt-text">Gemini Enterprise를 잘 쓰고 싶어하는 직장인을 위한 팁과 핵심 기능을 알려주는 포스터(비율 9:16)를 그려줘. 내용: AI Assistant, Deep Research, Gemini Notebook, Agent Designer, Connectors, Media Generation</div>
+          </div>
+          <div class="action-callout">
+            <span class="action-callout-icon">🎨</span>
+            <div class="action-callout-content">
+              <strong>실습 팁</strong>: 비율(Aspect Ratio)을 9:16으로 명시하면 모바일 카드뉴스에 최적화됩니다.
+            </div>
+          </div>
+        </div>
+        <div class="screenshot-frame">
+          <img src="./img/21.webp" alt="모바일 포스터 생성 결과">
+          <span class="screenshot-caption">Nano Banana 9:16 모바일 안내 포스터 결과물</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. Step 1.4 Img2Img 다이어그램 변환 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.4 미디어 생성</span>
+      <h2 class="slide-title">스케치 기반 아키텍처 다이어그램 변환 (Img2Img)</h2>
+      <p class="lead-desc">손으로 그린 스케치 이미지(<code>handwrite_arch.png</code>)를 업로드하여 깔끔한 클라우드 구성도로 다시 그립니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card blue">
+          <div class="card-label">🏗️ 아키텍처 변환 요청</div>
+          <p class="card-text">회의 중 화이트보드에 그린 구성도나 손그림을 업로드한 후 다음과 같이 요청합니다.</p>
+          <div class="prompt-studio">
+            <div class="prompt-studio-header">
+              <span class="prompt-studio-tag">Prompt</span>
+            </div>
+            <div class="prompt-text">첨부한 아키텍처를 Google Cloud Architecture 스타일로 전문적이고 세련되게 다시 그려줘</div>
+          </div>
+        </div>
+        <div class="screenshot-frame">
+          <img src="./img/23.webp" alt="클라우드 구성도 변환 결과">
+          <span class="screenshot-caption">스케치를 인식하여 정돈된 클라우드 다이어그램으로 생성한 결과</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. Step 1.4 Veo 비디오 생성 Part A -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.4 미디어 생성</span>
+      <h2 class="slide-title">Veo 비디오 생성 모델 (제품 연출 & 식품 매크로)</h2>
+      <p class="lead-desc">구글의 영상 생성 모델 <strong>Veo</strong>로 1080p 고화질 시네마틱 홍보 비디오를 제작합니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card" style="padding: 1.4rem; text-align: center;">
+          <div class="card-label" style="justify-content: center;">🍾 제품 연출 돌리 샷</div>
+          <p class="card-text" style="font-size: 0.95rem;">대리석 위 물방울과 자연광 조명 클로즈업 무빙</p>
+          <img src="./img/24.webp" alt="향수 제품 영상" style="width: 100%; border-radius: 12px; max-height: 28vh; object-fit: cover;">
+        </div>
+        <div class="lecture-card blue" style="padding: 1.4rem; text-align: center;">
+          <div class="card-label" style="justify-content: center;">🍔 식품 매크로 슬로우 모션</div>
+          <p class="card-text" style="font-size: 0.95rem;">녹아내리는 치즈와 바삭한 패티의 4K 디테일</p>
+          <img src="./img/26.webp" alt="버거 매크로 영상" style="width: 100%; border-radius: 12px; max-height: 28vh; object-fit: cover;">
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. Step 1.4 Veo 비디오 생성 Part B -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.4 미디어 생성</span>
+      <h2 class="slide-title">Veo 비디오 생성 모델 (드론 주행 & 90s 레트로)</h2>
+      <p class="lead-desc">카메라 앵글(드론 FPV)과 필름 질감(90년대 VHS)을 프롬프트로 세밀하게 제어합니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card yellow" style="padding: 1.4rem; text-align: center;">
+          <div class="card-label" style="justify-content: center;">🚁 드론 FPV 하강 샷</div>
+          <p class="card-text" style="font-size: 0.95rem;">폭포 협곡을 빠른 속도로 하강하는 역동적 앵글</p>
+          <img src="./img/28.webp" alt="드론 영상" style="width: 100%; border-radius: 12px; max-height: 28vh; object-fit: cover;">
+        </div>
+        <div class="lecture-card purple" style="padding: 1.4rem; text-align: center;">
+          <div class="card-label" style="justify-content: center;">📼 90년대 VHS 캠코더 스타일</div>
+          <p class="card-text" style="font-size: 0.95rem;">노이즈와 색 번짐이 연출된 아날로그 감성 비디오</p>
+          <img src="./img/30.webp" alt="레트로 보드 영상" style="width: 100%; border-radius: 12px; max-height: 28vh; object-fit: cover;">
+        </div>
+      </div>
+    </section>
+
+    <!-- 16. Step 1.5 Excel 분석 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.5 로컬 파일 분석</span>
+      <h2 class="slide-title">Excel 데이터 시각화 및 매출 차트 도출</h2>
+      <p class="lead-desc"><code>coffee orders.xlsx</code> 파일을 첨부하고 기간별 매출 추이와 제품별 판매량을 분석합니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card">
+          <div class="card-label">📌 스프레드시트 분석 핵심 팁</div>
+          <ul class="point-list">
+            <li><strong>컬럼 헤더 위치</strong>: 엑셀 파일의 1행에 열 이름(Header)이 명확해야 합니다.</li>
+            <li><strong>괄호 컬럼명 지정</strong>: <code>(주문 완료일)</code>, <code>(Orders Total Sales)</code>처럼 괄호로 컬럼을 지정하면 매핑 정확도가 높아집니다.</li>
+            <li><strong>복합 차트 출력</strong>: 월별 매출 선 차트와 상품별 기여도 막대 차트를 한 번에 생성합니다.</li>
+          </ul>
+        </div>
+        <div class="screenshot-frame">
+          <img src="./img/13.webp" alt="엑셀 매출 차트 분석">
+          <span class="screenshot-caption">첨부한 엑셀 데이터를 기반으로 생성된 매출 추이 시각화 차트</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17. Step 1.6 PPTX 요약 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.6 로컬 파일 분석</span>
+      <h2 class="slide-title">PowerPoint (PPTX) 슬라이드 구조 요약 표</h2>
+      <p class="lead-desc">발표자료(<code>BigQuery New Feature Update.pptx</code>)를 첨부하여 슬라이드별 핵심 기능을 표로 추출합니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card blue">
+          <div class="card-label">📑 슬라이드 구조 요약 질의</div>
+          <div class="prompt-studio">
+            <div class="prompt-studio-header">
+              <span class="prompt-studio-tag">Prompt</span>
+            </div>
+            <div class="prompt-text">BigQuery New Feature 들에 대해서 각 기능별로 요약을 해주고, GA, Preview 여부를 표로 작성해서 보여줘</div>
+          </div>
+          <p class="card-text" style="margin-top: 0.6rem;">문서 파서가 슬라이드 단위로 텍스트와 표를 인식하여 3열 비교 표를 완성합니다.</p>
+        </div>
+        <div class="screenshot-frame">
+          <img src="./img/16.webp" alt="PPTX 요약 표">
+          <span class="screenshot-caption">슬라이드 장표를 파싱하여 도출한 GA / Preview 요약 표</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18. Step 1.7 Canvas 구글 슬라이드 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.7 Canvas</span>
+      <h2 class="slide-title">Google Slides 자동 생성 및 PPTX 내보내기</h2>
+      <p class="lead-desc">대화 내용으로 GCP 아키텍처 슬라이드를 만들고 <strong>Google Slides 및 PPTX</strong> 파일로 내보냅니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card">
+          <div class="card-label">📊 Canvas 슬라이드 요청 프롬프트</div>
+          <div class="prompt-studio">
+            <div class="prompt-studio-header">
+              <span class="prompt-studio-tag">Prompt</span>
+            </div>
+            <div class="prompt-text" style="font-size: 0.88rem; line-height: 1.5;">새로운 모바일 앱을 위한 백엔드 아키텍처를 GCP에서 설계하려고 해. 트래픽 급증 시 자동 확장과 실시간 로그 분석 파이프라인이 중요해. 완전 관리형 서버리스 서비스를 위주로 설계하고 이유를 설명해줘.
+
+그리고 구글 슬라이드로 요약해줘.
+슬라이드는 하얀색 바탕의 깔끔하고 모던한 IT 기술 문서 스타일로 작성해줘.</div>
+          </div>
+        </div>
+        <div class="screenshot-frame">
+          <img src="./img/image128.webp" alt="Canvas 슬라이드 생성 결과" style="max-height: 42vh;">
+          <span class="screenshot-caption">Canvas 창에서 자동 렌더링된 프레젠테이션 슬라이드</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19. Step 1.8 APE 프레임워크 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.8 프롬프트 프레임워크</span>
+      <h2 class="slide-title">APE: 단순 질의 및 빠른 요약에 최적화</h2>
+      <p class="lead-desc">복잡한 설정 없이 <strong>행동(Action), 목적(Purpose), 기대형식(Expectation)</strong> 3가지만 지정하는 가벼운 구조입니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card">
+          <div class="card-label">⚡ APE 3요소</div>
+          <ul class="point-list">
+            <li><strong>Action (행동)</strong>: 모델이 수행할 핵심 작업 (요약, 추출, 번역 등)</li>
+            <li><strong>Purpose (목적)</strong>: 요청 배경이나 비즈니스 목표</li>
+            <li><strong>Expectation (기대형식)</strong>: 원하는 결과물의 형태 (3개 불릿, 1줄 요약 등)</li>
+          </ul>
+        </div>
+        <div class="lecture-card blue">
+          <div class="card-label">📋 실전 예제</div>
+          <div class="prompt-studio">
+            <div class="prompt-studio-header">
+              <span class="prompt-studio-tag">APE Format</span>
+            </div>
+            <div class="prompt-text">[Action] 이 첨부 기사를 요약하세요.
+[Purpose] 팀 주간 회의에서 2분 동안 구두로 브리핑해야 합니다.
+[Expectation] 핵심 논점 3가지를 글머리 기호(Bullet points)로 정리하세요.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 20. Step 1.8 CRAFT 프레임워크 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.8 프롬프트 프레임워크</span>
+      <h2 class="slide-title">C.R.A.F.T: 표준 비즈니스 보고서 구조</h2>
+      <p class="lead-desc">업무 지시의 모호성을 없애고 <strong>전문가 페르소나와 출력 서식을 엄격하게 통제</strong>하는 기업 표준 프레임워크입니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card yellow">
+          <div class="card-label">🏆 CRAFT 5대 구성 요소</div>
+          <ul class="point-list">
+            <li><strong>Context (맥락)</strong>: 업무 상황 및 예산 등 비즈니스 배경</li>
+            <li><strong>Role (역할)</strong>: 10년차 수석 전략가 등 구체적 페르소나 부여</li>
+            <li><strong>Action (행동)</strong>: 실행할 과제를 명확한 동사로 지시</li>
+            <li><strong>Format (형식)</strong>: 표, 글머리 기호, 1페이지 요약 등 양식 지정</li>
+            <li><strong>Tone (어조)</strong>: 임원 보고용 격식체 등 읽는 사람 맞춤 설정</li>
+          </ul>
+        </div>
+        <div class="lecture-card">
+          <div class="card-label">📋 실전 작성 예시</div>
+          <div class="prompt-studio">
+            <div class="prompt-studio-header">
+              <span class="prompt-studio-tag">CRAFT Format</span>
+            </div>
+            <div class="prompt-text" style="font-size: 0.88rem;">[Context] 다음 주 신규 서비스 출시를 앞두고 마케팅 예산이 제한적입니다.
+[Role] IT 스타트업의 10년 차 수석 마케팅 전략가입니다.
+[Action] 저예산으로 실행 가능한 게릴라 마케팅 아이디어 3가지를 제안하세요.
+[Format] 중요도 순 불릿 포인트와 하단 기대효과 요약 표로 작성하세요.
+[Tone] 경영진 보고용이므로 전문적이고 격식 있는 어조를 유지하세요.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 21. Step 1.8 CRAFT 템플릿 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.8 프롬프트 프레임워크</span>
+      <h2 class="slide-title">CRAFT 표준 마크다운 복사 템플릿</h2>
+      <p class="lead-desc">어떤 비즈니스 시나리오에서도 즉시 복사하여 괄호 안의 내용만 바꿔 조립할 수 있는 표준 템플릿입니다.</p>
+      <div class="full-width-card">
+        <div class="lecture-card">
+          <div class="card-label">💡 범용 조립용 템플릿</div>
+          <div class="prompt-studio">
+            <div class="prompt-studio-header">
+              <span class="prompt-studio-tag">Markdown Template</span>
+            </div>
+            <div class="prompt-text">[Context]
+현재 [프로젝트 배경] 상황이며, 이번 작업의 핵심 목적은 [달성 목표]입니다.
+
+[Role]
+당신은 [해당 분야]에서 10년 이상의 실무 경험을 가진 베테랑 [직무/페르소나]입니다.
+
+[Action]
+입력 데이터를 바탕으로 [수행 과제]를 실행하고, [해결 방안]을 구체적으로 제시해 주세요.
+
+[Format]
+- 핵심 요약 (3줄 이내)
+- 세부 실행 방안 (글머리 기호)
+- 항목별 비교 분석 (Table 표 형식)
+
+[Tone]
+최종 독자는 [경영진/고객/팀원]이므로 [전문적/객관적/친근한] 비즈니스 어조를 유지하세요.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 22. Step 1.8 CO-STAR 프레임워크 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.8 프롬프트 프레임워크</span>
+      <h2 class="slide-title">CO-STAR: 마케팅 및 카피라이팅 정밀 제어</h2>
+      <p class="lead-desc">대외 커뮤니케이션, 콜드 메일, 홍보 문구 등 <strong>문체(Style)와 청중(Audience)을 정밀 타깃팅</strong>할 때 사용합니다.</p>
+      <div class="split-layout">
+        <div class="lecture-card purple">
+          <div class="card-label">🎨 CO-STAR 6요소</div>
+          <ul class="point-list">
+            <li><strong>Context (맥락)</strong>: 프로젝트 배경 및 시장 환경</li>
+            <li><strong>Objective (목표)</strong>: 달성하려는 비즈니스 전환 목표</li>
+            <li><strong>Style (스타일)</strong>: 기술 문서, 블로그, 위트 있는 카피 등 문체</li>
+            <li><strong>Tone (어조)</strong>: 신뢰감, 권위, 친근함 등 태도 설정</li>
+            <li><strong>Audience (청중)</strong>: 글을 읽을 대상의 직책과 이해 수준</li>
+            <li><strong>Response (응답 포맷)</strong>: 글자 수 제한, 메일 서식 등 출력 규격</li>
+          </ul>
+        </div>
+        <div class="lecture-card">
+          <div class="card-label">📋 B2B 콜드 메일 예제</div>
+          <div class="prompt-studio">
+            <div class="prompt-studio-header">
+              <span class="prompt-studio-tag">CO-STAR Format</span>
+            </div>
+            <div class="prompt-text" style="font-size: 0.9rem;">[Context] SaaS 협업 툴 신규 출시 및 무료 체험 도입 유도
+[Objective] IT 부서 팀장에게 도입 가치를 전달하고 15분 미팅 제안
+[Style] 설득력 있는 B2B 비즈니스 카피라이팅 문체
+[Tone] 업무 비효율 문제를 정확히 짚는 신뢰감 있는 톤
+[Audience] 엔터프라이즈 기업의 팀장급 의사결정권자
+[Response] 핵심 가치 비교표를 포함한 400자 이내 이메일 초안</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 23. Step 1.8 프레임워크 선택 기준 -->
+    <section class="slide-section">
+      <span class="section-tag">Step 1.8 프롬프트 프레임워크</span>
+      <h2 class="slide-title">3대 프레임워크 비교 및 선택 가이드</h2>
+      <p class="lead-desc">업무 목적과 문서의 복잡도에 따라 가장 적합한 프레임워크를 선택합니다.</p>
+      <div class="triple-grid">
+        <div class="lecture-card">
+          <div class="card-label">⚡ APE</div>
+          <p class="card-text"><strong>추천 용도</strong>: 단문 요약, 데이터 추출, 단순 번역</p>
+          <ul class="point-list">
+            <li>빠른 질의에 적합</li>
+            <li>작성 시간 30초 이내</li>
+            <li>직관적인 3단계 구조</li>
+          </ul>
+        </div>
+        <div class="lecture-card yellow">
+          <div class="card-label">🏆 C.R.A.F.T</div>
+          <p class="card-text"><strong>추천 용도</strong>: 기획서, 시장 조사, 임원 보고서</p>
+          <ul class="point-list">
+            <li>표준 비즈니스 업무용</li>
+            <li>페르소나와 서식 엄격 통제</li>
+            <li>재사용 가능한 템플릿화</li>
+          </ul>
+        </div>
+        <div class="lecture-card purple">
+          <div class="card-label">🎨 CO-STAR</div>
+          <p class="card-text"><strong>추천 용도</strong>: 마케팅 카피, 대외 메일, 보도자료</p>
+          <ul class="point-list">
+            <li>스타일과 청중 정밀 제어</li>
+            <li>대외 커뮤니케이션 최적화</li>
+            <li>높은 감성적 설득력</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 24. 완료 및 Track 2 이동 -->
+    <section class="slide-section">
+      <h2 class="hero-title" style="font-size: 2.8rem;">Track 1 실습 완료</h2>
+      <p class="lead-desc">어시스턴트 기본 활용과 멀티모달 실습을 마쳤습니다.<br>이어서 사내 문서 기반 팀 도서관과 에이전트를 만드는 Track 2 (Agentic Value)로 이동합니다.</p>
+      <a href="slide_track2.html" class="btn-hero-cta">🔵 Track 2 에이전트 구축 슬라이드로 이동 &rarr;</a>
+    </section>
+  </div>
+
+  <!-- 이미지 확대 모달 -->
+  <div class="lightbox-backdrop" id="lightboxBackdrop" onclick="dismissLightbox()">
+    <img class="lightbox-view-img" id="lightboxViewImg" src="" alt="확대된 이미지">
+  </div>
+
+  <script>
+    const slideContainer = document.getElementById('slideContainer');
+    const navPips = document.querySelectorAll('.nav-pip');
+    const slideSections = document.querySelectorAll('.slide-section');
+    const progressFill = document.getElementById('progressFill');
+    const slideNumPill = document.getElementById('slideNumPill');
+
+    function refreshProgress(idx) {
+      navPips.forEach((pip, i) => pip.classList.toggle('active', i === idx));
+      const pct = ((idx + 1) / slideSections.length) * 100;
+      progressFill.style.width = pct + '%';
+      slideNumPill.innerText = String(idx + 1).padStart(2, '0') + ' / ' + String(slideSections.length).padStart(2, '0');
+    }
+
+    function jumpToSlide(idx) {
+      if (idx >= 0 && idx < slideSections.length) {
+        slideSections[idx].scrollIntoView({ behavior: 'smooth' });
+        refreshProgress(idx);
+      }
+    }
+
+    function prevSlide() {
+      const idx = Math.round(slideContainer.scrollTop / (window.innerHeight - 64));
+      if (idx > 0) jumpToSlide(idx - 1);
+    }
+
+    function nextSlide() {
+      const idx = Math.round(slideContainer.scrollTop / (window.innerHeight - 64));
+      if (idx < slideSections.length - 1) jumpToSlide(idx + 1);
+    }
+
+    slideContainer.addEventListener('scroll', () => {
+      const activeIdx = Math.round(slideContainer.scrollTop / (window.innerHeight - 64));
+      refreshProgress(activeIdx);
+    });
+
+    const lightboxBackdrop = document.getElementById('lightboxBackdrop');
+    const lightboxViewImg = document.getElementById('lightboxViewImg');
+    document.querySelectorAll('.screenshot-frame img, .lecture-card img').forEach(img => {
+      img.addEventListener('click', (e) => {
+        e.stopPropagation();
+        lightboxViewImg.src = img.src;
+        lightboxBackdrop.classList.add('active');
+      });
+    });
+    function dismissLightbox() { lightboxBackdrop.classList.remove('active'); }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightboxBackdrop.classList.contains('active')) {
+        dismissLightbox();
+        return;
+      }
+      if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+        return;
+      }
+      const idx = Math.round(slideContainer.scrollTop / (window.innerHeight - 64));
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        e.preventDefault();
+        if (idx < slideSections.length - 1) jumpToSlide(idx + 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        if (idx > 0) jumpToSlide(idx - 1);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        jumpToSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        jumpToSlide(slideSections.length - 1);
+      }
+    });
+
+    let touchStartY = 0;
+    slideContainer.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
+    slideContainer.addEventListener('touchend', e => {
+      const diff = touchStartY - e.changedTouches[0].clientY;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    }, { passive: true });
+
+    refreshProgress(0);
+  </script>
+</body>
+</html>
