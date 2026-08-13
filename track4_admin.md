@@ -69,7 +69,7 @@ graph TD
 | :--- | :--- | :--- | :--- |
 | **데이터 주권** | Customer Data Storage & Zero Training | **ON (학습 절대 미사용)** | 사내 기밀 및 프롬프트의 AI 학습 데이터 활용 원천 방지 |
 | **외부 연동** | Web Search (Google Grounding) | **부서별 토글 제어** | 일반 부서는 ON, 보안 부서는 사내 데이터 우선 모드로 제한 |
-| **미디어 생성** | Image & Video Generation (Nano Banana, Veo) | **전사 활성화** | 비즈니스 시각 자료 및 사내 영상 콘텐츠 제작 지원 |
+| **미디어 생성** | Image & Video Generation | **전사 활성화** | 비즈니스 시각 자료 및 사내 영상 콘텐츠 제작 지원 |
 | **에이전트 권한** | Custom Agent Creation | **승인 기반 배포** | 임직원이 제작한 에이전트를 관리자 승인 후 사내 갤러리에 배포 |
 
 ---
