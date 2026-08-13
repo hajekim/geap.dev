@@ -349,7 +349,8 @@
       padding: 1.1rem 1.4rem;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
+      gap: 0.5rem;
       position: relative;
     }
 
@@ -985,27 +986,26 @@
         <div class="slide-body">
           <div class="layout-split">
             <div class="biz-card highlight">
-              <div>
-                <div class="card-head">📱 9:16 세로형 모바일 포스터</div>
-                <div class="prompt-box">
-                  <div class="prompt-box-header">
-                    <span class="prompt-chip">9:16 Poster</span>
-                    <button class="btn-copy-prompt" onclick="copyPromptText('p5')">복사하기</button>
-                  </div>
-                  <div class="prompt-code" id="p5" style="font-size: 0.95rem;">Gemini Enterprise를 잘 쓰고 싶어하는 직장인을 위한 팁과 핵심 기능을 알려주는 포스터(비율 9:16)를 그려줘. 내용: AI Assistant, Deep Research, Gemini Notebook, Agent Designer, Connectors, Media Generation</div>
+              <div class="card-head">📱 9:16 세로형 모바일 포스터</div>
+              <div class="prompt-box">
+                <div class="prompt-box-header">
+                  <span class="prompt-chip">9:16 Poster</span>
+                  <button class="btn-copy-prompt" onclick="copyPromptText('p5')">복사하기</button>
                 </div>
+                <div class="prompt-code" id="p5" style="font-size: 0.95rem;">Gemini Enterprise를 잘 쓰고 싶어하는 직장인을 위한 팁과 핵심 기능을 알려주는 포스터(비율 9:16)를 그려줘. 내용: AI Assistant, Deep Research, Gemini Notebook, Agent Designer, Connectors, Media Generation</div>
               </div>
               <div class="image-stage-frame">
-                <img src="./img/21.webp" alt="포스터 생성 결과" style="max-height: 22vh; width: auto; object-fit: contain;">
+                <img src="./img/21.webp" alt="포스터 생성 결과" style="max-height: 20vh; width: auto; object-fit: contain;">
+              </div>
+              <div style="margin-top: auto; font-size: 0.94rem; color: #166534; background: #f0fdf4; padding: 6px 12px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                ✨ 모바일 최적화 9:16 비율 및 엔터프라이즈 인포그래픽 렌더링
               </div>
             </div>
             <div class="biz-card highlight">
-              <div>
-                <div class="card-head">🏗️ 스케치 다이어그램 변환 (Img2Img)</div>
-                <p class="card-para">회의실 화이트보드 스케치를 업로드하고 전문 클라우드 스타일로 다시 그리도록 요청합니다.</p>
-              </div>
+              <div class="card-head">🏗️ 스케치 다이어그램 변환 (Img2Img)</div>
+              <p class="card-para">회의실 화이트보드 스케치를 업로드하고 전문 클라우드 스타일로 다시 그리도록 요청합니다.</p>
               <div class="image-stage-frame">
-                <img src="./img/23.webp" alt="다이어그램 변환 결과" style="max-height: 22vh; width: 100%; object-fit: contain;">
+                <img src="./img/23.webp" alt="다이어그램 변환 결과" style="max-height: 20vh; width: 100%; object-fit: contain;">
               </div>
               <div style="margin-top: auto; font-size: 0.94rem; color: #166534; background: #f0fdf4; padding: 6px 12px; border-radius: 8px; border: 1px solid #bbf7d0;">
                 ✨ 손그림의 모호한 선과 기호를 엔터프라이즈 아키텍처 아이콘으로 정밀 변환
@@ -1202,6 +1202,9 @@
                   <div class="prompt-code" id="p8">[Action] 이 첨부 기사를 요약하세요.
 [Purpose] 팀 주간 회의에서 2분 동안 구두로 브리핑해야 합니다.
 [Expectation] 핵심 논점 3가지를 글머리 기호(Bullet points)로 정리하세요.</div>
+                </div>
+                <div style="margin-top: auto; font-size: 0.94rem; color: #166534; background: #f0fdf4; padding: 6px 12px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                  👉 <strong>적용 시점</strong>: 회의 직전 2분 요약 브리핑 및 빠른 팩트 추출
                 </div>
               </div>
             </div>
