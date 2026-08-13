@@ -3,25 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Gemini Enterprise — 오프닝 키노트 & 로드맵</title>
+  <title>Google Gemini Enterprise — 오프닝 키노트 & 전사 AI 로드맵</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
+      --primary-blue: #1a73e8;
       --primary-green: #1e8e3e;
       --primary-green-dark: #137333;
       --primary-green-light: #e6f4ea;
       --google-blue: #1a73e8;
-      --google-blue-dark: #1557b0;
-      --google-blue-light: #e8f0fe;
-      --google-yellow: #ea8600;
-      --google-yellow-light: #fef7e0;
-      --google-red: #d93025;
-      --google-red-light: #fce8e6;
+      --google-red: #ea4335;
+      --google-yellow: #fbbc04;
+      --google-green: #34a853;
       --purple: #7c3aed;
-      --purple-light: #f3e8ff;
 
       --bg-canvas: #0f172a;
       --stage-bg: #ffffff;
@@ -49,7 +46,6 @@
       user-select: none;
     }
 
-    /* 16:9 프레젠테이션 스테이지 컨테이너 */
     .presentation-app {
       width: 100vw;
       height: 100vh;
@@ -172,7 +168,7 @@
       pointer-events: auto;
     }
     .btn-top-next-track:hover {
-      background: var(--primary-green-dark);
+      background: #137333;
       box-shadow: 0 6px 18px rgba(30, 142, 62, 0.6);
       transform: scale(1.05);
     }
@@ -210,7 +206,6 @@
       display: flex;
     }
 
-    /* 개별 슬라이드 (가로 전환 / 페이드) */
     .slide-canvas {
       position: absolute;
       top: 0;
@@ -234,7 +229,6 @@
       z-index: 10;
     }
 
-    /* 슬라이드 상단 헤더 */
     .slide-header {
       text-align: left;
       margin-bottom: 0.7rem;
@@ -246,7 +240,7 @@
       border-radius: 6px;
       font-size: 0.85rem;
       font-weight: 700;
-      background: var(--google-blue-light);
+      background: #e8f0fe;
       color: var(--google-blue);
       margin-bottom: 0.25rem;
     }
@@ -265,7 +259,6 @@
       line-height: 1.48;
     }
 
-    /* 슬라이드 바디 영역 */
     .slide-body {
       flex: 1;
       display: flex;
@@ -275,7 +268,6 @@
       min-height: 0;
     }
 
-    /* 2열 스플릿 레이아웃 */
     .layout-split {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -286,24 +278,6 @@
       text-align: left;
     }
 
-    /* 2x2 매트릭스 레이아웃 */
-    .layout-matrix-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      width: 100%;
-      height: 100%;
-      justify-content: space-between;
-    }
-    .layout-matrix-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 0.9rem;
-      flex: 1;
-    }
-
-    /* 3열 다이어그램 레이아웃 */
     .layout-triad {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -314,7 +288,6 @@
       text-align: left;
     }
 
-    /* 4열 매트릭스 레이아웃 */
     .layout-quad {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -325,9 +298,9 @@
       text-align: left;
     }
 
-    /* 하단 통합 결과 배너 공통 스타일 */
+    /* 하단 통합 결과 배너 */
     .fusion-banner {
-      background: linear-gradient(135deg, #f0fdf4, #e8f0fe);
+      background: linear-gradient(135deg, #f0fdf4, #f8fafc);
       border: 1px solid #bbf7d0;
       border-radius: 12px;
       padding: 0.6rem 1.2rem;
@@ -340,7 +313,7 @@
     .fusion-banner-title {
       font-size: 1.05rem;
       font-weight: 700;
-      color: #14532d;
+      color: #166534;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -361,37 +334,24 @@
       color: var(--text-primary);
     }
 
-    /* 비즈니스 카드 스타일 */
+    /* 비즈니스 카드 */
     .biz-card {
       background: var(--stage-subtle);
       border: 1px solid var(--border-color);
       border-radius: 14px;
-      padding: 1.1rem 1.4rem;
+      padding: 1.1rem 1.3rem;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      gap: 0.5rem;
+      gap: 0.45rem;
       position: relative;
     }
 
     .biz-card.highlight {
       background: #ffffff;
       border-color: #bbf7d0;
-      box-shadow: 0 8px 20px -4px rgba(30, 142, 62, 0.08);
+      box-shadow: 0 8px 20px -4px rgba(34, 197, 94, 0.08);
     }
-    .biz-card.highlight.blue {
-      border-color: #bfdbfe;
-      box-shadow: 0 8px 20px -4px rgba(26, 115, 232, 0.08);
-    }
-    .biz-card.highlight.purple {
-      border-color: #e9d5ff;
-      box-shadow: 0 8px 20px -4px rgba(124, 58, 237, 0.08);
-    }
-    .biz-card.highlight.red {
-      border-color: #fecaca;
-      box-shadow: 0 8px 20px -4px rgba(217, 48, 37, 0.08);
-    }
-
     .biz-card.highlight::before {
       content: '';
       position: absolute;
@@ -402,29 +362,62 @@
       background: var(--primary-green);
       border-radius: 14px 14px 0 0;
     }
+
+    .biz-card.highlight.blue {
+      border-color: #bfdbfe;
+    }
     .biz-card.highlight.blue::before { background: var(--google-blue); }
+
+    .biz-card.highlight.purple {
+      border-color: #e9d5ff;
+    }
     .biz-card.highlight.purple::before { background: var(--purple); }
+
+    .biz-card.highlight.red {
+      border-color: #fecaca;
+    }
     .biz-card.highlight.red::before { background: var(--google-red); }
 
     .card-head {
       font-family: var(--font-heading);
-      font-size: 1.28rem;
+      font-size: 1.26rem;
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.25rem;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
     .card-para {
-      font-size: 1.10rem;
+      font-size: 1.08rem;
       color: var(--text-secondary);
-      line-height: 1.55;
-      margin-bottom: 0.4rem;
+      line-height: 1.5;
     }
 
-    /* 하단 발표자 프롬프터 서랍 */
+    /* 고밀도 서브 블록 */
+    .sub-block {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin: 2px 0;
+    }
+    .sub-block-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .sub-block-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
     .prompter-drawer {
       position: absolute;
       bottom: 0;
@@ -453,7 +446,6 @@
       flex-shrink: 0;
     }
 
-    /* 좌우 내비게이션 화살표 */
     .stage-nav-arrow {
       position: absolute;
       top: 50%;
@@ -474,13 +466,62 @@
       transition: all 0.2s ease;
     }
     .stage-nav-arrow:hover {
-      background: var(--google-blue-light);
-      color: var(--google-blue);
-      border-color: #bfdbfe;
+      background: var(--primary-green-light);
+      color: var(--primary-green-dark);
+      border-color: #bbf7d0;
       transform: translateY(-50%) scale(1.08);
     }
     .nav-arrow-left { left: 16px; }
     .nav-arrow-right { right: 16px; }
+
+    .toast-popup {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1e293b;
+      color: #ffffff;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast-popup.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(10px);
+      z-index: 3000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      cursor: zoom-out;
+    }
+    .lightbox-modal.active { opacity: 1; pointer-events: auto; }
+    .lightbox-modal img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 <body>
@@ -489,7 +530,7 @@
     <header class="top-control-bar">
       <div class="brand-meta">
         <a href="index.html" class="btn-portal-exit">← 포털 홈</a>
-        <span class="track-indicator">🎯 오프닝 키노트 & 로드맵</span>
+        <span class="track-indicator">🎯 Master Keynote</span>
       </div>
       <div class="stage-progress">
         <div class="progress-bar-bg">
@@ -551,7 +592,7 @@
         </div>
       </section>
 
-      <!-- Slide 02: 엔터프라이즈 AI 보안 아키텍처 -->
+      <!-- Slide 02: 엔터프라이즈 AI 보안 아키텍처 (풍부한 카드) -->
       <section class="slide-canvas" data-prompter="강사 멘트: 고객의 모든 데이터는 VPC Service Controls 경계 내에 격리되며, 모델 재학습에 절대 사용되지 않는 기업 데이터 주권 원칙을 강조합니다.">
         <div class="slide-header">
           <span class="act-tag">Architecture</span>
@@ -563,20 +604,32 @@
             <div class="layout-split" style="flex: 1;">
               <div class="biz-card highlight blue">
                 <div class="card-head">🛡️ 사내 데이터 보호 및 절대 격리</div>
-                <p class="card-para">사용자 질의 및 입력 데이터는 기반 모델의 재학습(Training)에 절대 활용되지 않으며, 고객 전용 테넌트 경계 내에서 암호화 처리됩니다.</p>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">VPC Service Controls</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">고객 관리 암호화 키(CMEK)</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">HIPAA / ISO 27001 준수</span>
+                <div class="sub-block">
+                  <div class="sub-block-title">1. 모델 재학습(Training) 배제</div>
+                  <div class="sub-block-desc">사용자 프롬프트 및 사내 첨부 문서는 기반 모델 학습에 절대 사용되지 않음 (Zero Training)</div>
+                </div>
+                <div class="sub-block">
+                  <div class="sub-block-title">2. VPC Service Controls 경계</div>
+                  <div class="sub-block-desc">외부 비인가 IP 차단 및 고객 전용 보안 테넌트 경계 내에서만 안전하게 연산 수행</div>
+                </div>
+                <div class="sub-block">
+                  <div class="sub-block-title">3. 고객 관리 암호화 키 (CMEK)</div>
+                  <div class="sub-block-desc">FIPS 140-2 Level 3 인증 HSM 키로 저장 및 전송 중인 모든 사내 데이터 암호화</div>
                 </div>
               </div>
               <div class="biz-card highlight">
                 <div class="card-head">⚡ 권한(ACL) 기반 업무 도구 연동</div>
-                <p class="card-para">Google Workspace(Gmail, Drive) 및 Microsoft 365 데이터와 실시간 연동되어, 사용자가 실제 접근 권한을 가진 문서에 대해서만 정확하게 답변을 생성합니다.</p>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">실시간 권한(ACL) 상속</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">WIF 기반 SSO 연동</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Cloud Audit Logs 전수 기록</span>
+                <div class="sub-block">
+                  <div class="sub-block-title">1. 실시간 권한(ACL) 상속</div>
+                  <div class="sub-block-desc">Google Workspace 및 M365의 원본 파일 접근 권한이 색인에 실시간 동기화되어 비인가 열람 0%</div>
+                </div>
+                <div class="sub-block">
+                  <div class="sub-block-title">2. WIF 키리스(Keyless) 인증</div>
+                  <div class="sub-block-desc">Okta, Entra ID 등 사내 IDP와 OIDC로 연결하여 정적 키 파일 유출 사고 원천 차단</div>
+                </div>
+                <div class="sub-block">
+                  <div class="sub-block-title">3. 전수 감사 로그 (Cloud Audit Logs)</div>
+                  <div class="sub-block-desc">모든 질의와 RAG 문서 인용 내역이 BigQuery로 전송되어 영구 감사 및 SIEM 관제 지원</div>
                 </div>
               </div>
             </div>
@@ -592,7 +645,7 @@
         </div>
       </section>
 
-      <!-- Slide 03: 4대 맞춤 트랙 매트릭스 -->
+      <!-- Slide 03: 4대 맞춤 트랙 매트릭스 (풍부한 카드) -->
       <section class="slide-canvas" data-prompter="강사 멘트: 참석자의 직무와 기술 수준에 맞추어 4개의 독립된 트랙으로 실습이 진행됨을 안내합니다.">
         <div class="slide-header">
           <span class="act-tag">Tracks Matrix</span>
@@ -600,37 +653,57 @@
           <p class="slide-desc-text">비즈니스 실무자부터 시스템 아키텍트까지 최적화된 맞춤형 학습 경로를 제공합니다.</p>
         </div>
         <div class="slide-body">
-          <div class="layout-quad">
-            <div class="biz-card highlight">
-              <div class="card-head">🟢 Track 1</div>
-              <div style="font-weight: 700; font-size: 1.12rem; color: var(--primary-green-dark);">Day 1 Value</div>
-              <p class="card-para">설치 없이 브라우저에서 즉시 체감하는 기본 AI 어시스턴트, Veo/Nano Banana 미디어 생성 및 Excel/PPTX 파일 분석</p>
-              <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 5px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
-                👥 전사 모든 임직원
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div class="layout-quad" style="flex: 1;">
+              <div class="biz-card highlight">
+                <div class="card-head">🟢 Track 1</div>
+                <div style="font-weight: 800; font-size: 1.12rem; color: var(--primary-green-dark);">Day 1 Value</div>
+                <div class="sub-block" style="padding: 6px 8px;">
+                  <div class="sub-block-title" style="font-size: 0.82rem; color: var(--primary-green-dark);">🎯 대상: 전사 모든 임직원</div>
+                  <div class="sub-block-desc" style="font-size: 0.85rem;">• 개인화 pContext 설정<br>• 실시간 웹 검색 SWOT 분석<br>• Imagen/Veo 미디어 생성<br>• Excel/PPT 파일 시각화</div>
+                </div>
+                <div style="margin-top: auto; font-size: 0.85rem; color: #166534; background: #f0fdf4; padding: 4px 8px; border-radius: 6px; border: 1px solid #bbf7d0; text-align: center;">
+                  기초 실무 완성
+                </div>
+              </div>
+              <div class="biz-card highlight blue">
+                <div class="card-head">🔵 Track 2</div>
+                <div style="font-weight: 800; font-size: 1.12rem; color: var(--google-blue);">Agentic Value</div>
+                <div class="sub-block" style="padding: 6px 8px;">
+                  <div class="sub-block-title" style="font-size: 0.82rem; color: #1e40af;">🎯 대상: 기획자 & 파워유저</div>
+                  <div class="sub-block-desc" style="font-size: 0.85rem;">• Notebook 팀 도서관 5종<br>• Deep Research 심층 탐색<br>• Agent Designer 노코드 빌더<br>• 4단계 워크플로우 자동화</div>
+                </div>
+                <div style="margin-top: auto; font-size: 0.85rem; color: #1e40af; background: #eff6ff; padding: 4px 8px; border-radius: 6px; border: 1px solid #bfdbfe; text-align: center;">
+                  노코드 에이전트 구축
+                </div>
+              </div>
+              <div class="biz-card highlight purple">
+                <div class="card-head">🟣 Track 2 Plus</div>
+                <div style="font-weight: 800; font-size: 1.12rem; color: var(--purple);">Pro Code ADK</div>
+                <div class="sub-block" style="padding: 6px 8px;">
+                  <div class="sub-block-title" style="font-size: 0.82rem; color: #6b21a8;">🎯 대상: 개발자 & 엔지니어</div>
+                  <div class="sub-block-desc" style="font-size: 0.85rem;">• Drive/GCS 커넥터 RAG<br>• Python Google ADK 2.0<br>• to_a2a() 마이크로서비스<br>• Cloud Run 서버리스 배포</div>
+                </div>
+                <div style="margin-top: auto; font-size: 0.85rem; color: #6b21a8; background: #faf5ff; padding: 4px 8px; border-radius: 6px; border: 1px solid #e9d5ff; text-align: center;">
+                  프로코드 확장 개발
+                </div>
+              </div>
+              <div class="biz-card highlight red">
+                <div class="card-head">🔴 Track 3</div>
+                <div style="font-weight: 800; font-size: 1.12rem; color: var(--google-red);">Admin & Security</div>
+                <div class="sub-block" style="padding: 6px 8px;">
+                  <div class="sub-block-title" style="font-size: 0.82rem; color: #991b1b;">🎯 대상: IT 관리자 & CISO</div>
+                  <div class="sub-block-desc" style="font-size: 0.85rem;">• 서울-아이오와 멀티 리전 DR<br>• Model Armor 7대 보안 방화벽<br>• BigQuery SIEM 실시간 감사<br>• Chrome 옴니바 & FinOps ROI</div>
+                </div>
+                <div style="margin-top: auto; font-size: 0.85rem; color: #991b1b; background: #fef2f2; padding: 4px 8px; border-radius: 6px; border: 1px solid #fecaca; text-align: center;">
+                  전사 인프라 & 거버넌스
+                </div>
               </div>
             </div>
-            <div class="biz-card highlight blue">
-              <div class="card-head">🔵 Track 2</div>
-              <div style="font-weight: 700; font-size: 1.12rem; color: var(--google-blue);">Agentic Value</div>
-              <p class="card-para">Gemini Notebook 도서관 5종 콘텐츠 자동 생성, Deep Research 심층 조사, Agent Designer 노코드 에이전트 구축</p>
-              <div style="margin-top: auto; font-size: 0.92rem; color: #1e40af; background: #eff6ff; padding: 5px 10px; border-radius: 8px; border: 1px solid #bfdbfe;">
-                👥 기획자 & 파워유저
-              </div>
-            </div>
-            <div class="biz-card highlight purple">
-              <div class="card-head">🟣 Track 2 Plus</div>
-              <div style="font-weight: 700; font-size: 1.12rem; color: var(--purple);">Pro Code ADK</div>
-              <p class="card-para">Google Drive 및 GCS 사내 RAG 연동, Google ADK 2.0 파이썬 에이전트 개발, Cloud Run 배포 및 A2A 등록</p>
-              <div style="margin-top: auto; font-size: 0.92rem; color: #6b21a8; background: #faf5ff; padding: 5px 10px; border-radius: 8px; border: 1px solid #e9d5ff;">
-                👥 개발자 & 엔지니어
-              </div>
-            </div>
-            <div class="biz-card highlight red">
-              <div class="card-head">🔴 Track 3</div>
-              <div style="font-weight: 700; font-size: 1.12rem; color: var(--google-red);">Admin & Security</div>
-              <p class="card-para">GCP 테넌트 구성, Model Armor 7대 인라인 보안 검증, BigQuery SIEM 감사 로그 관제 및 ROI 분석</p>
-              <div style="margin-top: auto; font-size: 0.92rem; color: #991b1b; background: #fef2f2; padding: 5px 10px; border-radius: 8px; border: 1px solid #fecaca;">
-                👥 IT 관리자 & CISO
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">🌐 엔터프라이즈 맞춤형 커리큘럼</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">수준별/직무별 완벽 분리 실습</div>
               </div>
             </div>
           </div>
@@ -649,20 +722,32 @@
             <div class="layout-split" style="flex: 1;">
               <div class="biz-card highlight">
                 <div class="card-head">✨ 개인화 컨텍스트 (pContext) & 실시간 웹</div>
-                <p class="card-para">사용자의 직무, 산업군, 세션 메모리를 결합하여 질문 배경을 일일이 설명할 필요 없이 맞춤형 답변을 도출하며, 실시간 구글 검색 인덱싱으로 출처를 검증합니다.</p>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">직무 페르소나 설정</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">실시간 Source 검증</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">URL 바인딩 요약</span>
+                <div class="sub-block">
+                  <div class="sub-block-title">직무별 맞춤 추론</div>
+                  <div class="sub-block-desc">사용자의 직무, 산업군, 세션 메모리를 결합하여 배경 설명 없이 즉시 핵심 답변 도출</div>
+                </div>
+                <div class="sub-block">
+                  <div class="sub-block-title">실시간 출처 검증 (Grounding)</div>
+                  <div class="sub-block-desc">구글 실시간 검색 인덱스와 연결되어 최신 시장 트렌드 및 뉴스 팩트체크 자동 수행</div>
+                </div>
+                <div class="sub-block">
+                  <div class="sub-block-title">URL 직접 바인딩 요약</div>
+                  <div class="sub-block-desc">웹 링크 입력만으로 핵심 요약 및 SWOT 4분면 전략 분석표 자동 도출</div>
                 </div>
               </div>
               <div class="biz-card highlight">
                 <div class="card-head">📊 멀티모달 창작 & 업무 파일 시각화</div>
-                <p class="card-para">Nano Banana 이미지 및 Veo 1080p 시네마틱 영상 제작을 실습하고, Excel 매출 차트 및 PPTX 요약 표, Canvas 슬라이드 자동 생성을 실행합니다.</p>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">9:16 모바일 포스터</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Veo 1080p 시네마틱</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Canvas Google Slides</span>
+                <div class="sub-block">
+                  <div class="sub-block-title">Imagen 3 & Veo 1080p 제작</div>
+                  <div class="sub-block-desc">9:16 모바일 포스터, 제품 콘셉트 스케치, 시네마틱 홍보 영상 자동 생성</div>
+                </div>
+                <div class="sub-block">
+                  <div class="sub-block-title">Excel & PowerPoint 완벽 분석</div>
+                  <div class="sub-block-desc">매출 스프레드시트 결합 분석, 피벗 차트 도출 및 100페이지 PPT 구조화 요약</div>
+                </div>
+                <div class="sub-block">
+                  <div class="sub-block-title">Canvas Google Slides 변환</div>
+                  <div class="sub-block-desc">텍스트 아이디어를 단 3초 만에 완성형 프레젠테이션 슬라이드로 자동 렌더링</div>
                 </div>
               </div>
             </div>
@@ -689,20 +774,24 @@
             <div class="layout-split" style="flex: 1;">
               <div class="biz-card highlight blue">
                 <div class="card-head">📚 Gemini Notebook Enterprise 도서관</div>
-                <p class="card-para">업로드 파일, Google Drive, 유튜브 소스 3종을 그라운딩하여 인포그래픽, 팟캐스트 오디오, 시네마틱 슬라이드, 리포트, 튜토리얼 비디오 5종을 자동 완성합니다.</p>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">오디오 팟캐스트 개요</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">인포그래픽 3종 스타일</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">시네마틱 발표 슬라이드</span>
+                <div class="sub-block">
+                  <div class="sub-block-title">3대 소스 바인딩</div>
+                  <div class="sub-block-desc">업로드 파일, Google Drive, 유튜브 소스를 묶어 100% 인용 출처 기반 도서관 확립</div>
+                </div>
+                <div class="sub-block">
+                  <div class="sub-block-title">5종 멀티모달 콘텐츠 자동 완성</div>
+                  <div class="sub-block-desc">인포그래픽(3종 스타일), 2인 대담 팟캐스트(Audio Overview), 시네마틱 슬라이드, 리포트, 비디오 콘티</div>
                 </div>
               </div>
               <div class="biz-card highlight blue">
                 <div class="card-head">🛠️ Deep Research & Agent Designer</div>
-                <p class="card-para">웹 전반을 최대 수십 회 심층 추론하는 리서치 보고서를 생성하고, 코딩 없이 CRAFT 코치 에이전트 및 소셜 미디어 멀티 에이전트를 조립합니다.</p>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">다단계 자율 리서치</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">CRAFT 코치 에이전트</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">소셜 미디어 멀티 에이전트</span>
+                <div class="sub-block">
+                  <div class="sub-block-title">Deep Research 자율 탐색</div>
+                  <div class="sub-block-desc">160+ 웹페이지 및 PDF 원문을 병렬 크롤링하여 10페이지 분량 심층 전략 보고서 작성</div>
+                </div>
+                <div class="sub-block">
+                  <div class="sub-block-title">Agent Designer & Workflow Builder</div>
+                  <div class="sub-block-desc">CRAFT 프롬프트 코치, 소셜 마케팅 멀티봇, 4단계 시장 분석 파이프라인 노코드 조립</div>
                 </div>
               </div>
             </div>
@@ -729,20 +818,24 @@
             <div class="layout-split" style="flex: 1;">
               <div class="biz-card highlight purple">
                 <div class="card-head">🟣 Track 2 Plus: Google ADK 2.0</div>
-                <p class="card-para">Google Drive 및 GCS 저장소 RAG 연동을 바탕으로, Python 기반 Google ADK 프레임워크로 비즈니스 로직을 구현하고 Cloud Run에 마이크로서비스로 배포합니다.</p>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Drive & GCS RAG 탐색</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Google ADK 2.0 그래프</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Cloud Run & A2A 등록</span>
+                <div class="sub-block">
+                  <div class="sub-block-title">Drive & GCS 사내 저장소 RAG</div>
+                  <div class="sub-block-desc">Zero Data Leak 기반 OAuth 승인 및 수백 기가바이트 파일 레이크 실시간 시맨틱 검색</div>
+                </div>
+                <div class="sub-block">
+                  <div class="sub-block-title">Python Google ADK 2.0 개발</div>
+                  <div class="sub-block-desc">비즈니스 Tool 바인딩, to_a2a() 표준 래핑 및 Cloud Run 서버리스 컨테이너 배포</div>
                 </div>
               </div>
               <div class="biz-card highlight red">
                 <div class="card-head">🔴 Track 3: Model Armor & FinOps</div>
-                <p class="card-para">악성 URL, PII 유출, 프롬프트 인젝션을 인라인으로 차단하는 7대 보안 테스트를 수행하고, BigQuery 감사 로그 분석과 Chrome 옴니바 ROI를 산출합니다.</p>
-                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto;">
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Model Armor 7대 보안 검증</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">BigQuery SIEM 감사 로그</span>
-                  <span style="background: #f1f5f9; padding: 3px 10px; border-radius: 12px; font-size: 0.9rem; color: #475569;">Chrome 주소창 옴니바 연동</span>
+                <div class="sub-block">
+                  <div class="sub-block-title">Model Armor 7대 보안 방화벽</div>
+                  <div class="sub-block-desc">악성 URL 차단, PII SDP 인라인 마스킹, 프롬프트 인젝션 방어 및 킬 스위치</div>
+                </div>
+                <div class="sub-block">
+                  <div class="sub-block-title">BigQuery SIEM 관제 & FinOps ROI</div>
+                  <div class="sub-block-desc">실시간 감사 SQL 쿼리, Chrome 옴니바 4단계 연동 및 연간 300% ROI 산출 모델</div>
                 </div>
               </div>
             </div>
@@ -757,7 +850,7 @@
         </div>
       </section>
 
-      <!-- Slide 07: 3대 프롬프트 프레임워크 매트릭스 -->
+      <!-- Slide 07: 3대 프롬프트 프레임워크 매트릭스 (풍부한 카드) -->
       <section class="slide-canvas" data-prompter="강사 멘트: 실무 질의 목적에 따라 APE(속도), CRAFT(보고서), CO-STAR(마케팅)를 선택하는 기준을 설명합니다.">
         <div class="slide-header">
           <span class="act-tag">Frameworks</span>
@@ -769,23 +862,35 @@
             <div class="layout-triad" style="flex: 1;">
               <div class="biz-card highlight">
                 <div class="card-head">⚡ APE (단순 질의 & 요약)</div>
-                <p class="card-para">Action · Purpose · Expectation<br>빠른 정보 요약과 사실 추출에 최적화된 직관적인 3단계 기본 구조</p>
+                <p class="card-para" style="font-size: 0.95rem;">Action · Purpose · Expectation<br>빠른 정보 요약과 사실 추출에 최적화된 직관적인 3단계 기본 구조</p>
+                <div class="sub-block">
+                  <div class="sub-block-title">📌 권장 업무 시나리오</div>
+                  <div class="sub-block-desc">• 회의록 핵심 안건 3줄 요약<br>• 영문 기술 문서 한국어 번역<br>• 긴 이메일 스레드 팩트 추출</div>
+                </div>
                 <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
-                  ⏱️ 30초 내 신속 작성 · 회의 브리핑
+                  ⏱️ 30초 내 신속 작성 · 사실 확인
                 </div>
               </div>
               <div class="biz-card highlight">
                 <div class="card-head">🏆 C.R.A.F.T (비즈니스 보고서)</div>
-                <p class="card-para">Context · Role · Action · Format · Tone<br>기획서, 제안서, 공식 메일 등 형식과 톤 제어가 필요한 비즈니스 표준</p>
+                <p class="card-para" style="font-size: 0.95rem;">Context · Role · Action · Format · Tone<br>기획서, 제안서, 공식 메일 등 형식과 톤 제어가 필요한 비즈니스 표준</p>
+                <div class="sub-block">
+                  <div class="sub-block-title">📌 권장 업무 시나리오</div>
+                  <div class="sub-block-desc">• 임원 보고용 전략 원페이저 기획<br>• 신규 사업 제안서 초안 작성<br>• 대외 공문 및 고객 공식 회신문</div>
+                </div>
                 <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
                   📑 2분 내 정형화 작성 · 임원 보고
                 </div>
               </div>
               <div class="biz-card highlight">
                 <div class="card-head">🎨 CO-STAR (마케팅 & 대외)</div>
-                <p class="card-para">Context · Objective · Style · Tone · Audience · Response<br>고객 타깃팅 및 브랜드 어조 제어가 중요한 카피라이팅에 최적화</p>
+                <p class="card-para" style="font-size: 0.95rem;">Context · Objective · Style · Tone · Audience · Response<br>고객 타깃팅 및 브랜드 어조 제어가 중요한 카피라이팅에 최적화</p>
+                <div class="sub-block">
+                  <div class="sub-block-title">📌 권장 업무 시나리오</div>
+                  <div class="sub-block-desc">• SNS 다채널 홍보 카피 다변화<br>• B2B 잠재 고객 영업 콜드메일<br>• 보도자료 및 이벤트 안내문</div>
+                </div>
                 <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
-                  🎯 3분 내 정밀 타깃팅 · B2B 영업 메일
+                  🎯 3분 내 정밀 타깃팅 · 마케팅 카피
                 </div>
               </div>
             </div>
@@ -801,7 +906,7 @@
         </div>
       </section>
 
-      <!-- Slide 08: 엔터프라이즈 AI 성숙도 4단계 로드맵 -->
+      <!-- Slide 08: 엔터프라이즈 AI 성숙도 4단계 로드맵 (풍부한 카드) -->
       <section class="slide-canvas" data-prompter="강사 멘트: 단순 어시스턴트에서 시작하여 자율 멀티 에이전트와 전사 거버넌스로 진화하는 기업 AI 성숙도 4단계를 설명합니다.">
         <div class="slide-header">
           <span class="act-tag">Maturity Journey</span>
@@ -809,37 +914,57 @@
           <p class="slide-desc-text">개인 생산성 향상에서 출발하여 전사 자율 워크플로우와 거버넌스로 확장하는 로드맵입니다.</p>
         </div>
         <div class="slide-body">
-          <div class="layout-quad">
-            <div class="biz-card highlight">
-              <div style="font-size: 1.8rem; margin-bottom: 2px;">1️⃣</div>
-              <div class="card-head" style="color: var(--primary-green-dark);">개인 어시스턴트</div>
-              <p class="card-para">초안 작성, 번역, 표 분석, 미디어 생성 등 일상 업무 30% 시간 절감</p>
-              <div style="margin-top: auto; font-size: 0.9rem; color: #475569; background: #f8fafc; padding: 4px 8px; border-radius: 6px;">
-                🟢 Track 1 영역
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
+            <div class="layout-quad" style="flex: 1;">
+              <div class="biz-card highlight">
+                <div style="font-size: 1.6rem; margin-bottom: 2px;">1️⃣</div>
+                <div class="card-head" style="color: var(--primary-green-dark); font-size: 1.1rem;">개인 어시스턴트</div>
+                <div class="sub-block" style="padding: 6px 8px;">
+                  <div class="sub-block-title" style="font-size: 0.82rem; color: var(--primary-green-dark);">1단계: 개인 업무 혁신</div>
+                  <div class="sub-block-desc" style="font-size: 0.84rem;">초안 작성, 실시간 웹 검색, 번역, 엑셀/PPT 분석으로 일상 업무 시간 30% 절감</div>
+                </div>
+                <div style="margin-top: auto; font-size: 0.85rem; color: #166534; background: #f0fdf4; padding: 4px 8px; border-radius: 6px; border: 1px solid #bbf7d0; text-align: center;">
+                  🟢 Track 1 영역
+                </div>
+              </div>
+              <div class="biz-card highlight blue">
+                <div style="font-size: 1.6rem; margin-bottom: 2px;">2️⃣</div>
+                <div class="card-head" style="color: var(--google-blue); font-size: 1.1rem;">팀 지식 도서관</div>
+                <div class="sub-block" style="padding: 6px 8px;">
+                  <div class="sub-block-title" style="font-size: 0.82rem; color: #1e40af;">2단계: 팀 지식 자산화</div>
+                  <div class="sub-block-desc" style="font-size: 0.84rem;">Notebook 그라운딩으로 팟캐스트, 인포그래픽 5종 생성 및 노코드 에이전트 조립</div>
+                </div>
+                <div style="margin-top: auto; font-size: 0.85rem; color: #1e40af; background: #eff6ff; padding: 4px 8px; border-radius: 6px; border: 1px solid #bfdbfe; text-align: center;">
+                  🔵 Track 2 영역
+                </div>
+              </div>
+              <div class="biz-card highlight purple">
+                <div style="font-size: 1.6rem; margin-bottom: 2px;">3️⃣</div>
+                <div class="card-head" style="color: var(--purple); font-size: 1.1rem;">자율 워크플로우</div>
+                <div class="sub-block" style="padding: 6px 8px;">
+                  <div class="sub-block-title" style="font-size: 0.82rem; color: #6b21a8;">3단계: 시스템 연동 자동화</div>
+                  <div class="sub-block-desc" style="font-size: 0.84rem;">Google ADK 2.0 기반 멀티 에이전트 협업 및 Cloud Run 서버리스 마이크로서비스 배포</div>
+                </div>
+                <div style="margin-top: auto; font-size: 0.85rem; color: #6b21a8; background: #faf5ff; padding: 4px 8px; border-radius: 6px; border: 1px solid #e9d5ff; text-align: center;">
+                  🟣 Track 2 Plus 영역
+                </div>
+              </div>
+              <div class="biz-card highlight red">
+                <div style="font-size: 1.6rem; margin-bottom: 2px;">4️⃣</div>
+                <div class="card-head" style="color: var(--google-red); font-size: 1.1rem;">전사 거버넌스</div>
+                <div class="sub-block" style="padding: 6px 8px;">
+                  <div class="sub-block-title" style="font-size: 0.82rem; color: #991b1b;">4단계: 엔터프라이즈 운영</div>
+                  <div class="sub-block-desc" style="font-size: 0.84rem;">Model Armor 보안 방화벽, BigQuery SIEM 관제 및 연간 300% FinOps ROI 달성</div>
+                </div>
+                <div style="margin-top: auto; font-size: 0.85rem; color: #991b1b; background: #fef2f2; padding: 4px 8px; border-radius: 6px; border: 1px solid #fecaca; text-align: center;">
+                  🔴 Track 3 영역
+                </div>
               </div>
             </div>
-            <div class="biz-card highlight blue">
-              <div style="font-size: 1.8rem; margin-bottom: 2px;">2️⃣</div>
-              <div class="card-head" style="color: var(--google-blue);">팀 지식 도서관</div>
-              <p class="card-para">Gemini Notebook 소스 그라운딩 기반 5종 멀티모달 콘텐츠 자동 완성</p>
-              <div style="margin-top: auto; font-size: 0.9rem; color: #475569; background: #f8fafc; padding: 4px 8px; border-radius: 6px;">
-                🔵 Track 2 영역
-              </div>
-            </div>
-            <div class="biz-card highlight purple">
-              <div style="font-size: 1.8rem; margin-bottom: 2px;">3️⃣</div>
-              <div class="card-head" style="color: var(--purple);">자율 워크플로우</div>
-              <p class="card-para">Google ADK 2.0 기반 멀티 에이전트 협업 및 Cloud Run 마이크로서비스 연동</p>
-              <div style="margin-top: auto; font-size: 0.9rem; color: #475569; background: #f8fafc; padding: 4px 8px; border-radius: 6px;">
-                🟣 Track 2 Plus 영역
-              </div>
-            </div>
-            <div class="biz-card highlight red">
-              <div style="font-size: 1.8rem; margin-bottom: 2px;">4️⃣</div>
-              <div class="card-head" style="color: var(--google-red);">전사 거버넌스</div>
-              <p class="card-para">Model Armor 보안 방화벽, BigQuery SIEM 관제 및 전사 ROI 가치 실현</p>
-              <div style="margin-top: auto; font-size: 0.9rem; color: #475569; background: #f8fafc; padding: 4px 8px; border-radius: 6px;">
-                🔴 Track 3 영역
+            <div class="fusion-banner">
+              <div class="fusion-banner-title">🚀 성숙도 발전 단계</div>
+              <div class="fusion-pills">
+                <div class="fusion-pill-item">개인 도구 ➔ 팀 도서관 ➔ 자율 프로세스 ➔ 전사 거버넌스</div>
               </div>
             </div>
           </div>
@@ -907,6 +1032,14 @@
     </main>
   </div>
 
+  <!-- 토스트 알림 -->
+  <div class="toast-popup" id="toastPopup">✓ 링크가 복사되었습니다.</div>
+
+  <!-- 라이트박스 -->
+  <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox()">
+    <img id="lightboxImage" src="" alt="확대 이미지">
+  </div>
+
   <script>
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide-canvas');
@@ -915,6 +1048,9 @@
     const slidePageBadge = document.getElementById('slidePageBadge');
     const prompterDrawer = document.getElementById('prompterDrawer');
     const prompterText = document.getElementById('prompterText');
+    const toastPopup = document.getElementById('toastPopup');
+    const lightboxModal = document.getElementById('lightboxModal');
+    const lightboxImage = document.getElementById('lightboxImage');
     const topNextTrackBtn = document.getElementById('topNextTrackBtn');
 
     function updateSlideStage(idx) {
@@ -929,7 +1065,7 @@
       progressFill.style.width = pct + '%';
       slidePageBadge.innerText = String(currentSlide + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
 
-      // 마지막 슬라이드 도달 시 상단 Track 1 이동 버튼 동적 활성화
+      // 마지막 슬라이드 도달 시 상단 다음 트랙 이동 버튼 동적 활성화
       if (topNextTrackBtn) {
         if (currentSlide === totalSlides - 1) {
           topNextTrackBtn.classList.add('visible');
@@ -967,6 +1103,15 @@
       }
     }
 
+    function openLightbox(src) {
+      lightboxImage.src = src;
+      lightboxModal.classList.add('active');
+    }
+
+    function closeLightbox() {
+      lightboxModal.classList.remove('active');
+    }
+
     // 키보드 내비게이션
     window.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
@@ -985,10 +1130,12 @@
         toggleFullScreen();
       } else if (e.key === 'n' || e.key === 'N') {
         togglePrompter();
+      } else if (e.key === 'Escape') {
+        closeLightbox();
       }
     });
 
-    // 스와이프 제스처
+    // 터치 스와이프 제스처
     let touchStartX = 0;
     const stageWrapper = document.getElementById('stageWrapper');
     stageWrapper.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });

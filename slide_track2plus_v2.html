@@ -299,8 +299,8 @@
 
     /* 하단 통합 결과 배너 */
     .fusion-banner {
-      background: linear-gradient(135deg, #faf5ff, #f8fafc);
-      border: 1px solid #e9d5ff;
+      background: linear-gradient(135deg, #f5f3ff, #f8fafc);
+      border: 1px solid #ddd6fe;
       border-radius: 12px;
       padding: 0.6rem 1.2rem;
       display: flex;
@@ -312,7 +312,7 @@
     .fusion-banner-title {
       font-size: 1.05rem;
       font-weight: 700;
-      color: #581c87;
+      color: #6b21a8;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -333,22 +333,22 @@
       color: var(--text-primary);
     }
 
-    /* 카드 스타일 */
+    /* 비즈니스 카드 */
     .biz-card {
       background: var(--stage-subtle);
       border: 1px solid var(--border-color);
       border-radius: 14px;
-      padding: 1.1rem 1.4rem;
+      padding: 1.1rem 1.3rem;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      gap: 0.5rem;
+      gap: 0.45rem;
       position: relative;
     }
 
     .biz-card.highlight {
       background: #ffffff;
-      border-color: #e9d5ff;
+      border-color: #ddd6fe;
       box-shadow: 0 8px 20px -4px rgba(124, 58, 237, 0.08);
     }
     .biz-card.highlight::before {
@@ -364,20 +364,70 @@
 
     .card-head {
       font-family: var(--font-heading);
-      font-size: 1.28rem;
+      font-size: 1.26rem;
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.25rem;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
     .card-para {
-      font-size: 1.10rem;
+      font-size: 1.08rem;
       color: var(--text-secondary);
-      line-height: 1.55;
-      margin-bottom: 0.4rem;
+      line-height: 1.5;
+    }
+
+    /* 고밀도 서브 블록 */
+    .sub-block {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin: 2px 0;
+    }
+    .sub-block-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #6b21a8;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .sub-block-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    /* 가로형 스텝 프로세스 바 */
+    .stepper-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+    .step-node {
+      background: #ffffff;
+      border: 1px solid #ddd6fe;
+      border-radius: 10px;
+      padding: 8px 12px;
+      position: relative;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .step-node-num {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--primary-purple);
+      text-transform: uppercase;
+    }
+    .step-node-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
     }
 
     .prompt-box {
@@ -424,14 +474,13 @@
     }
     .prompt-code {
       font-family: var(--font-code);
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       color: #0f172a;
       line-height: 1.55;
       white-space: pre-wrap;
       word-break: break-all;
     }
 
-    /* 이미지 쇼케이스 프레임 */
     .image-stage-frame {
       background: #f8fafc;
       border: 1px solid #cbd5e1;
@@ -628,7 +677,7 @@
         </div>
       </section>
 
-      <!-- Slide 02: 커넥터 연동 전 환경 점검 및 Zero Data Leak -->
+      <!-- Slide 02: 커넥터 연동 전 환경 점검 및 Zero Data Leak (풍부한 카드) -->
       <section class="slide-canvas" data-prompter="강사 멘트: Drive 커넥터는 사용자의 실제 접근 권한(ACL)을 완벽히 상속하여 데이터 유출을 0%로 차단하는 Zero Data Leak 아키텍처입니다.">
         <div class="slide-header">
           <span class="act-tag">Act 1. 엔터프라이즈 인증 & 보안</span>
@@ -639,22 +688,30 @@
           <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
             <div class="layout-split" style="flex: 1;">
               <div class="biz-card highlight">
-                <div class="card-head">🔐 Zero Data Leak 작동 방식</div>
-                <p class="card-para">사용자가 OAuth 권한 승인을 완료하면 Gemini가 본인의 Drive 파일만 직접 검색합니다. 접근 권한(ACL)이 없는 사내 문서는 검색 인덱스에서 원천 배제됩니다.</p>
-                <div style="margin-top: auto; font-size: 0.92rem; color: #581c87; background: #faf5ff; padding: 6px 10px; border-radius: 8px; border: 1px solid #e9d5ff;">
-                  🛡️ <strong>보안 원칙</strong>: 권한 없는 문서 데이터 유출 원천 차단
+                <div class="card-head">🔐 Zero Data Leak 핵심 메커니즘</div>
+                <div class="sub-block">
+                  <div class="sub-block-title">1. User-Delegated Token</div>
+                  <div class="sub-block-desc">전사 공용 서비스 계정이 아닌, 로그인한 사용자 본인의 OAuth 단기 토큰으로만 파일 검색 수행</div>
+                </div>
+                <div class="sub-block">
+                  <div class="sub-block-title">2. Real-time ACL Inheritance</div>
+                  <div class="sub-block-desc">원본 드라이브에서 열람 권한이 없는 문서는 색인 단계에서 100% 필터링되어 노출 불가</div>
+                </div>
+                <div class="sub-block">
+                  <div class="sub-block-title">3. VPC Service Controls</div>
+                  <div class="sub-block-desc">지정된 엔터프라이즈 보안 반경 외부로 비정형 원문 데이터 반출 불가</div>
                 </div>
               </div>
               <div class="biz-card highlight">
-                <div class="card-head">⚠️ 시작 전 체크리스트</div>
+                <div class="card-head">⚠️ 시작 전 환경 점검 체크리스트</div>
                 <ul style="line-height: 1.8; font-size: 1.05rem; padding-left: 1.2rem; color: var(--text-secondary);">
-                  <li>어드민 콘솔에서 Google Drive 커넥터 활성화 완료 확인</li>
-                  <li>Gemini Enterprise 커넥터 목록에 Drive 항목 표시 확인</li>
-                  <li>Enable actions 버튼 노출 확인 (팝업 허용 필수)</li>
-                  <li>버튼 미노출 시 강사 또는 IT 관리자에게 즉시 문의</li>
+                  <li><strong>어드민 활성화</strong>: 콘솔에서 Google Drive 엔터프라이즈 커넥터 On 확인</li>
+                  <li><strong>커넥터 목록 확인</strong>: 대화창 우하단 @메뉴에서 Google Drive 노출 확인</li>
+                  <li><strong>Enable actions 클릭</strong>: 최초 1회 읽기 전용 OAuth 권한 승인 창 허용</li>
+                  <li><strong>브라우저 팝업 허용</strong>: 주소창 우측 팝업 차단 해제 필수</li>
                 </ul>
-                <div style="margin-top: auto; font-size: 0.94rem; color: #b45309; background: #fefce8; padding: 6px 12px; border-radius: 8px; border: 1px solid #fef08a;">
-                  💡 브라우저 주소창 팝업 차단 해제 필수
+                <div style="margin-top: auto; font-size: 0.94rem; color: #166534; background: #f0fdf4; padding: 6px 12px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                  ✨ 사용자별 최초 1회 승인 후 영구 안전 세션 유지
                 </div>
               </div>
             </div>
@@ -807,7 +864,7 @@
         </div>
       </section>
 
-      <!-- Slide 06: RAG-Ready 문서 작성 3대 골든 룰 -->
+      <!-- Slide 06: RAG-Ready 문서 작성 3대 골든 룰 (풍부한 카드) -->
       <section class="slide-canvas" data-prompter="강사 멘트: RAG의 답변 정확도는 원본 문서의 구조화 수준에 의해 결정됩니다. 이미지 데이터 표 병기, 헤딩 계층화, 구버전 아카이빙 3대 수칙을 설명합니다.">
         <div class="slide-header">
           <span class="act-tag">Act 2. 사내 지식 RAG 탐색</span>
@@ -818,24 +875,39 @@
           <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
             <div class="layout-triad" style="flex: 1;">
               <div class="biz-card highlight">
-                <div class="card-head">📊 1. 이미지에 텍스트 병기</div>
-                <p class="card-para">차트나 다이어그램 아래에 핵심 수치를 표 형식으로 한 번 더 정리합니다. 정형 텍스트가 함께 있을 때 임베딩 검색 정확도가 2배 향상됩니다.</p>
-                <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
-                  📈 멀티모달 임베딩 보강
+                <div class="card-head">📊 1. 이미지에 텍스트 표 병기</div>
+                <p class="card-para" style="font-size: 0.95rem;">차트나 이미지 캡처 아래에 핵심 수치를 마크다운/HTML 표로 함께 기재</p>
+                <div class="sub-block">
+                  <div class="sub-block-title">💡 적용 효과</div>
+                  <div class="sub-block-desc">• OCR 의존도 탈피 및 검색 정확도 200% 향상<br>• 정형 통계 데이터의 완벽한 RAG 추출 보장</div>
+                </div>
+                <div class="sub-block" style="margin-top: auto; background: #eff6ff; border-color: #bfdbfe;">
+                  <div class="sub-block-title" style="color: #1e40af;">📌 가이드</div>
+                  <div class="sub-block-desc">인포그래픽 하단에 요약 데이터 표 필수 첨부</div>
                 </div>
               </div>
               <div class="biz-card highlight">
-                <div class="card-head">📋 2. 헤딩 계층 구조화</div>
-                <p class="card-para">H1, H2, H3 스타일을 명확히 구분하여 문서를 작성합니다. 계층 구조가 있는 문서가 청킹(Chunking) 시 관련성 점수를 높게 받습니다.</p>
-                <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
-                  📑 시맨틱 청킹 정밀도 극대화
+                <div class="card-head">📋 2. 헤딩 계층 명확화 (H1-H3)</div>
+                <p class="card-para" style="font-size: 0.95rem;">단락을 굵은 글씨 대신 정형 H1, H2, H3 스타일로 계층 구조화</p>
+                <div class="sub-block">
+                  <div class="sub-block-title">💡 적용 효과</div>
+                  <div class="sub-block-desc">• 시맨틱 청킹(Semantic Chunking) 정밀도 극대화<br>• 컨텍스트 분실 없는 정확한 섹션 인용</div>
+                </div>
+                <div class="sub-block" style="margin-top: auto; background: #eff6ff; border-color: #bfdbfe;">
+                  <div class="sub-block-title" style="color: #1e40af;">📌 가이드</div>
+                  <div class="sub-block-desc">문서당 1개의 H1과 논리적 H2/H3 트리 유지</div>
                 </div>
               </div>
               <div class="biz-card highlight">
-                <div class="card-head">🗂️ 3. 구버전 문서 주기적 격리</div>
-                <p class="card-para">같은 내용의 구버전과 신버전이 공존하면 최신본 판단 오류가 발생합니다. 구버전 문서는 아카이브 전용 버킷으로 정기 이관합니다.</p>
-                <div style="margin-top: auto; font-size: 0.92rem; color: #166534; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0;">
-                  🧹 단일 진실 공급원(SSOT) 유지
+                <div class="card-head">🗂️ 3. 구버전 아카이빙 & 수명 관리</div>
+                <p class="card-para" style="font-size: 0.95rem;">신/구 규정이 공존하지 않도록 만료 문서는 아카이브 버킷으로 즉시 격리</p>
+                <div class="sub-block">
+                  <div class="sub-block-title">💡 적용 효과</div>
+                  <div class="sub-block-desc">• 단일 진실 공급원(SSOT) 100% 유지<br>• 과거 규정 혼선으로 인한 업무 오류 원천 방지</div>
+                </div>
+                <div class="sub-block" style="margin-top: auto; background: #eff6ff; border-color: #bfdbfe;">
+                  <div class="sub-block-title" style="color: #1e40af;">📌 가이드</div>
+                  <div class="sub-block-desc">주기적 증분 동기화 및 라이프사이클 정책 적용</div>
                 </div>
               </div>
             </div>
@@ -849,7 +921,7 @@
         </div>
       </section>
 
-      <!-- Slide 07: High-Code ADK 개발 파이프라인 개요 -->
+      <!-- Slide 07: High-Code ADK 개발 파이프라인 (스텝 바 + 2단 상세 패널) -->
       <section class="slide-canvas" data-prompter="강사 멘트: Google ADK로 비즈니스 로직을 구현하고 to_a2a()로 표준 A2A 서버로 변환하여 Cloud Run에 배포하는 4단계 파이프라인입니다.">
         <div class="slide-header">
           <span class="act-tag">Act 3. Google ADK 2.0</span>
@@ -857,34 +929,59 @@
           <p class="slide-desc-text">Python으로 에이전트를 작성하고 Cloud Run 배포 후 Gemini Enterprise에 등록합니다.</p>
         </div>
         <div class="slide-body">
-          <div style="display: flex; flex-direction: column; gap: 0.8rem; height: 100%; justify-content: space-between;">
-            <div class="layout-quad" style="flex: 1;">
-              <div class="biz-card highlight" style="padding: 1.1rem 1rem;">
-                <div style="font-size: 1.5rem; margin-bottom: 2px;">🛠️</div>
-                <div style="font-weight: 700; font-size: 1.1rem; color: var(--primary-purple);">① ADK 코드 작성</div>
-                <p class="card-para" style="font-size: 0.95rem;">Python 기반 Agent 클래스 정의 및 도구(Tools), 프롬프트 연결</p>
+          <div style="display: flex; flex-direction: column; gap: 0.6rem; height: 100%; justify-content: space-between;">
+            <!-- 상단 가로형 4단계 스텝 바 -->
+            <div class="stepper-row">
+              <div class="step-node" style="border-top: 3px solid var(--primary-purple);">
+                <div class="step-node-num">Step 1</div>
+                <div class="step-node-title">🛠️ ADK 코드 작성</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px;">Agent 클래스 & Tools 바인딩</div>
               </div>
-              <div class="biz-card highlight" style="padding: 1.1rem 1rem;">
-                <div style="font-size: 1.5rem; margin-bottom: 2px;">🔗</div>
-                <div style="font-weight: 700; font-size: 1.1rem; color: var(--primary-purple);">② to_a2a() 래핑</div>
-                <p class="card-para" style="font-size: 0.95rem;">A2A 통신 규격 변환 및 Agent Card 메타데이터 JSON 자동 생성</p>
+              <div class="step-node" style="border-top: 3px solid var(--primary-purple);">
+                <div class="step-node-num">Step 2</div>
+                <div class="step-node-title">🔗 to_a2a() 래핑</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px;">Agent Card 메타데이터 생성</div>
               </div>
-              <div class="biz-card highlight" style="padding: 1.1rem 1rem;">
-                <div style="font-size: 1.5rem; margin-bottom: 2px;">☁️</div>
-                <div style="font-weight: 700; font-size: 1.1rem; color: var(--primary-purple);">③ Cloud Run 배포</div>
-                <p class="card-para" style="font-size: 0.95rem;">adk deploy 명령어로 서버리스 컨테이너 원클릭 자동 프로비저닝</p>
+              <div class="step-node" style="border-top: 3px solid var(--primary-purple);">
+                <div class="step-node-num">Step 3</div>
+                <div class="step-node-title">☁️ Cloud Run 배포</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px;">서버리스 원클릭 자동 프로비저닝</div>
               </div>
-              <div class="biz-card highlight" style="padding: 1.1rem 1rem;">
-                <div style="font-size: 1.5rem; margin-bottom: 2px;">🏢</div>
-                <div style="font-weight: 700; font-size: 1.1rem; color: var(--primary-purple);">④ 어드민 등록</div>
-                <p class="card-para" style="font-size: 0.95rem;">Gemini Enterprise Agent Registry에 등록하여 전사 채팅창에 노출</p>
+              <div class="step-node" style="border-top: 3px solid var(--primary-purple);">
+                <div class="step-node-num">Step 4</div>
+                <div class="step-node-title">🏢 어드민 등록</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px;">Agent Registry 전사 카탈로그 활성화</div>
               </div>
             </div>
+
+            <!-- 하단 2단 상세 패널 -->
+            <div class="layout-split" style="flex: 1;">
+              <div class="biz-card highlight">
+                <div class="card-head">💻 핵심 아키텍처 원리</div>
+                <ul style="line-height: 1.7; font-size: 1rem; padding-left: 1.2rem; color: var(--text-secondary);">
+                  <li><strong>Agent Development Kit (ADK)</strong>: LLM 추론, 세션 메모리, Tool 실행을 추상화한 구글 공식 프레임워크</li>
+                  <li><strong>A2A (Agent-to-Agent) Protocol</strong>: 표준 JSON-RPC 기반으로 서로 다른 마이크로서비스 간 양방향 통신 보장</li>
+                  <li><strong>Agent Card Discovery</strong>: 에이전트의 이름, 기능, 스키마를 JSON 메타데이터로 외부에 자동 공표</li>
+                </ul>
+              </div>
+              <div class="biz-card highlight">
+                <div class="card-head">🚀 인프라 및 운영 장점</div>
+                <ul style="line-height: 1.7; font-size: 1rem; padding-left: 1.2rem; color: var(--text-secondary);">
+                  <li><strong>서버리스 자동 확장</strong>: 트래픽 0일 때 비용 0원 (Scale to Zero), 대규모 호출 시 자동 오토스케일</li>
+                  <li><strong>Zero-Trust IAM 연동</strong>: 사내 서비스 계정 및 Workload Identity로 안전한 통신 보안 확립</li>
+                  <li><strong>CI/CD 자동화</strong>: Cloud Build와 연동하여 Git Push 시 자동 테스트 및 무중단 배포</li>
+                </ul>
+                <div style="margin-top: auto; font-size: 0.94rem; color: #166534; background: #f0fdf4; padding: 6px 12px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                  ✨ 엔터프라이즈 레벨의 안정성과 확장성 100% 보장
+                </div>
+              </div>
+            </div>
+
             <div class="fusion-banner">
               <div class="fusion-banner-title">🚀 Google ADK 2.0 표준</div>
               <div class="fusion-pills">
-                <div class="fusion-pill-item">Agent-to-Agent (A2A) 상호운용성 보장</div>
-                <div class="fusion-pill-item">서버리스 오토스케일링 인프라</div>
+                <div class="fusion-pill-item">A2A 표준 상호운용성</div>
+                <div class="fusion-pill-item">Cloud Run 완전 관리형 서버리스</div>
               </div>
             </div>
           </div>
@@ -994,7 +1091,7 @@ app = to_a2a(root_agent) # A2A 표준 엔드포인트 자동 래핑</pre>
         </div>
       </section>
 
-      <!-- Slide 10: Track 2 Plus 완료 & 다음 트랙 이동 -->
+      <!-- Slide 10: Track 2 Plus 완료 & 다음 트랙 이동 (풍부한 3단 카드) -->
       <section class="slide-canvas" data-prompter="클로징: Track 2 Plus 실습을 완료했습니다. 전사 인프라 격리, Model Armor 보안 방화벽 및 FinOps 거버넌스를 다루는 Track 3로 이동합니다.">
         <div class="slide-header" style="text-align: center; margin-bottom: 0.7rem;">
           <h2 class="slide-title-text" style="font-size: 2.5rem;">Track 2 Plus 실습 완료 & 다음 단계</h2>
@@ -1179,7 +1276,7 @@ app = to_a2a(root_agent) # A2A 표준 엔드포인트 자동 래핑</pre>
       }
     });
 
-    // 스와이프 제스처
+    // 터치 스와이프 제스처
     let touchStartX = 0;
     const stageWrapper = document.getElementById('stageWrapper');
     stageWrapper.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
