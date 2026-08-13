@@ -461,6 +461,7 @@
 
     /* ── 모듈형 스텝 카드 (Step Container) ── */
     .step-card {
+      scroll-margin-top: 80px;
       background: #ffffff;
       border: 1px solid rgba(226, 232, 240, 0.9);
       border-radius: var(--radius-xl);
@@ -976,6 +977,14 @@
     .brand-text-group { display: flex; flex-direction: column; gap: 1px; }
     .brand-title-row { display: flex; align-items: center; gap: 8px; }
     .brand-sub-badge { font-size: 0.72rem; font-weight: 700; color: var(--google-blue); letter-spacing: 0.02em; text-transform: uppercase; }
+
+  
+    html {
+      scroll-behavior: smooth;
+    }
+    .step-card {
+      scroll-margin-top: 80px;
+    }
 
   </style>
 </head>

@@ -599,6 +599,14 @@
     .brand-title-row { display: flex; align-items: center; gap: 8px; }
     .brand-sub-badge { font-size: 0.72rem; font-weight: 700; color: var(--google-blue); letter-spacing: 0.02em; text-transform: uppercase; }
 
+  
+    html {
+      scroll-behavior: smooth;
+    }
+    .step-card {
+      scroll-margin-top: 80px;
+    }
+
   </style>
 </head>
 <body>
@@ -667,11 +675,10 @@
               <span>🟣</span>
               <span class="label">Track 3. Pro Code</span>
             </a>
-            <ul class="sub-nav-list">
-              <li class="sub-nav-item"><a href="#step-01">3.1 Workspace OAuth 커넥터</a></li>
-              <li class="sub-nav-item"><a href="#step-02">3.2 사내 문서 RAG 탐색</a></li>
-              <li class="sub-nav-item"><a href="#step-03">3.3 Python ADK 2.0 에이전트</a></li>
-              <li class="sub-nav-item"><a href="#step-04">3.4 Cloud Run 배포 & A2A 등록</a></li>
+                        <ul class="sub-nav-list">
+              <li class="sub-nav-item"><a href="#step-31">3.1 Workspace OAuth 커넥터</a></li>
+              <li class="sub-nav-item"><a href="#step-32">3.2 사내 문서 RAG 탐색</a></li>
+              <li class="sub-nav-item"><a href="#step-33">3.3 Python ADK &amp; A2A 등록</a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -752,9 +759,9 @@
       </section>
 
       <!-- Part A.1 Google Drive 권한 승인 -->
-      <article class="step-card" id="step-a1">
+      <article class="step-card" id="step-31">
         <div class="step-card-header">
-          <div class="step-badge">A.1</div>
+          <div class="step-badge">3.1</div>
           <div class="step-header-text">
             <h2 class="step-title">Google Drive 및 Workspace 권한 승인</h2>
             <p class="step-desc">사내 드라이브 문서를 검색하고 요약하기 위해 최초 1회 OAuth 동의를 완료합니다.</p>
@@ -809,9 +816,9 @@
       </article>
 
       <!-- Part A.2 사내 정보 검색 및 RAG 탐색 -->
-      <article class="step-card" id="step-a2">
+      <article class="step-card" id="step-32">
         <div class="step-card-header">
-          <div class="step-badge">A.2</div>
+          <div class="step-badge">3.2</div>
           <div class="step-header-text">
             <h2 class="step-title">사내 정보 검색 및 클라우드 지식 RAG 탐색</h2>
             <p class="step-desc">구글 드라이브 및 사설 클라우드 저장소에 보관된 사내 규정 문서를 RAG 검색합니다.</p>
@@ -912,9 +919,9 @@
       </article>
 
       <!-- Part B.1 Custom Agent 개발 -->
-      <article class="step-card" id="step-b1">
+      <article class="step-card" id="step-33">
         <div class="step-card-header">
-          <div class="step-badge">B.1</div>
+          <div class="step-badge">3.3</div>
           <div class="step-header-text">
             <h2 class="step-title">Custom Agent 개발 및 A2A 등록</h2>
             <p class="step-desc">Python ADK로 작성한 커스텀 에이전트를 Cloud Run에 배포하고 A2A 프로토콜로 Gemini Enterprise에 등록합니다.</p>

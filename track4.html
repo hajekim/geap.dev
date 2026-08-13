@@ -569,6 +569,14 @@
     .brand-title-row { display: flex; align-items: center; gap: 8px; }
     .brand-sub-badge { font-size: 0.72rem; font-weight: 700; color: var(--google-blue); letter-spacing: 0.02em; text-transform: uppercase; }
 
+  
+    html {
+      scroll-behavior: smooth;
+    }
+    .step-card {
+      scroll-margin-top: 80px;
+    }
+
   </style>
 </head>
 <body>
@@ -644,12 +652,14 @@
               <span>🔴</span>
               <span class="label">Track 4. Admin &amp; Security</span>
             </a>
-            <ul class="sub-nav-list">
-              <li class="sub-nav-item"><a href="#step-01">4.1 GCP 인프라 이중화</a></li>
-              <li class="sub-nav-item"><a href="#step-02">4.2 Cloud Identity & WIF</a></li>
-              <li class="sub-nav-item"><a href="#step-03">4.3 Model Armor 7대 보안</a></li>
-              <li class="sub-nav-item"><a href="#step-04">4.4 Cloud Audit Logs SIEM</a></li>
-              <li class="sub-nav-item"><a href="#step-05">4.5 경영진 ROI 분석</a></li>
+                        <ul class="sub-nav-list">
+              <li class="sub-nav-item"><a href="#step-41">4.1 GCP 인프라 이중화</a></li>
+              <li class="sub-nav-item"><a href="#step-42">4.2 Cloud Identity &amp; WIF</a></li>
+              <li class="sub-nav-item"><a href="#step-43">4.3 전사 제어판 권장 설정</a></li>
+              <li class="sub-nav-item"><a href="#step-44">4.4 Agent Registry &amp; ADK</a></li>
+              <li class="sub-nav-item"><a href="#step-45">4.5 Model Armor 보안 검증</a></li>
+              <li class="sub-nav-item"><a href="#step-46">4.6 Cloud Audit Logs SIEM</a></li>
+              <li class="sub-nav-item"><a href="#step-47">4.7 옴니바 연동 &amp; ROI 모델</a></li>
             </ul>
           </li>
         </ul>
@@ -719,9 +729,9 @@
       </section>
 
       <!-- 3.1 GCP 설정 및 이중화 배포 전략 -->
-      <article class="step-card" id="step-31">
+      <article class="step-card" id="step-41">
         <div class="step-card-header">
-          <div class="step-badge">3.1</div>
+          <div class="step-badge">4.1</div>
           <div class="step-header-text">
             <h2 class="step-title">GCP 프로젝트 설정 및 이중화 배포 전략</h2>
             <p class="step-desc">Gemini Enterprise의 안정적 운영을 위해 핵심 API를 활성화하고 Live/Test 2중화 인스턴스를 구성합니다.</p>
@@ -747,9 +757,9 @@
       </article>
 
       <!-- 3.2 Identity 및 인증 체계 -->
-      <article class="step-card" id="step-32">
+      <article class="step-card" id="step-42">
         <div class="step-card-header">
-          <div class="step-badge">3.2</div>
+          <div class="step-badge">4.2</div>
           <div class="step-header-text">
             <h2 class="step-title">Cloud Identity 및 인증 관리 (WIF)</h2>
             <p class="step-desc">Google Workspace 1P Identity 연동 또는 외부 IdP(Okta, Azure AD)와의 WIF 연동을 설정합니다.</p>
@@ -787,9 +797,9 @@
       </article>
 
       <!-- 3.3 전사 제어판 설정 -->
-      <article class="step-card" id="step-33">
+      <article class="step-card" id="step-43">
         <div class="step-card-header">
-          <div class="step-badge">3.3</div>
+          <div class="step-badge">4.3</div>
           <div class="step-header-text">
             <h2 class="step-title">전사 제어판 환경 설정 (Day 1 권장값)</h2>
             <p class="step-desc">안정적인 서비스 도입 첫날 적용해야 할 핵심 제어판 튜닝 매트릭스입니다.</p>
@@ -837,9 +847,9 @@
       </article>
 
       <!-- 3.4 Agent Registry & ADK -->
-      <article class="step-card" id="step-34">
+      <article class="step-card" id="step-44">
         <div class="step-card-header">
-          <div class="step-badge">3.4</div>
+          <div class="step-badge">4.4</div>
           <div class="step-header-text">
             <h2 class="step-title">Agent Registry 관리 및 High-Code ADK 연동 규격</h2>
             <p class="step-desc">배포된 에이전트들의 생명주기를 중앙 통제하고 Gateway와 ADK 에이전트 간 통신 페이로드를 검증합니다.</p>
@@ -893,9 +903,9 @@
       </article>
 
       <!-- 3.5 Model Armor 인라인 보안 -->
-      <article class="step-card" id="step-35">
+      <article class="step-card" id="step-45">
         <div class="step-card-header">
-          <div class="step-badge">3.5</div>
+          <div class="step-badge">4.5</div>
           <div class="step-header-text">
             <h2 class="step-title">Model Armor 인라인 보안 및 실시간 검증 (7대 테스트)</h2>
             <p class="step-desc">입력 쿼리와 출력 답변에 대해 PII 유출, 악성 도메인, 유해 콘텐츠를 진입 시점에 차단합니다.</p>
@@ -945,9 +955,9 @@
       </article>
 
       <!-- 3.6 Cloud Audit Logs 감사 -->
-      <article class="step-card" id="step-36">
+      <article class="step-card" id="step-46">
         <div class="step-card-header">
-          <div class="step-badge">3.6</div>
+          <div class="step-badge">4.6</div>
           <div class="step-header-text">
             <h2 class="step-title">Cloud Audit Logs 보안 감사 및 BigQuery 연동</h2>
             <p class="step-desc">감사 로그를 BigQuery로 싱크하여 정책 변경 이력 및 위험 탐지 이벤트를 SQL로 추적합니다.</p>
@@ -985,9 +995,9 @@ LIMIT 100;</div>
       </article>
 
       <!-- 3.7 Chrome 연동 및 ROI 시뮬레이션 -->
-      <article class="step-card" id="step-37">
+      <article class="step-card" id="step-47">
         <div class="step-card-header">
-          <div class="step-badge">3.7</div>
+          <div class="step-badge">4.7</div>
           <div class="step-header-text">
             <h2 class="step-title">Chrome Enterprise 옴니바 연동 및 ROI 시뮬레이션</h2>
             <p class="step-desc">주소창에서 즉시 Gemini를 호출하도록 중앙 배포하고 직급별 ROI 비즈니스 임팩트를 산출합니다.</p>
