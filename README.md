@@ -1,117 +1,83 @@
-<div class="google-dots">
-  <div class="dot"></div>
-  <div class="dot"></div>
-  <div class="dot"></div>
-  <div class="dot"></div>
-</div>
+# Gemini Enterprise 핸즈온 교육 포털 (Hands-on Class)
 
-# Gemini Enterprise 핸즈온 교육 포털
+Google Gemini Enterprise를 활용한 실무 중심의 생성형 AI 핸즈온 교육 및 레퍼런스 가이드입니다. 
 
-<div class="track-slide-bar" style="border-color: var(--google-blue);">
-  <span class="track-slide-label">🎯 교육 시작 전 강사 발표 자료</span>
-  <a href="slide.html" target="_blank" class="track-slide-btn" style="color: var(--google-blue);">📽️ 오프닝 키노트 슬라이드 →</a>
-</div>
-
-역할에 맞는 트랙을 선택하면 바로 시작할 수 있습니다.
+> [!TIP]
+> **웹 포털로 실습하기**  
+> 본 저장소는 순수 HTML 기반의 독립 웹 애플리케이션을 제공합니다. 브라우저에서 [index.html](index.html)을 열거나 로컬 웹서버(`python3 -m http.server 8080`)를 실행하면 인터랙티브한 실습 환경(프롬프트 원클릭 복사, 이미지 줌 뷰어, 슬라이드 발표 모드)을 이용할 수 있습니다.
 
 ---
 
 ## 🧭 수준별 실습 교육 트랙
 
-<div style="display: flex; flex-direction: column; gap: 1rem; margin: 2rem 0;">
-
-  <div style="display: flex; align-items: center; gap: 1.5rem; padding: 1.2rem 1.8rem; background: #f8f9fa; border-radius: 16px; border-left: 6px solid var(--google-green);">
-    <div style="min-width: 210px;">
-      <div style="font-size: 1.05rem; font-weight: 700; color: var(--google-green);">🟢 Track 1. Day 1 Value</div>
-      <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">전사 임직원 · 입문자 · 영업/마케팅/기획 실무진</div>
-    </div>
-    <div style="flex: 1; font-size: 13.5px; color: #3c4043;">
-      AI 어시스턴트 · 실시간 웹 검색 그라운딩 · Nano Banana 이미지 & Veo 영상 · 파일 분석 · Gemini Canvas · 프롬프트 프레임워크
-    </div>
-    <a href="#/track1_day1_value" class="btn-start" style="color: var(--google-green); white-space: nowrap;">👉 교육 시작 →</a>
-  </div>
-
-  <div style="display: flex; align-items: center; gap: 1.5rem; padding: 1.2rem 1.8rem; background: #f8f9fa; border-radius: 16px; border-left: 6px solid var(--google-blue);">
-    <div style="min-width: 210px;">
-      <div style="font-size: 1.05rem; font-weight: 700; color: var(--google-blue);">🔵 Track 2. Advanced</div>
-      <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">비즈니스 파워 유저 · IT 기획/혁신 리더 · 시민 개발자</div>
-    </div>
-    <div style="flex: 1; font-size: 13.5px; color: #3c4043;">
-      Gemini Notebook · Deep Research · 에이전트 빌더 · Workflow Agent · ADK/CAA
-    </div>
-    <a href="#/track2_advanced" class="btn-start" style="color: var(--google-blue); white-space: nowrap;">👉 교육 시작 →</a>
-  </div>
-
-  <div style="display: flex; align-items: center; gap: 1.5rem; padding: 1.2rem 1.8rem; background: #f8f9fa; border-radius: 16px; border-left: 6px solid var(--google-blue);">
-    <div style="min-width: 210px;">
-      <div style="font-size: 1.05rem; font-weight: 700; color: var(--google-blue);">🔵+ Track 2 Plus. Connector & Custom Agent</div>
-      <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Drive/GWS 커넥터 연동 완료 · 커스텀 에이전트 환경 구성 완료</div>
-    </div>
-    <div style="flex: 1; font-size: 13.5px; color: #3c4043;">
-      Drive 권한 승인 · Drive/GCS RAG · ADK/CAA 커스텀 에이전트 개발 및 GE 등록
-    </div>
-    <a href="#/track2plus" class="btn-start" style="color: var(--google-blue); white-space: nowrap;">👉 교육 시작 →</a>
-  </div>
-
-  <div style="display: flex; align-items: center; gap: 1.5rem; padding: 1.2rem 1.8rem; background: #f8f9fa; border-radius: 16px; border-left: 6px solid var(--google-red);">
-    <div style="min-width: 210px;">
-      <div style="font-size: 1.05rem; font-weight: 700; color: var(--google-red);">🔴 Track 3. Admin Guide</div>
-      <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">클라우드 인프라 관리팀 · CISO/보안 조직 · 구매 의사결정권자</div>
-    </div>
-    <div style="flex: 1; font-size: 13.5px; color: #3c4043;">
-      GCP 설정 · Cloud Identity · Workspace 커넥터 & Actions · Model Armor · Audit Logs SIEM · ROI 분석
-    </div>
-    <a href="#/admin_guide" class="btn-start" style="color: var(--google-red); white-space: nowrap;">👉 교육 시작 →</a>
-  </div>
-
-</div>
-
-<div class="highlight-box">
-  <p>🚀 프롬프트 프레임워크 (APE / CRAFT / CO-STAR) 가이드</p>
-  <div style="font-size: 14px; color: #3c4043; margin-top: 8px; font-weight: 400;">
-    Google Gemini의 엔터프라이즈 프롬프트 프레임워크인 <b>C.R.A.F.T(Context, Role, Action, Format, Target)</b> 기반 표준 템플릿과 4대 실무 시나리오(제안 기획, CS 클레임 대응, 보도자료 SWOT, IT 장애 보고서), 그리고 <b>APE vs CRAFT vs CO-STAR 비교표</b>가 <b>Track 1 가이드</b>에 정리되어 있습니다.<br><br>
-    <a href="#/track1_day1_value?id=18-프롬프트-작성법" style="font-weight: 700; color: var(--google-blue); text-decoration: none;">👉 프롬프트 작성법 가이드 바로가기 &rarr;</a>
-  </div>
-</div>
+| 트랙 | 대상 및 난이도 | 주요 실습 주제 | 문서 바로가기 | 발표 자료 |
+| :--- | :--- | :--- | :--- | :--- |
+| **🟢 Track 1. Day 1 Value** | 전사 임직원 · 기획/마케팅 실무진<br>`입문 (No-Code)` | 웹 검색 그라운딩, 이미지/영상 생성, 엑셀/PPT 파일 분석, Canvas 슬라이드, CRAFT 프롬프트 | [📖 Track 1 가이드](track1_day1_value.md) | [📽️ 슬라이드](slide_track1.html) |
+| **🔵 Track 2. Agentic Value** | 비즈니스 파워 유저 · 기획 리더<br>`중급 (No-Code Agent)` | Gemini Notebook(3종 인포그래픽, 팟캐스트, 시네마틱 슬라이드), Deep Research, Agent Designer, Workflow Agent | [📖 Track 2 가이드](track2_advanced.md) | [📽️ 슬라이드](slide_track2.html) |
+| **🟣 Track 2 Plus. Pro Code** | 클라우드 엔지니어 · 백엔드 개발자<br>`고급 (Pro-Code)` | Google Drive/Workspace 커넥터 연동, 사내 내규 RAG 검색, Python ADK 에이전트 개발, Cloud Run 배포 및 A2A 등록 | [📖 Track 2 Plus 가이드](track2plus.md) | [📽️ 슬라이드](slide_track2plus.html) |
+| **🔴 Track 3. Admin & Security** | IT 관리자 · CISO · 보안 조직<br>`고급 (Admin & Security)` | GCP 이중화 배포, Cloud Identity (WIF), 전사 제어판 튜닝, Model Armor 7대 보안 테스트, Cloud Audit Logs SQL 감사, Chrome 옴니바 연동 및 ROI | [📖 Track 3 가이드](admin_guide.md) | [📽️ 슬라이드](slide_admin.html) |
 
 ---
 
-## 🏢 실습 시나리오
-자동차/모빌리티, 로보틱스, 교육기관, 게임 등 다양한 산업군의 실무 시나리오를 활용합니다.
+## 🚀 프롬프트 엔지니어링 프레임워크
 
-<div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
-  <div class="card" style="padding: 1.2rem; background: #ffffff;">
-    <h4 style="color: var(--google-blue); margin-bottom: 6px;">🚗 자동차/모빌리티</h4>
-    <p style="font-size: 13px; margin: 0;">EU 전기차 정책 변화를 실시간 검색하여 SWOT 분석 매트릭스 도출</p>
-  </div>
-  <div class="card" style="padding: 1.2rem; background: #ffffff;">
-    <h4 style="color: var(--google-red); margin-bottom: 6px;">🤖 로보틱스/제조</h4>
-    <p style="font-size: 13px; margin: 0;">CES 신기술 동향을 분석하여 경쟁사 대응 핵심 마케팅 메시지 수립</p>
-  </div>
-  <div class="card" style="padding: 1.2rem; background: #ffffff;">
-    <h4 style="color: #b06000; margin-bottom: 6px;">📢 마케팅/광고</h4>
-    <p style="font-size: 13px; margin: 0;">브랜드 캠페인 포스터 이미지 생성 및 Veo 시네마틱 루프 영상 제작</p>
-  </div>
-  <div class="card" style="padding: 1.2rem; background: #ffffff;">
-    <h4 style="color: var(--google-green); margin-bottom: 6px;">☕ 소비재/유통</h4>
-    <p style="font-size: 13px; margin: 0;">글로벌 커피 원두 매출 데이터를 다각도로 분석하고 시계열 트렌드 예측</p>
-  </div>
-  <div class="card" style="padding: 1.2rem; background: #ffffff;">
-    <h4 style="color: var(--google-blue); margin-bottom: 6px;">☁️ IT/클라우드</h4>
-    <p style="font-size: 13px; margin: 0;">수십 페이지 분량의 신규 기능 발표 장표를 요약하고 실무 항목으로 분류</p>
-  </div>
-  <div class="card" style="padding: 1.2rem; background: #ffffff;">
-    <h4 style="color: var(--google-red); margin-bottom: 6px;">🎓 교육기관</h4>
-    <p style="font-size: 13px; margin: 0;">대학 플립러닝 수업 설계 및 교육부 국책사업 기획안 작성</p>
-  </div>
-  <div class="card" style="padding: 1.2rem; background: #ffffff;">
-    <h4 style="color: #b06000; margin-bottom: 6px;">🎮 게임/엔터</h4>
-    <p style="font-size: 13px; margin: 0;">MMORPG 여름 한정 이벤트 섬 콘텐츠 및 퀘스트 기획</p>
-  </div>
-  <div class="card" style="padding: 1.2rem; background: #ffffff;">
-    <h4 style="color: var(--google-green); margin-bottom: 6px;">🏢 범용 기업</h4>
-    <p style="font-size: 13px; margin: 0;">뉴스 링크 하나로 SNS 홍보 문구를 자동 생산하는 노코드 에이전트 빌딩</p>
-  </div>
-</div>
+업무 목적과 완성도에 따라 최적화된 프롬프트 작성 프레임워크를 활용합니다.
+
+| 프레임워크 | 핵심 구성 요소 | 추천 활용 상황 |
+| :--- | :--- | :--- |
+| **C.R.A.F.T** | Context(맥락), Role(역할), Action(행동), Format(형식), Target(대상) | 복합 기획서, 대외 공식 커뮤니케이션, 상세 분석 보고서 |
+| **A.P.E** | Action(지시), Purpose(목적), Expectation(기대수준) | 일상 업무, 빠른 초안 작성, 1회성 요약 요청 |
+| **CO-STAR** | Context, Objective, Style, Tone, Audience, Response | 마케팅 카피, C-Level 보고, SNS 브랜드 포스팅 |
+
+> [!NOTE]
+> 상세 템플릿과 4대 실무 시나리오(제안 기획, CS 클레임, 보도자료, IT 장애 보고)는 [Track 1 프롬프트 가이드](track1_day1_value.md#18-프롬프트-작성법)에서 확인할 수 있습니다.
 
 ---
+
+## 🏢 산업별 실무 시나리오
+
+다양한 산업군의 실제 업무 문제를 해결하는 실습 시나리오가 각 트랙에 포함되어 있습니다.
+
+- **🚗 자동차/모빌리티**: 글로벌 전기차 정책 변화를 실시간 검색하여 전략적 SWOT 분석 매트릭스 도출
+- **🤖 로보틱스/제조**: 최신 기술 컨퍼런스 동향을 분석하여 경쟁사 대비 핵심 마케팅 메시지 수립
+- **📢 마케팅/광고**: 브랜드 캠페인 포스터 이미지 생성 및 시네마틱 루프 영상 제작
+- **☕ 소비재/유통**: 글로벌 커피 원두 매출 데이터를 다각도로 분석하고 시계열 트렌드 예측
+- **☁️ IT/클라우드**: 대규모 기능 업데이트 문서를 요약하고 실무 적용 로드맵으로 구조화
+- **🎓 교육/공공**: 플립러닝 수업 설계 및 국책 사업 기획안 자동 작성
+- **🎮 게임/엔터**: 시즌 이벤트 콘텐츠 기획 및 퀘스트 시나리오 작성
+- **🏢 엔터프라이즈 범용**: 뉴스 링크 입력만으로 SNS 게시물과 해시태그를 자동 생산하는 전용 에이전트 빌딩
+
+---
+
+## 📂 저장소 구조
+
+```text
+├── index.html               # 메인 교육 포털 홈 웹 애플리케이션
+├── track1.html              # Track 1 웹 인터랙티브 가이드
+├── track2.html              # Track 2 웹 인터랙티브 가이드
+├── track2plus.html          # Track 2 Plus 웹 인터랙티브 가이드
+├── track3.html              # Track 3 웹 인터랙티브 가이드
+├── track1_day1_value.md     # Track 1 마크다운 원본 문서
+├── track2_advanced.md       # Track 2 마크다운 원본 문서
+├── track2plus.md            # Track 2 Plus 마크다운 원본 문서
+├── admin_guide.md           # Track 3 마크다운 원본 문서
+├── img/                     # 전체 실습 스크린샷 및 UI 에셋
+└── samples/                 # 실습용 샘플 파일 (엑셀, PPTX, PDF, Zip, CSV)
+```
+
+---
+
+## 💻 로컬 실행 방법
+
+별도의 빌드 도구 없이 Python 기본 웹서버로 즉시 실행할 수 있습니다.
+
+```bash
+# 1. 저장소 디렉토리로 이동
+cd geap.dev
+
+# 2. 로컬 웹 서버 실행
+python3 -m http.server 8080
+
+# 3. 브라우저에서 접속
+# http://localhost:8080
+```

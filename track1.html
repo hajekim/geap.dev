@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track 1. Day 1 Value — Gemini Enterprise 교육 포털</title>
+  <meta name="description" content="Gemini Enterprise 실무 활용 핸즈온 - Track 1 Day 1 Value">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --google-blue: #1a73e8;
+      --google-blue-dark: #1558b0;
+      --google-blue-light: #e8f0fe;
+      --google-green: #34a853;
+      --google-green-dark: #1e7e34;
+      --google-green-light: #e6f4ea;
+      --google-red: #ea4335;
+      --google-red-light: #fce8e6;
+      --google-yellow: #fbbc04;
+      --google-yellow-light: #fef7e0;
+      --purple: #7c3aed;
+      --purple-light: #f3e8ff;
+      
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --border-focus: #cbd5e1;
+      
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-sub: #64748b;
+      
+      --font-display: 'Outfit', 'Noto Sans KR', sans-serif;
+      --font-body: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      
+      --sidebar-width: 290px;
+      --sidebar-collapsed-width: 72px;
+      --header-height: 64px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.75;
+      letter-spacing: -0.015em;
+      word-break: keep-all;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Ambient Background Glows */
+    .ambient-glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(140px);
+      z-index: -1;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+    .glow-1 { width: 500px; height: 500px; top: -10%; right: -5%; background: radial-gradient(circle, var(--google-blue) 0%, transparent 70%); }
+    .glow-2 { width: 600px; height: 600px; bottom: -10%; left: 20%; background: radial-gradient(circle, var(--google-green) 0%, transparent 70%); }
+    .glow-3 { width: 450px; height: 450px; top: 40%; right: 10%; background: radial-gradient(circle, var(--google-yellow) 0%, transparent 70%); }
+
+    /* ── 사이드바 ── */
+    aside.sidebar {
+      width: var(--sidebar-width);
+      background: #ffffff;
+      border-right: 1px solid var(--border-color);
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
+    }
+
+    .sidebar-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--header-height);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand-logo {
+      font-size: 24px;
+      line-height: 1;
+    }
+    .brand-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-title span {
+      color: var(--google-blue);
+    }
+
+    .sidebar-toggle-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+    .sidebar-toggle-btn:hover {
+      background: var(--bg-main);
+      color: var(--google-blue);
+    }
+
+    .sidebar-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 14px 24px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #1a73e8, #34a853);
+      color: #ffffff !important;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 10px 16px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);
+      transition: all 0.2s ease;
+    }
+    .sidebar-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(26, 115, 232, 0.35);
+      opacity: 0.95;
+    }
+
+    .nav-group-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-sub);
+      padding: 0 8px 6px 8px;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .nav-item a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: all 0.15s ease;
+    }
+    .nav-item a:hover {
+      background: #f1f5f9;
+      color: var(--text-main);
+    }
+    .nav-item.active a {
+      background: var(--google-green-light);
+      color: var(--google-green-dark);
+      font-weight: 700;
+    }
+
+    .sub-nav-list {
+      list-style: none;
+      margin: 4px 0 6px 16px;
+      padding-left: 12px;
+      border-left: 2px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .sub-nav-item a {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      padding: 5px 8px;
+      border-radius: 6px;
+      display: block;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .sub-nav-item a:hover {
+      color: var(--google-blue);
+      background: #f8fafc;
+    }
+    .sub-nav-item.active a {
+      color: var(--google-blue);
+      font-weight: 700;
+      background: var(--google-blue-light);
+    }
+
+    /* ── 축소 모드 (Mini Sidebar) ── */
+    body.sidebar-mini {
+      --sidebar-width: var(--sidebar-collapsed-width);
+    }
+    body.sidebar-mini .brand-title,
+    body.sidebar-mini .sidebar-cta,
+    body.sidebar-mini .nav-group-title,
+    body.sidebar-mini .sub-nav-list,
+    body.sidebar-mini .nav-item a span.label {
+      display: none !important;
+    }
+    body.sidebar-mini .sidebar-header {
+      justify-content: center;
+      padding: 16px 0;
+    }
+    body.sidebar-mini .brand {
+      display: none;
+    }
+    body.sidebar-mini .nav-item a {
+      justify-content: center;
+      padding: 10px 0;
+      font-size: 1.2rem;
+    }
+
+    /* ── 메인 뷰 컨테이너 ── */
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    /* ── 상단 앱 바 (Header) ── */
+    header.app-bar {
+      height: var(--header-height);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-sub);
+    }
+    .breadcrumbs a {
+      color: var(--text-sub);
+      text-decoration: none;
+    }
+    .breadcrumbs a:hover {
+      color: var(--google-blue);
+    }
+    .breadcrumbs .current {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .app-bar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-slide-launch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .btn-slide-launch:hover {
+      background: var(--bg-main);
+      border-color: var(--border-focus);
+    }
+
+    /* ── 메인 콘텐츠 영역 ── */
+    main.content-area {
+      flex: 1;
+      max-width: 1040px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 40px 32px 100px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    /* ── 히어로 배너 (Hero Card) ── */
+    .hero-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 36px 40px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: var(--google-green);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: var(--google-green-light);
+      color: var(--google-green-dark);
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 820px;
+      margin-bottom: 24px;
+    }
+
+    .hero-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+    }
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .meta-label {
+      font-size: 0.75rem;
+      color: var(--text-sub);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .meta-value {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    /* ── 첨부파일 다운로드 바 ── */
+    .download-strip {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      box-shadow: var(--shadow-sm);
+      flex-wrap: wrap;
+    }
+    .download-strip-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .download-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--google-blue-light);
+      color: var(--google-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .download-info h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+    .download-info p {
+      font-size: 0.82rem;
+      color: var(--text-sub);
+    }
+    .download-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .btn-download.excel {
+      background: #107c41;
+      color: #ffffff;
+    }
+    .btn-download.excel:hover {
+      background: #0d6334;
+      transform: translateY(-1px);
+    }
+    .btn-download.pptx {
+      background: #c43e1c;
+      color: #ffffff;
+    }
+    .btn-download.pptx:hover {
+      background: #a33215;
+      transform: translateY(-1px);
+    }
+
+    /* ── 모듈형 스텝 카드 (Step Container) ── */
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 32px 36px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      transition: box-shadow 0.2s ease;
+    }
+    .step-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .step-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .step-badge {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 800;
+      background: var(--google-blue);
+      color: #ffffff;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(26, 115, 232, 0.3);
+    }
+    .step-header-text {
+      flex: 1;
+    }
+    .step-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .step-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── 지시사항 리스트 (Numbered Instruction Block) ── */
+    .instructions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .instruction-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .inst-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: var(--text-main);
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .inst-body {
+      flex: 1;
+      font-size: 0.92rem;
+      color: var(--text-main);
+    }
+    .inst-body p {
+      margin-bottom: 8px;
+    }
+    .inst-body ul {
+      margin-left: 20px;
+      margin-top: 6px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+    .inst-body li {
+      margin-bottom: 4px;
+    }
+
+    /* ── 프롬프트 4대 요소 2x2 카드 그리드 ── */
+    .prompt-4elements-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin: 20px 0;
+    }
+    @media (max-width: 768px) {
+      .prompt-4elements-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .element-card {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      transition: all 0.2s ease;
+    }
+    .element-card:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    .element-card.persona { border-left: 4px solid var(--google-blue); }
+    .element-card.context { border-left: 4px solid var(--google-green); }
+    .element-card.task { border-left: 4px solid var(--google-red); }
+    .element-card.format { border-left: 4px solid var(--purple); }
+
+    .element-card-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .element-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #ffffff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .element-card.persona .element-badge { background: var(--google-blue); }
+    .element-card.context .element-badge { background: var(--google-green); }
+    .element-card.task .element-badge { background: var(--google-red); }
+    .element-card.format .element-badge { background: var(--purple); }
+
+    .element-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .element-desc {
+      font-size: 0.82rem;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+    .element-sample {
+      background: #ffffff;
+      border: 1px dashed var(--border-focus);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── 프롬프트 스튜디오 카드 (Prompt Studio) ── */
+    .prompt-studio {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin: 20px 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .prompt-studio-header {
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .prompt-studio-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .prompt-chip {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .prompt-chip.blue { background: var(--google-blue-light); color: var(--google-blue-dark); }
+    .prompt-chip.green { background: var(--google-green-light); color: var(--google-green-dark); }
+    .prompt-chip.orange { background: var(--google-yellow-light); color: #854d0e; }
+    .prompt-chip.purple { background: var(--purple-light); color: var(--purple); }
+
+    .btn-copy-prompt {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-copy-prompt:hover {
+      background: var(--google-blue-light);
+      border-color: var(--google-blue);
+      color: var(--google-blue);
+    }
+
+    .prompt-body {
+      padding: 18px 22px;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #1e293b;
+      white-space: pre-wrap;
+      word-break: keep-all;
+      background: #ffffff;
+      font-family: inherit;
+    }
+
+    /* ── 시나리오 탭 컴포넌트 ── */
+    .tabs-container {
+      margin: 20px 0;
+    }
+    .tabs-nav {
+      display: flex;
+      gap: 8px;
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: 20px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--text-sub);
+      padding: 10px 16px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      color: var(--google-blue);
+    }
+    .tab-btn.active {
+      color: var(--google-blue);
+      font-weight: 700;
+      border-bottom-color: var(--google-blue);
+    }
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── 듀얼 이미지 그리드 (Image Showcase) ── */
+    .img-grid-dual {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .img-frame {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .img-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: zoom-in;
+      transition: transform 0.2s ease;
+    }
+    .img-frame img:hover {
+      transform: scale(1.01);
+    }
+    .img-caption {
+      padding: 8px 12px;
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      text-align: center;
+      background: #ffffff;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* ── 알림 박스 (Callouts) ── */
+    .callout {
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      margin: 20px 0;
+      font-size: 0.9rem;
+      border-left: 4px solid;
+      line-height: 1.65;
+    }
+    .callout.tip {
+      background: var(--google-green-light);
+      border-left-color: var(--google-green);
+      color: #14532d;
+    }
+    .callout.note {
+      background: var(--google-blue-light);
+      border-left-color: var(--google-blue);
+      color: #1e3a8a;
+    }
+    .callout.warning {
+      background: var(--google-yellow-light);
+      border-left-color: var(--google-yellow);
+      color: #713f12;
+    }
+    .callout-title {
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── 표 (Data Tables) ── */
+    .table-container {
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background: #ffffff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+    th {
+      background: #f8fafc;
+      padding: 12px 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-color);
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-muted);
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:hover td {
+      background: #f8fafc;
+    }
+
+    /* ── 토스트 알림 (Toast) ── */
+    #toast-container {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .toast {
+      background: #1e293b;
+      border-left: 4px solid var(--google-green);
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-xl);
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: toastIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+                 toastOut 0.25s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards;
+      pointer-events: auto;
+    }
+    @keyframes toastIn { to { opacity: 1; transform: translateY(0); } }
+    @keyframes toastOut { to { opacity: 0; transform: translateY(-8px); } }
+
+    /* ── 맨 위로 가기 버튼 ── */
+    #back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: var(--google-blue);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 9000;
+    }
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #back-to-top:hover {
+      background: var(--google-blue);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* ── 이미지 모달 (Lightbox) ── */
+    .img-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 20000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .img-modal.active {
+      display: flex;
+    }
+    .img-modal img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-xl);
+    }
+    .img-modal-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      color: #ffffff;
+      font-size: 32px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    @media (max-width: 960px) {
+      aside.sidebar {
+        position: fixed;
+        left: -100%;
+      }
+      aside.sidebar.open {
+        left: 0;
+      }
+      header.app-bar {
+        padding: 0 16px;
+      }
+      main.content-area {
+        padding: 24px 16px 80px 16px;
+      }
+      .hero-card {
+        padding: 24px;
+      }
+      .step-card {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- 사이드바 -->
+  <aside class="sidebar" id="app-sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="brand">
+        <span class="brand-logo">🌐</span>
+        <span class="brand-title">GE <span>Class</span></span>
+      </a>
+      <button type="button" class="sidebar-toggle-btn" id="toggle-sidebar" title="사이드바 축소/확대">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="sidebar-content">
+      <a href="https://vertexaisearch.cloud.google.com/home/cid/b17b23b4-97ed-4658-a9c9-20a91599fce7?hl=ko" target="_blank" rel="noopener noreferrer" class="sidebar-cta">
+        <span>Gemini Enterprise 바로가기</span>
+        <span>↗</span>
+      </a>
+
+      <div>
+        <div class="nav-group-title">커리큘럼 트랙</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="index.html">
+              <span>🏠</span>
+              <span class="label">포털 홈 (Home)</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a href="track1.html">
+              <span>🟢</span>
+              <span class="label">Track 1. Day 1 Value</span>
+            </a>
+            <ul class="sub-nav-list">
+              <li class="sub-nav-item"><a href="#step-01">1.1 시작하기 (개인화)</a></li>
+              <li class="sub-nav-item"><a href="#step-02">1.2 AI 어시스턴트</a></li>
+              <li class="sub-nav-item"><a href="#step-03">1.3 실시간 웹 검색</a></li>
+              <li class="sub-nav-item"><a href="#step-04">1.4 Create Images & Video</a></li>
+              <li class="sub-nav-item"><a href="#step-05">1.5 엑셀 파일 분석</a></li>
+              <li class="sub-nav-item"><a href="#step-06">1.6 PPT 파일 분석</a></li>
+              <li class="sub-nav-item"><a href="#step-07">1.7 Canvas (슬라이드 제작)</a></li>
+              <li class="sub-nav-item"><a href="#step-08">1.8 프롬프트 작성법</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="track2.html">
+              <span>🔵</span>
+              <span class="label">Track 2. Agentic Value</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="track2plus.html">
+              <span>🟣</span>
+              <span class="label">Track 2 Plus. Pro Code</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="track3.html">
+              <span>🔴</span>
+              <span class="label">Track 3. Admin & Security</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 메인 뷰 -->
+  <div class="main-wrapper">
+    <header class="app-bar">
+      <div class="breadcrumbs">
+        <a href="index.html#/">교육 포털</a>
+        <span>/</span>
+        <span class="current">Track 1. Day 1 Value</span>
+      </div>
+      <div class="app-bar-actions">
+        <a href="slide_track1.html" target="_blank" class="btn-slide-launch">
+          <span>📽️</span>
+          <span>슬라이드로 강의 시작</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="content-area">
+      <!-- 히어로 카드 -->
+      <section class="hero-card">
+        <span class="hero-badge">기초 및 실무 활용 트랙</span>
+        <h1 class="hero-title">Track 1. Day 1 Value</h1>
+        <p class="hero-desc">별도의 개발 연동 없이 브라우저에서 바로 사용하는 실습 과정입니다. AI 어시스턴트, 웹 검색 그라운딩, 이미지 및 비디오 생성, 엑셀/PPT 파일 분석, Canvas 슬라이드 자동 생성, 실무 프롬프트 작성 프레임워크를 학습합니다.</p>
+        
+        <div class="hero-meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">예상 소요 시간</span>
+            <span class="meta-value">⏱️ 약 45분</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">실습 대상</span>
+            <span class="meta-value">👥 전사 임직원 및 실무진</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">실습 난이도</span>
+            <span class="meta-value">⚡ 입문 (No-Code)</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">활용 도구</span>
+            <span class="meta-value">🛠️ Gemini, Imagen 3, Veo, Canvas</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 첨부파일 다운로드 바 -->
+      <section class="download-strip">
+        <div class="download-strip-left">
+          <div class="download-icon">📥</div>
+          <div class="download-info">
+            <h4>실습용 첨부파일 다운로드</h4>
+            <p>1.5절 및 1.6절 파일 분석 실습에 필요한 샘플 데이터입니다.</p>
+          </div>
+        </div>
+        <div class="download-actions">
+          <a href="samples/coffee orders.xlsx" download="coffee orders.xlsx" class="btn-download excel">
+            <span>📊</span>
+            <span>coffee orders.xlsx</span>
+          </a>
+          <a href="samples/202603-BigQuery New Feature Update.pptx" download="202603-BigQuery New Feature Update.pptx" class="btn-download pptx">
+            <span>📑</span>
+            <span>BigQuery 업데이트.pptx</span>
+          </a>
+          <a href="samples/handwrite_arch.png" download="handwrite_arch.png" class="btn-download">
+            <span>📐</span>
+            <span>handwrite_arch.png</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 01. 시작하기 -->
+      <article class="step-card" id="step-01">
+        <div class="step-card-header">
+          <div class="step-badge">01</div>
+          <div class="step-header-text">
+            <h2 class="step-title">1.1 시작하기 (개인화 설정)</h2>
+            <p class="step-desc">사용자의 직무와 선호에 맞는 맞춤형 답변을 받기 위해 초기 환경을 설정합니다.</p>
+          </div>
+        </div>
+
+        <div class="instructions-list">
+          <div class="instruction-item">
+            <div class="inst-num">1</div>
+            <div class="inst-body">
+              <p>화면 좌측 하단의 <strong>Settings & help &gt; Personalization</strong> 메뉴로 이동합니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/01.webp" alt="Personalization 메뉴 위치">
+            <span class="img-caption">Settings & help &gt; Personalization 메뉴</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/02.webp" alt="개인화 프로필 입력 화면">
+            <span class="img-caption">직무 및 소속 정보 입력</span>
+          </div>
+        </div>
+
+        <div class="instructions-list">
+          <div class="instruction-item">
+            <div class="inst-num">2</div>
+            <div class="inst-body">
+              <p>직무 정보를 입력합니다. 예시:</p>
+              <ul>
+                <li>선호하는 이름: <code>홍길동 마케터</code></li>
+                <li>직무: <code>글로벌 브랜드 마케터</code></li>
+                <li>산업군: <code>자동차 및 모빌리티</code></li>
+              </ul>
+            </div>
+          </div>
+          <div class="instruction-item">
+            <div class="inst-num">3</div>
+            <div class="inst-body">
+              <p>이전 대화 맥락을 활용할 수 있도록 <strong>Conversation history</strong>와 <strong>Reference saved memories</strong> 옵션을 모두 켭니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin: 16px 0;">
+          <img src="./img/03.webp" style="max-width: 500px; width: 100%; border-radius: 8px; border: 1px solid var(--border-color); cursor: zoom-in;" alt="메모리 활성화 화면">
+        </div>
+
+        <div class="instructions-list">
+          <div class="instruction-item">
+            <div class="inst-num">4</div>
+            <div class="inst-body">
+              <p><strong>Settings & help &gt; Appearance</strong> 탭에서 <strong>Homepage elements</strong> 항목의 퀵 메뉴를 활성화합니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/04.webp" alt="Homepage elements 설정">
+            <span class="img-caption">Homepage elements 설정</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/04a.webp" alt="홈 화면 반영 결과">
+            <span class="img-caption">홈 화면 퀵 메뉴 노출 확인</span>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <div class="callout-title">💡 개인화 컨텍스트(pContext)의 작동 원리</div>
+          Gemini Enterprise는 사용자의 업무 맥락을 파악하여 적절한 답변을 제공합니다. 다음 네 가지 데이터를 바탕으로 개인 맞춤형 문맥을 실시간으로 갱신합니다:
+          <ul style="margin-left: 18px; margin-top: 6px;">
+            <li>연동된 업무 도구(Google Workspace 또는 Office 365)의 최근 데이터</li>
+            <li>조직도와 보고 체계 정보</li>
+            <li>설정에 입력한 프로필(이름, 역할, 직무, 소속 산업군)</li>
+            <li>최근 대화 기록 및 위치 정보</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 02. AI 어시스턴트 -->
+      <article class="step-card" id="step-02">
+        <div class="step-card-header">
+          <div class="step-badge">02</div>
+          <div class="step-header-text">
+            <h2 class="step-title">1.2 AI 어시스턴트 활용 및 세션 공유</h2>
+            <p class="step-desc">시장 분석 보고서를 작성하고 팀원들과 안전한 링크로 대화 세션을 공유합니다.</p>
+          </div>
+        </div>
+
+        <div class="instructions-list">
+          <div class="instruction-item">
+            <div class="inst-num">1</div>
+            <div class="inst-body">
+              <p>대화창에 아래의 역할 기반 프롬프트를 입력하고 실행합니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-studio">
+          <div class="prompt-studio-header">
+            <div class="prompt-studio-title">
+              <span class="prompt-chip blue">Gemini 2.0</span>
+              <span>프리미엄 세단 마케팅 트렌드 분석</span>
+            </div>
+            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-sedan-analysis')">
+              <span>📋</span>
+              <span>프롬프트 복사</span>
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-sedan-analysis">[Role] 너는 10년 차 글로벌 프리미엄 브랜드 마케팅 전문가야.
+[Context] 차세대 프리미엄 세단 글로벌 런칭을 앞두고 북미 및 유럽 시장의 최신 마케팅 경쟁 지형을 분석 중이야.
+[Action] 최근 북미 및 유럽 시장의 프리미엄 세단 최신 트렌드를 검색하여 요약해 줘. 주요 경쟁사들의 마케팅 소구점(Selling Point)을 비교하고, 한국 자동차 브랜드가 차별화할 수 있는 전략 인사이트를 제시해 줘.
+[Format] 1. 시장 트렌드 3줄 요약, 2. 경쟁사별 소구점 비교 분석표, 3. 실행 방안 순서로 정리해 줘.</div>
+        </div>
+
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/06.webp" alt="분석 답변 결과">
+            <span class="img-caption">마케팅 트렌드 및 비교표 답변</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/07.webp" alt="출처 검증 링크">
+            <span class="img-caption">답변 하단 출처(Source) 검증</span>
+          </div>
+        </div>
+
+        <div class="instructions-list">
+          <div class="instruction-item">
+            <div class="inst-num">2</div>
+            <div class="inst-body">
+              <p><strong>안전한 세션 공유</strong>: 대화 세션 우측 상단의 <strong>Share</strong> 아이콘을 누르고 <strong>Create public link</strong>로 생성된 링크를 팀원에게 전달합니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/09.webp" alt="공유 버튼 클릭">
+            <span class="img-caption">우측 상단 Share 메뉴</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/10.webp" alt="공유 링크 생성">
+            <span class="img-caption">공유 링크 생성 및 복사</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 03. 실시간 웹 검색 -->
+      <article class="step-card" id="step-03">
+        <div class="step-card-header">
+          <div class="step-badge">03</div>
+          <div class="step-header-text">
+            <h2 class="step-title">1.3 실시간 웹 검색 (Google Search)</h2>
+            <p class="step-desc">구글 검색 그라운딩을 통해 최신 규제 정책과 전시회 기술 동향을 분석합니다.</p>
+          </div>
+        </div>
+
+        <div class="prompt-studio">
+          <div class="prompt-studio-header">
+            <div class="prompt-studio-title">
+              <span class="prompt-chip green">Search Grounding</span>
+              <span>EU 전기차 정책 변화 및 SWOT 분석</span>
+            </div>
+            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-ev-swot')">
+              <span>📋</span>
+              <span>프롬프트 복사</span>
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-ev-swot">[Context] 2026년 유럽연합(EU)의 친환경 정책 및 보조금 규제가 변경되고 있습니다.
+[Action] EU의 전기차(EV) 보조금 정책 변화와 탄소국경조정제도(CBAM) 관련 최신 뉴스를 검색해 줘. 이 변화가 한국 자동차 제조사의 유럽 시장 진출에 미칠 영향을 분석해 줘.
+[Format] SWOT(강점, 약점, 기회, 위협) 분석 매트릭스 표로 정리하고, 최우선 대응 전략 2가지를 제시해 줘.</div>
+        </div>
+
+        <div class="prompt-studio">
+          <div class="prompt-studio-header">
+            <div class="prompt-studio-title">
+              <span class="prompt-chip orange">Search Grounding</span>
+              <span>CES 2026 피지컬 AI 경쟁 동향</span>
+            </div>
+            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-ces-trends')">
+              <span>📋</span>
+              <span>프롬프트 복사</span>
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-ces-trends">[Role] 너는 테크 산업 수석 애널리스트야.
+[Action] 최근 열린 CES 2026에서 주요 기업들이 발표한 피지컬 AI(Physical AI) 및 온디바이스 기술 트렌드를 웹 검색으로 분석해 줘.
+[Format] 1. 핵심 기술 트렌드 3가지 요약, 2. 주요 경쟁사 동향 분석, 3. 시장 대응을 위한 마케팅 메시지 3줄.</div>
+        </div>
+      </article>
+
+      <!-- 04. Create Images & Video -->
+      <article class="step-card" id="step-04">
+        <div class="step-card-header">
+          <div class="step-badge">04</div>
+          <div class="step-header-text">
+            <h2 class="step-title">1.4 Create Images &amp; Video (Nano Banana &amp; Veo)</h2>
+            <p class="step-desc">텍스트 프롬프트로 고화질 비즈니스 인포그래픽과 홍보용 비디오를 제작합니다.</p>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; color: var(--text-main);">1) Nano Banana 모델을 활용한 비즈니스 이미지 생성</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px;">화면 상단 Tools 패널에서 <strong>Create images</strong> 도구를 켠 뒤 실행합니다.</p>
+
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/19.webp" alt="이미지 생성 메뉴 진입">
+            <span class="img-caption">Create images 도구 활성화</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/20.webp" alt="이미지 생성 인터페이스">
+            <span class="img-caption">이미지 생성 인터페이스 화면</span>
+          </div>
+        </div>
+
+        <div class="prompt-studio">
+          <div class="prompt-studio-header">
+            <div class="prompt-studio-title">
+              <span class="prompt-chip blue">Imagen 3</span>
+              <span>엔터프라이즈 기능 안내 포스터 (9:16)</span>
+            </div>
+            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-img-poster')">
+              <span>📋</span>
+              <span>프롬프트 복사</span>
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-img-poster">Gemini Enterprise의 핵심 기능을 설명하는 세련된 인포그래픽 포스터(세로형 9:16)를 그려줘.
+포함할 내용:
+- AI Assistant & Web Search: 실시간 Google 검색 그라운딩 및 코드 작성
+- Deep Research: 다수 소스 자율 분석 및 심층 리포트 작성
+- Gemini Notebook: 사내 문서 기반 출처 검증 리서치
+- Agent Designer: 노코드 맞춤형 AI 에이전트 구축
+- Media Generation: 비즈니스 이미지 및 동영상 즉각 생성</div>
+        </div>
+
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/21.webp" alt="생성된 포스터 1">
+            <span class="img-caption">인포그래픽 포스터 예시 1</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/22.webp" alt="생성된 포스터 2">
+            <span class="img-caption">인포그래픽 포스터 예시 2</span>
+          </div>
+        </div>
+
+        <div class="prompt-studio">
+          <div class="prompt-studio-header">
+            <div class="prompt-studio-title">
+              <span class="prompt-chip green">Image-to-Image</span>
+              <span>손그림 스케치를 클라우드 아키텍처 다이어그램으로 변환</span>
+            </div>
+            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-img-arch')">
+              <span>📋</span>
+              <span>프롬프트 복사</span>
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-img-arch">첨부한 손그림 스케치 아키텍처를 Google Cloud 공식 Architecture Icon 스타일을 적용하여 정돈된 고해상도 엔지니어링 다이어그램으로 다시 그려줘.</div>
+        </div>
+
+        <div style="text-align: center; margin: 16px 0;">
+          <img src="./img/23.webp" style="max-width: 600px; width: 100%; border-radius: 8px; border: 1px solid var(--border-color); cursor: zoom-in;" alt="아키텍처 변환 결과">
+        </div>
+
+        <hr style="border: none; border-top: 1px solid var(--border-color); margin: 32px 0 24px 0;">
+
+        <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; color: var(--text-main);">2) Veo 모델을 활용한 비디오 생성</h3>
+        
+        <div class="tabs-container">
+          <div class="tabs-nav">
+            <button type="button" class="tab-btn active" onclick="switchTab(this, 'tab-veo-1')">1. 럭셔리 향수 광고</button>
+            <button type="button" class="tab-btn" onclick="switchTab(this, 'tab-veo-2')">2. 치즈버거 슬로우 모션</button>
+            <button type="button" class="tab-btn" onclick="switchTab(this, 'tab-veo-3')">3. 폭포 FPV 드론</button>
+            <button type="button" class="tab-btn" onclick="switchTab(this, 'tab-veo-4')">4. 90년대 레트로 VHS</button>
+          </div>
+
+          <div id="tab-veo-1" class="tab-pane active">
+            <div class="prompt-studio">
+              <div class="prompt-studio-header">
+                <div class="prompt-studio-title">
+                  <span class="prompt-chip orange">Veo Prompt</span>
+                  <span>돌리 레프트 샷 럭셔리 향수</span>
+                </div>
+                <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-v1')">📋 복사</button>
+              </div>
+              <div class="prompt-body" id="prompt-v1">향수병을 소개하는 홍보 영상을 만드세요. 호박색 액체가 담긴 유리 향수병의 각진 마개에 초점을 맞춘 클로즈업 돌리 레프트 샷으로 시작합니다. 병 표면에 물방울이 은은하게 맺혀 있고, 흰색 대리석 위에 놓여 있습니다. 배경 창문에서 부드러운 자연광이 흘러들어오며 전체적으로 차분하고 우아한 분위기를 연출합니다.</div>
+            </div>
+            <div style="text-align: center;"><img src="./img/24.webp" style="max-width: 550px; width: 100%; border-radius: 8px;" alt="향수병 스크린샷"></div>
+          </div>
+
+          <div id="tab-veo-2" class="tab-pane">
+            <div class="prompt-studio">
+              <div class="prompt-studio-header">
+                <div class="prompt-studio-title">
+                  <span class="prompt-chip orange">Veo Prompt</span>
+                  <span>푸드 매크로 슬로우 모션</span>
+                </div>
+                <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-v2')">📋 복사</button>
+              </div>
+              <div class="prompt-body" id="prompt-v2">육즙이 가득한 치즈버거의 매크로 클로즈업 샷.
+- 세부 묘사: 녹아내린 치즈가 옆으로 천천히 흐르고 김이 피어오름
+- 촬영 기법: 하이 키 조명(high key lighting), 4k 해상도, 슬로우 모션
+- 오디오: 지글거리는 소리, 경쾌한 배경음</div>
+            </div>
+            <div style="text-align: center;"><img src="./img/26.webp" style="max-width: 550px; width: 100%; border-radius: 8px;" alt="치즈버거 스크린샷"></div>
+          </div>
+
+          <div id="tab-veo-3" class="tab-pane">
+            <div class="prompt-studio">
+              <div class="prompt-studio-header">
+                <div class="prompt-studio-title">
+                  <span class="prompt-chip orange">Veo Prompt</span>
+                  <span>폭포 FPV 드론 샷</span>
+                </div>
+                <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-v3')">📋 복사</button>
+              </div>
+              <div class="prompt-body" id="prompt-v3">거대한 폭포 아래로 빠르게 하강하는 FPV 드론 샷.
+- 세부 묘사: 렌즈에 부딪히는 물방울, 안개와 무지개를 통과하며 비행
+- 촬영 기법: 역동적인 모션 블러, 자연 다큐멘터리 스타일
+- 오디오: 세차게 쏟아지는 물소리, 바람 소리</div>
+            </div>
+            <div style="text-align: center;"><img src="./img/28.webp" style="max-width: 550px; width: 100%; border-radius: 8px;" alt="폭포 드론 스크린샷"></div>
+          </div>
+
+          <div id="tab-veo-4" class="tab-pane">
+            <div class="prompt-studio">
+              <div class="prompt-studio-header">
+                <div class="prompt-studio-title">
+                  <span class="prompt-chip orange">Veo Prompt</span>
+                  <span>1990년대 레트로 VHS</span>
+                </div>
+                <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-v4')">📋 복사</button>
+              </div>
+              <div class="prompt-body" id="prompt-v4">1990년대 VHS 비디오 스타일. 스케이트보더가 교외 거리에서 카메라 앞을 지나며 올리(ollie) 기술을 선보임.
+- 세부 묘사: 손으로 든 카메라의 흔들림, 색 번짐, 날짜 스탬프
+- 오디오: 테이프 노이즈, 보드 바퀴 소리</div>
+            </div>
+            <div style="text-align: center;"><img src="./img/30.webp" style="max-width: 550px; width: 100%; border-radius: 8px;" alt="스케이트보더 스크린샷"></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05. 엑셀 파일 분석 -->
+      <article class="step-card" id="step-05">
+        <div class="step-card-header">
+          <div class="step-badge">05</div>
+          <div class="step-header-text">
+            <h2 class="step-title">1.5 엑셀 파일 분석 (Excel Analytics)</h2>
+            <p class="step-desc">스프레드시트 데이터를 첨부하고 자연어로 질문하여 시계열 차트와 통계 검정을 도출합니다.</p>
+          </div>
+        </div>
+
+        <div class="callout note">
+          <div class="callout-title">💡 엑셀 분석 시 정확도를 높이는 방법</div>
+          열(Column) 이름이 첫 번째 행에 위치하도록 정리하고, 프롬프트 작성 시 <code>(주문 완료일)</code>, <code>(Orders Total Sales)</code>처럼 시트에 적힌 정확한 열 이름을 괄호 안에 명시하면 오류 없이 파싱됩니다.
+        </div>
+
+        <div class="prompt-studio">
+          <div class="prompt-studio-header">
+            <div class="prompt-studio-title">
+              <span class="prompt-chip blue">1단계</span>
+              <span>데이터 구조 파악</span>
+            </div>
+            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-xl-1')">📋 복사</button>
+          </div>
+          <div class="prompt-body" id="prompt-xl-1">업로드한 엑셀 문서의 전체 데이터 구조를 파악하고, 어떤 분석과 인사이트를 도출할 수 있는지 요약해 줘.</div>
+        </div>
+
+        <div class="prompt-studio">
+          <div class="prompt-studio-header">
+            <div class="prompt-studio-title">
+              <span class="prompt-chip green">2단계</span>
+              <span>시계열 매출 추이 분석</span>
+            </div>
+            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-xl-2')">📋 복사</button>
+          </div>
+          <div class="prompt-body" id="prompt-xl-2">(주문 완료일)을 기준으로 일별, 주별, 월별 매출(Orders Total Sales)의 변화 추이를 분석하여 매출이 가장 높은 시기와 낮은 시기의 특징을 파악해 줘.</div>
+        </div>
+
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/12.webp" alt="엑셀 파일 요약">
+            <span class="img-caption">데이터 구조 요약</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/13.webp" alt="시계열 차트 생성">
+            <span class="img-caption">시계열 차트 생성 결과</span>
+          </div>
+        </div>
+
+        <div class="prompt-studio">
+          <div class="prompt-studio-header">
+            <div class="prompt-studio-title">
+              <span class="prompt-chip orange">3단계</span>
+              <span>주문 유형별 매출 차이 t-test 통계 검정</span>
+            </div>
+            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-xl-3')">📋 복사</button>
+          </div>
+          <div class="prompt-body" id="prompt-xl-3">(주문 유형: Dine-in, Takeaway)에 따른 매출 비중을 분석하고, 매장 식사와 포장 판매 간의 주문당 평균 매출 차이가 통계적으로 유의미한지 t-test 검정을 수행해 줘.</div>
+        </div>
+
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/14.webp" alt="식사 유형 비교 차트">
+            <span class="img-caption">주문 유형별 비중 분석</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/15.webp" alt="t-test 검정 결과">
+            <span class="img-caption">t-test 통계 검정 결과표</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 06. PPT 파일 분석 -->
+      <article class="step-card" id="step-06">
+        <div class="step-card-header">
+          <div class="step-badge">06</div>
+          <div class="step-header-text">
+            <h2 class="step-title">1.6 PPT 파일 분석 (PowerPoint Analytics)</h2>
+            <p class="step-desc">수십 장의 프레젠테이션 파일을 분석하여 신규 기능 비교표를 도출합니다.</p>
+          </div>
+        </div>
+
+        <div class="prompt-studio">
+          <div class="prompt-studio-header">
+            <div class="prompt-studio-title">
+              <span class="prompt-chip blue">PPTX Analysis</span>
+              <span>BigQuery 신규 기능 GA/Preview 분류 표 생성</span>
+            </div>
+            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-pptx-table')">
+              <span>📋</span>
+              <span>프롬프트 복사</span>
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-pptx-table">[Role] 너는 10년 차 클라우드 솔루션 아키텍트야.
+[Context] 첨부된 보고서는 BigQuery의 최신 기능 업데이트 내역이야.
+[Action] 발표 장표에 포함된 New Feature들을 핵심 기능별로 간결하게 요약해 줘.
+[Format] 기능명, 핵심 요약, 출시 상태(GA vs Preview 여부)를 세 개 열의 마크다운 비교 표로 작성해 줘.</div>
+        </div>
+
+        <div style="text-align: center; margin: 16px 0;">
+          <img src="./img/16.webp" style="max-width: 600px; width: 100%; border-radius: 8px; border: 1px solid var(--border-color); cursor: zoom-in;" alt="PPTX 분석 표 결과">
+        </div>
+      </article>
+
+      <!-- 07. Canvas -->
+      <article class="step-card" id="step-07">
+        <div class="step-card-header">
+          <div class="step-badge">07</div>
+          <div class="step-header-text">
+            <h2 class="step-title">1.7 Canvas (구글 슬라이드 자동 생성)</h2>
+            <p class="step-desc">텍스트 요구사항을 바탕으로 구글 슬라이드 프레젠테이션을 생성하고 디자인을 지정합니다.</p>
+          </div>
+        </div>
+
+        <div class="prompt-studio">
+          <div class="prompt-studio-header">
+            <div class="prompt-studio-title">
+              <span class="prompt-chip blue">Canvas Prompt</span>
+              <span>GCP 백엔드 아키텍처 슬라이드 요약</span>
+            </div>
+            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-canvas-1')">📋 복사</button>
+          </div>
+          <div class="prompt-body" id="prompt-canvas-1">새로운 모바일 앱을 위한 백엔드 아키텍처를 GCP에서 처음부터 설계하려고 해. 초기에는 트래픽이 적겠지만, 이벤트 기간에는 10배 이상 늘어날 수 있어서 Auto-scaling이 필수야. 또한 초당 수천 건의 로그 데이터를 실시간 수집·분석할 파이프라인도 필요해. 완전 관리형 서버리스(Serverless) 위주로 인프라를 설계하고 선택 이유를 설명해 줘.
+
+그리고 구글 슬라이드로 요약해 줘.</div>
+        </div>
+
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/canvas_slide_01.webp" alt="Canvas 메뉴 선택">
+            <span class="img-caption">Canvas 모드 선택</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/canvas_slide_02.webp" alt="슬라이드 생성 결과">
+            <span class="img-caption">슬라이드 장표 자동 생성</span>
+          </div>
+        </div>
+
+        <div class="prompt-studio">
+          <div class="prompt-studio-header">
+            <div class="prompt-studio-title">
+              <span class="prompt-chip green">Canvas Style</span>
+              <span>모던 IT 기술 문서 스타일 지정</span>
+            </div>
+            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-canvas-2')">📋 복사</button>
+          </div>
+          <div class="prompt-body" id="prompt-canvas-2">위에서 작성한 GCP 백엔드 아키텍처 요약 슬라이드를, 흰색 바탕의 깔끔하고 모던한 IT 기술 문서 스타일로 장표 레이아웃을 다시 구성해 줘.</div>
+        </div>
+
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/canvas_slide_04.webp" alt="기술문서 스타일 1">
+            <span class="img-caption">기술문서 스타일 레이아웃 1</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/canvas_slide_05.webp" alt="기술문서 스타일 2">
+            <span class="img-caption">기술문서 스타일 레이아웃 2</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 08. 프롬프트 작성법 -->
+      <article class="step-card" id="step-08">
+        <div class="step-card-header">
+          <div class="step-badge">08</div>
+          <div class="step-header-text">
+            <h2 class="step-title">1.8 프롬프트 작성법 (Prompt Engineering Frameworks)</h2>
+            <p class="step-desc">프롬프트 4대 핵심 구성요소와 실무 표준 프레임워크를 학습합니다.</p>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; color: var(--text-main);">1) 효과적인 프롬프트를 위한 4대 핵심 구성요소</h3>
+
+        <div class="prompt-4elements-grid">
+          <div class="element-card persona">
+            <div class="element-card-head">
+              <span class="element-badge">Persona</span>
+              <span class="element-title">1. 페르소나 (역할)</span>
+            </div>
+            <div class="element-desc">AI에게 부여하는 전문적 직무, 연차, 정체성</div>
+            <div class="element-sample">예: "너는 15년 차 글로벌 이커머스 수석 마케팅 전략가야."</div>
+          </div>
+          <div class="element-card context">
+            <div class="element-card-head">
+              <span class="element-badge">Context</span>
+              <span class="element-title">2. 컨텍스트 (맥락)</span>
+            </div>
+            <div class="element-desc">배경 상황, 비즈니스 목적 및 참조 데이터</div>
+            <div class="element-sample">예: "다음 주 신규 PB 상품 런칭을 앞두고 예산 타당성 보고서를 작성 중이야."</div>
+          </div>
+          <div class="element-card task">
+            <div class="element-card-head">
+              <span class="element-badge">Task</span>
+              <span class="element-title">3. 태스크 (과제)</span>
+            </div>
+            <div class="element-desc">명확한 동사로 지시하는 구체적인 행동 과제</div>
+            <div class="element-sample">예: "경쟁사 동향을 비교하고 차별화 마케팅 액션 플랜을 도출해 줘."</div>
+          </div>
+          <div class="element-card format">
+            <div class="element-card-head">
+              <span class="element-badge">Format</span>
+              <span class="element-title">4. 포맷 (형식)</span>
+            </div>
+            <div class="element-desc">최종 출력 구조, 표(Table), 분량 및 어조 제약</div>
+            <div class="element-sample">예: "경영진 보고용 개조식 보고서 양식으로 3개 파트로 나누어 작성해 줘."</div>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1.05rem; font-weight: 700; margin: 28px 0 12px 0; color: var(--text-main);">2) 프레임워크 3종 비교 (APE vs CRAFT vs CO-STAR)</h3>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>프레임워크</th>
+                <th>핵심 구성 요소</th>
+                <th>추천 활용 업무</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>APE</strong></td>
+                <td>Action(행동) · Purpose(목적) · Expectation(기대결과)</td>
+                <td>단순 요약, 빠른 팩트 질의, 짧은 발표 스크립트 작성</td>
+              </tr>
+              <tr>
+                <td><strong>CRAFT</strong></td>
+                <td>Context(맥락) · Role(역할) · Action(행동) · Format(양식) · Tone/Target(어조/청중)</td>
+                <td>정형화된 업무 보고서, 전략 기획안, 공식 이메일 (엔터프라이즈 표준)</td>
+              </tr>
+              <tr>
+                <td><strong>CO-STAR</strong></td>
+                <td>Context · Objective · Style · Tone · Audience · Response</td>
+                <td>마케팅 카피라이팅, B2B 제안서 등 정밀한 문체 통제가 필요한 작업</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="font-size: 1.05rem; font-weight: 700; margin: 28px 0 12px 0; color: var(--text-main);">3) 실무 표준 4대 시나리오 템플릿</h3>
+
+        <div class="tabs-container">
+          <div class="tabs-nav">
+            <button type="button" class="tab-btn active" onclick="switchTab(this, 'tab-sc-1')">A. 신규 사업 제안서</button>
+            <button type="button" class="tab-btn" onclick="switchTab(this, 'tab-sc-2')">B. 고객 클레임 사과문</button>
+            <button type="button" class="tab-btn" onclick="switchTab(this, 'tab-sc-3')">C. 보도자료 SWOT 분석</button>
+            <button type="button" class="tab-btn" onclick="switchTab(this, 'tab-sc-4')">D. IT 장애 포스트모템</button>
+          </div>
+
+          <div id="tab-sc-1" class="tab-pane active">
+            <div class="prompt-studio">
+              <div class="prompt-studio-header">
+                <div class="prompt-studio-title">
+                  <span class="prompt-chip blue">기획 / 전략본부</span>
+                  <span>신규 사업 제안서 기획</span>
+                </div>
+                <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-sc1')">📋 프롬프트 복사</button>
+              </div>
+              <div class="prompt-body" id="prompt-sc1">[Context] 당사는 2027년 탄소 중립 규제에 맞춰 사내 물류 인프라를 친환경 스마트 모빌리티로 전환하는 프로젝트를 추진 중입니다. 목적은 경영진에게 전사 ESG 전환의 실질적인 투자 타당성을 제안하는 것입니다.
+[Role] 당신은 친환경 인프라 설계 분야에서 15년 이상의 경력을 가진 ESG 전략본부 수석 기획 전문가입니다.
+[Action] 경영진 보고용 '친환경 모빌리티 인프라 전환 추진 기획서' 초안을 작성하세요. 사내 유휴 공간을 임직원 복합 친환경 커뮤니티 공간으로 연계하는 아이디어가 포함되어야 합니다.
+[Format] 1. 사업 개요 및 필요성, 2. 단계별 실행 일정, 3. 정량적 탄소 배출 저감 및 예산 예측 모델(표), 4. 임직원 캠페인 방안 순으로 작성하세요.
+[Tone] 이사회 및 경영진 대상이므로 비즈니스 가치와 비용 효율성에 초점을 둔 객관적이고 명확한 문체를 유지하세요.</div>
+            </div>
+          </div>
+
+          <div id="tab-sc-2" class="tab-pane">
+            <div class="prompt-studio">
+              <div class="prompt-studio-header">
+                <div class="prompt-studio-title">
+                  <span class="prompt-chip green">CS / 고객 지원</span>
+                  <span>고객 불만 및 클레임 사과 이메일</span>
+                </div>
+                <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-sc2')">📋 프롬프트 복사</button>
+              </div>
+              <div class="prompt-body" id="prompt-sc2">[Context] 당사 원격 협업 서비스 'SpaceWork'의 서버 통신 오류로 인해 월요일 오전 9시부터 11시까지 2시간 동안 접속 지연 장애가 발생하여 고객 불만이 접수된 상황입니다.
+[Role] 당신은 고객 서비스 및 브랜드 소통을 12년간 총괄해 온 CS 실장입니다.
+[Action] 유료 구독 고객들에게 발송할 '공식 사과문 및 보상 대책 안내 이메일' 초안을 작성하세요.
+[Format] 메일 제목 옵션 3개 / 도입부(상황 설명) / 사과 문구 / 구체적 보상안(요금 감면 등) / 재발 방지 대책 구조로 작성하세요.
+[Tone] 변명을 피하고, 고객의 불편에 공감하는 정중한 문장으로 신뢰감을 줄 수 있도록 서술하세요.</div>
+            </div>
+          </div>
+
+          <div id="tab-sc-3" class="tab-pane">
+            <div class="prompt-studio">
+              <div class="prompt-studio-header">
+                <div class="prompt-studio-title">
+                  <span class="prompt-chip orange">마케팅 / 대외 홍보</span>
+                  <span>보도자료 분석 및 SWOT 전략 수립</span>
+                </div>
+                <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-sc3')">📋 프롬프트 복사</button>
+              </div>
+              <div class="prompt-body" id="prompt-sc3">[Context] 경쟁사가 물류 창고 자동화용 자율주행로봇(AMR) 'FlexLoad'를 공개한 보도자료를 배포했습니다. 당사 마케팅 및 제품 팀이 취해야 할 대응 시나리오를 수립하는 것이 목적입니다.
+[Role] 당신은 물류 자동화 기업에서 10년 이상 제품 기획과 경쟁사 분석(CI)을 담당한 수석 마케팅 애널리스트입니다.
+[Action] 보도자료 내용을 분석하여 당사 조직이 참고할 SWOT 경쟁 대응 보고서를 작성하세요.
+[Format] 1. 핵심 사실 3줄 요약, 2. 경쟁사 신모델 SWOT 매트릭스 표, 3. 당사 긴급 마케팅 차별화 전략 2가지 제안.
+[Tone] 주관적 추측을 배제하고 사실과 공학적 사양에 기반한 객관적인 문체를 사용하세요.</div>
+            </div>
+          </div>
+
+          <div id="tab-sc-4" class="tab-pane">
+            <div class="prompt-studio">
+              <div class="prompt-studio-header">
+                <div class="prompt-studio-title">
+                  <span class="prompt-chip purple">IT 시스템 및 SRE</span>
+                  <span>IT 서비스 장애 사후 분석(Post-Mortem) 보고서</span>
+                </div>
+                <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-sc4')">📋 프롬프트 복사</button>
+              </div>
+              <div class="prompt-body" id="prompt-sc4">[Context] 일요일 14:00부터 16:30까지 데이터베이스 스토리지 용량 부족(Full-Disk)으로 인해 결제 트랜잭션 API 서비스가 중단되는 장애가 발생했습니다.
+[Role] 당신은 대용량 트랜잭션 환경에서 15년 이상의 장애 대응을 총괄해 온 수석 사이트 안정성 엔지니어(Principal SRE)입니다.
+[Action] 경영진 및 보안 책임자에게 제출할 '장애 사후 분석 및 재발방지대책(Post-Mortem)' 보고서를 작성하세요.
+[Format] 1. 장애 개요 및 시간대별 타임라인 표, 2. 근본 원인 분석(RCA), 3. 긴급 조치 내역, 4. 중장기 자동 디스크 확장 및 이중화 개선 계획.
+[Tone] 간결하고 직관적인 개조식 표준 기술 보고서 문체를 사용하세요.</div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <!-- 토스트 알림 컨테이너 -->
+  <div id="toast-container"></div>
+  <button id="back-to-top" title="맨 위로 가기">↑</button>
+
+  <!-- 이미지 모달 -->
+  <div class="img-modal" id="image-modal">
+    <span class="img-modal-close" id="modal-close">&times;</span>
+    <img id="modal-img" src="" alt="확대 이미지">
+  </div>
+
+  <script>
+    // ── 사이드바 토글 ──
+    const toggleBtn = document.getElementById('toggle-sidebar');
+    const sidebar = document.getElementById('app-sidebar');
+
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('sidebar-mini');
+      const isMini = document.body.classList.contains('sidebar-mini');
+      localStorage.setItem('sidebar-mini-state', isMini ? '1' : '0');
+    });
+
+    if (localStorage.getItem('sidebar-mini-state') === '1') {
+      document.body.classList.add('sidebar-mini');
+    }
+
+    // ── 프롬프트 복사 기능 ──
+    function copyPrompt(elementId) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const text = el.innerText || el.textContent;
+      navigator.clipboard.writeText(text.trim()).then(() => {
+        showToast('📋 프롬프트가 클립보드에 복사되었습니다.');
+      }).catch(err => {
+        console.error('복사 실패:', err);
+      });
+    }
+
+    // ── 토스트 메시지 ──
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerText = message;
+      container.appendChild(toast);
+      setTimeout(() => {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 2500);
+    }
+
+    // ── 탭 전환 기능 ──
+    function switchTab(btn, paneId) {
+      const container = btn.closest('.tabs-container');
+      if (!container) return;
+      container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      container.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const target = container.querySelector('#' + paneId);
+      if (target) target.classList.add('active');
+    }
+
+    // ── 스크롤스파이 (Scrollspy) ──
+    const sections = document.querySelectorAll('article.step-card');
+    const navLinks = document.querySelectorAll('.sub-nav-item');
+
+    window.addEventListener('scroll', () => {
+      let currentId = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 100;
+        if (window.scrollY >= top) {
+          currentId = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(li => {
+        li.classList.remove('active');
+        const a = li.querySelector('a');
+        if (a && a.getAttribute('href') === '#' + currentId) {
+          li.classList.add('active');
+        }
+      });
+
+      // 맨 위로 가기 버튼 표시
+      const backToTop = document.getElementById('back-to-top');
+      if (window.scrollY > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    document.getElementById('back-to-top').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ── 이미지 라이트박스 모달 ──
+    const modal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalClose = document.getElementById('modal-close');
+
+    document.querySelectorAll('.img-frame img, .step-card img').forEach(img => {
+      img.addEventListener('click', () => {
+        modalImg.src = img.src;
+        modal.classList.add('active');
+      });
+    });
+
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
+  </script>
+</body>
+</html>

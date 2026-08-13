@@ -4,77 +4,452 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Track 1: Day 1 Value — 종합 슬라이드 강의</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟢</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --google-blue: #1a73e8;
-      --google-red: #ea4335;
-      --google-yellow: #fbbc05;
       --google-green: #34a853;
-      --bg-dark: #0d1117;
-      --card-bg: rgba(255, 255, 255, 0.05);
-      --card-border: rgba(255, 255, 255, 0.15);
-      --text-main: #ffffff;
-      --text-sub: #9ca3af;
+      --google-green-dark: #1e7e34;
+      --google-green-light: #e6f4ea;
+      --google-red: #ea4335;
+      --google-yellow: #fbbc04;
+      --google-yellow-light: #fef7e0;
+      --purple: #7c3aed;
+
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-sub: #64748b;
+
       --font-display: 'Outfit', 'Noto Sans KR', sans-serif;
-      --font-body: 'Noto Sans KR', -apple-system, sans-serif;
+      --font-body: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body, html { width: 100%; height: 100%; overflow: hidden; background: var(--bg-dark); color: var(--text-main); font-family: var(--font-body); word-break: keep-all; }
-    
-    .bg-glow { position: fixed; width: 650px; height: 650px; border-radius: 50%; filter: blur(150px); z-index: 0; opacity: 0.25; pointer-events: none; }
-    .glow-1 { top: -120px; left: -120px; background: var(--google-blue); }
-    .glow-2 { bottom: -120px; right: -120px; background: var(--google-green); }
 
-    .slide-container { width: 100%; height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; position: relative; z-index: 1; }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      word-break: keep-all;
+    }
+
+    .bg-glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(140px);
+      z-index: 0;
+      opacity: 0.14;
+      pointer-events: none;
+    }
+    .glow-1 { width: 550px; height: 550px; top: -10%; left: -5%; background: radial-gradient(circle, var(--google-green) 0%, transparent 70%); }
+    .glow-2 { width: 500px; height: 500px; bottom: -10%; right: -5%; background: radial-gradient(circle, var(--google-blue) 0%, transparent 70%); }
+
+    /* 상단 HUD 헤더 */
+    .pres-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+    }
+
+    .header-left { display: flex; align-items: center; gap: 12px; }
+    .btn-back-portal {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: #f1f5f9;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--border-color);
+      transition: all 0.2s ease;
+    }
+    .btn-back-portal:hover {
+      background: var(--google-green-light);
+      color: var(--google-green-dark);
+      border-color: #bbf7d0;
+    }
+
+    .pres-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      background: var(--google-green-light);
+      color: var(--google-green-dark);
+    }
+
+    .header-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 4.3%;
+      background: linear-gradient(90deg, var(--google-green), #10b981);
+      border-radius: 999px;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .slide-counter {
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .btn-ctrl {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+    .btn-ctrl:hover { background: #f1f5f9; color: var(--text-main); }
+
+    /* 슬라이드 컨테이너 */
+    .slide-container {
+      width: 100%;
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      position: relative;
+      z-index: 1;
+      padding-top: 60px;
+    }
     .slide-container::-webkit-scrollbar { display: none; }
-    .slide { width: 100vw; height: 100vh; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2.5rem 5rem; position: relative; text-align: center; max-height: 100vh; overflow: hidden; }
 
-    .nav-dots { position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 6px; z-index: 10; max-height: 92vh; overflow-y: auto; padding: 4px; }
+    .slide {
+      width: 100vw;
+      height: calc(100vh - 60px);
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2.5rem 5rem;
+      position: relative;
+      text-align: center;
+      max-height: calc(100vh - 60px);
+      overflow: hidden;
+    }
+
+    /* 우측 내비게이션 닷 */
+    .nav-dots {
+      position: fixed;
+      right: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 10;
+      padding: 8px 6px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(8px);
+      border-radius: 30px;
+      border: 1px solid var(--border-color);
+      max-height: 85vh;
+      overflow-y: auto;
+    }
     .nav-dots::-webkit-scrollbar { display: none; }
-    .nav-dot { width: 10px; height: 10px; min-width: 10px; min-height: 10px; padding: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.25); cursor: pointer; transition: all 0.3s ease; border: none; flex-shrink: 0; outline: none; }
-    .nav-dot.active { background: var(--google-blue); transform: scale(1.4); box-shadow: 0 0 12px var(--google-blue); }
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      min-width: 8px;
+      min-height: 8px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+      outline: none;
+    }
+    .nav-dot.active {
+      background: var(--google-green);
+      transform: scale(1.4);
+      box-shadow: 0 0 8px rgba(52, 168, 83, 0.6);
+    }
 
-    h1 { font-family: var(--font-display); font-size: 3.5rem; font-weight: 900; line-height: 1.25; margin-bottom: 1rem; background: linear-gradient(135deg, #ffffff 40%, #66b2ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-    h2 { font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; margin-bottom: 0.8rem; color: #ffffff; }
-    p.subtitle { font-size: 1.45rem; color: var(--text-sub); max-width: 950px; line-height: 1.6; margin-bottom: 1.8rem; }
+    /* 타이포그래피 */
+    h1 {
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+      letter-spacing: -0.03em;
+    }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.8rem; width: 100%; max-width: 1250px; align-items: stretch; }
-    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 2.2rem; text-align: left; backdrop-filter: blur(16px); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
-    .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: var(--google-blue); }
-    .card.green::before { background: var(--google-green); }
+    h2 {
+      font-family: var(--font-display);
+      font-size: 2.1rem;
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    p.subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 920px;
+      line-height: 1.6;
+      margin-bottom: 1.6rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1.6rem;
+      width: 100%;
+      max-width: 1220px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 1.8rem 2rem;
+      text-align: left;
+      box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.05), 0 4px 6px -2px rgba(15, 23, 42, 0.02);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--google-green);
+    }
+    .card.blue::before { background: var(--google-blue); }
     .card.yellow::before { background: var(--google-yellow); }
+    .card.red::before { background: var(--google-red); }
 
-    .card h3 { font-family: var(--font-display); font-size: 1.7rem; margin-bottom: 0.8rem; color: #fff; }
-    .card p { color: #d1d5db; font-size: 1.25rem; line-height: 1.6; margin-bottom: 0.8rem; }
-    .card ul { list-style: none; padding: 0; margin-top: 0.4rem; }
-    .card ul li { color: #e5e7eb; font-size: 1.2rem; line-height: 1.7; margin-bottom: 0.5rem; padding-left: 1.6rem; position: relative; }
-    .card ul li::before { content: '✔'; position: absolute; left: 0; color: var(--google-blue); font-weight: 700; }
-    .card.green ul li::before { color: var(--google-green); }
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; margin-bottom: 0.6rem; }
+    .card ul { list-style: none; padding: 0; margin-top: 0.3rem; }
+    .card ul li { color: var(--text-main); font-size: 1.02rem; line-height: 1.65; margin-bottom: 0.4rem; padding-left: 1.4rem; position: relative; }
+    .card ul li::before { content: '✔'; position: absolute; left: 0; color: var(--google-green); font-weight: 700; }
+    .card.blue ul li::before { color: var(--google-blue); }
 
-    .code-box { background: rgba(26, 115, 232, 0.15); border: 1px solid rgba(102, 178, 255, 0.3); border-left: 5px solid var(--google-blue); border-radius: 12px; padding: 1rem 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; color: #a5c8ff; text-align: left; margin: 0.8rem 0; line-height: 1.5; white-space: pre-wrap; }
-    
-    .img-showcase img { border-radius: 14px; border: 1px solid rgba(255,255,255,0.25); box-shadow: 0 15px 35px rgba(0,0,0,0.6); max-height: 38vh; max-width: 100%; object-fit: contain; }
-    .img-showcase img, .card img, figure img, .zoomable { cursor: zoom-in; transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
-    .img-showcase img:hover, .card img:hover, figure img:hover, .zoomable:hover { transform: scale(1.04); border-color: var(--google-blue); box-shadow: 0 8px 25px rgba(26, 115, 232, 0.4); }
+    .code-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-left: 4px solid var(--google-green);
+      border-radius: 10px;
+      padding: 0.9rem 1.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.96rem;
+      color: #f1f5f9;
+      text-align: left;
+      margin: 0.6rem 0;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+    .card.blue .code-box { border-left-color: var(--google-blue); }
 
-    .lightbox-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; cursor: zoom-out; }
+    .img-showcase { display: flex; align-items: center; justify-content: center; width: 100%; }
+    .img-showcase img {
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      max-height: 38vh;
+      max-width: 100%;
+      object-fit: contain;
+      cursor: zoom-in;
+      transition: transform 0.2s ease;
+    }
+    .img-showcase img:hover, .card img:hover, .zoomable:hover {
+      transform: scale(1.02);
+      border-color: var(--google-green);
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--google-green), var(--google-green-dark));
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 1.1rem 2.6rem;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(52, 168, 83, 0.35);
+      transition: all 0.25s ease;
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(52, 168, 83, 0.45); }
+
+    .hint {
+      position: absolute;
+      bottom: 1.2rem;
+      font-size: 0.92rem;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .kbd-chip {
+      background: #e2e8f0;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .float-nav-btn {
+      position: fixed;
+      bottom: 20px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--text-main);
+      cursor: pointer;
+      z-index: 50;
+      transition: all 0.2s ease;
+    }
+    .float-nav-btn:hover { background: var(--google-green-light); color: var(--google-green-dark); transform: scale(1.06); }
+    .float-nav-prev { left: 20px; }
+    .float-nav-next { right: 60px; }
+
+    /* 라이트박스 */
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      cursor: zoom-out;
+    }
     .lightbox-modal.active { opacity: 1; pointer-events: auto; }
-    .lightbox-img { max-width: 92vw; max-height: 92vh; border-radius: 16px; box-shadow: 0 0 60px rgba(26, 115, 232, 0.5); border: 2px solid rgba(255, 255, 255, 0.25); transform: scale(0.92); transition: transform 0.25s ease; object-fit: contain; }
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 14px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      transform: scale(0.95);
+      transition: transform 0.25s ease;
+    }
     .lightbox-modal.active .lightbox-img { transform: scale(1); }
 
-    .cta-btn { display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, var(--google-blue), #1558b0); color: #fff; font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; padding: 1.2rem 3rem; border-radius: 50px; text-decoration: none; box-shadow: 0 10px 30px rgba(26, 115, 232, 0.4); transition: all 0.3s ease; }
-    .cta-btn:hover { transform: translateY(-3px) scale(1.05); }
-    .hint { position: absolute; bottom: 1.2rem; font-size: 1.05rem; color: var(--text-sub); opacity: 0.8; }
+    @media screen and (max-width: 768px) {
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.6rem; }
+      .slide { padding: 1.5rem; }
+      .grid { grid-template-columns: 1fr; }
+      .nav-dots, .header-center, .float-nav-btn { display: none; }
+    }
   </style>
 </head>
 <body>
   <div class="bg-glow glow-1"></div>
   <div class="bg-glow glow-2"></div>
 
+  <!-- 상단 HUD 헤더 -->
+  <header class="pres-header">
+    <div class="header-left">
+      <a href="index.html" class="btn-back-portal">← 포털 홈</a>
+      <span class="pres-badge">🟢 Track 1. Day 1 Value</span>
+    </div>
+    <div class="header-center">
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="slide-counter" id="slideCounter">01 / 23</span>
+      <button class="btn-ctrl" onclick="toggleFullScreen()" title="전체화면 (F)">⛶</button>
+    </div>
+  </header>
+
+  <!-- 플로팅 이전/다음 버튼 -->
+  <button class="float-nav-btn float-nav-prev" onclick="prevSlide()" title="이전 (←)">←</button>
+  <button class="float-nav-btn float-nav-next" onclick="nextSlide()" title="다음 (→)">→</button>
+
+  <!-- 우측 슬라이드 닷 네비게이션 (23개) -->
   <div class="nav-dots">
     <button class="nav-dot active" onclick="scrollToSlide(0)" title="1. 타이틀"></button>
     <button class="nav-dot" onclick="scrollToSlide(1)" title="2. pContext 원리"></button>
@@ -88,16 +463,16 @@
     <button class="nav-dot" onclick="scrollToSlide(9)" title="10. CES 2026 로보틱스"></button>
     <button class="nav-dot" onclick="scrollToSlide(10)" title="11. URL 바인딩 질의"></button>
     <button class="nav-dot" onclick="scrollToSlide(11)" title="12. Nano Banana 포스터"></button>
-    <button class="nav-dot" onclick="scrollToSlide(12)" title="13. 손그림 & 레고 변환"></button>
+    <button class="nav-dot" onclick="scrollToSlide(12)" title="13. 손그림 & 다이어그램"></button>
     <button class="nav-dot" onclick="scrollToSlide(13)" title="14. Veo 향수 & 버거"></button>
     <button class="nav-dot" onclick="scrollToSlide(14)" title="15. Veo 드론 & VHS"></button>
     <button class="nav-dot" onclick="scrollToSlide(15)" title="16. Excel 커피 매출 분석"></button>
     <button class="nav-dot" onclick="scrollToSlide(16)" title="17. PPTX 장표 분류 표"></button>
-    <button class="nav-dot" onclick="scrollToSlide(17)" title="18. APE 프레임워크"></button>
-    <button class="nav-dot" onclick="scrollToSlide(18)" title="19. CRAFT 프레임워크"></button>
-    <button class="nav-dot" onclick="scrollToSlide(19)" title="20. CRAFT 범용 템플릿"></button>
-    <button class="nav-dot" onclick="scrollToSlide(20)" title="21. CO-STAR 프레임워크"></button>
-    <button class="nav-dot" onclick="scrollToSlide(21)" title="22. 프롬프트 구조화 3대 팁"></button>
+    <button class="nav-dot" onclick="scrollToSlide(17)" title="18. Canvas 슬라이드"></button>
+    <button class="nav-dot" onclick="scrollToSlide(18)" title="19. APE 프레임워크"></button>
+    <button class="nav-dot" onclick="scrollToSlide(19)" title="20. CRAFT 프레임워크"></button>
+    <button class="nav-dot" onclick="scrollToSlide(20)" title="21. CRAFT 범용 템플릿"></button>
+    <button class="nav-dot" onclick="scrollToSlide(21)" title="22. CO-STAR 프레임워크"></button>
     <button class="nav-dot" onclick="scrollToSlide(22)" title="23. 실습 시작"></button>
   </div>
 
@@ -105,27 +480,29 @@
     <!-- 1 -->
     <section class="slide">
       <h1>🟢 Track 1: Day 1 Value<br>기본 기능 및 멀티모달 실습 가이드</h1>
-      <p class="subtitle">이 트랙은 별도의 사전 설정이나 API 연동 없이, 엔드유저 계정에서 즉시 활용할 수 있는 기능들을 다룹니다.<br>AI Assistant의 개인화 설정부터 웹 그라운딩, 미디어 생성, 로컬 파일 분석 실습을 단계별로 진행합니다.</p>
-      <div class="hint">⬇️ 방향키(↓) 또는 마우스 스크롤로 다음 슬라이드로 이동</div>
+      <p class="subtitle">별도의 복잡한 개발이나 인프라 연동 없이, 엔드유저 계정에서 웹 브라우저로 즉시 활용할 수 있는 핵심 가치를 다룹니다.<br>AI Assistant 개인화부터 웹 그라운딩, 미디어 생성, 로컬 파일 분석 실습을 단계별로 진행합니다.</p>
+      <div class="hint">
+        <span class="kbd-chip">Space</span> 또는 <span class="kbd-chip">↓</span> 키를 눌러 다음 슬라이드로 이동
+      </div>
     </section>
 
     <!-- 2 -->
     <section class="slide">
       <h2>시작하기 (1): 개인화 컨텍스트 (pContext) 개요</h2>
-      <p class="subtitle">Gemini Enterprise는 사용자의 업무 환경을 반영하기 위해 <b>'개인화 컨텍스트(pContext)'</b> 기능을 제공합니다.<br>최근 30일 내외의 사내 4대 정보를 참조하여 직무와 역할에 맞는 답변을 뽑아냅니다.</p>
+      <p class="subtitle">Gemini Enterprise는 사용자의 업무 환경을 반영하기 위해 <b>개인화 컨텍스트(pContext)</b> 기능을 제공합니다.<br>최근 30일 내외의 사내 4대 정보를 참조하여 직무와 역할에 맞는 답변을 도출합니다.</p>
       <div class="grid">
         <div class="card">
           <h3>📌 pContext 4대 참조 소스</h3>
           <ul>
-            <li><b>Workspace & M365</b>: 캘린더 일정, Gmail 이메일, Drive 문서 참조</li>
-            <li><b>Knowledge Graph</b>: 사내 조직도 및 협업 보고 체계 연계</li>
-            <li><b>사용자 프로필</b>: 선호 호칭, 직무 역할, 소속 회사 산업군</li>
-            <li><b>대화 세션 메모리</b>: 이전 대화 이력 및 저장된 참조 정보</li>
+            <li><strong>Workspace & M365</strong>: 캘린더 일정, Gmail 이메일, Drive 문서 참조</li>
+            <li><strong>Knowledge Graph</strong>: 사내 조직도 및 협업 보고 체계 연계</li>
+            <li><strong>사용자 프로필</strong>: 선호 호칭, 직무 역할, 소속 회사 산업군</li>
+            <li><strong>대화 세션 메모리</strong>: 이전 대화 이력 및 저장된 참조 정보</li>
           </ul>
         </div>
         <div class="card green">
-          <h3>💡 실무 적용 기능</h3>
-          <p>동일한 질의에 대해서도 마케팅 담당자에게는 카피라이팅 및 시장 동향을, 엔지니어에게는 기술 사양 및 아키텍처 요약으로 구분하여 응답합니다.</p>
+          <h3>💡 실무 적용 시나리오</h3>
+          <p>동일한 질의에 대해서도 마케팅 담당자에게는 카피라이팅 및 시장 동향을, 엔지니어에게는 기술 사양 및 아키텍처 요약으로 맞춤 응답합니다.</p>
         </div>
       </div>
     </section>
@@ -138,9 +515,9 @@
         <div class="card">
           <h3>✍️ 필수 매개변수 입력 예시</h3>
           <ul>
-            <li><b>선호하는 이름</b>: 예) `홍길동 마케터`</li>
-            <li><b>내 직무</b>: 예) `글로벌 브랜드 마케터`</li>
-            <li><b>회사 산업군</b>: 예) `자동차 및 모빌리티`</li>
+            <li><strong>선호하는 이름</strong>: 예) `홍길동 마케터`</li>
+            <li><strong>내 직무</strong>: 예) `글로벌 브랜드 마케터`</li>
+            <li><strong>회사 산업군</strong>: 예) `자동차 및 모빌리티`</li>
           </ul>
         </div>
         <div class="img-showcase">
@@ -187,7 +564,7 @@
           <h3>🔍 출처 표시 및 본문 질의</h3>
           <p>답변을 구성하는 데 사용된 보고서 및 기사 링크를 확인할 수 있으며, 본문의 특정 단락을 드래그하여 후속 질의를 이어갑니다.</p>
           <ul>
-            <li><b>@멘션 호출</b>: `@Deep Research` 또는 사내 연결 도구를 호출하여 전문 검색을 합니다.</li>
+            <li><strong>@멘션 호출</strong>: `@Deep Research` 또는 사내 연결 도구를 호출하여 전문 검색을 수행합니다.</li>
           </ul>
         </div>
         <div class="img-showcase">
@@ -219,7 +596,7 @@
       <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: center;">
         <div class="card yellow">
           <h3>🤝 컨텍스트 유지 협업</h3>
-          <p>공유 링크를 수신한 사용자도 기존 세션의 문답 맥락을 공유받아 추가적인 질의를 이어나갈 수 있으며, 생성자는 언제든 공유를 중단할 수 있습니다.</p>
+          <p>공유 링크를 수신한 사용자도 기존 세션의 문답 맥락을 공유받아 추가 질의를 이어나갈 수 있으며, 생성자는 언제든 공유를 중단할 수 있습니다.</p>
         </div>
         <div class="img-showcase" style="flex-direction: column; gap: 12px;">
           <img src="./img/09.webp" alt="Share 버튼" style="max-height: 18vh;">
@@ -235,7 +612,7 @@
       <div class="card" style="max-width: 1100px; width: 100%;">
         <h3>📋 실습 프롬프트 실행</h3>
         <div class="code-box">2026년 현재 유럽연합(EU)의 전기차(EV) 보조금 정책 변화와 탄소국경조정제도(CBAM) 관련 최신 글로벌 뉴스를 검색해 줘. 이러한 정책 변화가 한국자동차의 유럽 시장 진출에 미칠 영향을 SWOT(강점, 약점, 기회, 위협) 분석 매트릭스 형태로 시각화해서 정리해 줘.</div>
-        <p style="margin-top: 0.8rem; color: #85e89d;">💡 <b>결과</b>: 실시간 검색된 뉴스 출처가 맵핑된 4분면 비교 표가 화면에 나타납니다.</p>
+        <p style="margin-top: 0.8rem; color: var(--google-green-dark); font-weight: 600;">💡 결과: 실시간 검색된 뉴스 출처가 매핑된 4분면 비교 표가 화면에 나타납니다.</p>
       </div>
     </section>
 
@@ -245,20 +622,20 @@
       <p class="subtitle"><b>CES 2026 피지컬 AI 신기술</b> 발표 내용을 검색하여 글로벌 업체의 기술 트렌드와 마케팅 메시지를 분석합니다.</p>
       <div class="card" style="max-width: 1100px; width: 100%;">
         <h3>📋 실습 프롬프트 실행</h3>
-        <div class="code-box">최근 열린 'CES 2026'에서 주요 경쟁사들이 발표한 피지컬 AI 기술 및 마케팅 트렌드를 웹 검색으로 분석해 줘. 특히 중국 업체들의 추격 양상을 요약하고, 이를 방어하기 위해 보스턴 다이내믹스가 글로벌 시장을 타겟으로 내세워야 할 핵심 마케팅 메시지를 3줄로 작성해 줘.</div>
+        <div class="code-box">최근 열린 'CES 2026'에서 주요 경쟁사들이 발표한 피지컬 AI 기술 및 마케팅 트렌드를 웹 검색으로 분석해 줘. 특히 글로벌 선도 기업들의 기술 혁신을 요약하고, 차별화 마케팅 핵심 메시지를 3줄로 작성해 줘.</div>
       </div>
     </section>
 
     <!-- 11 -->
     <section class="slide">
       <h2>웹 검색 그라운딩 (3): URL 바인딩 질의</h2>
-      <p class="subtitle"><b>특정 웹페이지 URL을 프롬프트 내에 포함하여 해당 페이지의 HTML 텍스트 본문을 파싱</b>하고 요약합니다.</p>
+      <p class="subtitle"><b>특정 웹페이지 URL을 프롬프트 내에 포함하여 해당 페이지의 텍스트 본문을 파싱</b>하고 요약합니다.</p>
       <div class="card" style="max-width: 1100px; width: 100%;">
         <h3>📋 실습 프롬프트 실행</h3>
         <div class="code-box">다음 웹페이지의 내용을 읽고, 핵심 내용을 3줄로 요약한 뒤 우리 사업에 시사하는 바를 설명해줘: https://blog.google/technology/ai/</div>
         <ul style="margin-top: 1.2rem;">
-          <li><b>작동 메커니즘</b>: 대상 URL의 본문 데이터를 읽어와 대화 컨텍스트에 포함하여 질의에 답합니다.</li>
-          <li><b>적용 범위</b>: 인증(로그인)이 필요하지 않은 공개 웹페이지, 보도자료, 기술 블로그 등에 활용할 수 있습니다.</li>
+          <li><strong>작동 메커니즘</strong>: 대상 URL의 본문 데이터를 읽어와 대화 컨텍스트에 포함하여 질의에 답합니다.</li>
+          <li><strong>적용 범위</strong>: 공개 웹페이지, 보도자료, 기술 블로그 등에 다양하게 활용할 수 있습니다.</li>
         </ul>
       </div>
     </section>
@@ -270,7 +647,7 @@
       <div class="grid" style="grid-template-columns: 1.1fr 1fr; align-items: center;">
         <div class="card">
           <h3>✍️ 이미지 생성 프롬프트 예시</h3>
-          <div class="code-box" style="font-size: 1.1rem;">Gemini Enterprise를 잘 쓰고 싶어하는 직장인을 위한 팁과 핵심 기능을 알려주는 포스터(비율 9:16)를 그려줘. 내용: AI Assistant, Deep Research, Gemini Notebook, Agent Designer, Connectors, Media Generation</div>
+          <div class="code-box" style="font-size: 0.95rem;">Gemini Enterprise를 잘 쓰고 싶어하는 직장인을 위한 팁과 핵심 기능을 알려주는 포스터(비율 9:16)를 그려줘. 내용: AI Assistant, Deep Research, Gemini Notebook, Agent Designer, Connectors, Media Generation</div>
         </div>
         <div class="img-showcase">
           <img src="./img/21.webp" alt="포스터 생성 결과 1">
@@ -298,15 +675,15 @@
       <h2>미디어 생성 (3): 비디오 생성 모델 (Veo) - Part A</h2>
       <p class="subtitle"><b>Veo 비디오 생성 모델</b>을 활용하여 제품 광고 및 클로즈업 1080p 영상을 생성하는 실습입니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1100px;">
-        <div class="card" style="padding: 1.8rem; text-align: center;">
-          <h3 style="font-size: 1.5rem; justify-content: center;">🍾 제품 연출 비디오</h3>
-          <p style="font-size: 1.1rem;">대리석 위 물방울과 자연광 조명 클로즈업 돌리 샷</p>
-          <img src="./img/24.webp" alt="향수" style="width: 100%; border-radius: 12px; margin-top: 10px; max-height: 35vh; object-fit: cover;">
+        <div class="card" style="padding: 1.5rem; text-align: center;">
+          <h3 style="justify-content: center;">🍾 제품 연출 비디오</h3>
+          <p style="font-size: 1rem;">대리석 위 물방울과 자연광 조명 클로즈업 돌리 샷</p>
+          <img src="./img/24.webp" alt="향수" style="width: 100%; border-radius: 12px; margin-top: 10px; max-height: 32vh; object-fit: cover;">
         </div>
-        <div class="card" style="padding: 1.8rem; text-align: center;">
-          <h3 style="font-size: 1.5rem; justify-content: center;">🍔 식품 매크로 비디오</h3>
-          <p style="font-size: 1.1rem;">녹아내리는 치즈와 김 4K 슬로우 모션 효과</p>
-          <img src="./img/26.webp" alt="버거" style="width: 100%; border-radius: 12px; margin-top: 10px; max-height: 35vh; object-fit: cover;">
+        <div class="card" style="padding: 1.5rem; text-align: center;">
+          <h3 style="justify-content: center;">🍔 식품 매크로 비디오</h3>
+          <p style="font-size: 1rem;">녹아내리는 치즈와 김 4K 슬로우 모션 효과</p>
+          <img src="./img/26.webp" alt="버거" style="width: 100%; border-radius: 12px; margin-top: 10px; max-height: 32vh; object-fit: cover;">
         </div>
       </div>
     </section>
@@ -316,15 +693,15 @@
       <h2>미디어 생성 (4): 비디오 생성 모델 (Veo) - Part B</h2>
       <p class="subtitle">드론 주행 시점 영상 및 특정 연대(90년대 VHS) 스타일의 필터가 적용된 영상을 생성합니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1fr; max-width: 1100px;">
-        <div class="card" style="padding: 1.8rem; text-align: center;">
-          <h3 style="font-size: 1.5rem; justify-content: center;">🚁 드론 FPV 시점 영상</h3>
-          <p style="font-size: 1.1rem;">폭포 아래로 하강하는 빠른 속도감의 드론 촬영 기법</p>
-          <img src="./img/28.webp" alt="드론" style="width: 100%; border-radius: 12px; margin-top: 10px; max-height: 35vh; object-fit: cover;">
+        <div class="card" style="padding: 1.5rem; text-align: center;">
+          <h3 style="justify-content: center;">🚁 드론 FPV 시점 영상</h3>
+          <p style="font-size: 1rem;">폭포 아래로 하강하는 빠른 속도감의 드론 촬영 기법</p>
+          <img src="./img/28.webp" alt="드론" style="width: 100%; border-radius: 12px; margin-top: 10px; max-height: 32vh; object-fit: cover;">
         </div>
-        <div class="card" style="padding: 1.8rem; text-align: center;">
-          <h3 style="font-size: 1.5rem; justify-content: center;">📼 레트로 스타일 영상</h3>
-          <p style="font-size: 1.1rem;">색 번짐과 흔들림 효과가 적용된 90년대 캠코더 스타일</p>
-          <img src="./img/30.webp" alt="보드" style="width: 100%; border-radius: 12px; margin-top: 10px; max-height: 35vh; object-fit: cover;">
+        <div class="card" style="padding: 1.5rem; text-align: center;">
+          <h3 style="justify-content: center;">📼 레트로 스타일 영상</h3>
+          <p style="font-size: 1rem;">색 번짐과 흔들림 효과가 적용된 90년대 캠코더 스타일</p>
+          <img src="./img/30.webp" alt="보드" style="width: 100%; border-radius: 12px; margin-top: 10px; max-height: 32vh; object-fit: cover;">
         </div>
       </div>
     </section>
@@ -332,7 +709,7 @@
     <!-- 16 -->
     <section class="slide">
       <h2>Excel 로컬 파일 업로드 및 데이터 시각화</h2>
-      <p class="subtitle">`coffee orders.xlsx` 파일을 첨부하고 <b>월별·일별 매출 추이 선 차트 및 상품 기여도 파이 차트</b>를 그립니다.</p>
+      <p class="subtitle">`coffee orders.xlsx` 파일을 첨부하고 <b>월별·일별 매출 추이 선 차트 및 상품 기여도 차트</b>를 그립니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: center;">
         <div class="card">
           <h3>📌 스프레드시트 분석 가이드</h3>
@@ -351,8 +728,8 @@
       <div class="grid" style="grid-template-columns: 1fr 1.2fr; align-items: center;">
         <div class="card blue">
           <h3>📑 슬라이드 구조 요약 질의</h3>
-          <div class="code-box" style="font-size: 1.1rem;">BigQuery New Feature 들에 대해서 각 기능별로 요약을 해주고, GA, Preview 여부를 표로 작성해서 보여줘</div>
-          <p style="margin-top: 0.8rem;">문서 파서가 프레젠테이션의 텍스트와 개체를 슬라이드 단위로 인식하여 요약 표를 생성합니다.</p>
+          <div class="code-box" style="font-size: 0.98rem;">BigQuery New Feature 들에 대해서 각 기능별로 요약을 해주고, GA, Preview 여부를 표로 작성해서 보여줘</div>
+          <p style="margin-top: 0.6rem;">문서 파서가 프레젠테이션의 텍스트와 개체를 슬라이드 단위로 인식하여 요약 표를 생성합니다.</p>
         </div>
         <div class="img-showcase">
           <img src="./img/16.webp" alt="PPTX 요약 표">
@@ -362,27 +739,25 @@
 
     <!-- 18 -->
     <section class="slide">
-      <h2>Canvas: Google Slides & PPTX</h2>
-      <p class="subtitle">대화 내용으로 <b>GCP 아키텍처 구글 슬라이드를 자동 생성</b>하고, 원하는 스타일을 적용하여 <b>Google Slides 및 PPTX 파일</b>로 내보냅니다.</p>
+      <h2>Canvas: Google Slides 자동 생성</h2>
+      <p class="subtitle">대화 내용으로 <b>GCP 아키텍처 구글 슬라이드를 자동 생성</b>하고, 원하는 스타일을 적용하여 <b>Google Slides 및 PPTX</b>로 내보냅니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1.1fr; max-width: 1200px; align-items: center;">
         <div class="card green">
           <h3>📊 Canvas 구글 슬라이드 요약 프롬프트</h3>
-          <div class="code-box" style="font-size: 0.95rem; line-height: 1.5;">새로운 모바일 앱을 위한 백엔드 아키텍처를 GCP에서 설계하려고 해. 트래픽 급증 시 자동 확장(Auto-scaling)과 실시간 로그 분석 파이프라인이 중요해. 완전 관리형 서버리스 서비스를 위주로 설계하고 이유를 설명해줘.<br><br><b>그리고 구글 슬라이드로 요약해줘.</b><br><b>슬라이드는 하얀색 바탕의 깔끔하고 모던한 IT 기술 문서 스타일로 작성해줘.</b></div>
+          <div class="code-box" style="font-size: 0.9rem; line-height: 1.45;">새로운 모바일 앱을 위한 백엔드 아키텍처를 GCP에서 설계하려고 해. 트래픽 급증 시 자동 확장(Auto-scaling)과 실시간 로그 분석 파이프라인이 중요해. 완전 관리형 서버리스 서비스를 위주로 설계하고 이유를 설명해줘.<br><br><strong>그리고 구글 슬라이드로 요약해줘.</strong><br><strong>슬라이드는 하얀색 바탕의 깔끔하고 모던한 IT 기술 문서 스타일로 작성해줘.</strong></div>
         </div>
         <div class="card blue">
-          <h3>✨ 핵심 기능 & 내보내기 (Export)</h3>
+          <h3>✨ 핵심 기능 & 내보내기</h3>
           <ul>
-            <li><b>Canvas 실시간 장표 구성</b>: 대화 내용을 바탕으로 다면 프레젠테이션 슬라이드가 Canvas 창에 시각화됨</li>
-            <li><b>디자인 스타일 지정</b>: "모던한 IT 기술 문서 스타일", "15장 기업 템플릿" 등 톤앤매너 지정 지원</li>
-            <li><b>Export & Download</b>: Google Slides 직접 내보내기 및 PowerPoint(.pptx) 다운로드 지원</li>
-            <li><small style="color: #9ca3af;">* Gemini Enterprise Slide 직접 편집 기능은 Private Preview 제공 중입니다.</small></li>
+            <li><strong>Canvas 실시간 장표 구성</strong>: 대화 내용을 바탕으로 다면 프레젠테이션 슬라이드가 Canvas 창에 시각화됨</li>
+            <li><strong>디자인 스타일 지정</strong>: "모던한 IT 기술 문서 스타일" 등 톤앤매너 지정 지원</li>
+            <li><strong>Export & Download</strong>: Google Slides 직접 내보내기 및 PowerPoint(.pptx) 다운로드 지원</li>
           </ul>
         </div>
       </div>
       <div style="display: flex; justify-content: center; margin-top: 0.8rem;">
         <figure style="text-align: center; margin: 0;">
-          <img src="./img/image128.webp" alt="Canvas IT 기술 문서 스타일 슬라이드 생성 결과" class="zoomable" style="height: 145px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 4px 16px rgba(0,0,0,0.4); cursor: pointer;">
-          <figcaption style="font-size: 0.76rem; color: #9ca3af; margin-top: 0.35rem;">Canvas IT 기술 문서 스타일 슬라이드 생성 결과 예시</figcaption>
+          <img src="./img/image128.webp" alt="Canvas 슬라이드 생성 결과" class="zoomable" style="height: 130px; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.06); cursor: pointer;">
         </figure>
       </div>
     </section>
@@ -395,9 +770,9 @@
         <div class="card">
           <h3>⚡ APE 핵심 요소</h3>
           <ul>
-            <li><b>Action (행동)</b>: 모델이 수행할 작업이나 미션 지정</li>
-            <li><b>Purpose (목적)</b>: 이 요청을 하는 배경이나 비즈니스 이유</li>
-            <li><b>Expectation (기대)</b>: 원하는 결과물의 형식</li>
+            <li><strong>Action (행동)</strong>: 모델이 수행할 작업이나 미션 지정</li>
+            <li><strong>Purpose (목적)</strong>: 이 요청을 하는 배경이나 비즈니스 이유</li>
+            <li><strong>Expectation (기대)</strong>: 원하는 결과물의 형식</li>
           </ul>
         </div>
         <div class="card blue">
@@ -409,7 +784,7 @@
       </div>
     </section>
 
-    <!-- 19 -->
+    <!-- 20 -->
     <section class="slide">
       <h2>프롬프트 프레임워크 (2): CRAFT</h2>
       <p class="subtitle">프롬프트를 5가지 영역으로 나누어 <b>특정 페르소나를 부여하고 정형화된 비즈니스 보고서</b>를 만드는 표준 프레임워크입니다.</p>
@@ -417,31 +792,31 @@
         <div class="card yellow">
           <h3>🏆 CRAFT 5대 핵심 요소</h3>
           <ul>
-            <li><b>Context (맥락)</b>: 상황 파악을 위한 배경지식 및 비즈니스 환경</li>
-            <li><b>Role (역할)</b>: 10년차 수석 등 전문 역할/페르소나 부여</li>
-            <li><b>Action (행동)</b>: 수행할 핵심 미션을 명확한 동사로 지시</li>
-            <li><b>Format (형식)</b>: 표, 보고서, 불릿 등 출력 구조 지정</li>
-            <li><b>Tone / Target (어조/대상)</b>: 독자 수준 및 어조 설정</li>
+            <li><strong>Context (맥락)</strong>: 상황 파악을 위한 배경지식 및 비즈니스 환경</li>
+            <li><strong>Role (역할)</strong>: 10년차 수석 등 전문 역할/페르소나 부여</li>
+            <li><strong>Action (행동)</strong>: 수행할 핵심 미션을 명확한 동사로 지시</li>
+            <li><strong>Format (형식)</strong>: 표, 보고서, 불릿 등 출력 구조 지정</li>
+            <li><strong>Tone / Target (어조/대상)</strong>: 독자 수준 및 어조 설정</li>
           </ul>
         </div>
         <div class="card">
           <h3>📋 CRAFT 실전 프롬프트 예제</h3>
-          <div class="code-box" style="font-size: 1rem;">[Context] 우리는 다음 주에 새로운 모바일 앱 출시를 앞두고 있고, 마케팅 예산이 제한적인 상황이야.
+          <div class="code-box" style="font-size: 0.92rem;">[Context] 우리는 다음 주에 새로운 모바일 앱 출시를 앞두고 있고, 마케팅 예산이 제한적인 상황이야.
 [Role] 너는 IT 스타트업의 10년 차 수석 마케팅 전략가야.
 [Action] 제한된 예산으로 실행 가능한 게릴라 마케팅 아이디어 3가지를 제안해줘.
 [Format] 가장 중요한 순서대로 3개의 핵심 행동 지침을 불릿 포인트로 정리하고, 각 항목 하단에 기대 효과를 표로 요약해줘.
-[Tone] 임원 보고용 보고서이니 전문적이고 격식 있는 어조로 작성해줘. (또는 "비개발자 부서원들이 읽을 예정이니 기술 전문 용어는 쉽게 풀어써줘.")</div>
+[Tone] 임원 보고용 보고서이니 전문적이고 격식 있는 어조로 작성해줘.</div>
         </div>
       </div>
     </section>
 
-    <!-- 20 -->
+    <!-- 21 -->
     <section class="slide">
       <h2>프롬프트 프레임워크 (3): CRAFT 범용 템플릿</h2>
       <p class="subtitle">어떤 비즈니스 시나리오에서도 즉시 복사하여 붙여넣고 조립할 수 있는 <b>CRAFT 표준 마크다운 템플릿</b>입니다.</p>
       <div class="card" style="max-width: 1100px; width: 100%;">
-        <h3>💡 CRAFT 표준 구조 템플릿 (원클릭 복사 활용)</h3>
-        <div class="code-box" style="font-size: 1.1rem;">[Context]
+        <h3>💡 CRAFT 표준 구조 템플릿</h3>
+        <div class="code-box" style="font-size: 0.95rem;">[Context]
 우리는 현재 [프로젝트/배경 설명] 상황에 처해 있으며, 이번 작업의 핵심 목적은 [달성 목표]입니다.
 
 [Role]
@@ -459,50 +834,30 @@
       </div>
     </section>
 
-    <!-- 21 -->
+    <!-- 22 -->
     <section class="slide">
       <h2>프롬프트 프레임워크 (4): CO-STAR</h2>
-      <p class="subtitle">마케팅 카피라이팅, 홍보 문구, 콜드 메일 등 <b>글의 스타일과 청중 맞춤 어조를 극도로 정밀 제어</b>할 때 사용하는 고도화 기법입니다.</p>
+      <p class="subtitle">마케팅 카피라이팅, 홍보 문구, 콜드 메일 등 <b>스타일과 청중 맞춤 어조를 정밀 제어</b>할 때 사용하는 고도화 기법입니다.</p>
       <div class="grid" style="grid-template-columns: 1fr 1.1fr; max-width: 1200px; align-items: center;">
         <div class="card green">
           <h3>🎨 CO-STAR 6대 구성 요소</h3>
           <ul>
-            <li><b>Context (맥락)</b>: 작업의 배경 및 도메인 정보</li>
-            <li><b>Objective (목표)</b>: 달성하고자 하는 비즈니스 목적</li>
-            <li><b>Style (스타일)</b>: 기술문서, 블로그 등 글의 문체</li>
-            <li><b>Tone (어조)</b>: 신뢰감, 객관성 등 태도 설정</li>
-            <li><b>Audience (청중)</b>: 글을 읽을 대상의 수준과 직무</li>
-            <li><b>Response (응답 포맷)</b>: 최종 출력 양식 지정</li>
+            <li><strong>Context (맥락)</strong>: 작업의 배경 및 도메인 정보</li>
+            <li><strong>Objective (목표)</strong>: 달성하고자 하는 비즈니스 목적</li>
+            <li><strong>Style (스타일)</strong>: 기술문서, 블로그 등 글의 문체</li>
+            <li><strong>Tone (어조)</strong>: 신뢰감, 객관성 등 태도 설정</li>
+            <li><strong>Audience (청중)</strong>: 글을 읽을 대상의 수준과 직무</li>
+            <li><strong>Response (응답 포맷)</strong>: 최종 출력 양식 지정</li>
           </ul>
         </div>
         <div class="card">
           <h3>📋 B2B 콜드 메일 카피 실전 예제</h3>
-          <div class="code-box" style="font-size: 1.05rem;">[Context] SaaS 협업 툴 신규 출시 및 무료 체험 가입 유도
+          <div class="code-box" style="font-size: 0.95rem;">[Context] SaaS 협업 툴 신규 출시 및 무료 체험 가입 유도
 [Objective] 팀장급 관리자에게 제품 가치 전달 및 미팅 제안
 [Style] 격식 있고 설득력 있는 B2B 카피라이팅 문체
 [Tone] 상대방 업무 페인 포인트를 짚어내는 신뢰감 있는 톤
 [Audience] IT 기업의 팀장급 의사결정권자
 [Response] 표 1개 포함 400자 이내 이메일 초안 포맷</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 22 -->
-    <section class="slide">
-      <h2>프롬프트 작성 공식 (5): 가독성을 높이는 3대 팁</h2>
-      <p class="subtitle">AI 모델이 지시사항을 100% 명확히 인식하여 오류와 추측을 방지하는 구조화 기법입니다.</p>
-      <div class="grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1250px;">
-        <div class="card">
-          <h3>1️⃣ 마크다운 헤더 사용</h3>
-          <p>`# 역할`, `# 분석 소스` 등 마크다운 기호로 영역을 시각적으로 분리하면 LLM이 각 지시어의 의미와 맥락을 정확히 구분합니다.</p>
-        </div>
-        <div class="card blue">
-          <h3>2️⃣ 구분자 (`[ ]`, `<tags>`) 활용</h3>
-          <p>텍스트나 참조 데이터 등 '입력 데이터'와 AI가 수행할 '명령 지시어'를 대괄호나 XML 태그로 묶어주어 혼동을 원천 차단합니다.</p>
-        </div>
-        <div class="card yellow">
-          <h3>3️⃣ 제약 조건은 '가장 뒤'에 배치</h3>
-          <p>LLM은 프롬프트 맨 마지막 줄에 가장 높은 주의력(Recency Effect)을 기울입니다. 글자 수 제한, 금지어 등 엄격한 조건은 최하단에 작성하세요.</p>
         </div>
       </div>
     </section>
@@ -515,7 +870,7 @@
     </section>
   </div>
 
-  <!-- 라이트박스 (이미지 확대 팝업) -->
+  <!-- 라이트박스 -->
   <div class="lightbox-modal" id="lightbox" onclick="closeLightbox()">
     <img class="lightbox-img" id="lightboxImg" src="" alt="확대 이미지">
   </div>
@@ -524,15 +879,41 @@
     const container = document.getElementById('container');
     const dots = document.querySelectorAll('.nav-dot');
     const slides = document.querySelectorAll('.slide');
-    function scrollToSlide(idx) { slides[idx].scrollIntoView({ behavior: 'smooth' }); }
+    const progressBar = document.getElementById('progressBar');
+    const slideCounter = document.getElementById('slideCounter');
+
+    function updateProgress(idx) {
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      const pct = ((idx + 1) / slides.length) * 100;
+      progressBar.style.width = pct + '%';
+      slideCounter.innerText = String(idx + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+    }
+
+    function scrollToSlide(idx) {
+      if (idx >= 0 && idx < slides.length) {
+        slides[idx].scrollIntoView({ behavior: 'smooth' });
+        updateProgress(idx);
+      }
+    }
+
+    function prevSlide() {
+      const idx = Math.round(container.scrollTop / (window.innerHeight - 60));
+      if (idx > 0) scrollToSlide(idx - 1);
+    }
+
+    function nextSlide() {
+      const idx = Math.round(container.scrollTop / (window.innerHeight - 60));
+      if (idx < slides.length - 1) scrollToSlide(idx + 1);
+    }
+
     container.addEventListener('scroll', () => {
-      const activeIdx = Math.round(container.scrollTop / window.innerHeight);
-      dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+      const activeIdx = Math.round(container.scrollTop / (window.innerHeight - 60));
+      updateProgress(activeIdx);
     });
-    
+
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
-    document.querySelectorAll('.img-showcase img, .card img, figure img, .zoomable').forEach(img => {
+    document.querySelectorAll('.card img, img, .zoomable').forEach(img => {
       img.addEventListener('click', (e) => {
         e.stopPropagation();
         lightboxImg.src = img.src;
@@ -541,15 +922,50 @@
     });
     function closeLightbox() { lightbox.classList.remove('active'); }
 
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && lightbox.classList.contains('active')) {
         closeLightbox();
         return;
       }
-      const idx = Math.round(container.scrollTop / window.innerHeight);
-      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); if (idx < slides.length - 1) scrollToSlide(idx + 1); }
-      else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); if (idx > 0) scrollToSlide(idx - 1); }
+      if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+        return;
+      }
+      const idx = Math.round(container.scrollTop / (window.innerHeight - 60));
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        e.preventDefault();
+        if (idx < slides.length - 1) scrollToSlide(idx + 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        if (idx > 0) scrollToSlide(idx - 1);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        scrollToSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        scrollToSlide(slides.length - 1);
+      }
     });
+
+    let touchStartY = 0;
+    container.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
+    container.addEventListener('touchend', e => {
+      const diff = touchStartY - e.changedTouches[0].clientY;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    }, { passive: true });
+
+    updateProgress(0);
   </script>
 </body>
 </html>
