@@ -459,54 +459,61 @@
       font-weight: 700;
       color: var(--text-primary);
     }
-
+    /* 원클릭 프롬프트 박스 (High-Contrast Modern Dark Code Editor) */
     .prompt-box {
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
+      background: #0f172a;
+      border: 1px solid #1e293b;
       border-radius: 12px;
-      padding: 0.9rem 1.1rem;
-      margin-top: 0.3rem;
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       position: relative;
+      margin: 0.4rem 0;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     }
     .prompt-box-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-bottom: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.45rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid #334155;
     }
     .prompt-chip {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 700;
-      color: var(--primary-blue-dark);
-      background: var(--primary-blue-light);
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
       padding: 3px 10px;
       border-radius: 6px;
       font-family: var(--font-code);
     }
     .btn-copy-prompt {
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      color: var(--text-secondary);
-      font-size: 1.14rem;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 6px;
-      cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
+      background: #334155;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
       transition: all 0.2s ease;
     }
     .btn-copy-prompt:hover {
-      background: var(--primary-blue-light);
-      color: var(--primary-blue-dark);
-      border-color: var(--primary-blue-border);
+      background: #1a73e8;
+      border-color: #1a73e8;
+      color: #ffffff;
     }
     .prompt-code {
       font-family: var(--font-code);
-      font-size: 1.06rem;
-      color: #0f172a;
-      line-height: 1.55;
+      font-size: 1.15rem;
+      color: #f1f5f9 !important;
+      line-height: 1.6;
       white-space: pre-wrap;
       word-break: break-all;
     }
