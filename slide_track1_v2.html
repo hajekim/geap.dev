@@ -146,6 +146,35 @@
       gap: 8px;
     }
 
+    .btn-top-next-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #1a73e8, #1557b0);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 20px;
+      box-shadow: 0 4px 14px rgba(26, 115, 232, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      opacity: 0;
+      transform: scale(0.85);
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-top-next-track.visible {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+    .btn-top-next-track:hover {
+      background: #1967d2;
+      box-shadow: 0 6px 18px rgba(26, 115, 232, 0.6);
+      transform: scale(1.05);
+    }
+
     .btn-icon-ctrl {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -655,6 +684,7 @@
         <span class="slide-page-badge" id="slidePageBadge">01 / 16</span>
       </div>
       <div class="top-actions">
+        <a href="slide_track2.html" class="btn-top-next-track" id="topNextTrackBtn" title="Track 2 슬라이드로 이동">🔵 Track 2 이동 &rarr;</a>
         <button class="btn-icon-ctrl" onclick="togglePrompter()" title="강사 해설 노트 (N)">💬</button>
         <button class="btn-icon-ctrl" onclick="toggleFullScreen()" title="전체화면 (F)">⛶</button>
       </div>
@@ -1355,10 +1385,13 @@
             </div>
           </div>
         </div>
-        <div style="text-align: center; margin-top: auto; padding-top: 0.7rem;">
-          <a href="slide_track2.html" class="btn-portal-exit" style="background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark)); color: #ffffff; padding: 12px 30px; font-size: 1.15rem; border-radius: 30px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 10px 25px rgba(30,142,62,0.3);">
-            🔵 Track 2 (Agentic Value) 슬라이드로 이동 &rarr;
-          </a>
+        <div class="fusion-banner" style="margin-top: auto;">
+          <div class="fusion-banner-title">🎉 Track 1 (Day 1 Value) 실무 과정 수료</div>
+          <div class="fusion-pills">
+            <div class="fusion-pill-item">✅ pContext 개인화 설정 완료</div>
+            <div class="fusion-pill-item">✅ 멀티모달 실무 창작 완료</div>
+            <div class="fusion-pill-item">✅ 3대 프롬프트 프레임워크 마스터</div>
+          </div>
         </div>
       </section>
 
@@ -1392,6 +1425,7 @@
     const toastPopup = document.getElementById('toastPopup');
     const lightboxModal = document.getElementById('lightboxModal');
     const lightboxImage = document.getElementById('lightboxImage');
+    const topNextTrackBtn = document.getElementById('topNextTrackBtn');
 
     function updateSlideStage(idx) {
       if (idx < 0 || idx >= totalSlides) return;
@@ -1404,6 +1438,15 @@
       const pct = ((currentSlide + 1) / totalSlides) * 100;
       progressFill.style.width = pct + '%';
       slidePageBadge.innerText = String(currentSlide + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
+
+      // 마지막 슬라이드 도달 시 상단 Track 2 이동 버튼 동적 활성화
+      if (topNextTrackBtn) {
+        if (currentSlide === totalSlides - 1) {
+          topNextTrackBtn.classList.add('visible');
+        } else {
+          topNextTrackBtn.classList.remove('visible');
+        }
+      }
 
       // 프롬프터 텍스트 갱신
       const pText = slides[currentSlide].getAttribute('data-prompter') || '강사 해설 포인트가 지정되지 않았습니다.';
