@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Track 3. Knowledge & Connectors — Gemini Enterprise 교육 포털</title>
-  <meta name="description" content="Gemini Enterprise 실무 활용 핸즈온 - Track 3 Connector & Custom Agent">
+  <title>Track 5. Admin &amp; Security — Gemini Enterprise 교육 포털</title>
+  <meta name="description" content="Gemini Enterprise 실무 활용 핸즈온 - Track 5 Admin & Security">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,11 +18,10 @@
       --google-green-dark: #1e7e34;
       --google-green-light: #e6f4ea;
       --google-red: #ea4335;
+      --google-red-dark: #c5221f;
       --google-red-light: #fce8e6;
       --google-yellow: #fbbc04;
       --google-yellow-light: #fef7e0;
-      --purple: #7c3aed;
-      --purple-light: #f3e8ff;
       
       --bg-main: #f0f4f9;
       --bg-card: #ffffff;
@@ -71,7 +70,7 @@
       opacity: 0.12;
       pointer-events: none;
     }
-    .glow-1 { width: 500px; height: 500px; top: -10%; right: -5%; background: radial-gradient(circle, var(--purple) 0%, transparent 70%); }
+    .glow-1 { width: 500px; height: 500px; top: -10%; right: -5%; background: radial-gradient(circle, var(--google-red) 0%, transparent 70%); }
     .glow-2 { width: 600px; height: 600px; bottom: -10%; left: 20%; background: radial-gradient(circle, var(--google-blue) 0%, transparent 70%); }
 
         /* 사이드바 & Google Cloud Brand */
@@ -226,7 +225,7 @@
 
     .breadcrumbs { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-sub); }
     .breadcrumbs a { color: var(--text-sub); text-decoration: none; }
-    .breadcrumbs a:hover { color: var(--purple); }
+    .breadcrumbs a:hover { color: var(--google-red); }
     .breadcrumbs .current { font-weight: 600; color: var(--text-main); }
 
     .btn-slide-launch {
@@ -273,15 +272,15 @@
       left: 0;
       width: 6px;
       height: 100%;
-      background: var(--purple);
+      background: var(--google-red);
     }
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       padding: 4px 10px;
-      background: var(--purple-light);
-      color: var(--purple);
+      background: var(--google-red-light);
+      color: var(--google-red-dark);
       border-radius: 20px;
       font-size: 0.78rem;
       font-weight: 700;
@@ -318,8 +317,8 @@
       width: 44px;
       height: 44px;
       border-radius: var(--radius-md);
-      background: var(--purple-light);
-      color: var(--purple);
+      background: var(--google-red-light);
+      color: var(--google-red);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -339,11 +338,10 @@
       font-weight: 700;
       text-decoration: none;
       transition: all 0.15s ease;
-      background: #f1f5f9;
-      color: var(--text-main);
-      border: 1px solid var(--border-color);
+      background: var(--google-red);
+      color: #ffffff;
     }
-    .btn-download:hover { background: var(--purple-light); border-color: var(--purple); color: var(--purple); transform: translateY(-1px); }
+    .btn-download:hover { background: var(--google-red-dark); transform: translateY(-1px); }
 
     /* 스텝 카드 */
     .step-card {
@@ -370,7 +368,7 @@
       font-family: var(--font-display);
       font-size: 0.95rem;
       font-weight: 800;
-      background: var(--purple);
+      background: var(--google-red);
       color: #ffffff;
       width: 40px;
       height: 40px;
@@ -379,31 +377,11 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 2px 6px rgba(124, 58, 237, 0.3);
+      box-shadow: 0 2px 6px rgba(234, 67, 53, 0.3);
     }
     .step-header-text { flex: 1; }
     .step-title { font-size: 1.3rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px; }
     .step-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
-
-    /* 지시사항 */
-    .instructions-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 20px; }
-    .instruction-item { display: flex; align-items: flex-start; gap: 14px; }
-    .inst-num {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: #f1f5f9;
-      color: var(--text-main);
-      font-size: 0.8rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .inst-body { flex: 1; font-size: 0.92rem; color: var(--text-main); }
-    .inst-body p { margin-bottom: 6px; }
 
     /* 프롬프트 & 코드 스튜디오 */
     .prompt-studio {
@@ -427,6 +405,8 @@
     .prompt-studio-title { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 700; color: var(--text-main); }
     .prompt-chip { font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
     .prompt-chip.blue { background: var(--google-blue-light); color: var(--google-blue-dark); }
+    .prompt-chip.red { background: var(--google-red-light); color: var(--google-red-dark); }
+    .prompt-chip.green { background: var(--google-green-light); color: var(--google-green-dark); }
     .prompt-chip.purple { background: var(--purple-light); color: var(--purple); }
 
     .btn-copy-prompt {
@@ -443,7 +423,7 @@
       gap: 6px;
       transition: all 0.15s ease;
     }
-    .btn-copy-prompt:hover { background: var(--purple-light); border-color: var(--purple); color: var(--purple); }
+    .btn-copy-prompt:hover { background: var(--google-red-light); border-color: var(--google-red); color: var(--google-red); }
 
     .prompt-body {
       padding: 18px 22px;
@@ -483,29 +463,19 @@
     .callout.warning { background: var(--google-yellow-light); border-left-color: var(--google-yellow); color: #713f12; }
     .callout-title { font-weight: 700; font-size: 0.92rem; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
 
-    /* 파이프라인 단계 칩 */
-    .pipeline-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
-      margin: 20px 0;
-    }
-    .pipeline-step {
-      background: #f8fafc;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      text-align: center;
-    }
-    .pipeline-step-num { font-size: 1.2rem; margin-bottom: 4px; }
-    .pipeline-step-title { font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 2px; }
-    .pipeline-step-sub { font-size: 0.78rem; color: var(--text-sub); }
+    /* 테이블 */
+    .table-container { overflow-x: auto; margin: 20px 0; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: #ffffff; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: left; }
+    th { background: #f8fafc; padding: 12px 16px; font-weight: 700; color: var(--text-main); border-bottom: 1px solid var(--border-color); }
+    td { padding: 12px 16px; border-bottom: 1px solid var(--border-color); color: var(--text-muted); }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f8fafc; }
 
     /* 토스트 */
     #toast-container { position: fixed; bottom: 28px; right: 28px; z-index: 10000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
     .toast {
       background: #1e293b;
-      border-left: 4px solid var(--purple);
+      border-left: 4px solid var(--google-red);
       color: #ffffff;
       padding: 12px 20px;
       border-radius: var(--radius-md);
@@ -531,7 +501,7 @@
       height: 44px;
       border-radius: 50%;
       background: #ffffff;
-      color: var(--purple);
+      color: var(--google-red);
       border: 1px solid var(--border-color);
       box-shadow: var(--shadow-md);
       display: flex;
@@ -545,7 +515,7 @@
       z-index: 9000;
     }
     #back-to-top.visible { opacity: 1; pointer-events: auto; }
-    #back-to-top:hover { background: var(--purple); color: #ffffff; }
+    #back-to-top:hover { background: var(--google-red); color: #ffffff; }
 
     .img-modal {
       display: none;
@@ -678,16 +648,11 @@
               <span class="label">Track 2. Agentic Value</span>
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a href="track3.html">
               <span>🟣</span>
               <span class="label">Track 3. Knowledge &amp; Connectors</span>
             </a>
-            <ul class="sub-nav-list">
-              <li class="sub-nav-item"><a href="#step-31">3.1 Google Drive Connector 연동 및 OAuth 인증</a></li>
-              <li class="sub-nav-item"><a href="#step-32">3.2 사내 정보 검색 및 클라우드 지식 RAG 탐색</a></li>
-              <li class="sub-nav-item"><a href="#step-33">3.3 사내 지식 베이스 최적화 및 거버넌스</a></li>
-            </ul>
           </li>
         </ul>
 
@@ -707,7 +672,7 @@
 
         <div class="nav-group-title">관리자 및 운영 (Admin &amp; Ops)</div>
         <ul class="nav-list">
-          <li class="nav-item">
+          <li class="nav-item active">
             <a href="track5.html">
               <span>🔴</span>
               <span class="label">Track 5. Admin &amp; Security</span>
@@ -722,7 +687,7 @@
   <div class="main-wrapper">
     <header class="app-bar">
       <div class="breadcrumbs">
-        <span class="current">Track 3. Knowledge & Connectors</span>
+        <span class="current">Track 5. Admin &amp; Security</span>
       </div>
       <div class="g-dots" style="opacity: 0.85;">
         <span class="g-dot blue"></span>
@@ -731,7 +696,7 @@
         <span class="g-dot green"></span>
       </div>
       <div class="app-bar-actions">
-        <a href="slide_track3_v2.html" target="_blank" class="btn-slide-launch">
+        <a href="slide_track5_v2.html" target="_blank" class="btn-slide-launch">
           <span>📽️</span>
           <span>슬라이드로 강의 시작</span>
         </a>
@@ -741,26 +706,26 @@
     <main class="content-area">
       <!-- 히어로 카드 -->
       <section class="hero-card">
-        <span class="hero-badge">심화 연동 및 개발자 트랙</span>
-        <h1 class="hero-title">Track 3. Enterprise Knowledge &amp; Connectors</h1>
-        <p class="hero-desc">Google Drive 커넥터를 연동하여 사내 복리후생 내규를 검색하고, 사설 GCS 저장소 문서를 기반으로 정확한 출처를 인용하는 엔터프라이즈 RAG 검색 및 지식 베이스 최적화 기법을 실습합니다.</p>
+        <span class="hero-badge">관리자 및 보안 전담 트랙</span>
+        <h1 class="hero-title">Track 5. Admin &amp; Security Guide</h1>
+        <p class="hero-desc">IT 관리자와 CISO를 위한 전사 운영 실습 과정입니다. GCP 인스턴스 이중화, Cloud Identity 연동, Model Armor 인라인 보안 필터링, Cloud Audit Logs 기반 SIEM 감사 추적, 경영진 보고용 ROI 시뮬레이션을 다룹니다.</p>
         
         <div class="hero-meta-grid">
           <div class="meta-item">
             <span class="meta-label">예상 소요 시간</span>
-            <span class="meta-value">⏱️ 약 50분</span>
+            <span class="meta-value">⏱️ 약 60분</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">실습 대상</span>
-            <span class="meta-value">👥 클라우드 엔지니어 및 백엔드 개발자</span>
+            <span class="meta-value">👥 IT 관리자, CISO, 클라우드 운영팀</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">실습 난이도</span>
-            <span class="meta-value">⚡ 고급 (Pro-Code / Developer)</span>
+            <span class="meta-value">⚡ 고급 (Admin &amp; Security)</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">활용 도구</span>
-            <span class="meta-value">🛠️ Google Drive Connector, GCS Data Store, Enterprise RAG</span>
+            <span class="meta-value">🛠️ GCP Console, Cloud Logging, BigQuery, Model Armor</span>
           </div>
         </div>
       </section>
@@ -768,222 +733,361 @@
       <!-- 다운로드 스트립 -->
       <section class="download-strip">
         <div class="download-strip-left">
-          <div class="download-icon">📥</div>
+          <div class="download-icon">🔐</div>
           <div class="download-info">
-            <h4>RAG 실습용 샘플 사내 문서 다운로드</h4>
-            <p>사내 복리후생 규정 및 앰버서더 가이드라인 파일입니다 (PDF &amp; MD).</p>
+            <h4>관리자 감사 체크리스트 다운로드</h4>
+            <p>Cloud IAM 권한 매트릭스 및 Model Armor 보안 체크리스트 시트입니다.</p>
           </div>
         </div>
         <div class="download-actions">
-          <a href="samples/%5B공통_내규%5D_넥스트_테크놀로지스_임직원_복리후생_가이드라인.pdf" download class="btn-download">📕 복리후생 가이드라인.pdf</a>
-          <a href="samples/%5B공통_내규%5D_넥스트_테크놀로지스_임직원_복리후생_가이드라인.md" download class="btn-download">📄 복리후생 가이드라인.md</a>
-          <a href="samples/%5B마케팅_캠페인%5D_넥스트_테크놀로지스_사내_브랜드_앰버서더_프로그램_가이드라인.pdf" download class="btn-download">📕 앰버서더 가이드라인.pdf</a>
-          <a href="samples/%5B마케팅_캠페인%5D_넥스트_테크놀로지스_사내_브랜드_앰버서더_프로그램_가이드라인.md" download class="btn-download">📄 앰버서더 가이드라인.md</a>
-          <a href="samples/track2_rag_policy.md" download class="btn-download">📄 AI 윤리 규정.md</a>
+          <a href="samples/admin_iam_checklist.csv" download="admin_iam_checklist.csv" class="btn-download">📥 감사 체크리스트 (CSV)</a>
         </div>
       </section>
 
-      <!-- Part A.1 Google Drive 권한 승인 -->
-      <article class="step-card" id="step-31">
+      <!-- 3.1 GCP 설정 및 이중화 배포 전략 -->
+      <article class="step-card" id="step-51">
         <div class="step-card-header">
-          <div class="step-badge">3.1</div>
+          <div class="step-badge">5.1</div>
           <div class="step-header-text">
-            <h2 class="step-title">Google Drive Connector 연동 및 OAuth 인증</h2>
-            <p class="step-desc">사내 드라이브 문서를 검색하고 요약하기 위해 최초 1회 OAuth 동의를 완료합니다.</p>
+            <h2 class="step-title">GCP 프로젝트 설정 및 이중화 배포 전략</h2>
+            <p class="step-desc">Gemini Enterprise의 안정적 운영을 위해 핵심 API를 활성화하고 Live/Test 2중화 인스턴스를 구성합니다.</p>
           </div>
         </div>
 
-        <div class="instructions-list">
-          <div class="instruction-item">
-            <div class="inst-num">1</div>
-            <div class="inst-body"><p>대화창 오른쪽의 커넥터 아이콘을 클릭하고 <strong>Drive</strong> 항목의 <strong>Enable actions</strong> 버튼을 누릅니다.</p></div>
-          </div>
-          <div class="instruction-item">
-            <div class="inst-num">2</div>
-            <div class="inst-body"><p>구글 계정 선택 팝업이 뜨면 실습용 계정을 선택합니다.</p></div>
-          </div>
-          <div class="instruction-item">
-            <div class="inst-num">3</div>
-            <div class="inst-body"><p>권한 요청 화면에서 <strong>Allow</strong>를 클릭하여 승인합니다.</p></div>
-          </div>
-          <div class="instruction-item">
-            <div class="inst-num">4</div>
-            <div class="inst-body"><p>Drive 항목이 <strong>Disable actions</strong> 상태로 바뀌면 연동이 완료됩니다.</p></div>
-          </div>
-        </div>
-
-        <div class="img-grid-dual">
-          <div class="img-frame">
-            <img src="./img/auth_01.webp" alt="Drive Enable actions 버튼">
-            <span class="img-caption">1단계: 커넥터 활성화 메뉴</span>
-          </div>
-          <div class="img-frame">
-            <img src="./img/auth_02.webp" alt="계정 선택 팝업">
-            <span class="img-caption">2단계: 실습용 구글 계정 선택</span>
-          </div>
-        </div>
-
-        <div class="img-grid-dual">
-          <div class="img-frame">
-            <img src="./img/auth_03.webp" alt="OAuth 권한 동의">
-            <span class="img-caption">3단계: OAuth 권한 승인 화면</span>
-          </div>
-          <div class="img-frame">
-            <img src="./img/auth_04.webp" alt="Drive 연동 완료">
-            <span class="img-caption">4단계: Drive 연동 완료 (Disable actions)</span>
-          </div>
-        </div>
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main);">1) 필수 활성화 API 4종</h3>
+        <ul style="margin-left: 20px; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
+          <li><code>vertexai.googleapis.com</code>: Vertex AI 핵심 모델 엔드포인트 연동</li>
+          <li><code>discoveryengine.googleapis.com</code>: 에이전트 검색, 데이터 엔진 및 지식 베이스 관리</li>
+          <li><code>storage.googleapis.com</code>: 사설 데이터 업로드용 저장소 제어</li>
+          <li><code>iam.googleapis.com</code>: 전사 권한 및 IAM 체계 연동</li>
+        </ul>
 
         <div class="callout tip">
-          <div class="callout-title">💡 팝업 차단 트러블슈팅</div>
-          계정 선택 창이 나타나지 않고 무한 로딩이 걸릴 때는 브라우저 주소창 우측의 팝업 차단 아이콘을 눌러 항상 허용으로 변경한 뒤 새로고침합니다.
-        </div>
-      </article>
-
-      <!-- Part A.2 사내 정보 검색 및 RAG 탐색 -->
-      <article class="step-card" id="step-32">
-        <div class="step-card-header">
-          <div class="step-badge">3.2</div>
-          <div class="step-header-text">
-            <h2 class="step-title">사내 정보 검색 및 클라우드 지식 RAG 탐색</h2>
-            <p class="step-desc">구글 드라이브 및 사설 클라우드 저장소에 보관된 사내 규정 문서를 RAG 검색합니다.</p>
-          </div>
-        </div>
-
-        <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; color: var(--text-main);">1) Google Drive 사내 복리후생 내규 RAG 질의</h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px;">대화창 왼쪽 아래 커넥터에서 Google Search는 끄고 <strong>Drive</strong>만 활성화한 상태에서 실행합니다.</p>
-
-        <div class="prompt-studio">
-          <div class="prompt-studio-header">
-            <div class="prompt-studio-title">
-              <span class="prompt-chip blue">Drive RAG</span>
-              <span>사내 복리후생 내규 질문</span>
-            </div>
-            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-rag-welfare')">📋 복사</button>
-          </div>
-          <div class="prompt-body" id="prompt-rag-welfare">내 드라이브에 있는 "복리후생" 문서를 기반으로 자녀 학자금 지원 한도가 재직 기간에 따라 어떻게 다른지 알려줘</div>
-        </div>
-
-        <div class="img-grid-dual">
-          <div class="img-frame">
-            <img src="./img/image2.webp" alt="Drive 커넥터 활성화">
-            <span class="img-caption">Drive 커넥터 활성화 후 질문 입력</span>
-          </div>
-          <div class="img-frame">
-            <img src="./img/connect01.webp" alt="커넥터 승인 넛지">
-            <span class="img-caption">커넥터 최초 승인 넛지</span>
-          </div>
-        </div>
-
-        <div class="img-grid-dual">
-          <div class="img-frame">
-            <img src="./img/connect02.webp" alt="계정 승인 선택">
-            <span class="img-caption">커넥터 계정 승인 선택</span>
-          </div>
-          <div class="img-frame">
-            <img src="./img/image20.webp" alt="복지 규정 답변 결과">
-            <span class="img-caption">문서 기반 정확한 답변 도출</span>
-          </div>
-        </div>
-
-        <div style="text-align: center; margin: 16px 0;">
-          <img src="./img/image24.webp" style="max-width: 700px; width: 100%; border-radius: 8px; border: 1px solid var(--border-color); cursor: zoom-in;" alt="출처 문서 확인">
-          <div style="font-size: 0.78rem; color: var(--text-sub); margin-top: 6px;">클릭 시 원본 문서 위치 하이라이트</div>
-        </div>
-
-        <hr style="border: none; border-top: 1px solid var(--border-color); margin: 32px 0 24px 0;">
-
-        <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; color: var(--text-main);">2) GCS 사설 저장소 RAG 검색 (마케팅 캠페인)</h3>
-
-        <div class="prompt-studio">
-          <div class="prompt-studio-header">
-            <div class="prompt-studio-title">
-              <span class="prompt-chip purple">GCS RAG</span>
-              <span>사내 브랜드 앰버서더 요건 및 VIP 혜택 질의</span>
-            </div>
-            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-rag-ambassador')">📋 복사</button>
-          </div>
-          <div class="prompt-body" id="prompt-rag-ambassador">넥스트 테크놀로지스의 사내 브랜드 앰버서더 참여 요건과 전용 VIP 혜택이 무엇인지 요약해줘</div>
-        </div>
-
-        <div class="img-grid-dual">
-          <div class="img-frame">
-            <img src="./img/image1.webp" alt="GCS 실시간 질문 결과">
-            <span class="img-caption">앰버서더 가이드라인 질의 결과</span>
-          </div>
-          <div class="img-frame">
-            <img src="./img/image77.webp" alt="답변 출처 목록 확인">
-            <span class="img-caption">답변 출처 목록 확인</span>
-          </div>
-        </div>
-
-        <div class="prompt-studio">
-          <div class="prompt-studio-header">
-            <div class="prompt-studio-title">
-              <span class="prompt-chip purple">GCS RAG</span>
-              <span>토크콘서트 일정 및 초청 강사 질의</span>
-            </div>
-            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('prompt-rag-talk')">📋 복사</button>
-          </div>
-          <div class="prompt-body" id="prompt-rag-talk">넥스트월드 토크콘서트 개최 일정, 시간, 대강당 위치, 그리고 초청 강사를 정확히 가이드해줘</div>
-        </div>
-
-        <div style="text-align: center; margin: 16px 0;">
-          <img src="./img/image21.webp" style="max-width: 700px; width: 100%; border-radius: 8px; border: 1px solid var(--border-color); cursor: zoom-in;" alt="일정 쿼리 결과">
-          <div style="font-size: 0.78rem; color: var(--text-sub); margin-top: 6px;">행사 일정 질의응답 결과 화면</div>
-        </div>
-
-        <div class="callout note">
-          <div class="callout-title">💡 RAG 검색 정확도를 높이는 문서 작성 3대 수칙</div>
+          <div class="callout-title">💡 권장 배포 전략: Live / Test 2중화 아키텍처</div>
+          전사 임직원의 안정적인 온보딩과 기능 사전 검증을 위해 단일 프로젝트 내에 동일 사양의 인스턴스를 두 개로 이중화하여 생성합니다:
           <ul style="margin-left: 18px; margin-top: 6px;">
-            <li><strong>시각 자료 텍스트 병기</strong>: 차트나 다이어그램 이미지 아래에 표나 텍스트 요약을 함께 적어둡니다.</li>
-            <li><strong>명확한 헤딩(H1, H2, H3) 구조화</strong>: 단락 구분이 잘 된 문서일수록 청킹(Chunking) 검색 스코어가 높아집니다.</li>
-            <li><strong>구버전 문서 아카이브</strong>: 상충되는 이전 버전 문서는 별도 아카이브 폴더로 이동하여 혼선을 방지합니다.</li>
+            <li><strong>App 1 (Live 인스턴스)</strong>: 기본 기능 개방 및 전사 임직원 실사용 환경</li>
+            <li><strong>App 2 (Test 인스턴스)</strong>: 신규 커넥터 사전 연동 및 Model Armor 차단 임계값 튜닝 환경</li>
           </ul>
         </div>
       </article>
 
-      <!-- Part B.1 사내 지식 베이스 최적화 및 거버넌스 -->
-      <article class="step-card" id="step-33">
+      <!-- 3.2 Identity 및 인증 체계 -->
+      <article class="step-card" id="step-52">
         <div class="step-card-header">
-          <div class="step-badge">3.3</div>
+          <div class="step-badge">5.2</div>
           <div class="step-header-text">
-            <h2 class="step-title">사내 지식 베이스 최적화 및 거버넌스</h2>
-            <p class="step-desc">검색 정확도를 높이는 문서 청킹(Chunking), 메타데이터 태깅 및 지식 수명주기 관리 수칙을 익힙니다.</p>
+            <h2 class="step-title">Cloud Identity 및 인증 관리 (WIF)</h2>
+            <p class="step-desc">Google Workspace 1P Identity 연동 또는 외부 IdP(Okta, Azure AD)와의 WIF 연동을 설정합니다.</p>
           </div>
         </div>
 
-        <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; color: var(--text-main);">1) 검색 정확도를 극대화하는 문서 작성 및 청킹 3대 수칙</h3>
-        
-        <div class="pipeline-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 20px;">
-          <div class="pipeline-step">
-            <div class="pipeline-step-num">🏷️</div>
-            <div class="pipeline-step-title">1. 명확한 헤딩 구조화</div>
-            <div class="pipeline-step-sub">H1, H2, H3 단락 구분을 명확히 하여 시맨틱 청킹(Semantic Chunking) 스코어를 극대화합니다.</div>
-          </div>
-          <div class="pipeline-step">
-            <div class="pipeline-step-num">📊</div>
-            <div class="pipeline-step-title">2. 시각 자료 텍스트 병기</div>
-            <div class="pipeline-step-sub">복잡한 표나 차트 이미지 하단에 핵심 요약 텍스트를 함께 기재하여 검색 누락을 방지합니다.</div>
-          </div>
-          <div class="pipeline-step">
-            <div class="pipeline-step-num">🗄️</div>
-            <div class="pipeline-step-title">3. 구버전 문서 아카이빙</div>
-            <div class="pipeline-step-sub">이전 버전의 상충되는 규정 문서는 별도 아카이브 폴더로 격리하여 최신 기준만 답변에 반영되도록 관리합니다.</div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>인증 방식</th>
+                <th>작동 구조</th>
+                <th>주요 특징 및 권장 사항</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Cloud Identity (1P 네이티브)</strong></td>
+                <td>Google Workspace 사용자 디렉토리와 100% 동기화</td>
+                <td>공유 드라이브 및 파일 권한(ACL)이 실시간 상속되어 보안 누수가 발생하지 않습니다.</td>
+              </tr>
+              <tr>
+                <td><strong>Workforce Identity Federation (WIF)</strong></td>
+                <td>외부 3P IdP(Okta, Azure AD)에 로그인 인증 위임</td>
+                <td>계정 풀을 복제하지 않고 기존 사내 SSO 체계를 그대로 활용합니다.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout note">
+          <div class="callout-title">💡 무신뢰(Zero-Trust) 기반 권한(ACL) 실시간 상속</div>
+          Google Drive 커넥터가 사내 문서를 RAG 검색할 때 사용자에게 원천적으로 읽기 권한이 없는 문서는 검색 결과에 절대 노출되지 않습니다.
+        </div>
+      </article>
+
+      <!-- 3.3 전사 제어판 설정 -->
+      <article class="step-card" id="step-53">
+        <div class="step-card-header">
+          <div class="step-badge">5.3</div>
+          <div class="step-header-text">
+            <h2 class="step-title">전사 제어판 환경 설정 (Day 1 권장값)</h2>
+            <p class="step-desc">안정적인 서비스 도입 첫날 적용해야 할 핵심 제어판 튜닝 매트릭스입니다.</p>
           </div>
         </div>
 
-        <h3 style="font-size: 1.05rem; font-weight: 700; margin: 24px 0 12px 0; color: var(--text-main);">2) 데이터 스토어 연동 및 보안 거버넌스</h3>
-        <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
-          Gemini Enterprise는 기업의 접근 권한(ACL)을 그대로 상속하여 검색 결과를 생성합니다. 사용자가 권한을 가진 구글 드라이브 폴더나 GCS 버킷의 문서만 RAG 검색 범위에 포함되므로 데이터 유출 위험 없이 안전하게 사내 지식을 활용할 수 있습니다.
-        </p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>설정 영역</th>
+                <th>세부 옵션</th>
+                <th>Day 1 권장값</th>
+                <th>설정 목적</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Search UI</strong></td>
+                <td>피드백 활성화</td>
+                <td><strong>ON</strong></td>
+                <td>임직원의 답변 품질 체감 만족도 실시간 수집</td>
+              </tr>
+              <tr>
+                <td><strong>AI Assistant</strong></td>
+                <td>Model Armor 템플릿</td>
+                <td><strong>ON</strong></td>
+                <td>민감 정보 유출 및 악성 페이로드 실시간 필터링</td>
+              </tr>
+              <tr>
+                <td><strong>Feature Control</strong></td>
+                <td>외부 도메인 문서 포함</td>
+                <td><strong>OFF</strong></td>
+                <td>내부 컴플라이언스 보호를 위해 외부 공유 문서 검색 차단</td>
+              </tr>
+              <tr>
+                <td><strong>Observability</strong></td>
+                <td>질의응답 원본 기록</td>
+                <td><strong>OFF</strong></td>
+                <td>로그 저장소에 개인정보(PII) 무단 저장을 차단</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
 
-        <div class="callout tip" style="margin-top: 24px; border-left: 4px solid var(--track5-yellow);">
-          <div class="callout-title" style="color: var(--track5-yellow-dark);">🚀 Next Step: 고도화된 커스텀 에이전트 구축 (Track 4)</div>
-          <p style="margin: 0; font-size: 0.9rem; line-height: 1.6;">
-            단순 문서 검색을 넘어 <strong>BigQuery 자율 데이터 분석</strong>, <strong>Human-in-the-Loop 결재 승인</strong>, <strong>멀티 에이전트 협업 파이프라인</strong> 및 <strong>Vertex AI Agent Runtime 배포</strong>가 필요하신가요? 
-            다음 트랙인 <a href="track4.html" style="color: var(--track5-yellow-dark); font-weight: 700; text-decoration: underline;">Track 4. Custom Agent Solutions</a>에서 실제 동작하는 파이썬 소스코드와 원클릭 배포 스크립트를 통해 엔터프라이즈 에이전트 구축의 전 과정을 실습하실 수 있습니다.
-          </p>
+      <!-- 3.4 Agent Registry & ADK -->
+      <article class="step-card" id="step-54">
+        <div class="step-card-header">
+          <div class="step-badge">5.4</div>
+          <div class="step-header-text">
+            <h2 class="step-title">Agent Registry 관리 및 High-Code ADK 연동 규격</h2>
+            <p class="step-desc">배포된 에이전트들의 생명주기를 중앙 통제하고 Gateway와 ADK 에이전트 간 통신 페이로드를 검증합니다.</p>
+          </div>
+        </div>
+
+        <div class="prompt-studio">
+          <div class="prompt-studio-header">
+            <div class="prompt-studio-title">
+              <span class="prompt-chip blue">JSON Payload</span>
+              <span>1. Gateway &rarr; ADK Agent 요청 (Request Payload)</span>
+            </div>
+            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('json-req-payload')">📋 복사</button>
+          </div>
+          <div class="prompt-body" id="json-req-payload">{
+  "agent_id": "erp-expenditure-agent-01",
+  "query": "지난달 부서별 ERP 지출 내역 조회해줘",
+  "user_context": {
+    "user_email": "employee@company.com",
+    "department": "Finance",
+    "role": "Manager"
+  },
+  "parameters": {
+    "period": "last_month",
+    "target_fields": ["department", "amount", "category"]
+  }
+}</div>
+        </div>
+
+        <div class="prompt-studio">
+          <div class="prompt-studio-header">
+            <div class="prompt-studio-title">
+              <span class="prompt-chip green">JSON Payload</span>
+              <span>2. ADK Agent &rarr; Gateway 응답 (Response Payload)</span>
+            </div>
+            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('json-res-payload')">📋 복사</button>
+          </div>
+          <div class="prompt-body" id="json-res-payload">{
+  "status": "success",
+  "data": [
+    { "department": "HR", "amount": 15200000, "category": "Recruiting" },
+    { "department": "IT", "amount": 42000000, "category": "SaaS License" },
+    { "department": "Marketing", "amount": 28500000, "category": "Online Ad" }
+  ],
+  "grounding_metadata": {
+    "source_system": "SAPE-ERP-v2",
+    "retrieved_at": "2026-06-16T11:45:00Z"
+  }
+}</div>
+        </div>
+      </article>
+
+      <!-- 3.5 Model Armor 인라인 보안 -->
+      <article class="step-card" id="step-55">
+        <div class="step-card-header">
+          <div class="step-badge">5.5</div>
+          <div class="step-header-text">
+            <h2 class="step-title">Model Armor 인라인 보안 및 실시간 검증 (7대 테스트)</h2>
+            <p class="step-desc">입력 쿼리와 출력 답변에 대해 PII 유출, 악성 도메인, 유해 콘텐츠를 진입 시점에 차단합니다.</p>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main);">1) 악성 웹 도메인 및 위협 차단</h3>
+        <div style="text-align: center; margin: 16px 0;">
+          <img src="./img/image7.webp" style="max-width: 700px; width: 100%; border-radius: 8px; border: 1px solid var(--border-color); cursor: zoom-in;" alt="악성코드 차단 화면">
+          <div style="font-size: 0.78rem; color: var(--text-sub); margin-top: 6px;">Google Safe Browsing 연동 악성 도메인 진입 차단</div>
+        </div>
+
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main);">2) 개인 식별 정보(PII) 유출 차단 (SDP 연동)</h3>
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/image103.webp" alt="주민번호 차단">
+            <span class="img-caption">주민등록번호 기재 차단</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/image46.webp" alt="사번 엑셀 업로드 차단">
+            <span class="img-caption">인적사항 시트 업로드 차단</span>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main);">3) 편향, 유해 콘텐츠 및 공격성 차단</h3>
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/image87.webp" alt="인종 편향 차단">
+            <span class="img-caption">인종/집단 편향 유도 차단</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/image86.webp" alt="성인 유해 묘사 차단">
+            <span class="img-caption">성인 유해 묘사 필터링</span>
+          </div>
+        </div>
+
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/image61.webp" alt="인신공격 유도 차단">
+            <span class="img-caption">사내 동료 괴롭힘 인신공격 차단</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/image34.webp" alt="자살 위해 유도 차단">
+            <span class="img-caption">자해/자살 위해 유도 차단</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3.6 Cloud Audit Logs 감사 -->
+      <article class="step-card" id="step-56">
+        <div class="step-card-header">
+          <div class="step-badge">5.6</div>
+          <div class="step-header-text">
+            <h2 class="step-title">Cloud Audit Logs 보안 감사 및 BigQuery 연동</h2>
+            <p class="step-desc">감사 로그를 BigQuery로 싱크하여 정책 변경 이력 및 위험 탐지 이벤트를 SQL로 추적합니다.</p>
+          </div>
+        </div>
+
+        <div class="prompt-studio">
+          <div class="prompt-studio-header">
+            <div class="prompt-studio-title">
+              <span class="prompt-chip blue">Standard SQL</span>
+              <span>Model Armor 정책 변경 감사 추적 쿼리</span>
+            </div>
+            <button type="button" class="btn-copy-prompt" onclick="copyPrompt('sql-audit-query')">📋 쿼리 복사</button>
+          </div>
+          <div class="prompt-body" id="sql-audit-query">SELECT
+  timestamp,
+  protoPayload.authenticationInfo.principalEmail AS admin_email,
+  protoPayload.methodName AS api_action,
+  protoPayload.requestMetadata.callerIp AS ip_address,
+  protoPayload.resourceName AS policy_resource_name,
+  JSON_EXTRACT(protoPayload.metadata, '$.policyDelta') AS configuration_changes
+FROM
+  `your-gcp-project.cloudaudit_googleapis_com_activity.cloudaudit_googleapis_com_activity_*`
+WHERE
+  _TABLE_SUFFIX = FORMAT_TIMESTAMP('%Y%m%d', CURRENT_TIMESTAMP())
+  AND protoPayload.serviceName = 'modelarmor.googleapis.com'
+  AND protoPayload.methodName IN (
+    'google.cloud.modelarmor.v1.ModelArmorService.UpdatePolicy',
+    'google.cloud.modelarmor.v1.ModelArmorService.DeletePolicy',
+    'google.cloud.modelarmor.v1.ModelArmorService.CreatePolicy'
+  )
+ORDER BY timestamp DESC
+LIMIT 100;</div>
+        </div>
+      </article>
+
+      <!-- 3.7 Chrome 연동 및 ROI 시뮬레이션 -->
+      <article class="step-card" id="step-57">
+        <div class="step-card-header">
+          <div class="step-badge">5.7</div>
+          <div class="step-header-text">
+            <h2 class="step-title">Chrome Enterprise 옴니바 연동 및 ROI 시뮬레이션</h2>
+            <p class="step-desc">주소창에서 즉시 Gemini를 호출하도록 중앙 배포하고 직급별 ROI 비즈니스 임팩트를 산출합니다.</p>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main);">1) Chrome 주소창 옴니바 4단계 호출</h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px;">크롬 주소창에 <code>gemini</code>를 입력하고 Tab 또는 스페이스바를 누르면 Gemini 전용 검색창으로 즉시 전환됩니다.</p>
+
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/chrome01.webp" alt="크롬 옴니바 발동">
+            <span class="img-caption">1단계: gemini 입력 후 Tab 클릭</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/chrome02.webp" alt="쿼리 질문 입력">
+            <span class="img-caption">2단계: 실무 질문 입력</span>
+          </div>
+        </div>
+
+        <div class="img-grid-dual">
+          <div class="img-frame">
+            <img src="./img/chrome03.webp" alt="Gemini 자동 이동">
+            <span class="img-caption">3단계: 인스턴스 자동 라우팅</span>
+          </div>
+          <div class="img-frame">
+            <img src="./img/chrome04.webp" alt="결과 화면">
+            <span class="img-caption">4단계: 대화창 자동 렌더링</span>
+          </div>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid var(--border-color); margin: 32px 0 24px 0;">
+
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main);">2) 경영진 보고용 ROI 시뮬레이션 모델</h3>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>시뮬레이션 모델</th>
+                <th>인당 월간 절약 시간</th>
+                <th>인당 월간 절감 가치</th>
+                <th>월 구독 라이선스 비용</th>
+                <th>투자 회수 주기 (Payback)</th>
+                <th>연간 인당 순 가치 창출</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>보수적 모델 (일 5분 절약)</strong></td>
+                <td>1.6시간</td>
+                <td>72,000원</td>
+                <td>42,000원</td>
+                <td><strong>0.58개월 (약 17일)</strong></td>
+                <td>+624,000원 / 년</td>
+              </tr>
+              <tr>
+                <td><strong>중립적 모델 (일 15분 절약)</strong></td>
+                <td>5.0시간</td>
+                <td>225,000원</td>
+                <td>42,000원</td>
+                <td><strong>0.19개월 (약 6일)</strong></td>
+                <td>+2,196,000원 / 년</td>
+              </tr>
+              <tr>
+                <td><strong>적극적 모델 (일 30분 절약)</strong></td>
+                <td>10.0시간</td>
+                <td>450,000원</td>
+                <td>42,000원</td>
+                <td><strong>0.09개월 (약 3일)</strong></td>
+                <td>+4,896,000원 / 년</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </article>
     </main>
@@ -1013,7 +1117,7 @@
       if (!el) return;
       const text = el.innerText || el.textContent;
       navigator.clipboard.writeText(text.trim()).then(() => {
-        showToast('📋 코드가 클립보드에 복사되었습니다.');
+        showToast('📋 내용이 클립보드에 복사되었습니다.');
       }).catch(err => console.error('복사 실패:', err));
     }
 

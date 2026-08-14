@@ -1,36 +1,101 @@
-# macOS
+# ==============================================================================
+# Google Cloud & Enterprise Security (절대 커밋 금지: 보안 키 및 자격 증명)
+# ==============================================================================
+*key*.json
+*credentials*.json
+*service_account*.json
+*service-account*.json
+application_default_credentials.json
+.env
+.env.*
+!.env.example
+
+# ==============================================================================
+# Python & AI Agent Runtime Build Artifacts (빌드 및 런타임 캐시)
+# ==============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Reasoning Engine & ADK local staging caches
+.reasoning_engine*/
+.adk/
+.agents/
+
+# ==============================================================================
+# OS & Editor Metadata
+# ==============================================================================
 .DS_Store
 .AppleDouble
 .LSOverride
+Thumbs.db
+ehthumbs.db
 
-# Editor
+# IDE & Editors
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
-# Python
-__pycache__/
-*.py[cod]
-.env
-.venv/
-
-# Logs & temp
+# ==============================================================================
+# Logs & Temporary Files
+# ==============================================================================
 *.log
 *.tmp
+*.temp
+/tmp/
 
-# Node / build artifacts (Astro 실험 잔여물 포함)
+# ==============================================================================
+# Node & Web Build Artifacts
+# ==============================================================================
 node_modules/
-dist/
 .astro/
+.next/
+.cache/
 
-# Exclude heavy Veo GIFs: exceed GitHub 100MB single-file limit
+# ==============================================================================
+# Large Media Exclusions (GitHub 100MB single-file limit)
+# ==============================================================================
 img/25.gif
 img/27.gif
 img/29.gif
 img/31.gif
 
-# AI Agent workspace
+# ==============================================================================
+# AI Assistant & Chat Context Data
+# ==============================================================================
 .agent/
 .remember/
 

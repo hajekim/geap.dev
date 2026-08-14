@@ -1,0 +1,8 @@
+google-adk[gcp]>=2.2.0
+google-cloud-aiplatform[agent-engines]>=1.156.0
+google-cloud-bigquery>=3.20.0
+a2a-sdk[http-server]>=0.3.22
+google-genai>=2.14.0
+pydantic>=2.10.0
+fastapi>=0.115.0
+uvicorn>=0.34.0

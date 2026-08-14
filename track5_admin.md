@@ -1,4 +1,4 @@
-# 🔴 Track 4. Admin & Security — 관리자 및 보안 가이드
+# 🔴 Track 5. Admin & Security — 관리자 및 보안 가이드
 
 > [!NOTE]
 > **대상 안내**: IT 인프라 관리자, CISO, 클라우드 운영 조직을 위한 엔터프라이즈 기술 실습 가이드입니다. GCP 인프라 설정, Cloud Identity 권한 관리, Model Armor 인라인 보안 관제, Cloud Audit Logs SIEM 연동, Chrome 옴니바 배포 및 경영진 보고용 ROI 시뮬레이션을 단계별로 다룹니다.
@@ -6,8 +6,8 @@
 > [!TIP]
 > **실습 첨부파일 다운로드**
 > - [📥 IAM 권한 매트릭스 및 보안 감사 체크리스트 (admin_iam_checklist.csv)](samples/admin_iam_checklist.csv)
-> - [🌐 Track 4 인터랙티브 웹 포털 열기](https://geap.dev/track4.html)
-> - [📽️ Track 4 16:9 발표 슬라이드 열기](https://geap.dev/slide_track4_v2.html)
+> - [🌐 Track 5 인터랙티브 웹 포털 열기](https://geap.dev/track5.html)
+> - [📽️ Track 5 16:9 발표 슬라이드 열기](https://geap.dev/slide_track5_v2.html)
 
 ---
 

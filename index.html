@@ -371,7 +371,8 @@
     .track-card.t1 { border-top: 4px solid var(--google-green); }
     .track-card.t2 { border-top: 4px solid var(--google-blue); }
     .track-card.t3 { border-top: 4px solid var(--purple); }
-    .track-card.t4 { border-top: 4px solid var(--google-red); }
+    .track-card.t4 { border-top: 4px solid var(--amber); }
+    .track-card.t5 { border-top: 4px solid var(--google-red); }
 
     .track-card-header {
       display: flex;
@@ -462,8 +463,10 @@
     .track-card.t2 .btn-track-start:hover { background: var(--google-blue-dark); }
     .track-card.t3 .btn-track-start { background: var(--purple); }
     .track-card.t3 .btn-track-start:hover { background: #6b21a8; }
-    .track-card.t4 .btn-track-start { background: var(--google-red); }
-    .track-card.t4 .btn-track-start:hover { background: var(--google-red-dark); }
+    .track-card.t4 .btn-track-start { background: var(--amber); }
+    .track-card.t4 .btn-track-start:hover { background: #b45309; }
+    .track-card.t5 .btn-track-start { background: var(--google-red); }
+    .track-card.t5 .btn-track-start:hover { background: var(--google-red-dark); }
 
     .btn-track-slide {
       padding: 9px 14px;
@@ -489,6 +492,13 @@
       header.app-bar { padding: 0 16px; }
       main.content-area { padding: 0 16px; margin: 16px auto 40px auto; }
     }
+  
+    .nav-divider {
+      height: 1px;
+      background: var(--border-color, #e2e8f0);
+      margin: 12px 8px 14px 8px;
+    }
+
   </style>
 </head>
 <body>
@@ -528,16 +538,19 @@
       </div>
     </div>
 
-    <div class="sidebar-content">
+                            <div class="sidebar-content">
       <div>
-        <div class="nav-group-title">커리큘럼 트랙</div>
-        <ul class="nav-list">
+        <ul class="nav-list" style="margin-bottom: 12px;">
           <li class="nav-item active">
             <a href="index.html">
               <span>🏠</span>
               <span class="label">포털 홈 (Home)</span>
             </a>
           </li>
+        </ul>
+
+        <div class="nav-group-title">사용자 실무 (User Tracks)</div>
+        <ul class="nav-list" style="margin-bottom: 12px;">
           <li class="nav-item">
             <a href="track1.html">
               <span>🟢</span>
@@ -553,13 +566,31 @@
           <li class="nav-item">
             <a href="track3.html">
               <span>🟣</span>
-              <span class="label">Track 3. Pro Code</span>
+              <span class="label">Track 3. Knowledge &amp; Connectors</span>
             </a>
           </li>
+        </ul>
+
+        <div class="nav-divider"></div>
+
+        <div class="nav-group-title">개발자 및 엔지니어링 (Developer Tracks)</div>
+        <ul class="nav-list" style="margin-bottom: 12px;">
           <li class="nav-item">
             <a href="track4.html">
+              <span>🟡</span>
+              <span class="label">Track 4. Custom Agent</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="nav-divider"></div>
+
+        <div class="nav-group-title">관리자 및 운영 (Admin &amp; Ops)</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="track5.html">
               <span>🔴</span>
-              <span class="label">Track 4. Admin &amp; Security</span>
+              <span class="label">Track 5. Admin &amp; Security</span>
             </a>
           </li>
         </ul>
@@ -621,7 +652,7 @@
           </div>
         </div>
 
-        <!-- 4대 트랙 그리드 -->
+        <!-- 5대 트랙 그리드 -->
         <div class="tracks-grid">
           <!-- Track 1 -->
           <div class="track-card t1">
@@ -629,7 +660,7 @@
               <div class="track-card-header">
                 <div class="card-icon-box green">🟢</div>
                 <div>
-                  <span class="track-badge">기초 및 실무 활용</span>
+                  <span class="track-badge">사용자 실무 · 기초 생산성</span>
                   <h2 class="track-card-title">Track 1. Day 1 Value</h2>
                 </div>
               </div>
@@ -655,7 +686,7 @@
               <div class="track-card-header">
                 <div class="card-icon-box blue">🔵</div>
                 <div>
-                  <span class="track-badge">심화 에이전트 구축</span>
+                  <span class="track-badge">사용자 실무 · 에이전트 구축</span>
                   <h2 class="track-card-title">Track 2. Agentic Value</h2>
                 </div>
               </div>
@@ -679,16 +710,16 @@
               <div class="track-card-header">
                 <div class="card-icon-box purple">🟣</div>
                 <div>
-                  <span class="track-badge">개발자 및 커넥터</span>
-                  <h2 class="track-card-title">Track 3. Pro Code</h2>
+                  <span class="track-badge">사용자 실무 · 지식 연동</span>
+                  <h2 class="track-card-title">Track 3. Knowledge &amp; Connectors</h2>
                 </div>
               </div>
-              <p class="track-card-desc">Google Drive 커넥터 연동과 Python ADK 기반 커스텀 에이전트 개발 및 Cloud Run 배포를 실습합니다.</p>
+              <p class="track-card-desc">Google Drive 커넥터 연동, 사내 규정 문서 RAG 검색, 지식 베이스 최적화 및 문서 거버넌스를 실습합니다.</p>
               <ul class="track-features-list">
                 <li>Google Drive 및 Workspace OAuth 연동</li>
-                <li>사내 규정 문서 기반 RAG 탐색</li>
-                <li>Python ADK 에이전트 개발</li>
-                <li>Cloud Run 배포 및 A2A 등록</li>
+                <li>사내 복리후생 내규 RAG 질의</li>
+                <li>GCS 사설 저장소 지식 검색</li>
+                <li>시맨틱 청킹 및 문서 작성 3대 수칙</li>
               </ul>
             </div>
             <div class="track-actions">
@@ -701,24 +732,50 @@
           <div class="track-card t4">
             <div>
               <div class="track-card-header">
-                <div class="card-icon-box red">🔴</div>
+                <div class="card-icon-box" style="background: #fef3c7; color: #b45309; border: 1px solid #fde68a;">🟡</div>
                 <div>
-                  <span class="track-badge">관리자 및 보안</span>
-                  <h2 class="track-card-title">Track 4. Admin &amp; Security</h2>
+                  <span class="track-badge">개발자 및 엔지니어링 · 프로코드</span>
+                  <h2 class="track-card-title">Track 4. Custom Agent Solutions</h2>
                 </div>
               </div>
-              <p class="track-card-desc">IT 관리자와 CISO를 위한 GCP 인프라 이중화, Model Armor 인라인 보안, Cloud Audit Logs 감사를 다룹니다.</p>
+              <p class="track-card-desc">Google ADK 2.3.0과 Gemini 3.6 Flash 기반 BigQuery 분석, HITL 결재, Multi-Agent 파이프라인 및 Vertex AI 배포를 실습합니다.</p>
               <ul class="track-features-list">
-                <li>GCP Live / Test 인스턴스 이중화</li>
-                <li>Cloud Identity 및 WIF SSO 연동</li>
-                <li>Model Armor 인라인 보안 필터링</li>
-                <li>Cloud Audit Logs &amp; BigQuery SIEM</li>
-                <li>경영진 보고용 ROI 시뮬레이션</li>
+                <li>BigQuery SQL 자율 분석 에이전트</li>
+                <li>HITL ERP 결재 및 @멘션 연동</li>
+                <li>Sequential 멀티 에이전트 협업 파이프라인</li>
+                <li>Vertex AI Reasoning Engine 원클릭 배포</li>
+                <li>사내 Gemini Enterprise 앱 등록</li>
               </ul>
             </div>
             <div class="track-actions">
               <a href="track4.html" class="btn-track-start">실습 시작하기 &rarr;</a>
               <a href="slide_track4_v2.html" target="_blank" class="btn-track-slide">📽️ 슬라이드</a>
+            </div>
+          </div>
+
+          <!-- Track 5 -->
+          <div class="track-card t5" style="grid-column: span 2;">
+            <div>
+              <div class="track-card-header">
+                <div class="card-icon-box red">🔴</div>
+                <div>
+                  <span class="track-badge">관리자 및 운영 · 전사 거버넌스</span>
+                  <h2 class="track-card-title">Track 5. Admin &amp; Security</h2>
+                </div>
+              </div>
+              <p class="track-card-desc">IT 관리자와 보안 책임자를 위한 GCP 인프라 이중화, Model Armor 인라인 보안, Cloud Audit Logs 감사 및 비용 거버넌스를 다룹니다.</p>
+              <ul class="track-features-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <li>GCP Live / Test 인스턴스 이중화</li>
+                <li>Cloud Identity 및 WIF SSO 연동</li>
+                <li>Model Armor 인라인 보안 필터링</li>
+                <li>Cloud Audit Logs &amp; BigQuery SIEM</li>
+                <li>경영진 보고용 ROI 시뮬레이션</li>
+                <li>엔터프라이즈 데이터 거버넌스</li>
+              </ul>
+            </div>
+            <div class="track-actions">
+              <a href="track5.html" class="btn-track-start">실습 시작하기 &rarr;</a>
+              <a href="slide_track5_v2.html" target="_blank" class="btn-track-slide">📽️ 슬라이드</a>
             </div>
           </div>
         </div>

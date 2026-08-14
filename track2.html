@@ -629,6 +629,13 @@
       scroll-margin-top: 80px;
     }
 
+  
+    .nav-divider {
+      height: 1px;
+      background: var(--border-color, #e2e8f0);
+      margin: 12px 8px 14px 8px;
+    }
+
   </style>
 </head>
 <body>
@@ -669,48 +676,60 @@
       </div>
     </div>
 
-    <div class="sidebar-content">
+                            <div class="sidebar-content">
       <div>
-        <div class="nav-group-title">커리큘럼 트랙</div>
-        <ul class="nav-list">
+        <ul class="nav-list" style="margin-bottom: 12px;">
           <li class="nav-item">
             <a href="index.html">
               <span>🏠</span>
               <span class="label">포털 홈 (Home)</span>
             </a>
           </li>
+        </ul>
+
+        <div class="nav-group-title">사용자 실무 (User Tracks)</div>
+        <ul class="nav-list" style="margin-bottom: 12px;">
           <li class="nav-item">
             <a href="track1.html">
               <span>🟢</span>
               <span class="label">Track 1. Day 1 Value</span>
             </a>
-
           </li>
           <li class="nav-item active">
             <a href="track2.html">
               <span>🔵</span>
               <span class="label">Track 2. Agentic Value</span>
             </a>
-                        <ul class="sub-nav-list">
-              <li class="sub-nav-item"><a href="#step-21">2.1 Gemini Notebook 5대 과제</a></li>
-              <li class="sub-nav-item"><a href="#step-22">2.2 Deep Research</a></li>
-              <li class="sub-nav-item"><a href="#step-23">2.3 Agent Designer 노코드</a></li>
-              <li class="sub-nav-item"><a href="#step-24">2.4 Workflow Agent 파이프라인</a></li>
-            </ul>
           </li>
           <li class="nav-item">
             <a href="track3.html">
               <span>🟣</span>
-              <span class="label">Track 3. Pro Code</span>
+              <span class="label">Track 3. Knowledge &amp; Connectors</span>
             </a>
-
           </li>
+        </ul>
+
+        <div class="nav-divider"></div>
+
+        <div class="nav-group-title">개발자 및 엔지니어링 (Developer Tracks)</div>
+        <ul class="nav-list" style="margin-bottom: 12px;">
           <li class="nav-item">
             <a href="track4.html">
-              <span>🔴</span>
-              <span class="label">Track 4. Admin &amp; Security</span>
+              <span>🟡</span>
+              <span class="label">Track 4. Custom Agent</span>
             </a>
+          </li>
+        </ul>
 
+        <div class="nav-divider"></div>
+
+        <div class="nav-group-title">관리자 및 운영 (Admin &amp; Ops)</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="track5.html">
+              <span>🔴</span>
+              <span class="label">Track 5. Admin &amp; Security</span>
+            </a>
           </li>
         </ul>
       </div>
