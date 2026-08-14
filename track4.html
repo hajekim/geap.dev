@@ -942,6 +942,63 @@
       cursor: not-allowed;
     }
 
+
+    /* ── 범용 이미지 라이트박스 모달 ── */
+    .img-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(8px);
+      z-index: 20000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      cursor: zoom-out;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .img-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+    .img-modal img {
+      max-width: 92vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-xl);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: default;
+      transform: scale(0.95);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .img-modal.active img {
+      transform: scale(1);
+    }
+    .img-modal-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      color: #ffffff;
+      font-size: 32px;
+      cursor: pointer;
+      line-height: 1;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transition: all 0.2s;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .img-modal-close:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
+    }
+
   </style>
 </head>
 <body>
@@ -2045,17 +2102,61 @@ projects/YOUR_PROJECT_NUM/.../reasoningEngines/YOUR_ID    track4-custom-agent   
       }
     }
 
+    // 전역 키보드 단축키
     document.addEventListener('keydown', (e) => {
-      if (!modal.classList.contains('active')) return;
-      if (e.key === 'Escape') {
-        closeStepModal();
-      } else if (e.key === 'ArrowLeft') {
-        navStepModal(-1);
-      } else if (e.key === 'ArrowRight') {
-        navStepModal(1);
+      const imgModal = document.getElementById('image-modal');
+      if (imgModal && imgModal.classList.contains('active') && e.key === 'Escape') {
+        closeLightbox();
+        return;
+      }
+      if (modal && modal.classList.contains('active')) {
+        if (e.key === 'Escape') {
+          closeStepModal();
+        } else if (e.key === 'ArrowLeft') {
+          navStepModal(-1);
+        } else if (e.key === 'ArrowRight') {
+          navStepModal(1);
+        }
       }
     });
+    // ── 범용 이미지 라이트박스 함수 ──
+    function openLightbox(src) {
+      const imgModal = document.getElementById('image-modal');
+      const modalImg = document.getElementById('modal-img');
+      if (!imgModal || !modalImg) return;
+      modalImg.src = src;
+      imgModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const imgModal = document.getElementById('image-modal');
+      if (!imgModal) return;
+      imgModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // 모든 스크린샷 이미지 클릭 이벤트 바인딩
+    document.querySelectorAll('.screenshot-container img, .screenshot-body img, .img-frame img, .showcase-body img, .step-card img:not(.step-modal-body img):not([onclick*="openStepModal"])').forEach(img => {
+      if (img.id !== 'modal-img' && img.id !== 'modalStepImg') {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', (e) => {
+          // openStepModal이 바인딩된 부모 카드인 경우 중복 처리 방지
+          if (img.closest('.step-walkthrough-card')) return;
+          e.stopPropagation();
+          openLightbox(img.src);
+        });
+      }
+    });
+
   </script>
+
+
+  <!-- 범용 이미지 라이트박스 모달 -->
+  <div class="img-modal" id="image-modal" onclick="closeLightbox()">
+    <span class="img-modal-close" id="modal-close" onclick="closeLightbox()">&times;</span>
+    <img id="modal-img" src="" alt="확대 이미지" onclick="event.stopPropagation()">
+  </div>
 
 </body>
 </html>
